@@ -585,6 +585,9 @@ html,body{overflow-x:clip}
 @media (min-width:1500px){
   body.is-admin .appgrid .cols,body.is-admin .appgrid .offer{grid-template-columns:168px 64px 72px 132px minmax(0,1fr) 74px 170px}
 }
+.langbtn{min-width:46px;font-weight:700!important;display:inline-flex!important;align-items:center;gap:7px}
+.flag{width:18px;height:12px;border-radius:2px;flex:none;box-shadow:0 0 0 1px rgba(255,255,255,.15)}
+.langitem{display:flex!important;align-items:center;gap:9px}
 .note{font-size:.75rem;color:var(--muted);text-align:center;padding:0 0 28px}
 
 @media (max-width:900px){
@@ -605,7 +608,7 @@ html,body{overflow-x:clip}
 <div id="landing" hidden>
   <nav class="lnav"><div class="wrap bar">
     <div class="logo" aria-label="Hook n' Queue"><span aria-hidden="true">HOOK N<svg class="apos" viewBox="0 0 16 26"><path d="M5 2V14Q5 22 10.5 21Q14.5 20 13.5 13" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><polygon points="10,14 17,14 13.5,5" fill="currentColor"/></svg><b>QUEUE</b></span></div>
-    <button class="btn sec" data-login>Iniciar sesión</button>
+    <span style="display:flex;gap:8px"><button class="btn sec langbtn" onclick="setLang(LANG==='en'?'es':'en')" data-notr></button><button class="btn sec" data-login>Iniciar sesión</button></span>
   </div></nav>
   <section class="lhero" id="lhero">
     <div class="lsticky">
@@ -702,6 +705,124 @@ html,body{overflow-x:clip}
 <div id="modal"></div>
 
 <script>
+// ---------- idioma (español / inglés)
+let LANG=(()=>{try{const v=localStorage.getItem("hnq.lang");if(v)return JSON.parse(v)}catch(e){}return (navigator.language||"es").toLowerCase().startsWith("es")?"es":"en"})();
+document.documentElement.lang=LANG;
+const EN={
+"Iniciar sesión":"Sign in","Entrar con Google":"Sign in with Google","Cómo funciona":"How it works","Tu próximo dúo está acá.":"Your next duo is here.",
+"Publicá lo que buscás, filtrá por posición, rango y horario, y coordiná por chat con gente de tu server.":"Post what you're looking for, filter by role, rank and schedule, and team up by chat with players from your server.",
+"Bajá para entrar":"Scroll to enter","Paso a paso":"Step by step","Creá tu perfil":"Create your profile","Tu nombre de invocador, tu #tag y el server donde jugás. Nada más.":"Your summoner name, your #tag and your server. That's it.",
+"Publicá tu oferta":"Post your offer","Elegí modos, posiciones, rango y horarios en orden de preferencia, y ponele un título que invite.":"Pick modes, roles, rank and schedule in order of preference, and give it a catchy title.",
+"Coordiná por chat":"Team up by chat","Te escriben, se pasan el nick o el Discord y a jugar. Cuando la oferta termina, el chat se borra solo.":"They message you, you swap names or Discord and play. When the offer ends, the chat deletes itself.",
+"8 servers":"8 servers","Un tablón para cada server":"A board for every server","Decí qué preferís, en orden":"Say what you prefer, in order",
+"Marcá tus posiciones por prioridad. Los demás ven de un vistazo qué es lo que más te gusta jugar.":"Rank your roles by priority. Others see at a glance what you love to play.",
+"Filtrá hasta dar con tu dúo":"Filter until you find your duo","Últimas 24 hs, rango, posición, horario, micro u onda. Combiná los que quieras.":"Last 24 hours, rank, role, schedule, mic or vibe. Mix and match.",
+"Chats que no se acumulan":"Chats that don't pile up","Cada chat nace de una oferta y se borra 24 hs después de que termina. Tu bandeja siempre limpia.":"Every chat starts from an offer and is deleted 24 hours after it ends. Your inbox stays clean.",
+"¿Armamos la partida?":"Ready to queue up?","Crear tu perfil lleva diez segundos.":"Creating your profile takes ten seconds.","Los demás ven primero tu":"Others see your top pick first:","jugadores coinciden":"players match",
+"Te paso mi Discord: premade_seba":"Here's my Discord: premade_seba","Listo, te agrego. ¡Nos vemos en la partida!":"Done, adding you. See you in game!","Esta oferta terminó. El chat se borra en 24 h.":"This offer ended. The chat will be deleted in 24 h.",
+"Nueva oferta":"New offer","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
+"Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. League of Legends es una marca de Riot Games, Inc. ·":"Hook n' Queue isn't affiliated with or endorsed by Riot Games. League of Legends is a trademark of Riot Games, Inc. ·",
+"Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. ·":"Hook n' Queue isn't affiliated with or endorsed by Riot Games. ·","Privacidad":"Privacy","Donar":"Donate",
+"Buscá con quién jugar":"Find someone to play with","Elegí tu server, mirá las ofertas y coordiná la partida.":"Pick your server, browse offers and set up your game.",
+"Ofertas hoy":"Offers today","En línea ahora":"Online now","Activas en el server":"Active on server","Publicar oferta":"Post offer","Mis chats":"My chats",
+"Todas":"All","Últimas 24 hs":"Last 24 hours","Esta semana":"This week","Más de una semana":"Older than a week","Solo en línea":"Online only","Filtros":"Filters","Limpiar filtros":"Clear filters",
+"Jugador":"Player","Juega":"Plays","Busca":"Looking for","Rango":"Rank","Modo":"Mode","Oferta":"Offer","Publicada":"Posted","Abrir chat":"Open chat","Ya encontré":"Found one",
+"Juega de":"Plays","Rango del jugador":"Player rank","Desde":"From","Hasta":"To","Horario":"Schedule","Micrófono":"Mic","Onda":"Vibe",
+"Tocá para ver la oferta completa":"Tap to see the full offer","Modos":"Modes","Su rango":"Their rank","Rango que busca":"Rank wanted","Horarios":"Schedule","Sus mains":"Their mains",
+"💚 Ideal si jugás con":"💚 Ideal if you play","❌ Mejor no":"❌ Rather not","Sin preferencia":"No preference","Cualquiera":"Any",
+"Top":"Top","Jungla":"Jungle","Mid":"Mid","ADC":"ADC","Support":"Support","Fill":"Fill",
+"Solo/Dúo":"Solo/Duo","Flex":"Flex","Clash":"Clash","Normal":"Normal","ARAM":"ARAM",
+"Mañana":"Morning","Tarde":"Afternoon","Noche":"Night","Madrugada":"Late night",
+"Con micro":"Mic on","Sin micro":"No mic","Micro opcional":"Mic optional","Tryhard":"Tryhard","Relajado":"Chill",
+"Hierro":"Iron","Bronce":"Bronze","Plata":"Silver","Oro":"Gold","Platino":"Platinum","Esmeralda":"Emerald","Diamante":"Diamond","Master":"Master","Grandmaster":"Grandmaster","Challenger":"Challenger","Sin rango":"Unranked",
+"Latinoamérica Sur":"Latin America South","Latinoamérica Norte":"Latin America North","Brasil":"Brazil","Norteamérica":"North America","Europa Oeste":"Europe West","Europa Nórdica y Este":"Europe Nordic & East","Corea":"Korea","Oceanía":"Oceania",
+"Servers":"Servers","Servers y perfil":"Servers and profile","En línea y chats":"Online and chats","Tus chats":"Your chats","Ver todos":"See all","Ver su oferta":"See their offer",
+"ofertas":"offers","chats":"chats","Editar perfil":"Edit profile","💚 Bancá el proyecto":"💚 Support the project","💚 Donar":"💚 Donate","🛡️ Moderación":"🛡️ Moderation","Cerrar sesión":"Sign out",
+"Cuando le escribas a alguien, el chat aparece acá.":"When you message someone, the chat shows up here.","en línea":"online","· en línea":"· online","Tu oferta":"Your offer","En línea":"Online","tu server":"your server","sin leer":"unread",
+"Sin ofertas por ahora":"No offers yet","Cargando ofertas...":"Loading offers...","El anzuelo volvió vacío":"The hook came back empty",
+"Ninguna oferta coincide con tus filtros. Probá sacando alguno para ver más jugadores.":"No offers match your filters. Try removing some to see more players.",
+"Todavía nadie publicó en este server. El primero que tira el anzuelo, pesca.":"Nobody has posted on this server yet. First to cast the hook gets the catch.",
+"Completá tu perfil":"Complete your profile","Editar perfil":"Edit profile","Cambiá tus datos cuando quieras.":"Update your info anytime.",
+"Ya entraste con Google. Ahora contanos cómo te encuentran en el juego. Nicks o mensajes ofensivos no están permitidos.":"You're signed in with Google. Now tell us how to find you in game. Offensive names or messages aren't allowed.",
+"Nombre de invocador":"Summoner name","Server donde jugás":"Your server","Tus mains (hasta 3, en orden)":"Your mains (up to 3, in order)","Escribí un campeón...":"Type a champion...","Buscá un campeón...":"Search a champion...",
+"Avisarme por mail cuando me escriban":"Email me when someone messages me","Te llega un mail cuando alguien abre chat en tu oferta o te escribe (máximo uno por hora por chat). Lo podés apagar cuando quieras.":"You'll get an email when someone opens a chat on your offer or messages you (at most one per hour per chat). You can turn it off anytime.",
+"Tu avatar":"Your avatar","Color":"Color","Subir foto":"Upload photo","Cambiar foto":"Change photo","Usar inicial":"Use initial","Salir":"Sign out","Crear perfil":"Create profile","Guardar cambios":"Save changes","Cancelar":"Cancel","Guardando...":"Saving...",
+"Ej: Flash en la D":"e.g. Flash on D","Tag":"Tag","Elegí un archivo de imagen.":"Choose an image file.",
+"El nombre de invocador tiene que tener al menos 3 caracteres.":"Summoner name must be at least 3 characters.","El tag va sin espacios, de 3 a 5 letras o números.":"The tag has no spaces, 3 to 5 letters or numbers.",
+"Ese nombre no está permitido. Elegí otro, respetando a los demás.":"That name isn't allowed. Please choose another, and be respectful.","Ese nombre de invocador y #tag ya están registrados.":"That summoner name and #tag are already taken.",
+"No se pudo guardar. Probá de nuevo.":"Couldn't save. Please try again.","Hubo un problema al cargar tu perfil":"There was a problem loading your profile",
+"Donde podés marcar varias opciones, tocalas en orden de preferencia: la primera que elijas es la que más te interesa.":"Where you can pick several options, tap them in order of preference: the first one you pick is your favorite.",
+"Tu posición":"Your role","Posición que buscás":"Role you're looking for","💚 Ideal si tu dúo juega con (opcional)":"💚 Ideal if your duo plays (optional)","Champs que te gusta que use quien se sume. Hasta 5.":"Champions you'd like your teammate to play. Up to 5.",
+"❌ Mejor que no juegue con (opcional)":"❌ Rather they don't play (optional)","Tu rango":"Your rank","Rango que buscás (desde / hasta)":"Rank you're looking for (from / to)","Horarios en que jugás":"When you play",
+"Micrófono (opcional)":"Mic (optional)","Onda (opcional)":"Vibe (optional)","Título de tu oferta":"Offer title","Ej: Busco sup tranqui para subir a Plati":"e.g. Chill support wanted to climb to Plat","Publicando...":"Posting...",
+"El título tiene palabras que no están permitidas. Probá con otro.":"The title contains words that aren't allowed. Try another one.",
+"el modo":"the mode","tu posición":"your role","qué posición buscás":"the role you're looking for","el horario":"your schedule","un título de al menos 5 caracteres":"a title with at least 5 characters",
+"Oferta cerrada, GG":"Offer closed, GG","Coordinen nick, horario y, si quieren, Discord.":"Swap names, pick a time and, if you want, Discord.","Escribí un mensaje...":"Write a message...","Enviar":"Send","Mensaje":"Message",
+"Opciones":"Options","Cerrar":"Close","Volver a mis chats":"Back to my chats","Borrar chat":"Delete chat","Reportar":"Report","Bloquear":"Block","Chat borrado":"Chat deleted","No se pudo borrar el chat":"Couldn't delete the chat",
+"Reporte enviado. Lo vamos a revisar.":"Report sent. We'll review it.","No se pudo bloquear":"Couldn't block","No se pudo enviar el mensaje":"Couldn't send the message","No se pudo abrir el chat":"Couldn't open the chat","No se pudo cerrar la oferta":"Couldn't close the offer",
+"No se pudieron cargar las ofertas":"Couldn't load offers","Todavía no pescaste a nadie":"You haven't hooked anyone yet","Tocá \"Abrir chat\" en una oferta para escribirle a ese jugador.":"Tap \"Open chat\" on an offer to message that player.",
+"Bancá Hook n' Queue":"Support Hook n' Queue","La app es gratis y sin publicidad. Si te sirvió para encontrar dúo, podés colaborar con lo que quieras: ayuda a pagar el dominio y a mantenerla.":"The app is free and ad-free. If it helped you find a duo, you can chip in whatever you like: it helps pay for the domain and upkeep.",
+"Donar con Mercado Pago":"Donate with Mercado Pago","Alias de Mercado Pago":"Mercado Pago alias","Copiar":"Copy","¡Gracias por bancar! 🎣":"Thanks for the support! 🎣","Alias copiado":"Alias copied",
+"🛡️ Moderación":"🛡️ Moderation","Moderación":"Moderation","Reportes de la comunidad":"Community reports","Cargando reportes...":"Loading reports...","No se pudieron cargar los reportes.":"Couldn't load reports.","Sin reportes":"No reports","La comunidad está tranqui. 🎣":"All calm in the community. 🎣",
+"Descartar":"Dismiss","Banear":"Ban","Banear usuario":"Ban user","Borrar oferta":"Delete offer","Moderar":"Moderate","Oferta borrada":"Offer deleted","No se pudo borrar":"Couldn't delete","Reporte descartado":"Report dismissed","¿Borrar esta oferta?":"Delete this offer?",
+"Cuenta suspendida":"Account suspended","Tu cuenta fue suspendida por no respetar las normas de la comunidad. Si creés que es un error, escribinos desde la página de Privacidad.":"Your account was suspended for breaking the community rules. If you think this is a mistake, contact us through the Privacy page.","Entendido":"Got it",
+"Volver a Hook n' Queue":"Back to Hook n' Queue","Buscás":"Looking for","Fecha":"Date","Mensaje":"Message"
+};
+const TIERS_RE="Hierro|Bronce|Plata|Oro|Platino|Esmeralda|Diamante|Master|Grandmaster|Challenger";
+const ROLE_RE="Top|Jungla|Mid|ADC|Support|Fill";
+const tr=s=>EN[s]??s;
+const RULES=[
+ [/^hace (\d+) min$/,(m,a)=>`${a} min ago`],[/^hace (\d+) h$/,(m,a)=>`${a} h ago`],[/^hace 1 día$/,()=>"1 day ago"],[/^hace (\d+) días$/,(m,a)=>`${a} days ago`],
+ [/^(\d+) ofertas? activas?$/,(m,a)=>a==="1"?"1 active offer":`${a} active offers`],[/^Mostrando (\d+) de (\d+) ofertas$/,(m,a,b)=>`Showing ${a} of ${b} offers`],
+ [/^\+(\d+) conectados sin oferta$/,(m,a)=>`+${a} online without offers`],[/^(\d+) ofertas en común$/,(m,a)=>`${a} offers in common`],[/^(\d+) ofertas$/,(m,a)=>`${a} offers`],
+ [/^En línea en (\w+)$/,(m,a)=>`Online in ${a}`],[/^Nadie con ofertas conectado ahora en (\w+)\. Publicá la tuya y tirá el anzuelo\.$/,(m,a)=>`Nobody with an offer is online in ${a} right now. Post yours and cast the hook.`],
+ [/^Tirá el primer anzuelo en (\w+)$/,(m,a)=>`Cast the first hook in ${a}`],[/^Nueva oferta en (\w+)$/,(m,a)=>`New offer in ${a}`],[/^¡Oferta publicada en (\w+)!$/,(m,a)=>`Offer posted in ${a}!`],
+ [/^Se publica como (.+)\.$/,(m,a)=>`Posting as ${a}.`],[/^Prioridad (\d)$/,(m,a)=>`Priority ${a}`],[/^Máximo (\d+)$/,(m,a)=>`Max ${a}`],
+ [new RegExp(`^(${ROLE_RE}) \\((\\d)° preferencia\\)$`),(m,a,b)=>`${tr(a)} (#${b} choice)`],
+ [new RegExp(`^(${TIERS_RE}) (I|II|III|IV)$`),(m,a,b)=>`${tr(a)} ${b}`],
+ [new RegExp(`^(${TIERS_RE}) a (${TIERS_RE})$`),(m,a,b)=>`${tr(a)} to ${tr(b)}`],
+ [new RegExp(`^(${ROLE_RE}) busca ((?:${ROLE_RE})(?:, (?:${ROLE_RE}))*)$`),(m,a,b)=>`${tr(a)} looking for ${b.split(", ").map(tr).join(", ")}`],
+ [/^Publicada (hace .+) · Server (\w+)$/,(m,a,b)=>`Posted ${t(a)} · Server ${b}`],[/^Vence en (\d+) días$/,(m,a)=>`Expires in ${a} days`],
+ [/^Reportado por (.+) · (hace .+)$/,(m,a,b)=>`Reported by ${a} · ${t(b)}`],[/^Ofertas: (.+)$/,(m,a)=>`Offers: ${a}`],
+ [/^Abrir chat con (.+)$/,(m,a)=>`Open chat with ${a}`],[/^Chat con (.+)$/,(m,a)=>`Chat with ${a}`],[/^Vos: (.*)$/s,(m,a)=>`You: ${a}`],
+ [/^Oferta · (.+)$/,(m,a)=>`Offer · ${a}`],[/^Terminada · (.+)$/,(m,a)=>`Ended · ${a}`],
+ [/^Ofertas terminadas · se borra en (\d+) h$/,(m,a)=>`Offers ended · deleted in ${a} h`],[/^Oferta terminada · se borra en (\d+) h$/,(m,a)=>`Offer ended · deleted in ${a} h`],[/^Oferta terminada$/,()=>"Offer ended"],
+ [/^Las ofertas terminaron\. El chat se borra en (\d+) h, aprovechá para pasar tu nick o Discord\.$/,(m,a)=>`The offers ended. This chat will be deleted in ${a} h, so swap names or Discord now.`],
+ [/^Esta oferta terminó\. El chat se borra en (\d+) h, aprovechá para pasar tu nick o Discord\.$/,(m,a)=>`This offer ended. This chat will be deleted in ${a} h, so swap names or Discord now.`],
+ [/^Te falta elegir (.+)\.$/,(m,a)=>`You still need to choose ${a.split(", ").map(tr).join(", ")}.`],
+ [/^Nuevo mensaje de (.+)$/,(m,a)=>`New message from ${a}`],[/^(.+) bloqueado$/,(m,a)=>`${a} blocked`],[/^(.+) baneado$/,(m,a)=>`${a} banned`],
+ [/^No se pudo publicar: (.*)$/,(m,a)=>`Couldn't post: ${a}`],[/^No se pudo banear: (.*)$/,(m,a)=>`Couldn't ban: ${a}`],[/^Alias: (.+)$/,(m,a)=>`Alias: ${a}`],
+ [/^¿Banear a (.+)\?\n\nSe borra su perfil, sus ofertas y sus chats, y no va a poder volver a usar la app con esa cuenta\.$/,(m,a)=>`Ban ${a}?\n\nTheir profile, offers and chats will be deleted, and they won't be able to use the app with that account again.`],
+ [/^¿Borrar el chat con (.+) de tu lista\?\n\nA la otra persona no le pasa nada\. Si te vuelve a escribir, el chat reaparece con los mensajes anteriores\.$/,(m,a)=>`Delete your chat with ${a} from your list?\n\nNothing happens to the other person. If they message you again, the chat comes back with the previous messages.`],
+ [/^(\S+) · (.+)$/,(m,a,b)=>{const x=tr(b);return x!==b?`${a} · ${x}`:m}]
+];
+function t(s){
+  if(LANG!=="en"||typeof s!=="string")return s;
+  const mm=s.match(/^(\s*)([\s\S]*?)(\s*)$/);const core=mm[2];if(!core)return s;
+  if(EN[core]!==undefined)return mm[1]+EN[core]+mm[3];
+  for(const [re,fn] of RULES){const r=core.match(re);if(r){const out=fn(...r);if(out!==core)return mm[1]+out+mm[3]}}
+  for(const sep of [" / ",", "]){if(core.includes(sep)){const parts=core.split(sep);if(parts.every(p=>EN[p]!==undefined||RULES.some(([re])=>re.test(p))))return mm[1]+parts.map(p=>t(p)).join(sep)+mm[3]}}
+  return s;
+}
+const T_ATTRS=["placeholder","title","aria-label"];
+function tNode(n){
+  if(n.nodeType===3){if(n.parentElement&&n.parentElement.closest("script,style,[data-notr]"))return;const v=t(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v;return}
+  if(n.nodeType!==1||n.closest("[data-notr]"))return;
+  for(const a of T_ATTRS){const v=n.getAttribute&&n.getAttribute(a);if(v){const x=t(v);if(x!==v)n.setAttribute(a,x)}}
+  const w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT|NodeFilter.SHOW_ELEMENT);let c;
+  while(c=w.nextNode()){if(c.nodeType===3)tNode(c);else for(const a of T_ATTRS){const v=c.getAttribute(a);if(v){const x=t(v);if(x!==v)c.setAttribute(a,x)}}}
+}
+function setLang(l){try{localStorage.setItem("hnq.lang",JSON.stringify(l))}catch(e){}location.reload()}
+const FLAG_AR='<svg class="flag" viewBox="0 0 18 12" aria-hidden="true"><rect width="18" height="12" fill="#74ACDF"/><rect y="4" width="18" height="4" fill="#fff"/><circle cx="9" cy="6" r="1.4" fill="#F6B40E"/></svg>';
+const FLAG_US='<svg class="flag" viewBox="0 0 19 10" aria-hidden="true"><rect width="19" height="10" fill="#fff"/><g fill="#B22234"><rect width="19" height=".77"/><rect y="1.54" width="19" height=".77"/><rect y="3.08" width="19" height=".77"/><rect y="4.62" width="19" height=".77"/><rect y="6.15" width="19" height=".77"/><rect y="7.69" width="19" height=".77"/><rect y="9.23" width="19" height=".77"/></g><rect width="7.6" height="5.38" fill="#3C3B6E"/></svg>';
+const langLabel=()=>LANG==="en"?FLAG_AR+"<span>ES</span>":FLAG_US+"<span>EN</span>";
+document.querySelectorAll('.langbtn').forEach(b=>b.innerHTML=langLabel());
+if(LANG==="en"){
+  tNode(document.body);
+  new MutationObserver(ms=>{for(const m of ms){if(m.type==="characterData")tNode(m.target);else if(m.type==="attributes")tNode(m.target);else m.addedNodes.forEach(tNode)}})
+    .observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:T_ATTRS});
+}
+
 const SERVERS=[{id:"LAS",name:"Latinoamérica Sur"},{id:"LAN",name:"Latinoamérica Norte"},{id:"BR",name:"Brasil"},{id:"NA",name:"Norteamérica"},{id:"EUW",name:"Europa Oeste"},{id:"EUNE",name:"Europa Nórdica y Este"},{id:"KR",name:"Corea"},{id:"OCE",name:"Oceanía"}];
 const TIERS={"Hierro":"#7A7470","Bronce":"#A8653E","Plata":"#A9B5C0","Oro":"#E0B342","Platino":"#3FB6A8","Esmeralda":"#2FA866","Diamante":"#5C8DF0","Master":"#A35BE0","Grandmaster":"#E0524A","Challenger":"#F2D16B","Sin rango":"#4A4E57"};
 // Iconos propios (no oficiales)
@@ -849,7 +970,7 @@ function showBanned(){
     h("div",{class:"actions",style:"justify-content:center"},h("button",{class:"btn",onclick:()=>{m.replaceChildren();sb.auth.signOut()}},"Entendido")))));
 }
 async function banUser(id,nick,why){
-  if(!confirm(`¿Banear a ${nick}?\n\nSe borra su perfil, sus ofertas y sus chats, y no va a poder volver a usar la app con esa cuenta.`))return false;
+  if(!confirm(t(`¿Banear a ${nick}?\n\nSe borra su perfil, sus ofertas y sus chats, y no va a poder volver a usar la app con esa cuenta.`)))return false;
   const {error}=await sb.rpc("hnq_ban",{u:id,why:why||"Moderación"});
   if(error){toast("No se pudo banear: "+error.message);return false}
   OFFERS=OFFERS.filter(o=>o.user_id!==id);for(const c of Object.values(chats))if(c.user_id===id)delete chats[c.id];
@@ -858,7 +979,7 @@ async function banUser(id,nick,why){
 function modMenu(o,anchor){
   document.querySelector(".modpop")?.remove();
   const pop=h("div",{class:"modpop menu"},
-    h("button",{onclick:async()=>{pop.remove();if(!confirm("¿Borrar esta oferta?"))return;const {error}=await sb.from("offers").delete().eq("id",o.id);
+    h("button",{onclick:async()=>{pop.remove();if(!confirm(t("¿Borrar esta oferta?")))return;const {error}=await sb.from("offers").delete().eq("id",o.id);
       if(error){toast("No se pudo borrar");return}OFFERS=OFFERS.filter(x=>x.id!==o.id);render();toast("Oferta borrada")}},"Borrar oferta"),
     h("button",{class:"danger",onclick:async()=>{pop.remove();await banUser(o.user_id,o.nick,"Desde oferta: "+o.titulo)}},"Banear usuario"));
   anchor.parentElement.append(pop);
@@ -934,6 +1055,7 @@ function renderMe(){const box=document.getElementById("me");box.replaceChildren(
       menuWrap.append(h("div",{class:"umenu",role:"menu"},h("div",{class:"uhead"},h("b",{},profile.nick),h("small",{}," #"+profile.tag+" · "+profile.server)),
         h("button",{role:"menuitem",onclick:()=>{closeUMenu();openProfile(true)}},"Editar perfil"),
         h("button",{role:"menuitem",onclick:()=>{closeUMenu();openDonate()}},"💚 Donar"),
+        (()=>{const b=h("button",{role:"menuitem",class:"langitem","data-notr":"",onclick:()=>setLang(LANG==="en"?"es":"en")});b.innerHTML=LANG==="en"?FLAG_AR+"<span>Español</span>":FLAG_US+"<span>English</span>";return b})(),
         isAdmin?h("button",{role:"menuitem",onclick:()=>{closeUMenu();openModeration()}},"🛡️ Moderación"):null,
         h("button",{role:"menuitem",class:"danger",onclick:()=>{closeUMenu();logout()}},"Cerrar sesión")))}},
     avatarEl({...profile,online:true},"av"),h("span",{class:"uname"},h("b",{},profile.nick),h("small",{}," #"+profile.tag)),h("span",{class:"caret","aria-hidden":"true"},"▾"));
@@ -1187,7 +1309,7 @@ function showChat(key){
   function menu(){if(menuEl){menuEl.remove();menuEl=null;return}
     menuEl=h("div",{class:"menu"},
       h("button",{onclick:async()=>{menuEl.remove();menuEl=null;
-        if(!confirm(`¿Borrar el chat con ${g0.nick} de tu lista?\n\nA la otra persona no le pasa nada. Si te vuelve a escribir, el chat reaparece con los mensajes anteriores.`))return;
+        if(!confirm(t(`¿Borrar el chat con ${g0.nick} de tu lista?\n\nA la otra persona no le pasa nada. Si te vuelve a escribir, el chat reaparece con los mensajes anteriores.`)))return;
         if(await setHidden(key,true)){closeDrawer();render();toast("Chat borrado")}else toast("No se pudo borrar el chat")}},"Borrar chat"),
       h("button",{onclick:async()=>{menuEl.remove();menuEl=null;await sb.from("reports").insert({reporter_id:uid,reported_id:key,reason:"chat"});toast("Reporte enviado. Lo vamos a revisar.")}},"Reportar"),
       h("button",{class:"danger",onclick:async()=>{const {error}=await sb.from("blocks").insert({blocker_id:uid,blocked_id:key});if(error&&error.code!=="23505"){toast("No se pudo bloquear");return}
