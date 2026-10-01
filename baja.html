@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avisos por mail · Hook n' Queue</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
+<style>
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0D0F0F;color:#E4EAE8;font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;padding:20px}
+.card{max-width:420px;background:#141817;border:1px solid #242A29;border-radius:16px;padding:32px 28px;text-align:center}
+h1{font-size:1.4rem;margin:8px 0}p{color:#C5CFCC;margin:8px 0 22px}
+a{display:inline-block;background:#3DBF8E;color:#06120D;text-decoration:none;font-weight:700;padding:11px 20px;border-radius:10px}
+.big{font-size:2.4rem}
+</style>
+</head>
+<body><div class="card"><div class="big" id="ic">🎣</div><h1 id="t">Un momento...</h1><p id="d">Estamos desactivando tus avisos.</p><a href="/">Volver a Hook n' Queue</a></div>
+<script>
+(async()=>{
+  const $=id=>document.getElementById(id);
+  const t=new URLSearchParams(location.search).get("t");
+  const sb=window.supabase.createClient("https://onidctftsskhgqdtjiib.supabase.co","sb_publishable_vDyM0bTueq3oLd3zSNIi-Q_D6GOxAgq");
+  let ok=false;
+  if(t){try{const {data,error}=await sb.rpc("hnq_unsubscribe",{t});ok=!error&&data===true}catch(e){}}
+  if(ok){$("ic").textContent="✅";$("t").textContent="Listo, no te mandamos más mails";$("d").textContent="Si algún día los querés de nuevo, los activás desde tu perfil en la app."}
+  else{$("ic").textContent="🤔";$("t").textContent="No pudimos encontrar tu suscripción";$("d").textContent="Puede que el link esté incompleto. Igual podés apagar los avisos desde tu perfil en la app."}
+})();
+</script>
+</body></html>

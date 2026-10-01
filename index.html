@@ -429,6 +429,103 @@ html.in-app .logo .apos{filter:none}
 a.btn{text-decoration:none;display:inline-block}
 .pick img.ic{width:18px;height:18px}.posic img.ic{width:22px;height:22px}.rn img.ic{width:16px;height:16px}img.ic{object-fit:contain}
 .loading{padding:48px 20px;text-align:center;color:var(--muted)}
+
+/* ---------- header usuario + celular ---------- */
+html,body{overflow-x:clip}
+.chatsbtn svg.ic{width:17px;height:17px}
+.umenu-wrap{position:relative}
+.userbtn{display:flex;align-items:center;gap:8px;border:0!important;background:transparent!important;padding:4px 6px!important;border-radius:999px!important;color:var(--ink)!important;font-size:.9rem!important}
+.userbtn:hover{background:var(--surface2)!important}
+.userbtn .caret{color:var(--muted);font-size:.7rem}
+.umenu{position:absolute;right:0;top:calc(100% + 8px);min-width:200px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:6px;z-index:30;box-shadow:0 16px 40px rgba(0,0,0,.45);display:grid}
+.umenu .uhead{padding:8px 10px 10px;border-bottom:1px solid var(--line);margin-bottom:4px}
+.umenu .uhead small{color:var(--muted);display:inline!important}
+.umenu button{border:0!important;background:transparent!important;text-align:left;padding:9px 10px!important;border-radius:8px!important;font-size:.9rem!important;color:var(--ink)!important}
+.umenu button:hover{background:var(--surface2)!important}
+.umenu .danger{color:#F26B6B!important}
+@media (max-width:640px){
+  .bar{gap:8px}
+  .logo{font-size:.95rem}
+  .chatsbtn .cl,.uname,.userbtn .caret{display:none}
+  .chatsbtn{padding:7px 10px!important}
+  .top{padding:20px 18px}
+  .top h1{font-size:1.3rem}
+  .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;width:100%}
+  .stat{min-width:0;padding:8px 10px}
+  .stat small{font-size:.68rem;line-height:1.2}
+  .stat b{font-size:1.05rem}
+  .drawer{width:100%;left:0;border-left:0;height:100dvh;bottom:auto}
+  .compose input,.card input,.card select{font-size:16px}
+  .panel-head{flex-wrap:wrap}
+  .fbar{padding:10px 14px}
+  .seg{max-width:100%}
+}
+
+/* ---------- columnas laterales (pantallas anchas) ---------- */
+.lside,.rside{display:none}
+@media (min-width:1500px){
+  .wrap{max-width:1640px}
+  .appgrid{display:grid;grid-template-columns:232px minmax(0,1fr) 272px;gap:24px;align-items:start}
+  .lside,.rside{display:grid;gap:14px;position:sticky;top:76px;margin-top:20px;min-width:0}
+  .appgrid .mode,.appgrid .cols span:nth-child(5){display:none}
+  .appgrid .cols,.appgrid .offer{grid-template-columns:168px 64px 72px 132px minmax(0,1fr) 74px 128px}
+  .appgrid .tag.t-mode{display:inline-flex}
+  .appgrid .servers{display:none}
+}
+.scard{min-width:0;overflow:hidden;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
+.scard h4{margin:0 0 10px;font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.scard h4 button{border:0;background:none;color:var(--accent);font-size:.72rem;text-transform:none;letter-spacing:0;padding:0}
+.slist{display:grid;gap:2px}
+.sitem{min-width:0;display:flex;align-items:center;gap:8px;border:0;background:transparent;color:var(--ink);padding:8px 10px;border-radius:9px;text-align:left;width:100%}
+.sitem:hover{background:var(--surface2)}
+.sitem[aria-current="true"]{background:var(--accent-soft)}
+.sitem[aria-current="true"] b{color:var(--accent)}
+.sitem b{font-weight:700;font-size:.88rem;min-width:44px}
+.sitem .nm{color:var(--muted);font-size:.76rem;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sitem em{flex:none;font-style:normal;font-size:.7rem;background:var(--surface2);color:var(--muted);border-radius:999px;padding:1px 8px;min-width:22px;text-align:center}
+.sitem[aria-current="true"] em{background:var(--accent);color:var(--accent-ink)}
+.pcard{display:grid;justify-items:center;text-align:center;gap:4px;padding:18px 14px}
+.pcard .pav{width:58px;height:58px;font-size:1.35rem;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#fff;margin-bottom:6px}
+.pcard small{color:var(--muted)}
+.pcard .pstats{display:flex;gap:18px;margin:10px 0 12px}
+.pcard .pstats div{display:grid}
+.pcard .pstats b{font-size:1.1rem}
+.pcard .pstats span{font-size:.7rem;color:var(--muted)}
+.pcard .btn{width:100%}
+.pcard .lnk{border:0;background:none;color:var(--muted);font-size:.78rem;margin-top:6px;padding:0}
+.pcard .lnk:hover{color:var(--ink)}
+.plist{display:grid;gap:2px}
+.pitem{display:flex;align-items:center;gap:10px;border:0;background:transparent;color:var(--ink);padding:7px 8px;border-radius:9px;text-align:left;width:100%;min-width:0}
+.pitem:hover{background:var(--surface2)}
+.pitem .pav{width:32px;height:32px;font-size:.8rem;flex:none}
+.pitem .pt{min-width:0;flex:1}
+.pitem .pt b{display:block;font-size:.86rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pitem .pt small{display:block;color:var(--muted);font-size:.74rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pitem .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+.sempty{color:var(--muted);font-size:.8rem;padding:4px 2px 2px;line-height:1.45}
+.smore{color:var(--muted);font-size:.74rem;padding:6px 8px 0}
+.tag.t-mode{display:none;background:var(--surface2);color:var(--ink)}
+/* ---------- campeones ---------- */
+.cchip{display:inline-flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:2px 10px 2px 3px;font-size:.8rem;white-space:nowrap}
+.cmono{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:.68rem;font-weight:800;color:#fff;flex:none}
+.cchip .cn{font-style:normal;font-size:.66rem;font-weight:700;color:var(--muted);margin:0 -2px 0 4px}
+.cchip.like{background:rgba(61,191,142,.12);border-color:rgba(61,191,142,.35);color:#9BE0C4}
+.cchip.avoid{background:rgba(242,107,107,.1);border-color:rgba(242,107,107,.35);color:#F4A3A3}
+.cchip .cx{border:0;background:none;color:var(--muted);font-size:1rem;line-height:1;padding:0 0 0 2px;cursor:pointer}
+.cchip .cx:hover{color:var(--ink)}
+.cpicks{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.cpicks:empty{display:none}
+.cbox{position:relative}
+.cinput:disabled{opacity:.5}
+.csug{position:absolute;left:0;right:0;top:calc(100% + 4px);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:4px;z-index:5;box-shadow:0 12px 30px rgba(0,0,0,.4);display:grid}
+.csug[hidden]{display:none}
+.copt{border:0;background:transparent;text-align:left;padding:6px;border-radius:8px;cursor:pointer}
+.copt:hover,.copt:focus{background:var(--surface2)}
+.copt .cchip{border:0;background:transparent}
+.clist{display:flex;flex-wrap:wrap;gap:5px}
+.pcard .clist{justify-content:center;margin-top:8px}
+.pcard .clist .cchip{font-size:.74rem}
+.hint2{font-size:.75rem;color:var(--muted);margin:-2px 0 8px}
 .note{font-size:.75rem;color:var(--muted);text-align:center;padding:0 0 28px}
 
 @media (max-width:900px){
@@ -516,7 +613,9 @@ a.btn{text-decoration:none;display:inline-block}
   <div class="me" id="me" hidden></div>
 </div></header>
 
-<main class="wrap">
+<main class="wrap appgrid">
+<aside class="lside" id="lside" aria-label="Servers y perfil"></aside>
+<div class="center">
   <section class="top">
     <div><h1>Buscá con quién jugar</h1><p>Elegí tu server, mirá las ofertas y coordiná la partida.</p></div>
     <div class="stats">
@@ -537,6 +636,8 @@ a.btn{text-decoration:none;display:inline-block}
     <div id="list"></div>
   </section>
   <p class="note">Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. · <a href="privacidad.html">Privacidad</a></p>
+</div>
+<aside class="rside" id="rside" aria-label="En línea y chats"></aside>
 </main>
 </div>
 <div id="modal"></div>
@@ -640,15 +741,80 @@ function offerDetail(o){
       it("Rango que busca",h("span",{},rb)),
       it("Horarios",h("div",{class:"tags"},[].concat(o.horario).map(x=>timeTag([x])))),
       it("Micrófono",h("div",{class:"tags"},micTag(o.mic)||h("span",{class:"dk nop"},"Sin preferencia"))),
+      o.mains&&o.mains.length?it("Sus mains",h("div",{class:"clist"},o.mains.map((c,i)=>champChip(c,"",i+1)))):null,
+      o.like&&o.like.length?it("💚 Ideal si jugás con",h("div",{class:"clist"},o.like.map(c=>champChip(c,"like")))):null,
+      o.avoid&&o.avoid.length?it("❌ Mejor no",h("div",{class:"clist"},o.avoid.map(c=>champChip(c,"avoid")))):null,
       it("Onda",h("div",{class:"tags"},[].concat(o.onda||[]).length?[].concat(o.onda).map(vibeTag):h("span",{class:"dk nop"},"Sin preferencia")))),
     h("div",{class:"dfoot"},h("span",{class:"dk"},"Publicada "+ago(o.at)+" · Server "+o.server),
       o.mine?null:h("button",{class:"btn",onclick:()=>openChat(o)},"Abrir chat con "+o.nick)));
 }
+
+// ---------- campeones (nombres desde datos públicos de Riot, con lista de respaldo)
+let CHAMPS="Aatrox,Ahri,Akali,Akshan,Alistar,Ambessa,Amumu,Anivia,Annie,Aphelios,Ashe,Aurelion Sol,Aurora,Azir,Bardo,Bel'Veth,Blitzcrank,Brand,Braum,Briar,Caitlyn,Camille,Cassiopeia,Cho'Gath,Corki,Darius,Diana,Dr. Mundo,Draven,Ekko,Elise,Evelynn,Ezreal,Fiddlesticks,Fiora,Fizz,Galio,Gangplank,Garen,Gnar,Gragas,Graves,Gwen,Hecarim,Heimerdinger,Hwei,Illaoi,Irelia,Ivern,Janna,Jarvan IV,Jax,Jayce,Jhin,Jinx,K'Sante,Kai'Sa,Kalista,Karma,Karthus,Kassadin,Katarina,Kayle,Kayn,Kennen,Kha'Zix,Kindred,Kled,Kog'Maw,LeBlanc,Lee Sin,Leona,Lillia,Lissandra,Lucian,Lulu,Lux,Malphite,Malzahar,Maokai,Master Yi,Mel,Milio,Miss Fortune,Mordekaiser,Morgana,Naafiri,Nami,Nasus,Nautilus,Neeko,Nidalee,Nilah,Nocturne,Nunu y Willump,Olaf,Orianna,Ornn,Pantheon,Poppy,Pyke,Qiyana,Quinn,Rakan,Rammus,Rek'Sai,Rell,Renata Glasc,Renekton,Rengar,Riven,Rumble,Ryze,Samira,Sejuani,Senna,Seraphine,Sett,Shaco,Shen,Shyvana,Singed,Sion,Sivir,Skarner,Smolder,Sona,Soraka,Swain,Sylas,Syndra,Tahm Kench,Taliyah,Talon,Taric,Teemo,Thresh,Tristana,Trundle,Tryndamere,Twisted Fate,Twitch,Udyr,Urgot,Varus,Vayne,Veigar,Vel'Koz,Vex,Vi,Viego,Viktor,Vladimir,Volibear,Warwick,Wukong,Xayah,Xerath,Xin Zhao,Yasuo,Yone,Yorick,Yuumi,Zac,Zed,Zeri,Ziggs,Zilean,Zoe,Zyra".split(",");
+(async()=>{try{const v=(await (await fetch("https://ddragon.leagueoflegends.com/api/versions.json")).json())[0];
+  const d=await (await fetch(`https://ddragon.leagueoflegends.com/cdn/${v}/data/es_AR/champion.json`)).json();
+  const names=Object.values(d.data).map(c=>c.name).sort((a,b)=>a.localeCompare(b,"es"));if(names.length>100)CHAMPS=names}catch(e){}})();
+const norm=t=>t.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/gi,"").toLowerCase();
+const CC=["#3F6FD8","#E0524A","#A35BE0","#E08A2E","#2FA866","#D6366E","#2BA3B8","#8A7F3A"];
+function champChip(name,cls="",num){let x=0;for(const c of name)x=(x*31+c.charCodeAt(0))>>>0;
+  return h("span",{class:"cchip "+cls},num?h("i",{class:"cn"},num):null,h("span",{class:"cmono",style:`background:${CC[x%CC.length]}`},name[0]),name)}
+function champPicker({max=3,value=[],numbered=false,placeholder="Buscá un campeón...",tone=""}={}){
+  let val=[...value];const chips=h("div",{class:"cpicks"}),input=h("input",{class:"cinput",placeholder,autocomplete:"off"}),sug=h("div",{class:"csug",role:"listbox"});
+  const wrap=h("div",{class:"cpicker "+tone},chips,h("div",{class:"cbox"},input,sug));
+  function paint(){chips.replaceChildren(...val.map((n,i)=>{const c=champChip(n,tone,numbered?i+1:null);c.append(h("button",{type:"button",class:"cx","aria-label":"Quitar "+n,onclick:()=>{val=val.filter(x=>x!==n);paint()}},"×"));return c}));
+    input.disabled=val.length>=max;input.placeholder=val.length>=max?`Máximo ${max}`:placeholder}
+  function suggest(){const q=norm(input.value);sug.replaceChildren();if(!q){sug.hidden=true;return}
+    const res=CHAMPS.filter(n=>!val.includes(n)&&norm(n).includes(q)).sort((a,b)=>norm(a).indexOf(q)-norm(b).indexOf(q)).slice(0,6);
+    sug.hidden=!res.length;res.forEach(n=>sug.append(h("button",{type:"button",class:"copt",onmousedown:e=>{e.preventDefault();add(n)}},champChip(n))))}
+  function add(n){if(val.length>=max||val.includes(n))return;val.push(n);input.value="";sug.hidden=true;paint();input.focus()}
+  input.addEventListener("input",suggest);input.addEventListener("blur",()=>setTimeout(()=>sug.hidden=true,100));
+  input.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();const f=sug.querySelector(".copt");if(f)f.dispatchEvent(new MouseEvent("mousedown"))}});
+  sug.hidden=true;paint();return{el:wrap,get:()=>val};
+}
+function renderSides(){
+  const L=document.getElementById("lside"),Rr=document.getElementById("rside");if(!L||!profile)return;
+  const all=allOffers().filter(o=>!blockedIds.has(o.user_id));
+  // izquierda: servers + perfil
+  const sl=h("div",{class:"slist"},SERVERS.map(sv=>{const n=all.filter(o=>o.server===sv.id).length;
+    return h("button",{class:"sitem","aria-current":String(sv.id===current),onclick:()=>{current=sv.id;render()}},h("b",{},sv.id),h("span",{class:"nm"},sv.name),h("em",{},String(n)))}));
+  const mine=all.filter(o=>o.mine).length,myChats=Object.keys(chats).length;
+  L.replaceChildren(
+    h("div",{class:"scard pcard"},avatarEl({...profile,online:true}),h("b",{},profile.nick),h("small",{},"#"+profile.tag+" · "+profile.server),profile.mains&&profile.mains.length?h("div",{class:"clist"},profile.mains.map((c,i)=>champChip(c,"",i+1))):null,
+      h("div",{class:"pstats"},h("div",{},h("b",{},String(mine)),h("span",{},"ofertas")),h("div",{},h("b",{},String(myChats)),h("span",{},"chats"))),
+      h("button",{class:"btn",onclick:()=>openOffer()},"Publicar oferta"),h("button",{class:"lnk",onclick:()=>openProfile(true)},"Editar perfil")),
+    h("div",{class:"scard"},h("h4",{},"Servers"),sl));
+  // derecha: en línea + chats
+  const seen=new Set(),on=[];
+  all.filter(o=>o.server===current&&o.online&&!o.mine).sort((a,b)=>b.at-a.at).forEach(o=>{if(!seen.has(o.user_id)){seen.add(o.user_id);on.push(o)}});
+  const extra=Math.max(0,onlineSet.size-1-on.length);
+  const onCard=h("div",{class:"scard"},h("h4",{},"En línea en "+current,h("span",{},String(on.length))),
+    on.length?h("div",{class:"plist"},on.slice(0,8).map(o=>h("button",{class:"pitem",title:"Ver su oferta",onclick:()=>{openRows.add(o.id);renderList();document.querySelector(`.offer[data-id="${o.id}"]`)?.scrollIntoView({block:"center",behavior:"smooth"})}},
+      avatarEl(o),h("div",{class:"pt"},h("b",{},o.nick),h("small",{},[].concat(o.rol)[0]+" busca "+o.busca.join(", "))))))
+      :h("p",{class:"sempty"},"Nadie con ofertas conectado ahora en "+current+". Publicá la tuya y tirá el anzuelo."),
+    extra?h("p",{class:"smore"},`+${extra} conectados sin oferta`):null);
+  const cl=Object.values(chats).sort((a,b)=>(b.msgs.at(-1)?.at||0)-(a.msgs.at(-1)?.at||0)).slice(0,5);
+  const chCard=h("div",{class:"scard"},h("h4",{},"Tus chats",cl.length?h("button",{onclick:openChats},"Ver todos"):null),
+    cl.length?h("div",{class:"plist"},cl.map(c=>{const last=c.msgs.at(-1);return h("button",{class:"pitem",onclick:()=>showChat(c.id)},
+      avatarEl({...c,online:onlineSet.has(c.user_id)}),h("div",{class:"pt"},h("b",{},c.nick),h("small",{},c.endedAt?"Oferta terminada":last?(last.me?"Vos: ":"")+last.text:c.titulo)),isUnread(c)?h("span",{class:"dot","aria-label":"sin leer"}):null)}))
+      :h("p",{class:"sempty"},"Cuando le escribas a alguien, el chat aparece acá."));
+  Rr.replaceChildren(onCard,chCard);
+}
 function renderMe(){const box=document.getElementById("me");box.replaceChildren();if(!profile){box.hidden=true;return}box.hidden=false;
-  box.append(h("button",{class:"chatsbtn",onclick:openChats},"Mis chats",unreadEl()),avatarEl({...profile,online:true},"av"),h("span",{},h("b",{},profile.nick),h("small",{}," #"+profile.tag)),h("button",{onclick:()=>openProfile(true)},"Editar perfil"),h("button",{onclick:logout},"Salir"))}
+  const chatIc=document.createElement("template");chatIc.innerHTML='<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
+  const menuWrap=h("div",{class:"umenu-wrap"});
+  const userBtn=h("button",{class:"userbtn","aria-haspopup":"true","aria-expanded":"false",onclick:e=>{e.stopPropagation();const open=menuWrap.querySelector(".umenu");if(open){open.remove();userBtn.setAttribute("aria-expanded","false");return}
+      userBtn.setAttribute("aria-expanded","true");
+      menuWrap.append(h("div",{class:"umenu",role:"menu"},h("div",{class:"uhead"},h("b",{},profile.nick),h("small",{}," #"+profile.tag+" · "+profile.server)),
+        h("button",{role:"menuitem",onclick:()=>{closeUMenu();openProfile(true)}},"Editar perfil"),
+        h("button",{role:"menuitem",class:"danger",onclick:()=>{closeUMenu();logout()}},"Cerrar sesión")))}},
+    avatarEl({...profile,online:true},"av"),h("span",{class:"uname"},h("b",{},profile.nick),h("small",{}," #"+profile.tag)),h("span",{class:"caret","aria-hidden":"true"},"▾"));
+  menuWrap.append(userBtn);
+  box.append(h("button",{class:"chatsbtn",onclick:openChats,"aria-label":"Mis chats"},chatIc.content.firstChild,h("span",{class:"cl"},"Mis chats"),unreadEl()),menuWrap)}
+function closeUMenu(){document.querySelector(".umenu")?.remove();document.querySelector(".userbtn")?.setAttribute("aria-expanded","false")}
+document.addEventListener("click",e=>{if(!e.target.closest(".umenu-wrap"))closeUMenu()});
 function renderServers(){const nav=document.getElementById("servers");nav.replaceChildren();
   SERVERS.forEach(s=>nav.append(h("button",{class:"srv","aria-pressed":String(s.id===current),title:s.name,onclick:()=>{current=s.id;render()}},s.id,profile&&profile.server===s.id?h("span",{class:"home","aria-label":"tu server"}):null)))}
-function renderList(){
+function renderList(){setTimeout(renderSides,0);
   const s=SERVERS.find(x=>x.id===current);
   const inServer=allOffers().filter(o=>o.server===current);
   const offers=inServer.filter(o=>!blockedIds.has(o.user_id)).filter(passes).sort((a,b)=>b.at-a.at);
@@ -672,7 +838,7 @@ function renderList(){
         h("div",{class:"pos"},h("span",{class:"lbl-m"},"Busca"),o.busca.map((r,i)=>roleIc(r,true,i)))),
       h("div",{class:"rank"},badge(tier),o.rango),
       h("div",{class:"mode"},[].concat(o.modo)[0],[].concat(o.modo).length>1?h("span",{class:"more"}," +"+([].concat(o.modo).length-1)):null),
-      h("div",{class:"title"},h("p",{},o.titulo),h("div",{class:"tags"},timeTag([].concat(o.horario),true),micTag(o.mic),vibeTag([].concat(o.onda)[0]))),
+      h("div",{class:"title"},h("p",{},o.titulo),h("div",{class:"tags"},tag("t-mode",null,[].concat(o.modo).join(" / ")),timeTag([].concat(o.horario),true),micTag(o.mic),vibeTag([].concat(o.onda)[0]))),
       h("div",{class:"age"},ago(o.at),o.mine?h("small",{class:"exp"},`Vence en ${Math.max(1,Math.ceil((EXPIRE-(Date.now()-o.at))/DAY))} días`):null),
       h("div",{class:"chat"},chatBtn,h("span",{class:"chev","aria-hidden":"true"},"▾")),
       isOpen?offerDetail(o):null);
@@ -681,12 +847,14 @@ function renderList(){
     row.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target===row){e.preventDefault();toggle()}});
     list.append(row)});
 }
-function render(){renderMe();renderServers();renderList()}
+function render(){renderMe();renderServers();renderList();renderSides()}
 
 function openProfile(editing,mode="signup"){const m=document.getElementById("modal");
   const nick=h("input",{id:"nick",maxlength:"16",placeholder:"Ej: Flash en la D",value:profile?profile.nick:"",autocomplete:"off"});
   const tag=h("input",{id:"tag",maxlength:"5",placeholder:"LAS1",value:profile?profile.tag:"",autocomplete:"off"});
   const srv=h("select",{id:"srv"},SERVERS.map(s=>h("option",{value:s.id,selected:(profile?profile.server:"LAS")===s.id},`${s.id} · ${s.name}`)));
+  const mainsP=champPicker({max:3,numbered:true,value:(profile&&profile.mains)||[],placeholder:"Escribí un campeón..."});
+  const notifCb=h("input",{type:"checkbox",checked:profile?profile.email_notif!==false:true});
   let pColor=(profile&&profile.color)||AVC[0],pPhoto=(profile&&profile.photo)||null;
   const prev=h("div",{class:"avprev"});
   const syncPrev=()=>{prev.replaceChildren(avatarEl({nick:nick.value.trim()||"?",color:pColor,photo:pPhoto,online:true},"pav big"));sw.style.display=pPhoto?"none":"flex";upBtn.textContent=pPhoto?"Cambiar foto":"Subir foto";rmBtn.hidden=!pPhoto};
@@ -713,17 +881,17 @@ function openProfile(editing,mode="signup"){const m=document.getElementById("mod
         if(up.error)throw up.error;
         photo_url=sb.storage.from("avatars").getPublicUrl(path).data.publicUrl+"?v="+Date.now();
       }
-      const row={id:uid,nick:n,tag:t,server:srv.value,color:pColor,photo_url:photo_url||null};
+      const row={id:uid,nick:n,tag:t,server:srv.value,color:pColor,photo_url:photo_url||null,mains:mainsP.get(),email_notif:notifCb.checked};
       const {error}=await sb.from("profiles").upsert(row);
       if(error){if(error.code==="23505")throw new Error("Ese nombre de invocador y #tag ya están registrados.");throw error}
-      profile={nick:n,tag:t,server:srv.value,color:pColor,photo:row.photo_url};current=profile.server;m.replaceChildren();
+      profile={nick:n,tag:t,server:srv.value,color:pColor,photo:row.photo_url,mains:row.mains,email_notif:row.email_notif};current=profile.server;m.replaceChildren();
       if(editing){await loadOffers();await loadChats();render()}else enterApp();
     }catch(ex){err.textContent=ex.message||"No se pudo guardar. Probá de nuevo.";btn.disabled=false;btn.textContent=editing?"Guardar cambios":"Crear perfil"}
   }
   m.replaceChildren(h("div",{class:"overlay"},h("form",{class:"card",onsubmit:save},
     h("h2",{},editing?"Editar perfil":"Completá tu perfil"),h("p",{},editing?"Cambiá tus datos cuando quieras.":"Ya entraste con Google. Ahora contanos cómo te encuentran en el juego."),
     h("div",{class:"field"},h("label",{for:"nick"},"Nombre de invocador"),h("div",{class:"row"},nick,h("div",{class:"tagbox"},h("span",{},"#"),tag))),
-    h("div",{class:"field"},h("label",{for:"srv"},"Server donde jugás"),srv),h("div",{class:"field"},h("label",{},"Tu avatar"),h("div",{class:"avrow"},prev,h("div",{class:"avopts"},sw,ic))),err,
+    h("div",{class:"field"},h("label",{for:"srv"},"Server donde jugás"),srv),h("div",{class:"field"},h("label",{},"Tus mains (hasta 3, en orden)"),mainsP.el),h("div",{class:"field"},h("label",{class:"remember"},notifCb,"Avisarme por mail cuando me escriban"),h("p",{class:"hint2"},"Te llega un mail cuando alguien abre chat en tu oferta o te escribe (máximo uno por hora por chat). Lo podés apagar cuando quieras.")),h("div",{class:"field"},h("label",{},"Tu avatar"),h("div",{class:"avrow"},prev,h("div",{class:"avopts"},sw,ic))),err,
     h("div",{class:"actions"},h("button",{type:"button",class:"btn sec",onclick:()=>{m.replaceChildren();if(!editing)sb.auth.signOut()}},editing?"Cancelar":"Salir"),h("button",{class:"btn",type:"submit"},editing?"Guardar cambios":"Crear perfil")))));
   syncPrev();nick.focus()}
 
@@ -751,6 +919,7 @@ function openOffer(){
   const div=h("select",{id:"div"},["I","II","III","IV"].map(d=>h("option",{value:d},d)));
   const syncDiv=()=>{div.disabled=!DIV_TIERS.includes(tier.value);div.style.opacity=div.disabled?.4:1};tier.addEventListener("change",syncDiv);
   const rMin=tierSelect("rmin",false,"Plata"),rMax=tierSelect("rmax",false,"Platino");
+  const likeP=champPicker({max:5,tone:"like"}),avoidP=champPicker({max:5,tone:"avoid"});
   const hora=picker(HOURS,{multi:true}),mic=picker(["Con micro","Sin micro"],{multi:true}),onda=picker(["Tryhard","Relajado"],{multi:true});
   const titulo=h("input",{id:"titulo",maxlength:"80",placeholder:"Ej: Busco sup tranqui para subir a Plati",autocomplete:"off"});
   const count=h("div",{class:"hint"},"0/80");titulo.addEventListener("input",()=>count.textContent=titulo.value.length+"/80");
@@ -766,13 +935,15 @@ function openOffer(){
     const rango=tier.value==="Sin rango"?"Sin rango":DIV_TIERS.includes(tier.value)?tier.value+" "+div.value:tier.value;
     const btn=e.submitter||e.target.querySelector('[type=submit]');btn.disabled=true;btn.textContent="Publicando...";
     const {data,error}=await sb.from("offers").insert({user_id:uid,server:current,titulo:t,modos:modo.get(),roles:rol.get(),busca:busca.get(),
-      rango,rango_min:TIER_ORDER[a],rango_max:TIER_ORDER[b],horarios:hora.get(),mic:mic.get(),onda:onda.get()}).select("*, profiles(nick,tag,color,photo_url)").single();
+      rango,rango_min:TIER_ORDER[a],rango_max:TIER_ORDER[b],like_champs:likeP.get(),avoid_champs:avoidP.get(),horarios:hora.get(),mic:mic.get(),onda:onda.get()}).select("*, profiles(nick,tag,color,photo_url,mains)").single();
     if(error){err.textContent="No se pudo publicar: "+error.message;btn.disabled=false;btn.textContent="Publicar oferta";return}
     const o=mapOffer(data);OFFERS=[o,...OFFERS.filter(x=>x.id!==o.id)];m.replaceChildren();if(F.fecha==="old"||activeCount())clearFilters();render();hookIn(o.id);toast("¡Oferta publicada en "+current+"!");
   }
   m.replaceChildren(h("div",{class:"overlay"},h("form",{class:"card wide",onsubmit:publish},
     h("h2",{},"Nueva oferta en "+current),h("p",{},"Se publica como "+profile.nick+" #"+profile.tag+"."),
     h("p",{class:"prio"},"Donde podés marcar varias opciones, tocalas en orden de preferencia: la primera que elijas es la que más te interesa."),F("Modos",modo.el),F("Tu posición",rol.el),F("Posición que buscás",busca.el),
+    h("div",{class:"field"},h("label",{},"💚 Ideal si tu dúo juega con (opcional)"),h("p",{class:"hint2"},"Champs que te gusta que use quien se sume. Hasta 5."),likeP.el),
+    h("div",{class:"field"},h("label",{},"❌ Mejor que no juegue con (opcional)"),avoidP.el),
     h("div",{class:"field"},h("label",{for:"tier"},"Tu rango"),h("div",{class:"two"},tier,div)),
     h("div",{class:"field"},h("label",{for:"rmin"},"Rango que buscás (desde / hasta)"),h("div",{class:"two"},rMin,rMax)),
     F("Horarios en que jugás",hora.el),F("Micrófono (opcional)",mic.el),F("Onda (opcional)",onda.el),
@@ -883,9 +1054,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDrawer()});
 setInterval(()=>{if(uid){renderList();if(repaint)repaint()}},60000);
 
 function mapOffer(r){const p=r.profiles||{};return{id:r.id,user_id:r.user_id,mine:r.user_id===uid,server:r.server,nick:p.nick||"?",tag:p.tag||"",color:p.color,photo:p.photo_url,
-  titulo:r.titulo,modo:r.modos,rol:r.roles,busca:r.busca,rango:r.rango,rangoBusca:r.rango_min?[r.rango_min,r.rango_max]:null,horario:r.horarios,mic:r.mic,onda:r.onda,at:Date.parse(r.created_at)}}
+  mains:p.mains||[],like:r.like_champs||[],avoid:r.avoid_champs||[],titulo:r.titulo,modo:r.modos,rol:r.roles,busca:r.busca,rango:r.rango,rangoBusca:r.rango_min?[r.rango_min,r.rango_max]:null,horario:r.horarios,mic:r.mic,onda:r.onda,at:Date.parse(r.created_at)}}
 async function loadOffers(){
-  const {data,error}=await sb.from("offers").select("*, profiles(nick,tag,color,photo_url)").is("closed_at",null)
+  const {data,error}=await sb.from("offers").select("*, profiles(nick,tag,color,photo_url,mains)").is("closed_at",null)
     .gt("created_at",new Date(Date.now()-EXPIRE).toISOString()).order("created_at",{ascending:false}).limit(500);
   loadingOffers=false;if(error){console.error(error);toast("No se pudieron cargar las ofertas");renderList();return}
   OFFERS=data.map(mapOffer);renderList();
@@ -912,7 +1083,7 @@ async function onSession(s){
   const {data,error}=await sb.from("profiles").select("*").eq("id",uid).maybeSingle();
   if(error){console.error(error);toast("Hubo un problema al cargar tu perfil");return}
   if(!data){showLanding();openProfile(false);return}
-  profile={nick:data.nick,tag:data.tag,server:data.server,color:data.color,photo:data.photo_url};current=profile.server;
+  profile={nick:data.nick,tag:data.tag,server:data.server,color:data.color,photo:data.photo_url,mains:data.mains||[],email_notif:data.email_notif};current=profile.server;
   enterApp();
 }
 let lastUid;
