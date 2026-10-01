@@ -545,6 +545,13 @@ html,body{overflow-x:clip}
 .pcard .clist{justify-content:center;margin-top:8px}
 .pcard .clist .cchip{font-size:.74rem}
 .hint2{font-size:.75rem;color:var(--muted);margin:-2px 0 8px}
+
+.msg.me small{opacity:1;color:rgba(0,0,0,.58)}
+.odiv{align-self:stretch;display:flex;align-items:center;gap:10px;margin:10px 0 4px;color:var(--muted);font-size:.72rem}
+.odiv::before,.odiv::after{content:"";flex:1;height:1px;background:var(--line)}
+.odiv span{max-width:75%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:var(--surface2);border-radius:999px;padding:3px 10px}
+.odiv.off span{opacity:.6}
+.ocount{font-size:.68rem;font-weight:500;color:var(--muted);background:var(--surface2);border-radius:999px;padding:1px 7px;margin-left:6px}
 .note{font-size:.75rem;color:var(--muted);text-align:center;padding:0 0 28px}
 
 @media (max-width:900px){
@@ -796,7 +803,7 @@ function renderSides(){
   // izquierda: servers + perfil
   const sl=h("div",{class:"slist"},SERVERS.map(sv=>{const n=all.filter(o=>o.server===sv.id).length;
     return h("button",{class:"sitem","aria-current":String(sv.id===current),onclick:()=>{current=sv.id;render()}},h("b",{},sv.id),h("span",{class:"nm"},sv.name),h("em",{},String(n)))}));
-  const mine=all.filter(o=>o.mine).length,myChats=Object.keys(chats).length;
+  const mine=all.filter(o=>o.mine).length,myChats=groupsOf().length;
   L.replaceChildren(
     h("div",{class:"scard pcard"},avatarEl({...profile,online:true}),h("b",{},profile.nick),h("small",{},"#"+profile.tag+" · "+profile.server),profile.mains&&profile.mains.length?h("div",{class:"clist"},profile.mains.map((c,i)=>champChip(c,"",i+1))):null,
       h("div",{class:"pstats"},h("div",{},h("b",{},String(mine)),h("span",{},"ofertas")),h("div",{},h("b",{},String(myChats)),h("span",{},"chats"))),
@@ -811,10 +818,10 @@ function renderSides(){
       avatarEl(o),h("div",{class:"pt"},h("b",{},o.nick),h("small",{},[].concat(o.rol)[0]+" busca "+o.busca.join(", "))))))
       :h("p",{class:"sempty"},"Nadie con ofertas conectado ahora en "+current+". Publicá la tuya y tirá el anzuelo."),
     extra?h("p",{class:"smore"},`+${extra} conectados sin oferta`):null);
-  const cl=Object.values(chats).sort((a,b)=>(b.msgs.at(-1)?.at||0)-(a.msgs.at(-1)?.at||0)).slice(0,5);
+  const cl=groupsOf().slice(0,5);
   const chCard=h("div",{class:"scard"},h("h4",{},"Tus chats",cl.length?h("button",{onclick:openChats},"Ver todos"):null),
-    cl.length?h("div",{class:"plist"},cl.map(c=>{const last=c.msgs.at(-1);return h("button",{class:"pitem",onclick:()=>showChat(c.id)},
-      avatarEl({...c,online:onlineSet.has(c.user_id)}),h("div",{class:"pt"},h("b",{},c.nick),h("small",{},c.endedAt?"Oferta terminada":last?(last.me?"Vos: ":"")+last.text:c.titulo)),isUnread(c)?h("span",{class:"dot","aria-label":"sin leer"}):null)}))
+    cl.length?h("div",{class:"plist"},cl.map(g=>h("button",{class:"pitem",onclick:()=>showChat(g.user_id)},
+      avatarEl({...g,online:onlineSet.has(g.user_id)}),h("div",{class:"pt"},h("b",{},g.nick),h("small",{},groupSub(g))),g.unread?h("span",{class:"dot","aria-label":"sin leer"}):null)))
       :h("p",{class:"sempty"},"Cuando le escribas a alguien, el chat aparece acá."));
   Rr.replaceChildren(onCard,chCard);
 }
@@ -995,7 +1002,24 @@ document.getElementById("onBtn").addEventListener("click",()=>{F.online=!F.onlin
 const leftH=c=>Math.max(1,Math.ceil((DAY-(Date.now()-c.endedAt))/36e5));
 const isUnread=c=>c.msgs.some(m=>!m.me&&m.at>(readAt[c.id]||0));
 function markRead(c){readAt[c.id]=Date.now();store.set("hnq.read",readAt)}
-function unreadEl(){const n=Object.values(chats).filter(isUnread).length;return n?h("span",{class:"unread"},n):null}
+// ---------- chats agrupados por persona (una conversación aunque haya varias ofertas)
+function groupsOf(all=false){
+  const g={};
+  for(const c of Object.values(chats))(g[c.user_id]||(g[c.user_id]={user_id:c.user_id,nick:c.nick,tag:c.tag,color:c.color,photo:c.photo,chats:[]})).chats.push(c);
+  return Object.values(g).map(x=>{x.chats.sort((a,b)=>a.createdAt-b.createdAt);
+    x.msgs=x.chats.flatMap(c=>c.msgs.map(m=>({...m,chat:c}))).sort((a,b)=>a.at-b.at);
+    x.last=x.msgs.at(-1);x.allEnded=x.chats.every(c=>c.endedAt);x.unread=x.chats.some(isUnread);
+    x.lastAt=Math.max(x.last?.at||0,...x.chats.map(c=>c.createdAt||0));
+    x.hiddenAt=Math.min(...x.chats.map(c=>c.hiddenAt||0));
+    x.hidden=!!x.hiddenAt&&x.lastAt<=x.hiddenAt;return x})
+    .filter(x=>all||!x.hidden).sort((a,b)=>b.lastAt-a.lastAt);
+}
+const groupOf=u=>groupsOf(true).find(g=>g.user_id===u);
+async function setHidden(u,hide){const {error}=await sb.rpc("hnq_hide_chats",{other:u,hide});if(error){console.error(error);return false}
+  for(const c of Object.values(chats))if(c.user_id===u)c.hiddenAt=hide?Date.now():null;return true}
+function sendTarget(g){const lc=g.last?.chat;if(lc&&!lc.endedAt)return lc;const act=g.chats.filter(c=>!c.endedAt);return [...(act.length?act:g.chats)].sort((a,b)=>b.createdAt-a.createdAt)[0]}
+const groupSub=g=>g.allEnded?`Ofertas terminadas · se borra en ${Math.min(...g.chats.map(leftH))} h`:g.last?(g.last.me?"Vos: ":"")+g.last.text:(g.chats.length>1?g.chats.length+" ofertas":g.chats[0].titulo);
+function unreadEl(){const n=groupsOf().filter(g=>g.unread).length;return n?h("span",{class:"unread"},n):null}
 const hhmm=ts=>new Date(ts).toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"});
 let openId=null,repaint=null;
 function closeDrawer(){document.getElementById("drawer")?.remove();openId=null;repaint=null}
@@ -1009,63 +1033,76 @@ async function loadChats(){
     const other=r.owner_id===uid?r.guest:r.owner;if(!other||blockedIds.has(other.id))continue;
     const endedAt=r.ended_at?Date.parse(r.ended_at):null;if(endedAt&&Date.now()-endedAt>=DAY)continue;
     const off=OFFERS.find(o=>o.id===r.offer_id);
-    next[r.id]={id:r.id,offer_id:r.offer_id,titulo:r.offer_title,server:off?off.server:"",endedAt,user_id:other.id,nick:other.nick,tag:other.tag,color:other.color,photo:other.photo_url,online:onlineSet.has(other.id),
+    const hid=r.owner_id===uid?r.owner_hidden_at:r.guest_hidden_at;
+    next[r.id]={id:r.id,hiddenAt:hid?Date.parse(hid):null,createdAt:Date.parse(r.created_at),offer_id:r.offer_id,titulo:r.offer_title,server:off?off.server:"",endedAt,user_id:other.id,nick:other.nick,tag:other.tag,color:other.color,photo:other.photo_url,online:onlineSet.has(other.id),
       msgs:(r.messages||[]).map(m=>({id:m.id,me:m.sender_id===uid,text:m.body,at:Date.parse(m.created_at)})).sort((x,y)=>x.at-y.at)};
   }
-  chats=next;renderMe();if(openId){if(chats[openId]){if(repaint)repaint()}else closeDrawer()}
+  chats=next;renderMe();if(openId){if(groupOf(openId)){if(repaint)repaint()}else closeDrawer()}
 }
 function onMessage(m){
   const c=chats[m.chat_id];if(!c){loadChats();return}
   if(c.msgs.some(x=>x.id===m.id))return;
   c.msgs.push({id:m.id,me:m.sender_id===uid,text:m.body,at:Date.parse(m.created_at)});
-  if(openId===c.id){markRead(c);repaint&&repaint()}else if(m.sender_id!==uid)toast("Nuevo mensaje de "+c.nick);
-  renderMe();
+  if(openId===c.user_id){markRead(c);repaint&&repaint()}else if(m.sender_id!==uid)toast("Nuevo mensaje de "+c.nick);
+  renderMe();renderSides();
 }
 async function openChat(o){
   if(!profile)return;
   let c=Object.values(chats).find(x=>x.offer_id===o.id);
-  if(c){showChat(c.id);return}
+  if(Object.values(chats).some(x=>x.user_id===o.user_id&&x.hiddenAt))await setHidden(o.user_id,false);
+  if(c){showChat(c.user_id);return}
   const {data,error}=await sb.from("chats").insert({offer_id:o.id,offer_title:o.titulo,owner_id:o.user_id,guest_id:uid}).select().single();
   if(error&&error.code!=="23505"){toast("No se pudo abrir el chat");console.error(error);return}
-  await loadChats();c=data?chats[data.id]:Object.values(chats).find(x=>x.offer_id===o.id);if(c)showChat(c.id);
+  await loadChats();showChat(o.user_id);
 }
-function showChat(id){
-  closeDrawer();openId=id;const c=chats[id];if(!c)return;markRead(c);renderMe();
+function showChat(key){
+  if(chats[key])key=chats[key].user_id;   // acepta id de chat o de usuario
+  closeDrawer();const g0=groupOf(key);if(!g0)return;openId=key;g0.chats.forEach(markRead);renderMe();
   const msgs=h("div",{class:"msgs"});
   const input=h("input",{placeholder:"Escribí un mensaje...",maxlength:"500","aria-label":"Mensaje"});
   let menuEl=null;
-  const who=c.nick+"#"+c.tag;
-  function paint(){const cc=chats[id];if(!cc)return;msgs.replaceChildren(h("div",{class:"sys"},`Chat por la oferta "${cc.titulo}". Coordinen nick, horario y, si quieren, Discord.`),
-    cc.endedAt?h("div",{class:"ended"},`Esta oferta terminó. El chat se borra en ${leftH(cc)} h, aprovechá para pasar tu nick o Discord.`):"",
-    ...cc.msgs.map(m=>h("div",{class:"msg"+(m.me?" me":"")},m.text,h("small",{},hhmm(m.at)))));msgs.scrollTop=msgs.scrollHeight}
+  const who=g0.nick+"#"+g0.tag;
+  const sub=h("small",{});
+  function paint(){const g=groupOf(key);if(!g)return;g.chats.forEach(markRead);
+    sub.textContent=g.chats.length>1?`${g.chats.length} ofertas en común`:g.chats[0].titulo;
+    const out=[h("div",{class:"sys"},"Coordinen nick, horario y, si quieren, Discord.")];
+    const shown=new Set();let prev=null;
+    const divider=c=>h("div",{class:"odiv"+(c.endedAt?" off":"")},h("span",{},(c.endedAt?"Terminada · ":"Oferta · ")+c.titulo));
+    for(const m of g.msgs){if(m.chat!==prev){if(g.chats.length>1||!prev)out.push(divider(m.chat));shown.add(m.chat.id);prev=m.chat}
+      out.push(h("div",{class:"msg"+(m.me?" me":"")},m.text,h("small",{},hhmm(m.at))))}
+    g.chats.filter(c=>!shown.has(c.id)).forEach(c=>out.push(divider(c)));
+    if(g.allEnded)out.push(h("div",{class:"ended"},`Las ofertas terminaron. El chat se borra en ${Math.min(...g.chats.map(leftH))} h, aprovechá para pasar tu nick o Discord.`));
+    msgs.replaceChildren(...out);msgs.scrollTop=msgs.scrollHeight}
   repaint=paint;
-  async function send(e){e.preventDefault();const t=input.value.trim();if(!t)return;input.value="";
-    const {data,error}=await sb.from("messages").insert({chat_id:id,sender_id:uid,body:t}).select().single();
+  async function send(e){e.preventDefault();const t=input.value.trim();if(!t)return;const g=groupOf(key);if(!g)return;input.value="";
+    const {data,error}=await sb.from("messages").insert({chat_id:sendTarget(g).id,sender_id:uid,body:t}).select().single();
     if(error){toast("No se pudo enviar el mensaje");input.value=t;return}
     onMessage(data)}
   function menu(){if(menuEl){menuEl.remove();menuEl=null;return}
     menuEl=h("div",{class:"menu"},
-      h("button",{onclick:async()=>{menuEl.remove();menuEl=null;await sb.from("reports").insert({reporter_id:uid,reported_id:c.user_id,reason:"chat"});toast("Reporte enviado. Lo vamos a revisar.")}},"Reportar"),
-      h("button",{class:"danger",onclick:async()=>{const {error}=await sb.from("blocks").insert({blocker_id:uid,blocked_id:c.user_id});if(error&&error.code!=="23505"){toast("No se pudo bloquear");return}
-        blockedIds.add(c.user_id);delete chats[id];closeDrawer();render();toast(who+" bloqueado")}},"Bloquear"));
+      h("button",{onclick:async()=>{menuEl.remove();menuEl=null;
+        if(!confirm(`¿Borrar el chat con ${g0.nick} de tu lista?\n\nA la otra persona no le pasa nada. Si te vuelve a escribir, el chat reaparece con los mensajes anteriores.`))return;
+        if(await setHidden(key,true)){closeDrawer();render();toast("Chat borrado")}else toast("No se pudo borrar el chat")}},"Borrar chat"),
+      h("button",{onclick:async()=>{menuEl.remove();menuEl=null;await sb.from("reports").insert({reporter_id:uid,reported_id:key,reason:"chat"});toast("Reporte enviado. Lo vamos a revisar.")}},"Reportar"),
+      h("button",{class:"danger",onclick:async()=>{const {error}=await sb.from("blocks").insert({blocker_id:uid,blocked_id:key});if(error&&error.code!=="23505"){toast("No se pudo bloquear");return}
+        blockedIds.add(key);for(const c of Object.values(chats))if(c.user_id===key)delete chats[c.id];closeDrawer();render();toast(who+" bloqueado")}},"Bloquear"));
     d.append(menuEl)}
   const d=h("aside",{class:"drawer",id:"drawer","aria-label":"Chat con "+who},
     h("div",{class:"dhead"},h("button",{class:"icb",title:"Volver a mis chats",onclick:openChats},"‹"),
-      avatarEl({...c,online:onlineSet.has(c.user_id)}),
-      h("div",{class:"t"},h("b",{},who),h("small",{},(c.server?c.server+" · ":"")+c.titulo)),
+      avatarEl({...g0,online:onlineSet.has(key)}),
+      h("div",{class:"t"},h("b",{},who),sub),
       h("button",{class:"icb",title:"Opciones",onclick:menu},"⋯"),h("button",{class:"icb",title:"Cerrar",onclick:closeDrawer},"✕")),
     msgs,h("form",{class:"compose",onsubmit:send},input,h("button",{class:"btn"},"Enviar")));
   document.body.append(d);paint();input.focus();
 }
 function openChats(){
-  closeDrawer();const list=Object.values(chats).sort((a,b)=>(b.msgs.at(-1)?.at||0)-(a.msgs.at(-1)?.at||0));
+  closeDrawer();const list=groupsOf();
   const d=h("aside",{class:"drawer",id:"drawer","aria-label":"Mis chats"},
     h("div",{class:"dhead"},h("div",{class:"t"},h("b",{},"Mis chats")),h("button",{class:"icb",title:"Cerrar",onclick:closeDrawer},"✕")),
-    list.length?h("div",{class:"clist"},list.map(c=>{const last=c.msgs.at(-1);
-      return h("button",{class:"citem",onclick:()=>showChat(c.id)},
-        avatarEl({...c,online:onlineSet.has(c.user_id)}),
-        h("div",{class:"t"},h("b",{},c.nick),h("small",{},c.endedAt?`Oferta terminada · se borra en ${leftH(c)} h`:last?(last.me?"Vos: ":"")+last.text:c.titulo)),
-        isUnread(c)?h("span",{class:"unread"},"•"):null)}))
+    list.length?h("div",{class:"clist"},list.map(g=>h("button",{class:"citem",onclick:()=>showChat(g.user_id)},
+        avatarEl({...g,online:onlineSet.has(g.user_id)}),
+        h("div",{class:"t"},h("b",{},g.nick,g.chats.length>1?h("span",{class:"ocount"},g.chats.length+" ofertas"):null),h("small",{},groupSub(g))),
+        g.unread?h("span",{class:"unread"},"•"):null)))
     :h("div",{class:"empty"},hangHook(),h("h3",{},"Todavía no pescaste a nadie"),h("p",{},"Tocá \"Abrir chat\" en una oferta para escribirle a ese jugador.")));
   document.body.append(d);
 }
