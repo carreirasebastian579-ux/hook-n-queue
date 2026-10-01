@@ -563,6 +563,28 @@ html,body{overflow-x:clip}
 .donate .thanks{font-size:.85rem;color:var(--muted);margin:16px 0 0}
 .donate .actions{justify-content:center}
 .pcard .lnk.don{margin-top:2px;color:var(--accent);opacity:.85}
+
+.pmore{align-self:center;font-size:.72rem;font-weight:700;color:var(--muted);background:var(--surface2);border-radius:999px;padding:2px 7px;cursor:default}
+.pmore.want{color:var(--accent)}
+.adminwrap{display:inline-flex;gap:6px;align-items:center;position:relative}
+.shield{border:1px solid var(--line);background:transparent;border-radius:8px;padding:6px 8px;line-height:1;cursor:pointer}
+.shield:hover{border-color:#F26B6B}
+.modpop{position:absolute;right:0;top:calc(100% + 6px);z-index:8;min-width:170px}
+.report{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line)}
+.report small{display:block;color:var(--muted);font-size:.75rem}
+.report .rofs{margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.report>div:first-child{min-width:0;flex:1}
+.modlist{display:block!important;align-content:start}
+.ractions{display:flex;gap:6px;flex:none}
+.danger-btn{background:#F26B6B!important;color:#1A0606!important}
+
+.pos{flex-wrap:nowrap!important;align-items:center}
+@media (min-width:901px){
+  body.is-admin .cols,body.is-admin .offer{grid-template-columns:170px 70px 76px 140px 90px minmax(0,1fr) 78px 178px}
+}
+@media (min-width:1500px){
+  body.is-admin .appgrid .cols,body.is-admin .appgrid .offer{grid-template-columns:168px 64px 72px 132px minmax(0,1fr) 74px 170px}
+}
 .note{font-size:.75rem;color:var(--muted);text-align:center;padding:0 0 28px}
 
 @media (max-width:900px){
@@ -809,6 +831,58 @@ function champPicker({max=3,value=[],numbered=false,placeholder="Buscá un campe
   sug.hidden=true;paint();return{el:wrap,get:()=>val};
 }
 
+
+// ---------- filtro de lenguaje ofensivo (mismas reglas que la base de datos)
+const BAD_SUB=/(niger|niga|negrata|fagot|maricon|sudaca|retrasadomental|hijodeputa|hijaputa|putamadre|conchatumadre|conchasumadre|conchadetumadre|heilhitler|siegheil|negrodemierda)/;
+const hnqNorm=t=>(t||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[0134578@$!|]/g,c=>({"0":"o","1":"i","3":"e","4":"a","5":"s","7":"t","8":"b","@":"a","$":"s","!":"i","|":"i"})[c]);
+const hnqSquash=t=>t.replace(/[^a-zñ]/g,"").replace(/(.)\1+/g,"$1");
+const BAD_WORDS=new Set(["puto","puta","putos","putas","trolo","trolos","marica","mogolico","mogolica","mogolicos","sorete","conchudo","conchuda","pija","verga","culiado","culiao","forro","forra","pelotudo","pelotuda","hdp","nazi","retard","fag","whore","slut","cunt","bitch"].map(hnqSquash));
+function isOffensive(t){const n=hnqNorm(t);if(BAD_SUB.test(hnqSquash(n)))return true;return n.split(/[^a-zñ]+/).some(w=>w&&BAD_WORDS.has(hnqSquash(w)))}
+function maskText(t){const out=String(t||"").split(/\s+/).map(w=>isOffensive(w)?"*".repeat(Math.max(3,w.length)):w).join(" ");return isOffensive(out)?"*** (mensaje ocultado por lenguaje ofensivo)":out}
+let isAdmin=false;
+
+// ---------- moderación (solo administradores)
+function showBanned(){
+  const m=document.getElementById("modal");showLanding();
+  m.replaceChildren(h("div",{class:"overlay"},h("div",{class:"card",style:"text-align:center"},h("div",{style:"font-size:2rem"},"🚫"),h("h2",{},"Cuenta suspendida"),
+    h("p",{},"Tu cuenta fue suspendida por no respetar las normas de la comunidad. Si creés que es un error, escribinos desde la página de Privacidad."),
+    h("div",{class:"actions",style:"justify-content:center"},h("button",{class:"btn",onclick:()=>{m.replaceChildren();sb.auth.signOut()}},"Entendido")))));
+}
+async function banUser(id,nick,why){
+  if(!confirm(`¿Banear a ${nick}?\n\nSe borra su perfil, sus ofertas y sus chats, y no va a poder volver a usar la app con esa cuenta.`))return false;
+  const {error}=await sb.rpc("hnq_ban",{u:id,why:why||"Moderación"});
+  if(error){toast("No se pudo banear: "+error.message);return false}
+  OFFERS=OFFERS.filter(o=>o.user_id!==id);for(const c of Object.values(chats))if(c.user_id===id)delete chats[c.id];
+  render();toast(nick+" baneado");return true;
+}
+function modMenu(o,anchor){
+  document.querySelector(".modpop")?.remove();
+  const pop=h("div",{class:"modpop menu"},
+    h("button",{onclick:async()=>{pop.remove();if(!confirm("¿Borrar esta oferta?"))return;const {error}=await sb.from("offers").delete().eq("id",o.id);
+      if(error){toast("No se pudo borrar");return}OFFERS=OFFERS.filter(x=>x.id!==o.id);render();toast("Oferta borrada")}},"Borrar oferta"),
+    h("button",{class:"danger",onclick:async()=>{pop.remove();await banUser(o.user_id,o.nick,"Desde oferta: "+o.titulo)}},"Banear usuario"));
+  anchor.parentElement.append(pop);
+  setTimeout(()=>document.addEventListener("click",function f(ev){if(!pop.contains(ev.target)){pop.remove();document.removeEventListener("click",f)}}),0);
+}
+async function openModeration(){
+  closeDrawer();
+  const body=h("div",{class:"clist modlist"},h("p",{class:"sempty",style:"padding:16px"},"Cargando reportes..."));
+  const d=h("aside",{class:"drawer",id:"drawer","aria-label":"Moderación"},
+    h("div",{class:"dhead"},h("div",{class:"t"},h("b",{},"🛡️ Moderación"),h("small",{},"Reportes de la comunidad")),h("button",{class:"icb",title:"Cerrar",onclick:closeDrawer},"✕")),body);
+  document.body.append(d);
+  const {data,error}=await sb.from("reports").select("id,reason,created_at,reporter:profiles!reports_reporter_id_fkey(nick,tag),reported:profiles!reports_reported_id_fkey(id,nick,tag)").order("created_at",{ascending:false}).limit(100);
+  if(error){body.replaceChildren(h("p",{class:"sempty",style:"padding:16px"},"No se pudieron cargar los reportes."));return}
+  const rows=(data||[]).filter(r=>r.reported);
+  if(!rows.length){body.replaceChildren(h("div",{class:"empty"},hangHook(),h("h3",{},"Sin reportes"),h("p",{},"La comunidad está tranqui. 🎣")));return}
+  body.replaceChildren(...rows.map(r=>{const offers=OFFERS.filter(o=>o.user_id===r.reported.id);
+    const el=h("div",{class:"report"},
+      h("div",{},h("b",{},r.reported.nick+"#"+r.reported.tag),h("small",{},`Reportado por ${r.reporter?.nick||"?"} · ${ago(Date.parse(r.created_at))}`),
+        offers.length?h("small",{class:"rofs"},"Ofertas: "+offers.map(o=>`"${o.titulo}"`).join(", ")):null),
+      h("div",{class:"ractions"},
+        h("button",{class:"btn sec sm",onclick:async()=>{await sb.from("reports").delete().eq("id",r.id);el.remove();toast("Reporte descartado")}},"Descartar"),
+        h("button",{class:"btn sm danger-btn",onclick:async()=>{if(await banUser(r.reported.id,r.reported.nick,"Reportado: "+(r.reason||"")))el.remove()}},"Banear")));
+    return el}));
+}
 // ---------- donaciones
 const MP_ALIAS="seba.carreira";
 const MP_LINK="https://link.mercadopago.com.ar/hooknqueue";
@@ -860,6 +934,7 @@ function renderMe(){const box=document.getElementById("me");box.replaceChildren(
       menuWrap.append(h("div",{class:"umenu",role:"menu"},h("div",{class:"uhead"},h("b",{},profile.nick),h("small",{}," #"+profile.tag+" · "+profile.server)),
         h("button",{role:"menuitem",onclick:()=>{closeUMenu();openProfile(true)}},"Editar perfil"),
         h("button",{role:"menuitem",onclick:()=>{closeUMenu();openDonate()}},"💚 Donar"),
+        isAdmin?h("button",{role:"menuitem",onclick:()=>{closeUMenu();openModeration()}},"🛡️ Moderación"):null,
         h("button",{role:"menuitem",class:"danger",onclick:()=>{closeUMenu();logout()}},"Cerrar sesión")))}},
     avatarEl({...profile,online:true},"av"),h("span",{class:"uname"},h("b",{},profile.nick),h("small",{}," #"+profile.tag)),h("span",{class:"caret","aria-hidden":"true"},"▾"));
   menuWrap.append(userBtn);
@@ -884,12 +959,13 @@ function renderList(){setTimeout(renderSides,0);
   if(!offers.length){list.append(h("div",{class:"empty"},hangHook(),h("h3",{},`Tirá el primer anzuelo en ${s.id}`),h("p",{},"Todavía nadie publicó en este server. El primero que tira el anzuelo, pesca."),h("button",{class:"btn",onclick:()=>openOffer()},"Publicar oferta")));return}
   offers.forEach(o=>{const tier=o.rango==="Sin rango"?"Sin rango":o.rango.split(" ")[0];
     const isOpen=openRows.has(o.id);
-    const chatBtn=o.mine?h("button",{class:"btn sec",onclick:e=>{e.stopPropagation();closeOffer(o.id)}},"Ya encontré"):h("button",{class:"btn sec",onclick:e=>{e.stopPropagation();openChat(o)}},"Abrir chat");
+    let chatBtn=o.mine?h("button",{class:"btn sec",onclick:e=>{e.stopPropagation();closeOffer(o.id)}},"Ya encontré"):h("button",{class:"btn sec",onclick:e=>{e.stopPropagation();openChat(o)}},"Abrir chat");
+    if(isAdmin&&!o.mine)chatBtn=h("span",{class:"adminwrap"},chatBtn,h("button",{class:"shield",title:"Moderar",onclick:e=>{e.stopPropagation();modMenu(o,e.currentTarget)}},"🛡️"));
     const row=h("article",{class:"offer"+(isOpen?" open":""),"data-id":o.id,tabindex:"0","aria-expanded":String(isOpen),title:isOpen?"":"Tocá para ver la oferta completa"},
       h("div",{class:"player"},avatarEl(o),h("div",{class:"pname"},h("b",{},o.nick),h("small",{},"#"+o.tag,o.online?h("span",{class:"ontxt"}," · en línea"):null,o.mine?h("span",{class:"mine-tag"},"Tu oferta"):null))),
       h("div",{class:"posgroup"},
-        h("div",{class:"pos"},h("span",{class:"lbl-m"},"Juega"),[].concat(o.rol).map((r,i)=>roleIc(r,false,i))),
-        h("div",{class:"pos"},h("span",{class:"lbl-m"},"Busca"),o.busca.map((r,i)=>roleIc(r,true,i)))),
+        h("div",{class:"pos"},h("span",{class:"lbl-m"},"Juega"),[].concat(o.rol).slice(0,[].concat(o.rol).length>2?1:2).map((r,i)=>roleIc(r,false,i)),[].concat(o.rol).length>2?h("span",{class:"pmore",title:[].concat(o.rol).join(", ")},"+"+([].concat(o.rol).length-1)):null),
+        h("div",{class:"pos"},h("span",{class:"lbl-m"},"Busca"),o.busca.slice(0,o.busca.length>2?1:2).map((r,i)=>roleIc(r,true,i)),o.busca.length>2?h("span",{class:"pmore want",title:o.busca.join(", ")},"+"+(o.busca.length-1)):null)),
       h("div",{class:"rank"},badge(tier),o.rango),
       h("div",{class:"mode"},[].concat(o.modo)[0],[].concat(o.modo).length>1?h("span",{class:"more"}," +"+([].concat(o.modo).length-1)):null),
       h("div",{class:"title"},h("p",{},o.titulo),h("div",{class:"tags"},tag("t-mode",null,[].concat(o.modo).join(" / ")),timeTag([].concat(o.horario),true),micTag(o.mic),vibeTag([].concat(o.onda)[0]))),
@@ -925,6 +1001,7 @@ function openProfile(editing,mode="signup"){const m=document.getElementById("mod
   async function save(e){e.preventDefault();const n=nick.value.trim(),t=tag.value.trim().replace(/^#/,"").toUpperCase();
     if(n.length<3){err.textContent="El nombre de invocador tiene que tener al menos 3 caracteres.";nick.focus();return}
     if(!/^[A-Z0-9]{3,5}$/.test(t)){err.textContent="El tag va sin espacios, de 3 a 5 letras o números.";tag.focus();return}
+    if(isOffensive(n)){err.textContent="Ese nombre no está permitido. Elegí otro, respetando a los demás.";nick.focus();return}
     const btn=e.submitter||e.target.querySelector('[type=submit]');btn.disabled=true;btn.textContent="Guardando...";err.textContent="";
     try{
       let photo_url=pPhoto;
@@ -937,13 +1014,13 @@ function openProfile(editing,mode="signup"){const m=document.getElementById("mod
       }
       const row={id:uid,nick:n,tag:t,server:srv.value,color:pColor,photo_url:photo_url||null,mains:mainsP.get(),email_notif:notifCb.checked};
       const {error}=await sb.from("profiles").upsert(row);
-      if(error){if(error.code==="23505")throw new Error("Ese nombre de invocador y #tag ya están registrados.");throw error}
+      if(error){if(error.code==="23505")throw new Error("Ese nombre de invocador y #tag ya están registrados.");if(String(error.message).includes("HNQ_OFFENSIVE"))throw new Error("Ese nombre no está permitido. Elegí otro, respetando a los demás.");throw error}
       profile={nick:n,tag:t,server:srv.value,color:pColor,photo:row.photo_url,mains:row.mains,email_notif:row.email_notif};current=profile.server;m.replaceChildren();
       if(editing){await loadOffers();await loadChats();render()}else enterApp();
     }catch(ex){err.textContent=ex.message||"No se pudo guardar. Probá de nuevo.";btn.disabled=false;btn.textContent=editing?"Guardar cambios":"Crear perfil"}
   }
   m.replaceChildren(h("div",{class:"overlay"},h("form",{class:"card",onsubmit:save},
-    h("h2",{},editing?"Editar perfil":"Completá tu perfil"),h("p",{},editing?"Cambiá tus datos cuando quieras.":"Ya entraste con Google. Ahora contanos cómo te encuentran en el juego."),
+    h("h2",{},editing?"Editar perfil":"Completá tu perfil"),h("p",{},editing?"Cambiá tus datos cuando quieras.":"Ya entraste con Google. Ahora contanos cómo te encuentran en el juego. Nicks o mensajes ofensivos no están permitidos."),
     h("div",{class:"field"},h("label",{for:"nick"},"Nombre de invocador"),h("div",{class:"row"},nick,h("div",{class:"tagbox"},h("span",{},"#"),tag))),
     h("div",{class:"field"},h("label",{for:"srv"},"Server donde jugás"),srv),h("div",{class:"field"},h("label",{},"Tus mains (hasta 3, en orden)"),mainsP.el),h("div",{class:"field"},h("label",{class:"remember"},notifCb,"Avisarme por mail cuando me escriban"),h("p",{class:"hint2"},"Te llega un mail cuando alguien abre chat en tu oferta o te escribe (máximo uno por hora por chat). Lo podés apagar cuando quieras.")),h("div",{class:"field"},h("label",{},"Tu avatar"),h("div",{class:"avrow"},prev,h("div",{class:"avopts"},sw,ic))),err,
     h("div",{class:"actions"},h("button",{type:"button",class:"btn sec",onclick:()=>{m.replaceChildren();if(!editing)sb.auth.signOut()}},editing?"Cancelar":"Salir"),h("button",{class:"btn",type:"submit"},editing?"Guardar cambios":"Crear perfil")))));
@@ -984,13 +1061,14 @@ function openOffer(){
     if(!modo.get().length)miss.push("el modo");if(!rol.get().length)miss.push("tu posición");if(!busca.get().length)miss.push("qué posición buscás");
     if(!hora.get().length)miss.push("el horario");;
     const t=titulo.value.trim();if(t.length<5)miss.push("un título de al menos 5 caracteres");
+    if(isOffensive(t)){err.textContent="El título tiene palabras que no están permitidas. Probá con otro.";return}
     if(miss.length){err.textContent="Te falta elegir "+miss.join(", ")+".";return}
     let a=TIER_ORDER.indexOf(rMin.value),b=TIER_ORDER.indexOf(rMax.value);if(a>b)[a,b]=[b,a];
     const rango=tier.value==="Sin rango"?"Sin rango":DIV_TIERS.includes(tier.value)?tier.value+" "+div.value:tier.value;
     const btn=e.submitter||e.target.querySelector('[type=submit]');btn.disabled=true;btn.textContent="Publicando...";
     const {data,error}=await sb.from("offers").insert({user_id:uid,server:current,titulo:t,modos:modo.get(),roles:rol.get(),busca:busca.get(),
       rango,rango_min:TIER_ORDER[a],rango_max:TIER_ORDER[b],like_champs:likeP.get(),avoid_champs:avoidP.get(),horarios:hora.get(),mic:mic.get(),onda:onda.get()}).select("*, profiles(nick,tag,color,photo_url,mains)").single();
-    if(error){err.textContent="No se pudo publicar: "+error.message;btn.disabled=false;btn.textContent="Publicar oferta";return}
+    if(error){err.textContent=String(error.message).includes("HNQ_OFFENSIVE")?"El título tiene palabras que no están permitidas. Probá con otro.":"No se pudo publicar: "+error.message;btn.disabled=false;btn.textContent="Publicar oferta";return}
     const o=mapOffer(data);OFFERS=[o,...OFFERS.filter(x=>x.id!==o.id)];m.replaceChildren();if(F.fecha==="old"||activeCount())clearFilters();render();hookIn(o.id);toast("¡Oferta publicada en "+current+"!");
   }
   m.replaceChildren(h("div",{class:"overlay"},h("form",{class:"card wide",onsubmit:publish},
@@ -1063,14 +1141,14 @@ async function loadChats(){
     const off=OFFERS.find(o=>o.id===r.offer_id);
     const hid=r.owner_id===uid?r.owner_hidden_at:r.guest_hidden_at;
     next[r.id]={id:r.id,hiddenAt:hid?Date.parse(hid):null,createdAt:Date.parse(r.created_at),offer_id:r.offer_id,titulo:r.offer_title,server:off?off.server:"",endedAt,user_id:other.id,nick:other.nick,tag:other.tag,color:other.color,photo:other.photo_url,online:onlineSet.has(other.id),
-      msgs:(r.messages||[]).map(m=>({id:m.id,me:m.sender_id===uid,text:m.body,at:Date.parse(m.created_at)})).sort((x,y)=>x.at-y.at)};
+      msgs:(r.messages||[]).map(m=>({id:m.id,me:m.sender_id===uid,text:maskText(m.body),at:Date.parse(m.created_at)})).sort((x,y)=>x.at-y.at)};
   }
   chats=next;renderMe();if(openId){if(groupOf(openId)){if(repaint)repaint()}else closeDrawer()}
 }
 function onMessage(m){
   const c=chats[m.chat_id];if(!c){loadChats();return}
   if(c.msgs.some(x=>x.id===m.id))return;
-  c.msgs.push({id:m.id,me:m.sender_id===uid,text:m.body,at:Date.parse(m.created_at)});
+  c.msgs.push({id:m.id,me:m.sender_id===uid,text:maskText(m.body),at:Date.parse(m.created_at)});
   if(openId===c.user_id){markRead(c);repaint&&repaint()}else if(m.sender_id!==uid)toast("Nuevo mensaje de "+c.nick);
   renderMe();renderSides();
 }
@@ -1103,7 +1181,7 @@ function showChat(key){
     msgs.replaceChildren(...out);msgs.scrollTop=msgs.scrollHeight}
   repaint=paint;
   async function send(e){e.preventDefault();const t=input.value.trim();if(!t)return;const g=groupOf(key);if(!g)return;input.value="";
-    const {data,error}=await sb.from("messages").insert({chat_id:sendTarget(g).id,sender_id:uid,body:t}).select().single();
+    const {data,error}=await sb.from("messages").insert({chat_id:sendTarget(g).id,sender_id:uid,body:maskText(t)}).select().single();
     if(error){toast("No se pudo enviar el mensaje");input.value=t;return}
     onMessage(data)}
   function menu(){if(menuEl){menuEl.remove();menuEl=null;return}
@@ -1164,6 +1242,9 @@ async function onSession(s){
   const id=s?.user?.id||null;
   if(!id){uid=null;profile=null;OFFERS=[];chats={};stopRealtime();closeDrawer();showLanding();return}
   uid=id;
+  const ban=await sb.from("banned").select("reason").eq("user_id",uid).maybeSingle();
+  if(ban.data){showBanned();return}
+  const adm=await sb.rpc("hnq_is_admin");isAdmin=adm.data===true;document.body.classList.toggle("is-admin",isAdmin);
   const {data,error}=await sb.from("profiles").select("*").eq("id",uid).maybeSingle();
   if(error){console.error(error);toast("Hubo un problema al cargar tu perfil");return}
   if(!data){showLanding();openProfile(false);return}
