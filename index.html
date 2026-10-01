@@ -552,6 +552,17 @@ html,body{overflow-x:clip}
 .odiv span{max-width:75%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:var(--surface2);border-radius:999px;padding:3px 10px}
 .odiv.off span{opacity:.6}
 .ocount{font-size:.68rem;font-weight:500;color:var(--muted);background:var(--surface2);border-radius:999px;padding:1px 7px;margin-left:6px}
+
+.donate{text-align:center;max-width:400px}
+.donate .dicon{font-size:2.2rem;margin-bottom:4px}
+.donate > p{margin:8px 0 20px}
+.mpbtn{display:block;margin-bottom:14px;background:#009EE3!important;color:#fff!important;box-shadow:none!important}
+.alias{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-align:left}
+.alias small{display:block;color:var(--muted);font-size:.72rem}
+.alias b{font-size:1.05rem;letter-spacing:.02em}
+.donate .thanks{font-size:.85rem;color:var(--muted);margin:16px 0 0}
+.donate .actions{justify-content:center}
+.pcard .lnk.don{margin-top:2px;color:var(--accent);opacity:.85}
 .note{font-size:.75rem;color:var(--muted);text-align:center;padding:0 0 28px}
 
 @media (max-width:900px){
@@ -661,7 +672,7 @@ html,body{overflow-x:clip}
     <div class="cols" id="cols"><span>Jugador</span><span>Juega</span><span>Busca</span><span>Rango</span><span>Modo</span><span>Oferta</span><span>Publicada</span><span></span></div>
     <div id="list"></div>
   </section>
-  <p class="note">Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. · <a href="privacidad.html">Privacidad</a></p>
+  <p class="note">Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. · <a href="privacidad.html">Privacidad</a> · <a href="#" onclick="openDonate();return false">Donar</a></p>
 </div>
 <aside class="rside" id="rside" aria-label="En línea y chats"></aside>
 </main>
@@ -797,6 +808,22 @@ function champPicker({max=3,value=[],numbered=false,placeholder="Buscá un campe
   input.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();const f=sug.querySelector(".copt");if(f)f.dispatchEvent(new MouseEvent("mousedown"))}});
   sug.hidden=true;paint();return{el:wrap,get:()=>val};
 }
+
+// ---------- donaciones
+const MP_ALIAS="seba.carreira";
+const MP_LINK="https://link.mercadopago.com.ar/hooknqueue";
+function openDonate(){
+  const m=document.getElementById("modal");
+  const copy=async()=>{try{await navigator.clipboard.writeText(MP_ALIAS);toast("Alias copiado")}catch(e){toast("Alias: "+MP_ALIAS)}};
+  m.replaceChildren(h("div",{class:"overlay",onclick:e=>{if(e.target.classList.contains("overlay"))m.replaceChildren()}},h("div",{class:"card donate"},
+    h("div",{class:"dicon"},"💚"),
+    h("h2",{},"Bancá Hook n' Queue"),
+    h("p",{},"La app es gratis y sin publicidad. Si te sirvió para encontrar dúo, podés colaborar con lo que quieras: ayuda a pagar el dominio y a mantenerla."),
+    MP_LINK?h("a",{class:"btn big mpbtn",href:MP_LINK,target:"_blank",rel:"noopener"},"Donar con Mercado Pago"):null,
+    h("div",{class:"alias"},h("div",{},h("small",{},"Alias de Mercado Pago"),h("b",{},MP_ALIAS)),h("button",{class:"btn sec",type:"button",onclick:copy},"Copiar")),
+    h("p",{class:"thanks"},"¡Gracias por bancar! 🎣"),
+    h("div",{class:"actions"},h("button",{class:"btn sec",type:"button",onclick:()=>m.replaceChildren()},"Cerrar")))));
+}
 function renderSides(){
   const L=document.getElementById("lside"),Rr=document.getElementById("rside");if(!L||!profile)return;
   const all=allOffers().filter(o=>!blockedIds.has(o.user_id));
@@ -807,7 +834,7 @@ function renderSides(){
   L.replaceChildren(
     h("div",{class:"scard pcard"},avatarEl({...profile,online:true}),h("b",{},profile.nick),h("small",{},"#"+profile.tag+" · "+profile.server),profile.mains&&profile.mains.length?h("div",{class:"clist"},profile.mains.map((c,i)=>champChip(c,"",i+1))):null,
       h("div",{class:"pstats"},h("div",{},h("b",{},String(mine)),h("span",{},"ofertas")),h("div",{},h("b",{},String(myChats)),h("span",{},"chats"))),
-      h("button",{class:"btn",onclick:()=>openOffer()},"Publicar oferta"),h("button",{class:"lnk",onclick:()=>openProfile(true)},"Editar perfil")),
+      h("button",{class:"btn",onclick:()=>openOffer()},"Publicar oferta"),h("button",{class:"lnk",onclick:()=>openProfile(true)},"Editar perfil"),h("button",{class:"lnk don",onclick:openDonate},"💚 Bancá el proyecto")),
     h("div",{class:"scard"},h("h4",{},"Servers"),sl));
   // derecha: en línea + chats
   const seen=new Set(),on=[];
@@ -832,6 +859,7 @@ function renderMe(){const box=document.getElementById("me");box.replaceChildren(
       userBtn.setAttribute("aria-expanded","true");
       menuWrap.append(h("div",{class:"umenu",role:"menu"},h("div",{class:"uhead"},h("b",{},profile.nick),h("small",{}," #"+profile.tag+" · "+profile.server)),
         h("button",{role:"menuitem",onclick:()=>{closeUMenu();openProfile(true)}},"Editar perfil"),
+        h("button",{role:"menuitem",onclick:()=>{closeUMenu();openDonate()}},"💚 Donar"),
         h("button",{role:"menuitem",class:"danger",onclick:()=>{closeUMenu();logout()}},"Cerrar sesión")))}},
     avatarEl({...profile,online:true},"av"),h("span",{class:"uname"},h("b",{},profile.nick),h("small",{}," #"+profile.tag)),h("span",{class:"caret","aria-hidden":"true"},"▾"));
   menuWrap.append(userBtn);
