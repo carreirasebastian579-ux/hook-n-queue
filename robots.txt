@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /baja.html
+
+Sitemap: https://hooknqueue.com/sitemap.xml
