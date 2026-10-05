@@ -803,7 +803,7 @@ const EN={
 "🛡️ Moderación":"🛡️ Moderation","Moderación":"Moderation","Reportes de la comunidad":"Community reports","Cargando reportes...":"Loading reports...","No se pudieron cargar los reportes.":"Couldn't load reports.","Sin reportes":"No reports","La comunidad está tranqui. 🎣":"All calm in the community. 🎣",
 "Descartar":"Dismiss","Banear":"Ban","Banear usuario":"Ban user","Borrar oferta":"Delete offer","Moderar":"Moderate","Oferta borrada":"Offer deleted","No se pudo borrar":"Couldn't delete","Reporte descartado":"Report dismissed","¿Borrar esta oferta?":"Delete this offer?",
 "Cuenta suspendida":"Account suspended","Tu cuenta fue suspendida por no respetar las normas de la comunidad. Si creés que es un error, escribinos desde la página de Privacidad.":"Your account was suspended for breaking the community rules. If you think this is a mistake, contact us through the Privacy page.","Entendido":"Got it",
-"Volver a Hook n' Queue":"Back to Hook n' Queue","Ver perfil":"View profile","Desconectado":"Offline","Mains":"Mains","Todavía no cargó sus mains.":"No mains added yet.","No tiene ofertas activas ahora.":"No active offers right now.","📋 Copiar Riot ID":"📋 Copy Riot ID","🔎 Ver en OP.GG":"🔎 View on OP.GG","💬 Abrir chat":"💬 Open chat","Riot ID copiado":"Riot ID copied","Buscás":"Looking for","Fecha":"Date","Mensaje":"Message"
+"Volver a Hook n' Queue":"Back to Hook n' Queue","Ver perfil":"View profile","Ya tenés 5 ofertas activas. Cerrá alguna con \"Ya encontré\" para publicar otra.":"You already have 5 active offers. Close one with \"Found one\" to post another.","Llegaste al máximo de 15 ofertas por día. Probá de nuevo mañana.":"You reached the limit of 15 offers per day. Try again tomorrow.","Estás mandando mensajes muy rápido. Esperá un momento.":"You're sending messages too fast. Please wait a moment.","Abriste muchos chats seguidos. Esperá un rato para abrir otro.":"You opened too many chats in a row. Please wait a bit.","Hiciste muchos reportes seguidos. Esperá un rato.":"You sent too many reports in a row. Please wait a bit.","Desconectado":"Offline","Mains":"Mains","Todavía no cargó sus mains.":"No mains added yet.","No tiene ofertas activas ahora.":"No active offers right now.","📋 Copiar Riot ID":"📋 Copy Riot ID","🔎 Ver en OP.GG":"🔎 View on OP.GG","💬 Abrir chat":"💬 Open chat","Riot ID copiado":"Riot ID copied","Buscás":"Looking for","Fecha":"Date","Mensaje":"Message"
 };
 const TIERS_RE="Hierro|Bronce|Plata|Oro|Platino|Esmeralda|Diamante|Master|Grandmaster|Challenger";
 const ROLE_RE="Top|Jungla|Mid|ADC|Support|Fill";
@@ -999,6 +999,14 @@ function isOffensive(t){const n=hnqNorm(t);if(BAD_SUB.test(hnqSquash(n)))return 
 function maskText(t){const out=String(t||"").split(/\s+/).map(w=>isOffensive(w)?"*".repeat(Math.max(3,w.length)):w).join(" ");return isOffensive(out)?"*** (mensaje ocultado por lenguaje ofensivo)":out}
 let isAdmin=false;
 
+// ---------- límites anti-spam
+function limitMsg(e){const m=String(e&&e.message||e||"");
+  if(m.includes("HNQ_LIMIT_OFFERS"))return "Ya tenés 5 ofertas activas. Cerrá alguna con \"Ya encontré\" para publicar otra.";
+  if(m.includes("HNQ_LIMIT_DAY"))return "Llegaste al máximo de 15 ofertas por día. Probá de nuevo mañana.";
+  if(m.includes("HNQ_LIMIT_MSG"))return "Estás mandando mensajes muy rápido. Esperá un momento.";
+  if(m.includes("HNQ_LIMIT_CHATS"))return "Abriste muchos chats seguidos. Esperá un rato para abrir otro.";
+  if(m.includes("HNQ_LIMIT_REPORTS"))return "Hiciste muchos reportes seguidos. Esperá un rato.";
+  return null}
 // ---------- moderación (solo administradores)
 function showBanned(){
   const m=document.getElementById("modal");showLanding();
@@ -1244,6 +1252,7 @@ function picker(opts,{multi=false,icons=false,value=multi?[]:null,onchange=null,
 function tierSelect(id,withNone,def){return h("select",{id},(withNone?["Sin rango",...TIER_ORDER]:TIER_ORDER).map(t=>h("option",{value:t,selected:t===def},t)))}
 function openOffer(){
   if(!profile){openProfile(false);return}
+  if(allOffers().filter(o=>o.mine).length>=5){toast(limitMsg("HNQ_LIMIT_OFFERS"));return}
   const m=document.getElementById("modal");
   const modo=picker(MODES,{multi:true}),rol=picker(ROLES,{multi:true,icons:true}),busca=picker(ROLES,{multi:true,icons:true});
   const tier=tierSelect("tier",true,"Oro");
@@ -1268,7 +1277,7 @@ function openOffer(){
     const btn=e.submitter||e.target.querySelector('[type=submit]');btn.disabled=true;btn.textContent="Publicando...";
     const {data,error}=await sb.from("offers").insert({user_id:uid,server:current,titulo:t,modos:modo.get(),roles:rol.get(),busca:busca.get(),
       rango,rango_min:TIER_ORDER[a],rango_max:TIER_ORDER[b],like_champs:likeP.get(),avoid_champs:avoidP.get(),horarios:hora.get(),mic:mic.get(),onda:onda.get()}).select("*, profiles(nick,tag,color,photo_url,mains,server)").single();
-    if(error){err.textContent=String(error.message).includes("HNQ_OFFENSIVE")?"El título tiene palabras que no están permitidas. Probá con otro.":"No se pudo publicar: "+error.message;btn.disabled=false;btn.textContent="Publicar oferta";return}
+    if(error){err.textContent=limitMsg(error)||(String(error.message).includes("HNQ_OFFENSIVE")?"El título tiene palabras que no están permitidas. Probá con otro.":"No se pudo publicar: "+error.message);btn.disabled=false;btn.textContent="Publicar oferta";return}
     const o=mapOffer(data);OFFERS=[o,...OFFERS.filter(x=>x.id!==o.id)];m.replaceChildren();if(F.fecha==="old"||activeCount())clearFilters();render();hookIn(o.id);toast("¡Oferta publicada en "+current+"!");
   }
   m.replaceChildren(h("div",{class:"overlay"},h("form",{class:"card wide",onsubmit:publish},
@@ -1358,7 +1367,7 @@ async function openChat(o){
   if(Object.values(chats).some(x=>x.user_id===o.user_id&&x.hiddenAt))await setHidden(o.user_id,false);
   if(c){showChat(c.user_id);return}
   const {data,error}=await sb.from("chats").insert({offer_id:o.id,offer_title:o.titulo,owner_id:o.user_id,guest_id:uid}).select().single();
-  if(error&&error.code!=="23505"){toast("No se pudo abrir el chat");console.error(error);return}
+  if(error&&error.code!=="23505"){toast(limitMsg(error)||"No se pudo abrir el chat");console.error(error);return}
   await loadChats();showChat(o.user_id);
 }
 function showChat(key){
@@ -1382,7 +1391,7 @@ function showChat(key){
   repaint=paint;
   async function send(e){e.preventDefault();const t=input.value.trim();if(!t)return;const g=groupOf(key);if(!g)return;input.value="";
     const {data,error}=await sb.from("messages").insert({chat_id:sendTarget(g).id,sender_id:uid,body:maskText(t)}).select().single();
-    if(error){toast("No se pudo enviar el mensaje");input.value=t;return}
+    if(error){toast(limitMsg(error)||"No se pudo enviar el mensaje");input.value=t;return}
     onMessage(data)}
   function menu(){if(menuEl){menuEl.remove();menuEl=null;return}
     menuEl=h("div",{class:"menu"},
