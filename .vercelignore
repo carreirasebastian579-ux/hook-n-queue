@@ -1,0 +1,4 @@
+# Archivos que están en GitHub pero no se publican en la web
+*.md
+*.sql
+iconos/LEEME.txt
