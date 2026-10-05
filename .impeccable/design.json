@@ -1,0 +1,584 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-05T23:25:09.247Z",
+  "title": "Design System: Hook n' Queue",
+  "extensions": {
+    "colorMeta": {
+      "verde-espectral": {
+        "role": "primary",
+        "displayName": "Verde Espectral",
+        "canonical": "oklch(82.7% 0.161 162.1)",
+        "tonalRamp": [
+          "#000F07",
+          "#032C1C",
+          "#064C33",
+          "#026F4B",
+          "#1E9367",
+          "#14BA81",
+          "#53E2A6",
+          "#C3FEE0"
+        ]
+      },
+      "bruma-menta": {
+        "role": "primary",
+        "displayName": "Bruma Menta",
+        "canonical": "oklch(91.4% 0.095 164.2)",
+        "tonalRamp": [
+          "#000F08",
+          "#022C1D",
+          "#054C35",
+          "#156E4F",
+          "#3E8F6E",
+          "#61B18F",
+          "#88D8B4",
+          "#C3FEE2"
+        ]
+      },
+      "abismo": {
+        "role": "neutral",
+        "displayName": "Abismo",
+        "canonical": "oklch(15.8% 0.015 179.6)",
+        "tonalRamp": [
+          "#050D0B",
+          "#1C2724",
+          "#374240",
+          "#55615E",
+          "#74807D",
+          "#95A29F",
+          "#BAC7C4",
+          "#E4F2EF"
+        ]
+      },
+      "fondo-hondo": {
+        "role": "neutral",
+        "displayName": "Fondo Hondo",
+        "canonical": "oklch(20.4% 0.021 179.0)",
+        "tonalRamp": [
+          "#030E0B",
+          "#192724",
+          "#344340",
+          "#52625E",
+          "#71817D",
+          "#91A39E",
+          "#B7C9C4",
+          "#E1F3EF"
+        ]
+      },
+      "fondo-alga": {
+        "role": "neutral",
+        "displayName": "Fondo Alga",
+        "canonical": "oklch(24.7% 0.027 170.8)",
+        "tonalRamp": [
+          "#010F0A",
+          "#162822",
+          "#32443E",
+          "#4F635B",
+          "#6E837B",
+          "#8FA49C",
+          "#B4CAC2",
+          "#DEF5EC"
+        ]
+      },
+      "linea-alga": {
+        "role": "neutral",
+        "displayName": "Línea Alga",
+        "canonical": "oklch(29.9% 0.032 172.7)",
+        "tonalRamp": [
+          "#000F0A",
+          "#122922",
+          "#2E453E",
+          "#4B645C",
+          "#6A847B",
+          "#8BA59C",
+          "#B0CBC2",
+          "#DAF6EC"
+        ]
+      },
+      "tinta-espuma": {
+        "role": "neutral",
+        "displayName": "Tinta Espuma",
+        "canonical": "oklch(95.2% 0.021 173.9)",
+        "tonalRamp": [
+          "#030E0A",
+          "#1A2723",
+          "#35433F",
+          "#52625D",
+          "#71817C",
+          "#92A39D",
+          "#B7C9C3",
+          "#E1F3ED"
+        ]
+      },
+      "musgo-apagado": {
+        "role": "neutral",
+        "displayName": "Musgo Apagado",
+        "canonical": "oklch(66.0% 0.037 172.9)",
+        "tonalRamp": [
+          "#000F0A",
+          "#0E2A22",
+          "#2B463E",
+          "#48655B",
+          "#67857B",
+          "#88A69C",
+          "#ADCCC2",
+          "#D7F7EC"
+        ]
+      },
+      "musgo-claro": {
+        "role": "neutral",
+        "displayName": "Musgo Claro",
+        "canonical": "oklch(82.3% 0.044 172.4)",
+        "tonalRamp": [
+          "#000F0A",
+          "#072B22",
+          "#25473D",
+          "#43665B",
+          "#62867A",
+          "#83A89B",
+          "#A8CEC1",
+          "#D2F9EB"
+        ]
+      },
+      "tinta-verde-noche": {
+        "role": "neutral",
+        "displayName": "Tinta Verde Noche",
+        "canonical": "oklch(17.3% 0.029 166.0)",
+        "tonalRamp": [
+          "#010F08",
+          "#162921",
+          "#31453C",
+          "#4E635A",
+          "#6D8379",
+          "#8EA59A",
+          "#B3CAC0",
+          "#DDF5EA"
+        ]
+      },
+      "verde-muelle": {
+        "role": "primary",
+        "displayName": "Verde Muelle",
+        "canonical": "oklch(72.2% 0.134 163.8)",
+        "tonalRamp": [
+          "#000F08",
+          "#032C1D",
+          "#084C35",
+          "#086F4E",
+          "#079469",
+          "#34B887",
+          "#63DFAC",
+          "#C4FEE2"
+        ]
+      },
+      "menta-preferida": {
+        "role": "primary",
+        "displayName": "Menta Preferida",
+        "canonical": "oklch(80.4% 0.095 166.9)",
+        "tonalRamp": [
+          "#000F08",
+          "#002C1E",
+          "#094B38",
+          "#0B6E52",
+          "#3A8F71",
+          "#5EB292",
+          "#84D8B7",
+          "#C1FFE4"
+        ]
+      },
+      "grafito-muelle": {
+        "role": "neutral",
+        "displayName": "Grafito Muelle",
+        "canonical": "oklch(16.6% 0.003 196.8)",
+        "tonalRamp": [
+          "#0A0C0C",
+          "#222424",
+          "#3E4040",
+          "#5C5E5E",
+          "#7B7E7E",
+          "#9C9F9F",
+          "#C2C5C5",
+          "#ECEFEF"
+        ]
+      },
+      "superficie-muelle": {
+        "role": "neutral",
+        "displayName": "Superficie Muelle",
+        "canonical": "oklch(20.4% 0.006 178.9)",
+        "tonalRamp": [
+          "#080C0B",
+          "#212524",
+          "#3C4140",
+          "#5A5F5E",
+          "#797E7D",
+          "#9AA09E",
+          "#C0C5C4",
+          "#EAF0EE"
+        ]
+      },
+      "superficie-muelle-2": {
+        "role": "neutral",
+        "displayName": "Superficie Muelle 2",
+        "canonical": "oklch(23.8% 0.008 182.3)",
+        "tonalRamp": [
+          "#080C0B",
+          "#202524",
+          "#3C4140",
+          "#595F5E",
+          "#797F7D",
+          "#9AA09F",
+          "#BFC6C4",
+          "#E9F0EF"
+        ]
+      },
+      "linea-muelle": {
+        "role": "neutral",
+        "displayName": "Línea Muelle",
+        "canonical": "oklch(27.9% 0.009 184.6)",
+        "tonalRamp": [
+          "#070C0C",
+          "#202524",
+          "#3B4140",
+          "#585F5E",
+          "#787F7E",
+          "#99A09F",
+          "#BEC6C5",
+          "#E8F0EF"
+        ]
+      },
+      "tinta-muelle": {
+        "role": "neutral",
+        "displayName": "Tinta Muelle",
+        "canonical": "oklch(93.2% 0.007 174.4)",
+        "tonalRamp": [
+          "#080C0B",
+          "#212524",
+          "#3C413F",
+          "#5A5F5D",
+          "#797F7D",
+          "#9AA09E",
+          "#C0C6C4",
+          "#EAF0EE"
+        ]
+      },
+      "gris-muelle": {
+        "role": "neutral",
+        "displayName": "Gris Muelle",
+        "canonical": "oklch(64.7% 0.013 177.8)",
+        "tonalRamp": [
+          "#060D0B",
+          "#1D2624",
+          "#384240",
+          "#56605D",
+          "#75807D",
+          "#96A19E",
+          "#BBC7C4",
+          "#E6F2EE"
+        ]
+      },
+      "tinta-verde-muelle": {
+        "role": "neutral",
+        "displayName": "Tinta Verde Muelle",
+        "canonical": "oklch(16.8% 0.021 166.4)",
+        "tonalRamp": [
+          "#030E09",
+          "#1A2722",
+          "#35433D",
+          "#53625B",
+          "#72817A",
+          "#93A39B",
+          "#B8C9C1",
+          "#E2F3EB"
+        ]
+      },
+      "coral-alerta": {
+        "role": "semantic",
+        "displayName": "Coral Alerta",
+        "canonical": "oklch(69.3% 0.167 22.4)",
+        "tonalRamp": [
+          "#1E0002",
+          "#4B000A",
+          "#790C1A",
+          "#A12F34",
+          "#C75253",
+          "#ED7473",
+          "#FDABA7",
+          "#FFE9E7"
+        ]
+      },
+      "celeste-mic": {
+        "role": "semantic",
+        "displayName": "Celeste Mic",
+        "canonical": "oklch(80.9% 0.081 253.3)",
+        "tonalRamp": [
+          "#000B1F",
+          "#002449",
+          "#1E4169",
+          "#3B608A",
+          "#5A80AC",
+          "#7BA2D0",
+          "#A0C8F8",
+          "#E4F0FE"
+        ]
+      },
+      "naranja-intento": {
+        "role": "semantic",
+        "displayName": "Naranja Intento",
+        "canonical": "oklch(78.9% 0.105 46.4)",
+        "tonalRamp": [
+          "#180500",
+          "#3F1600",
+          "#672C07",
+          "#8C4825",
+          "#B06845",
+          "#D48965",
+          "#FDAF8A",
+          "#FFEAE0"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Landing hero headline only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Landing section titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "App board title and modal titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All app text; landing paragraphs run larger."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase side-card headings and detail keys."
+      },
+      "eyebrow": {
+        "displayName": "Eyebrow",
+        "purpose": "Accent kicker above landing headlines."
+      }
+    },
+    "shadows": [
+      {
+        "name": "drawer",
+        "value": "-20px 0 40px rgba(0,0,0,.35)",
+        "purpose": "Chat drawer."
+      },
+      {
+        "name": "menu",
+        "value": "0 16px 40px rgba(0,0,0,.45)",
+        "purpose": "Dropdown menus."
+      },
+      {
+        "name": "suggest",
+        "value": "0 12px 30px rgba(0,0,0,.4)",
+        "purpose": "Champion suggestion list."
+      },
+      {
+        "name": "popover",
+        "value": "0 24px 60px rgba(0,0,0,.55)",
+        "purpose": "Mini profile card."
+      },
+      {
+        "name": "spectral-glow",
+        "value": "0 0 0 1px rgba(69,230,166,.4), 0 8px 30px rgba(69,230,166,.25)",
+        "purpose": "Landing primary buttons only; never in the app."
+      }
+    ],
+    "motion": [
+      {
+        "name": "reveal",
+        "value": "opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1)",
+        "purpose": "Landing scroll reveals (24px rise)."
+      },
+      {
+        "name": "pop",
+        "value": ".35s cubic-bezier(.3,1.6,.5,1)",
+        "purpose": "Priority number badges popping in."
+      },
+      {
+        "name": "row-in",
+        "value": "1.5s cubic-bezier(.2,.8,.2,1)",
+        "purpose": "New offer dropping into the board with the hook."
+      },
+      {
+        "name": "swing",
+        "value": "3.4s ease-in-out infinite, ±7deg",
+        "purpose": "Hanging hook in empty states and the final CTA."
+      },
+      {
+        "name": "sonar",
+        "value": "2.6s ease-out infinite",
+        "purpose": "Online indicator ring."
+      },
+      {
+        "name": "detail-in",
+        "value": ".25s ease-out",
+        "purpose": "Offer detail and popovers fading in."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "640px"
+      },
+      {
+        "name": "landing-stack",
+        "value": "820px"
+      },
+      {
+        "name": "board-cards",
+        "value": "900px"
+      },
+      {
+        "name": "three-column",
+        "value": "1500px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main action in the app: Publicar, Chatear, Guardar.",
+      "html": "<button class=\"ds-btn\">Chatear</button>",
+      "css": ":host{--bg:#0D0F0F;--surface:#141817;--surface2:#1B201F;--line:#242A29;--ink:#E4EAE8;--muted:#86918E;--accent:#3DBF8E;--accent-ink:#06120D;--accent-soft:rgba(61,191,142,.10)}.ds-btn{font-family:Inter,system-ui,-apple-system,\"Segoe UI\",sans-serif;border:0;border-radius:8px;padding:9px 16px;font-size:14px;font-weight:600;background:var(--accent);color:var(--accent-ink);cursor:pointer}.ds-btn:hover{filter:brightness(1.08)}.ds-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ds-btn:active{transform:translateY(1px)}"
+    },
+    {
+      "name": "Landing CTA",
+      "kind": "button",
+      "refersTo": "button-primary-landing",
+      "description": "Big spectral CTA on the landing; the only button allowed to glow.",
+      "html": "<button class=\"ds-cta\">Buscar dúo</button>",
+      "css": ":host{--bg:#0D0F0F;--surface:#141817;--surface2:#1B201F;--line:#242A29;--ink:#E4EAE8;--muted:#86918E;--accent:#3DBF8E;--accent-ink:#06120D;--accent-soft:rgba(61,191,142,.10)}.ds-cta{font-family:Inter,system-ui,-apple-system,\"Segoe UI\",sans-serif;border:0;border-radius:10px;padding:13px 22px;font-size:16px;font-weight:600;background:#45E6A6;color:#03140D;cursor:pointer;box-shadow:0 0 0 1px rgba(69,230,166,.4),0 8px 30px rgba(69,230,166,.25);transition:box-shadow .2s}.ds-cta:hover{box-shadow:0 0 0 1px rgba(69,230,166,.6),0 10px 40px rgba(69,230,166,.4)}.ds-cta:focus-visible{outline:2px solid #45E6A6;outline-offset:2px}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Cancel, secondary and toolbar actions.",
+      "html": "<button class=\"ds-btn-sec\">Cancelar</button>",
+      "css": ":host{--bg:#0D0F0F;--surface:#141817;--surface2:#1B201F;--line:#242A29;--ink:#E4EAE8;--muted:#86918E;--accent:#3DBF8E;--accent-ink:#06120D;--accent-soft:rgba(61,191,142,.10)}.ds-btn-sec{font-family:Inter,system-ui,-apple-system,\"Segoe UI\",sans-serif;border:0;border-radius:8px;padding:9px 16px;font-size:14px;font-weight:500;background:var(--surface2);color:var(--ink);cursor:pointer}.ds-btn-sec:hover{background:var(--line)}.ds-btn-sec:focus-visible{outline:2px solid var(--accent);outline-offset:2px}"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Standard field with label above; border turns accent on focus.",
+      "html": "<label class=\"ds-lbl\">Nombre de invocador<input class=\"ds-input\" placeholder=\"Tu nick\"></label>",
+      "css": ":host{--bg:#0D0F0F;--surface:#141817;--surface2:#1B201F;--line:#242A29;--ink:#E4EAE8;--muted:#86918E;--accent:#3DBF8E;--accent-ink:#06120D;--accent-soft:rgba(61,191,142,.10)}.ds-lbl{font-family:Inter,system-ui,-apple-system,\"Segoe UI\",sans-serif;display:block;font-size:.82rem;font-weight:500;color:var(--muted)}.ds-input{font-family:Inter,system-ui,-apple-system,\"Segoe UI\",sans-serif;display:block;width:260px;margin-top:6px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:11px 12px;font-size:14px;color:var(--ink);outline:none}.ds-input:focus{border-color:var(--accent)}"
+    },
+    {
+      "name": "Priority Pick",
+      "kind": "chip",
+      "refersTo": "pick-chip",
+      "description": "Selectable chip; selected ones show their priority number.",
+      "html": "<div class=\"ds-picks\"><button class=\"ds-pick\" aria-pressed=\"true\"><span class=\"ds-n\">1</span>Jungla</button><button class=\"ds-pick\" aria-pressed=\"true\"><span class=\"ds-n\">2</span>Mid</button><button class=\"ds-pick\" aria-pressed=\"false\">Top</button></div>",
+      "css": ":host{--bg:#0D0F0F;--surface:#141817;--surface2:#1B201F;--line:#242A29;--ink:#E4EAE8;--muted:#86918E;--accent:#3DBF8E;--accent-ink:#06120D;--accent-soft:rgba(61,191,142,.10)}.ds-picks{display:flex;gap:6px}.ds-pick{font-family:Inter,system-ui,-apple-system,\"Segoe UI\",sans-serif;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--bg);color:var(--muted);border-radius:8px;padding:7px 12px;font-size:.85rem;font-weight:500;cursor:pointer}.ds-pick:hover{color:var(--ink)}.ds-pick[aria-pressed=\"true\"]{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}.ds-pick:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ds-n{min-width:18px;height:18px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-size:.7rem;font-weight:700;display:grid;place-items:center}"
+    },
+    {
+      "name": "Server Tabs",
+      "kind": "nav",
+      "refersTo": "server-tab",
+      "description": "Scrolling server switcher; the active tab gets an accent border in the app.",
+      "html": "<nav class=\"ds-srvs\"><button class=\"ds-srv\" aria-pressed=\"true\">LAS</button><button class=\"ds-srv\" aria-pressed=\"false\">LAN</button><button class=\"ds-srv\" aria-pressed=\"false\">NA</button><button class=\"ds-srv\" aria-pressed=\"false\">EUW</button></nav>",
+      "css": ":host{--bg:#0D0F0F;--surface:#141817;--surface2:#1B201F;--line:#242A29;--ink:#E4EAE8;--muted:#86918E;--accent:#3DBF8E;--accent-ink:#06120D;--accent-soft:rgba(61,191,142,.10)}.ds-srvs{display:flex;gap:6px}.ds-srv{font-family:Inter,system-ui,-apple-system,\"Segoe UI\",sans-serif;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:8px;padding:7px 14px;font-weight:600;font-size:.85rem;cursor:pointer}.ds-srv:hover{color:var(--ink);background:var(--surface)}.ds-srv[aria-pressed=\"true\"]{background:var(--surface2);color:var(--ink);border-color:var(--accent)}.ds-srv:focus-visible{outline:2px solid var(--accent);outline-offset:2px}"
+    },
+    {
+      "name": "Offer Tags",
+      "kind": "chip",
+      "refersTo": "tag-pill",
+      "description": "Semantic pill tags on offers: schedule, mic, tryhard, chill.",
+      "html": "<div class=\"ds-tags\"><span class=\"ds-tag ds-time\">20–23 hs</span><span class=\"ds-tag ds-mic\">Con micro</span><span class=\"ds-tag ds-try\">Tryhard</span><span class=\"ds-tag ds-chill\">Chill</span></div>",
+      "css": ":host{--bg:#0D0F0F;--surface:#141817;--surface2:#1B201F;--line:#242A29;--ink:#E4EAE8;--muted:#86918E;--accent:#3DBF8E;--accent-ink:#06120D;--accent-soft:rgba(61,191,142,.10)}.ds-tags{display:flex;gap:5px}.ds-tag{font-family:Inter,system-ui,-apple-system,\"Segoe UI\",sans-serif;display:inline-flex;align-items:center;border-radius:999px;padding:2px 9px 2px 7px;font-size:.73rem;font-weight:500;white-space:nowrap}.ds-time{background:var(--surface2);color:#C5CFCC}.ds-mic{background:rgba(110,168,240,.13);color:#9CC4F4}.ds-try{background:rgba(240,130,80,.14);color:#F2A580}.ds-chill{background:rgba(61,191,142,.13);color:#80D4B4}"
+    },
+    {
+      "name": "Side Card",
+      "kind": "card",
+      "refersTo": "side-card",
+      "description": "Rail card at ≥1500px with an uppercase label heading.",
+      "html": "<section class=\"ds-scard\"><h4>Servers</h4><button class=\"ds-sitem\" aria-current=\"true\"><b>LAS</b><span>Latinoamérica Sur</span><em>12</em></button><button class=\"ds-sitem\"><b>LAN</b><span>Latinoamérica Norte</span><em>4</em></button></section>",
+      "css": ":host{--bg:#0D0F0F;--surface:#141817;--surface2:#1B201F;--line:#242A29;--ink:#E4EAE8;--muted:#86918E;--accent:#3DBF8E;--accent-ink:#06120D;--accent-soft:rgba(61,191,142,.10)}.ds-scard{font-family:Inter,system-ui,-apple-system,\"Segoe UI\",sans-serif;width:240px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;color:var(--ink)}.ds-scard h4{margin:0 0 10px;font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;font-weight:600}.ds-sitem{font-family:Inter,system-ui,-apple-system,\"Segoe UI\",sans-serif;display:flex;align-items:center;gap:8px;width:100%;border:0;background:transparent;color:inherit;padding:8px 10px;border-radius:9px;text-align:left;cursor:pointer}.ds-sitem:hover{background:var(--surface2)}.ds-sitem:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ds-sitem[aria-current=\"true\"]{background:var(--accent-soft)}.ds-sitem[aria-current=\"true\"] b{color:var(--accent)}.ds-sitem b{font-size:.88rem;min-width:44px}.ds-sitem span{flex:1;color:var(--muted);font-size:.76rem}.ds-sitem em{font-style:normal;font-size:.7rem;background:var(--surface2);color:var(--muted);border-radius:999px;padding:1px 8px}.ds-sitem[aria-current=\"true\"] em{background:var(--accent);color:var(--accent-ink)}"
+    },
+    {
+      "name": "Chat Bubbles",
+      "kind": "custom",
+      "refersTo": "chat-bubble-me",
+      "description": "Your messages accent-filled on the right, theirs on surface2 at left, one tucked corner.",
+      "html": "<div class=\"ds-msgs\"><div class=\"ds-msg\">¿Jugamos flex?</div><div class=\"ds-msg ds-me\">Dale, te paso el Discord</div></div>",
+      "css": ":host{--bg:#0D0F0F;--surface:#141817;--surface2:#1B201F;--line:#242A29;--ink:#E4EAE8;--muted:#86918E;--accent:#3DBF8E;--accent-ink:#06120D;--accent-soft:rgba(61,191,142,.10)}.ds-msgs{font-family:Inter,system-ui,-apple-system,\"Segoe UI\",sans-serif;display:flex;flex-direction:column;gap:6px;width:280px;font-size:14px}.ds-msg{max-width:78%;padding:8px 12px;border-radius:14px;border-bottom-left-radius:4px;background:var(--surface2);color:var(--ink);align-self:flex-start}.ds-me{align-self:flex-end;background:var(--accent);color:var(--accent-ink);border-radius:14px;border-bottom-right-radius:4px}"
+    },
+    {
+      "name": "Online Hook Indicator",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Signature: avatar with a hook badge and a sonar ring pulsing every 2.6s.",
+      "html": "<div class=\"ds-av\">S<span class=\"ds-onl\"><svg viewBox=\"0 0 10 14\" width=\"8\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\"><path d=\"M6 1v7.5a3 3 0 0 1-6 0V7\"/></svg></span></div>",
+      "css": ":host{--bg:#0D0F0F;--surface:#141817;--surface2:#1B201F;--line:#242A29;--ink:#E4EAE8;--muted:#86918E;--accent:#3DBF8E;--accent-ink:#06120D;--accent-soft:rgba(61,191,142,.10)}.ds-av{font-family:Inter,system-ui,-apple-system,\"Segoe UI\",sans-serif;position:relative;width:34px;height:34px;border-radius:50%;background:#6B5BD6;color:#fff;display:grid;place-items:center;font-weight:700;font-size:.85rem}.ds-onl{position:absolute;right:-5px;bottom:-5px;width:17px;height:17px;border-radius:50%;background:var(--surface);border:1.5px solid var(--accent);display:grid;place-items:center;color:var(--accent)}.ds-onl::after{content:\"\";position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--accent);opacity:0;animation:ds-onl 2.6s ease-out infinite}@keyframes ds-onl{0%{transform:scale(.8);opacity:.6}100%{transform:scale(1.5);opacity:0}}@media (prefers-reduced-motion:reduce){.ds-onl::after{animation:none}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "El Anzuelo Espectral",
+    "overview": "The whole system is one cast of a fishing line. The landing is the cast itself: a spectral green hook flies out of near-black water, bites into the headline and drags the page as you scroll, trailing a glowing chain, particles and a pulsing portal. That is the only place where the system glows. Once you are inside the app (`html.in-app`), you are standing on the dock waiting for a bite: the same green settles into a calmer, desaturated tone, the background turns to a neutral graphite, and light gives way to clear layering.\n\nInside, the app should feel warm and gamer, not clinical: the hook keeps appearing as a living signature (the online-indicator hook with its sonar ring, the hook that drops a newly published offer into the board, the hanging hook in empty states), priority numbers pop in, and rows land with a little bounce. That warmth comes from motion and the hook motif, never from glow, neon or gradients. Controls are tactile and confident: comfortable tap targets, soft 8px corners, clear pressed states, and nothing that needs precision aiming on a phone.\n\nDensity is moderate: the offer board is a real data table on desktop (8 columns, up to three columns of layout at ≥1500px) that folds into stacked cards on phones. Everything is set in a single typeface, Inter, with the brand voice carried by weight 800 and tight tracking.",
+    "keyCharacteristics": [
+      "Two registers of the same green: Verde Espectral (landing, can glow) and Verde Muelle (app, never glows).",
+      "Near-black, green-tinted water on the landing; neutral graphite inside the app.",
+      "The hook is the signature motif and appears in motion, never as static decoration.",
+      "Flat tonal layering; shadows only for things that float.",
+      "One family (Inter), voiced through heavy weights and negative tracking.",
+      "Tactile, generously tappable controls with clear `aria-pressed` states."
+    ],
+    "rules": [
+      {
+        "name": "The Two Greens Rule",
+        "body": "Verde Espectral lives on the landing and may glow. Verde Muelle lives in the app and never glows. Never put a glow, neon shadow or green gradient inside `html.in-app`.",
+        "section": "colors"
+      },
+      {
+        "name": "The Variable-Only Rule",
+        "body": "Components read `--accent`, `--surface`, `--ink` and friends, never hard-coded greens or grays, so the same markup renders correctly in both registers.",
+        "section": "colors"
+      },
+      {
+        "name": "The Signal Rule",
+        "body": "Inside the app, green marks what is actionable, selected, yours or online. If it is none of those, it is gray.",
+        "section": "colors"
+      },
+      {
+        "name": "The Heavy Voice Rule",
+        "body": "Headings are 800 with negative tracking; never use a light or thin weight for a heading, and never add a second typeface.",
+        "section": "typography"
+      },
+      {
+        "name": "The 16px Input Rule",
+        "body": "On phones every input and select is at least 16px so iOS does not zoom on focus.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Dock Rule",
+        "body": "In the app, a surface earns a shadow only if it floats over other content. Cards, panels, rows and buttons stay flat; hierarchy comes from tone and borders.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do style every component with the CSS variables so it works under both `:root` (landing) and `html.in-app` (app).",
+      "Do keep glow, particles and gradients on the landing; inside the app, express warmth through the hook motif and motion (pop, drop, swing, sonar ring).",
+      "Do mark selections with `aria-pressed` and show priority order with numbered accent badges; order is information.",
+      "Do keep tap targets comfortable (at least 32–34px icon buttons, full-width chat button on phones) and inputs at 16px on phones.",
+      "Do wrap every animation in a `prefers-reduced-motion: reduce` fallback that shows the final state.",
+      "Do check both ≥1500px (three-column layout) and 390px (no horizontal scroll)."
+    ],
+    "donts": [
+      "Don't put glows, neon shadows or green gradients inside the app (`html.in-app`); the landing is the only place things shine.",
+      "Don't add shadows to resting cards, panels, rows or buttons in the app; only floating layers get them.",
+      "Don't add a second typeface or use light weights for headings.",
+      "Don't use official Riot Games art, icons or imagery, or anything imitating League of Legends characters; position icons and logos are original.",
+      "Don't hard-code Verde Espectral (`#45E6A6`) inside the app or Verde Muelle on the landing.",
+      "Don't use the hook or chain as static clip-art; it appears as a living element (biting, dropping, swinging, pulsing)."
+    ]
+  }
+}

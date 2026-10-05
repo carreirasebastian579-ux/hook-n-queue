@@ -19,9 +19,12 @@ El dueño (Sebastian) no es programador: explicale todo en español rioplatense,
 - Probá en ancho de compu (≥1500px, con columnas laterales) y de celular (390px). En celular no tiene que haber scroll horizontal.
 
 ## Identidad visual (respetarla)
+El sistema completo está en `DESIGN.md` (estilo "El Anzuelo Espectral"); `PRODUCT.md` tiene el contexto del producto. Leelos antes de cualquier cambio visual.
 - Nombre: **Hook n' Queue**. Logo: wordmark "HOOK N' QUEUE" con el apóstrofe en forma de anzuelo.
-- **Landing**: verde espectral sobre casi negro (`#45E6A6`, fondo `#060F0D`), con el anzuelo que se clava en el título y arrastra al scrollear.
-- **Adentro de la app** (`html.in-app`): más sobrio, gris casi negro y verde apagado (`#3DBF8E`). Sin brillos.
+- **Landing**: **Verde Espectral** (`#45E6A6`) sobre casi negro (fondo `#060F0D`), con el anzuelo que se clava en el título y arrastra al scrollear. Es el único lugar donde algo brilla (glows, partículas, degradés).
+- **Adentro de la app** (`html.in-app`): gris grafito (`#0D0F0F`) y **Verde Muelle** (`#3DBF8E`). Cálida y gamer, pero **sin brillos**: la personalidad sale del anzuelo en movimiento (indicador "en línea", anzuelo que deja caer ofertas, anzuelo que se balancea), nunca de glows ni degradés.
+- Siempre usar las variables CSS (`--accent`, `--surface`, `--ink`…), no colores fijos, así cada componente funciona en la landing y en la app.
+- Plano por capas: sin sombras en tarjetas, paneles ni botones; solo en lo que flota (menús, chat, ventanas).
 - Íconos de posiciones y logos son **propios**. No usar arte, íconos ni imágenes oficiales de Riot Games (salvo que Sebastian los ponga en `iconos/` siguiendo la política de Riot).
 - Sin imágenes ni diseños que imiten personajes de League of Legends.
 
