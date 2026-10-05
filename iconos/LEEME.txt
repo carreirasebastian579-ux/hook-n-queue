@@ -1,0 +1,18 @@
+ÍCONOS DE POSICIONES (OPCIONALES)
+=================================
+
+Si ponés en esta carpeta alguno de estos archivos, la app lo usa
+en vez del ícono propio de esa posición:
+
+  top.png      -> Top
+  jungla.png   -> Jungla
+  mid.png      -> Mid
+  adc.png      -> ADC
+  support.png  -> Support
+  fill.png     -> Fill
+
+- Los nombres tienen que ser exactamente esos (en minúscula y en .png).
+- No hace falta ponerlos todos: los que falten siguen usando el ícono propio.
+- Recomendado: imágenes cuadradas, con fondo transparente (por ejemplo 64x64).
+- Si usás íconos oficiales de Riot Games, respetá su política
+  ("Legal Jibber Jabber"): https://www.riotgames.com/es/legal
