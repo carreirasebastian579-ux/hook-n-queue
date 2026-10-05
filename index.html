@@ -625,6 +625,11 @@ html,body{overflow-x:clip}
 .pfoot{display:flex;justify-content:center;gap:8px;color:var(--muted);font-size:.78rem}
 .pfoot button{border:0;background:none;color:var(--muted);cursor:pointer;padding:0;font-size:.78rem}
 .pfoot button:hover{color:#F26B6B}
+
+.modtabs{display:flex;gap:4px;padding:8px 14px;border-bottom:1px solid var(--line)}
+.modtabs button{border:0;background:transparent;color:var(--muted);padding:7px 14px;border-radius:8px;font-weight:600;cursor:pointer}
+.modtabs button[aria-pressed="true"]{background:var(--surface2);color:var(--ink)}
+.bmail{color:var(--ink)!important;opacity:.8}
 .note{font-size:.75rem;color:var(--muted);text-align:center;padding:0 0 28px}
 
 @media (max-width:900px){
@@ -803,7 +808,7 @@ const EN={
 "🛡️ Moderación":"🛡️ Moderation","Moderación":"Moderation","Reportes de la comunidad":"Community reports","Cargando reportes...":"Loading reports...","No se pudieron cargar los reportes.":"Couldn't load reports.","Sin reportes":"No reports","La comunidad está tranqui. 🎣":"All calm in the community. 🎣",
 "Descartar":"Dismiss","Banear":"Ban","Banear usuario":"Ban user","Borrar oferta":"Delete offer","Moderar":"Moderate","Oferta borrada":"Offer deleted","No se pudo borrar":"Couldn't delete","Reporte descartado":"Report dismissed","¿Borrar esta oferta?":"Delete this offer?",
 "Cuenta suspendida":"Account suspended","Tu cuenta fue suspendida por no respetar las normas de la comunidad. Si creés que es un error, escribinos desde la página de Privacidad.":"Your account was suspended for breaking the community rules. If you think this is a mistake, contact us through the Privacy page.","Entendido":"Got it",
-"Volver a Hook n' Queue":"Back to Hook n' Queue","Ver perfil":"View profile","Ya tenés 5 ofertas activas. Cerrá alguna con \"Ya encontré\" para publicar otra.":"You already have 5 active offers. Close one with \"Found one\" to post another.","Llegaste al máximo de 15 ofertas por día. Probá de nuevo mañana.":"You reached the limit of 15 offers per day. Try again tomorrow.","Estás mandando mensajes muy rápido. Esperá un momento.":"You're sending messages too fast. Please wait a moment.","Abriste muchos chats seguidos. Esperá un rato para abrir otro.":"You opened too many chats in a row. Please wait a bit.","Hiciste muchos reportes seguidos. Esperá un rato.":"You sent too many reports in a row. Please wait a bit.","Desconectado":"Offline","Mains":"Mains","Todavía no cargó sus mains.":"No mains added yet.","No tiene ofertas activas ahora.":"No active offers right now.","📋 Copiar Riot ID":"📋 Copy Riot ID","🔎 Ver en OP.GG":"🔎 View on OP.GG","💬 Abrir chat":"💬 Open chat","Riot ID copiado":"Riot ID copied","Buscás":"Looking for","Fecha":"Date","Mensaje":"Message"
+"Volver a Hook n' Queue":"Back to Hook n' Queue","Ver perfil":"View profile","Reportes":"Reports","Baneados":"Banned","Usuarios baneados":"Banned users","Cargando baneados...":"Loading banned users...","No se pudo cargar la lista.":"Couldn't load the list.","Nadie baneado":"Nobody banned","Por ahora todos se portan bien. 🎣":"Everyone is behaving so far. 🎣","Perfil borrado":"Deleted profile","Sin motivo":"No reason","Desbanear":"Unban","No se pudo desbanear":"Couldn't unban","Usuario desbaneado":"User unbanned","Ya tenés 5 ofertas activas. Cerrá alguna con \"Ya encontré\" para publicar otra.":"You already have 5 active offers. Close one with \"Found one\" to post another.","Llegaste al máximo de 15 ofertas por día. Probá de nuevo mañana.":"You reached the limit of 15 offers per day. Try again tomorrow.","Estás mandando mensajes muy rápido. Esperá un momento.":"You're sending messages too fast. Please wait a moment.","Abriste muchos chats seguidos. Esperá un rato para abrir otro.":"You opened too many chats in a row. Please wait a bit.","Hiciste muchos reportes seguidos. Esperá un rato.":"You sent too many reports in a row. Please wait a bit.","Desconectado":"Offline","Mains":"Mains","Todavía no cargó sus mains.":"No mains added yet.","No tiene ofertas activas ahora.":"No active offers right now.","📋 Copiar Riot ID":"📋 Copy Riot ID","🔎 Ver en OP.GG":"🔎 View on OP.GG","💬 Abrir chat":"💬 Open chat","Riot ID copiado":"Riot ID copied","Buscás":"Looking for","Fecha":"Date","Mensaje":"Message"
 };
 const TIERS_RE="Hierro|Bronce|Plata|Oro|Platino|Esmeralda|Diamante|Master|Grandmaster|Challenger";
 const ROLE_RE="Top|Jungla|Mid|ADC|Support|Fill";
@@ -827,6 +832,7 @@ const RULES=[
  [/^Las ofertas terminaron\. El chat se borra en (\d+) h, aprovechá para pasar tu nick o Discord\.$/,(m,a)=>`The offers ended. This chat will be deleted in ${a} h, so swap names or Discord now.`],
  [/^Esta oferta terminó\. El chat se borra en (\d+) h, aprovechá para pasar tu nick o Discord\.$/,(m,a)=>`This offer ended. This chat will be deleted in ${a} h, so swap names or Discord now.`],
  [/^Te falta elegir (.+)\.$/,(m,a)=>`You still need to choose ${a.split(", ").map(tr).join(", ")}.`],
+ [/^¿Desbanear a (.+)\?\n\nVa a poder volver a entrar y crear su perfil de nuevo\.$/,(m,a)=>`Unban ${a}?\n\nThey'll be able to sign in and create their profile again.`],
  [/^Nuevo mensaje de (.+)$/,(m,a)=>`New message from ${a}`],[/^(.+) bloqueado$/,(m,a)=>`${a} blocked`],[/^(.+) baneado$/,(m,a)=>`${a} banned`],
  [/^No se pudo publicar: (.*)$/,(m,a)=>`Couldn't post: ${a}`],[/^No se pudo banear: (.*)$/,(m,a)=>`Couldn't ban: ${a}`],[/^Alias: (.+)$/,(m,a)=>`Alias: ${a}`],
  [/^¿Banear a (.+)\?\n\nSe borra su perfil, sus ofertas y sus chats, y no va a poder volver a usar la app con esa cuenta\.$/,(m,a)=>`Ban ${a}?\n\nTheir profile, offers and chats will be deleted, and they won't be able to use the app with that account again.`],
@@ -1030,12 +1036,20 @@ function modMenu(o,anchor){
   anchor.parentElement.append(pop);
   setTimeout(()=>document.addEventListener("click",function f(ev){if(!pop.contains(ev.target)){pop.remove();document.removeEventListener("click",f)}}),0);
 }
-async function openModeration(){
+async function openModeration(tab="reports"){
   closeDrawer();
-  const body=h("div",{class:"clist modlist"},h("p",{class:"sempty",style:"padding:16px"},"Cargando reportes..."));
+  const body=h("div",{class:"clist modlist"});
+  const tabs=h("div",{class:"modtabs"},
+    h("button",{"aria-pressed":String(tab==="reports"),onclick:()=>openModeration("reports")},"Reportes"),
+    h("button",{"aria-pressed":String(tab==="banned"),onclick:()=>openModeration("banned")},"Baneados"));
   const d=h("aside",{class:"drawer",id:"drawer","aria-label":"Moderación"},
-    h("div",{class:"dhead"},h("div",{class:"t"},h("b",{},"🛡️ Moderación"),h("small",{},"Reportes de la comunidad")),h("button",{class:"icb",title:"Cerrar",onclick:closeDrawer},"✕")),body);
+    h("div",{class:"dhead"},h("div",{class:"t"},h("b",{},"🛡️ Moderación"),h("small",{},tab==="reports"?"Reportes de la comunidad":"Usuarios baneados")),h("button",{class:"icb",title:"Cerrar",onclick:closeDrawer},"✕")),
+    tabs,body);
   document.body.append(d);
+  return tab==="banned"?loadBannedList(body):loadReports(body);
+}
+async function loadReports(body){
+  body.replaceChildren(h("p",{class:"sempty",style:"padding:16px"},"Cargando reportes..."));
   const {data,error}=await sb.from("reports").select("id,reason,created_at,reporter:profiles!reports_reporter_id_fkey(nick,tag),reported:profiles!reports_reported_id_fkey(id,nick,tag)").order("created_at",{ascending:false}).limit(100);
   if(error){body.replaceChildren(h("p",{class:"sempty",style:"padding:16px"},"No se pudieron cargar los reportes."));return}
   const rows=(data||[]).filter(r=>r.reported);
@@ -1047,6 +1061,21 @@ async function openModeration(){
       h("div",{class:"ractions"},
         h("button",{class:"btn sec sm",onclick:async()=>{await sb.from("reports").delete().eq("id",r.id);el.remove();toast("Reporte descartado")}},"Descartar"),
         h("button",{class:"btn sm danger-btn",onclick:async()=>{if(await banUser(r.reported.id,r.reported.nick,"Reportado: "+(r.reason||"")))el.remove()}},"Banear")));
+    return el}));
+}
+async function loadBannedList(body){
+  body.replaceChildren(h("p",{class:"sempty",style:"padding:16px"},"Cargando baneados..."));
+  const {data,error}=await sb.rpc("hnq_banned_list");
+  if(error){body.replaceChildren(h("p",{class:"sempty",style:"padding:16px"},"No se pudo cargar la lista."));return}
+  if(!data||!data.length){body.replaceChildren(h("div",{class:"empty"},hangHook(),h("h3",{},"Nadie baneado"),h("p",{},"Por ahora todos se portan bien. 🎣")));return}
+  body.replaceChildren(...data.map(b=>{const who=b.nick?`${b.nick}#${b.tag}`:"Perfil borrado";
+    const el=h("div",{class:"report"},
+      h("div",{},h("b",{},who),b.email?h("small",{class:"bmail","data-notr":""},b.email):null,h("small",{},`${b.reason||"Sin motivo"} · ${ago(Date.parse(b.created_at))}`)),
+      h("div",{class:"ractions"},h("button",{class:"btn sec sm",onclick:async()=>{
+        if(!confirm(t(`¿Desbanear a ${b.nick||b.email||"este usuario"}?\n\nVa a poder volver a entrar y crear su perfil de nuevo.`)))return;
+        const {error}=await sb.rpc("hnq_unban",{u:b.user_id});
+        if(error){toast("No se pudo desbanear");return}
+        el.remove();toast("Usuario desbaneado");if(!body.querySelector(".report"))loadBannedList(body)}},"Desbanear")));
     return el}));
 }
 
