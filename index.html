@@ -633,6 +633,9 @@ html,body{overflow-x:clip}
 .clist{display:flex!important;flex-direction:column;justify-content:flex-start;align-items:stretch}
 .clist>.citem{flex:none}
 .clist>.empty{margin:auto 0}
+.ppbtn{display:block;margin:10px 0 0;background:#FFC439!important;color:#111!important;box-shadow:none!important}
+.payhint{display:block;color:var(--muted);font-size:.75rem;margin:4px 0 0}
+.donate .mpbtn{margin-bottom:0}
 .note{font-size:.75rem;color:var(--muted);text-align:center;padding:0 0 28px}
 
 @media (max-width:900px){
@@ -811,7 +814,7 @@ const EN={
 "🛡️ Moderación":"🛡️ Moderation","Moderación":"Moderation","Reportes de la comunidad":"Community reports","Cargando reportes...":"Loading reports...","No se pudieron cargar los reportes.":"Couldn't load reports.","Sin reportes":"No reports","La comunidad está tranqui. 🎣":"All calm in the community. 🎣",
 "Descartar":"Dismiss","Banear":"Ban","Banear usuario":"Ban user","Borrar oferta":"Delete offer","Moderar":"Moderate","Oferta borrada":"Offer deleted","No se pudo borrar":"Couldn't delete","Reporte descartado":"Report dismissed","¿Borrar esta oferta?":"Delete this offer?",
 "Cuenta suspendida":"Account suspended","Tu cuenta fue suspendida por no respetar las normas de la comunidad. Si creés que es un error, escribinos desde la página de Privacidad.":"Your account was suspended for breaking the community rules. If you think this is a mistake, contact us through the Privacy page.","Entendido":"Got it",
-"Volver a Hook n' Queue":"Back to Hook n' Queue","Ver perfil":"View profile","Reportes":"Reports","Baneados":"Banned","Usuarios baneados":"Banned users","Cargando baneados...":"Loading banned users...","No se pudo cargar la lista.":"Couldn't load the list.","Nadie baneado":"Nobody banned","Por ahora todos se portan bien. 🎣":"Everyone is behaving so far. 🎣","Perfil borrado":"Deleted profile","Sin motivo":"No reason","Desbanear":"Unban","No se pudo desbanear":"Couldn't unban","Usuario desbaneado":"User unbanned","Ya tenés 5 ofertas activas. Cerrá alguna con \"Ya encontré\" para publicar otra.":"You already have 5 active offers. Close one with \"Found one\" to post another.","Llegaste al máximo de 15 ofertas por día. Probá de nuevo mañana.":"You reached the limit of 15 offers per day. Try again tomorrow.","Estás mandando mensajes muy rápido. Esperá un momento.":"You're sending messages too fast. Please wait a moment.","Abriste muchos chats seguidos. Esperá un rato para abrir otro.":"You opened too many chats in a row. Please wait a bit.","Hiciste muchos reportes seguidos. Esperá un rato.":"You sent too many reports in a row. Please wait a bit.","Desconectado":"Offline","Mains":"Mains","Todavía no cargó sus mains.":"No mains added yet.","No tiene ofertas activas ahora.":"No active offers right now.","📋 Copiar Riot ID":"📋 Copy Riot ID","🔎 Ver en OP.GG":"🔎 View on OP.GG","💬 Abrir chat":"💬 Open chat","Riot ID copiado":"Riot ID copied","Buscás":"Looking for","Fecha":"Date","Mensaje":"Message"
+"Volver a Hook n' Queue":"Back to Hook n' Queue","Ver perfil":"View profile","Donar con PayPal":"Donate with PayPal","Desde Argentina":"From Argentina","Desde otros países":"From other countries","Reportes":"Reports","Baneados":"Banned","Usuarios baneados":"Banned users","Cargando baneados...":"Loading banned users...","No se pudo cargar la lista.":"Couldn't load the list.","Nadie baneado":"Nobody banned","Por ahora todos se portan bien. 🎣":"Everyone is behaving so far. 🎣","Perfil borrado":"Deleted profile","Sin motivo":"No reason","Desbanear":"Unban","No se pudo desbanear":"Couldn't unban","Usuario desbaneado":"User unbanned","Ya tenés 5 ofertas activas. Cerrá alguna con \"Ya encontré\" para publicar otra.":"You already have 5 active offers. Close one with \"Found one\" to post another.","Llegaste al máximo de 15 ofertas por día. Probá de nuevo mañana.":"You reached the limit of 15 offers per day. Try again tomorrow.","Estás mandando mensajes muy rápido. Esperá un momento.":"You're sending messages too fast. Please wait a moment.","Abriste muchos chats seguidos. Esperá un rato para abrir otro.":"You opened too many chats in a row. Please wait a bit.","Hiciste muchos reportes seguidos. Esperá un rato.":"You sent too many reports in a row. Please wait a bit.","Desconectado":"Offline","Mains":"Mains","Todavía no cargó sus mains.":"No mains added yet.","No tiene ofertas activas ahora.":"No active offers right now.","📋 Copiar Riot ID":"📋 Copy Riot ID","🔎 Ver en OP.GG":"🔎 View on OP.GG","💬 Abrir chat":"💬 Open chat","Riot ID copiado":"Riot ID copied","Buscás":"Looking for","Fecha":"Date","Mensaje":"Message"
 };
 const TIERS_RE="Hierro|Bronce|Plata|Oro|Platino|Esmeralda|Diamante|Master|Grandmaster|Challenger";
 const ROLE_RE="Top|Jungla|Mid|ADC|Support|Fill";
@@ -1123,17 +1126,18 @@ function openPlayerCard(id,anchor){
 }
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closePlayerCard()});
 // ---------- donaciones
-const MP_ALIAS="seba.carreira";
 const MP_LINK="https://link.mercadopago.com.ar/hooknqueue";
+const PAYPAL_LINK="https://paypal.me/hooknqueue";
 function openDonate(){
   const m=document.getElementById("modal");
-  const copy=async()=>{try{await navigator.clipboard.writeText(MP_ALIAS);toast("Alias copiado")}catch(e){toast("Alias: "+MP_ALIAS)}};
   m.replaceChildren(h("div",{class:"overlay",onclick:e=>{if(e.target.classList.contains("overlay"))m.replaceChildren()}},h("div",{class:"card donate"},
     h("div",{class:"dicon"},"💚"),
     h("h2",{},"Apoyar a Hook n' Queue"),
     h("p",{},"La app es gratis y sin publicidad. Si te sirvió para encontrar dúo, podés colaborar con lo que quieras: ayuda a pagar el dominio y a mantenerla."),
     MP_LINK?h("a",{class:"btn big mpbtn",href:MP_LINK,target:"_blank",rel:"noopener"},"Donar con Mercado Pago"):null,
-    h("div",{class:"alias"},h("div",{},h("small",{},"Alias de Mercado Pago"),h("b",{},MP_ALIAS)),h("button",{class:"btn sec",type:"button",onclick:copy},"Copiar")),
+    MP_LINK&&PAYPAL_LINK?h("small",{class:"payhint"},"Desde Argentina"):null,
+    PAYPAL_LINK?h("a",{class:"btn big ppbtn",href:PAYPAL_LINK,target:"_blank",rel:"noopener"},"Donar con PayPal"):null,
+    PAYPAL_LINK?h("small",{class:"payhint"},"Desde otros países"):null,
     h("p",{class:"thanks"},"¡Gracias por tu apoyo! 🎣"),
     h("div",{class:"actions"},h("button",{class:"btn sec",type:"button",onclick:()=>m.replaceChildren()},"Cerrar")))));
 }
