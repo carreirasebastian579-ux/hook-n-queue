@@ -38,7 +38,7 @@
 <style>
 :root{
   --bg:#060F0D; --surface:#0C1A17; --surface2:#13251F; --line:#1C332C; --ink:#E2F4EE; --muted:#7C9A90;
-  --accent:#45E6A6; --accent-ink:#03140D; --accent-soft:rgba(69,230,166,.13); --ic:#E2F4EE; --ic2:#25403A; --ok:#2DBE8C; --danger:#F26B6B;
+  --accent:#45E6A6; --accent-ink:#03140D; --accent-soft:rgba(69,230,166,.13); --ic:#E2F4EE; --ic2:#25403A; --ok:#2DBE8C; --danger:#F26B6B; --field-line:#5E6866;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
@@ -125,9 +125,9 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var
 label{display:block;font-weight:500;font-size:.82rem;margin-bottom:6px;color:var(--muted)}
 .field{margin-bottom:16px}
 .row{display:flex;gap:8px;align-items:center}
-input,select{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:11px 12px;outline:none}
+input,select{width:100%;background:var(--bg);border:1px solid var(--field-line);border-radius:8px;padding:11px 12px;outline:none}
 input:focus,select:focus{border-color:var(--accent)}
-.tagbox{display:flex;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding-left:10px;width:104px;flex:none}
+.tagbox{display:flex;align-items:center;background:var(--bg);border:1px solid var(--field-line);border-radius:8px;padding-left:10px;width:104px;flex:none}
 .tagbox:focus-within{border-color:var(--accent)}
 .tagbox span{color:var(--muted)}
 .tagbox input{border:0;padding-left:4px}
@@ -383,7 +383,7 @@ html.in-app .chip.role,html.in-app .mine-tag{color:#7FD3B2}
 html.in-app .logo .apos{filter:none}
 
 .pav,.av{position:relative;overflow:visible}
-.pav svg.ic,.av svg.ic{width:62%;height:62%;color:#fff}
+.pav svg.ic,.av svg.ic{width:62%;height:62%;color:inherit}
 .onl{position:absolute;right:-5px;bottom:-5px;width:17px;height:17px;border-radius:50%;background:var(--surface);border:1.5px solid var(--accent);display:grid;place-items:center;color:var(--accent)}
 .onl svg{width:8px;height:12px}
 .onl::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--accent);opacity:0;animation:onl 2.6s ease-out infinite}
@@ -437,7 +437,8 @@ html.in-app .logo .apos{filter:none}
 .mode .more{color:var(--muted);font-size:.78rem}
 .chat{display:flex;align-items:center;gap:8px}
 .chat .btn{white-space:nowrap}
-.chev{color:var(--muted);font-size:.8rem;transition:transform .2s}
+.chev{color:var(--muted);font-size:.8rem;transition:transform .2s;border:0;background:transparent;width:32px;height:32px;border-radius:8px;flex:none;display:grid;place-items:center;padding:0}
+.chev:hover{background:var(--surface2);color:var(--ink)}
 .offer.open .chev{transform:rotate(180deg)}
 .offer.open{background:rgba(255,255,255,.025)}
 .detail{grid-column:1/-1;cursor:default;margin:2px 0 14px;padding:16px 18px;border-radius:12px;background:var(--bg);border:1px solid var(--line);display:grid;gap:14px;animation:detIn .25s ease-out}
@@ -602,7 +603,9 @@ html,body{overflow-x:clip}
 .flag{width:18px;height:12px;border-radius:2px;flex:none;box-shadow:0 0 0 1px rgba(255,255,255,.15)}
 .langitem{display:flex!important;align-items:center;gap:9px}
 
-.player{cursor:pointer}
+.player{cursor:pointer;border:0;background:transparent;padding:0;text-align:left;color:inherit;font:inherit;border-radius:10px}
+.pname{display:block}
+.avbtn{border:0;background:transparent;padding:0;border-radius:50%;cursor:pointer;flex:none;display:grid}
 .player:hover .pname b{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}
 .pback{position:fixed;inset:0;z-index:40}
 .ppop{position:fixed;z-index:41;width:330px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 24px 60px rgba(0,0,0,.55);display:grid;gap:14px;animation:detIn .18s ease-out}
@@ -691,6 +694,12 @@ html,body{overflow-x:clip}
   .ofoot .actions .btn{flex:1;min-height:46px}
 }
 @media (prefers-reduced-motion:reduce){.more summary::after,.repbtn{transition:none}}
+@media (pointer:coarse){
+  .srv,.onbtn,.fbtn,.pick{min-height:44px}
+  .seg button{min-height:40px}
+  .icb,.chev{width:44px;height:44px}
+}
+@media (prefers-reduced-motion:reduce){.detail,.ppop{animation:none}.fake .caret,.dots i{animation:none}.scr{transition:none}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
 </head>
@@ -727,7 +736,7 @@ html,body{overflow-x:clip}
         <div class="step rv"><span class="num">2</span><div><h3>Publicá tu oferta</h3><p>Elegí modos, posiciones, rango y horarios en orden de preferencia, y ponele un título que invite.</p></div></div>
         <div class="step rv"><span class="num">3</span><div><h3>Coordiná por chat</h3><p>Te escriben, se pasan el nick o el Discord y a jugar. Cuando la oferta termina, el chat se borra solo.</p></div></div>
       </div>
-      <div class="phonewrap" aria-hidden="true"><div class="phone"><div class="notch"></div><div class="screen" id="screen"></div></div></div>
+      <div class="phonewrap" aria-hidden="true" inert><div class="phone"><div class="notch"></div><div class="screen" id="screen"></div></div></div>
     </div>
   </section>
 
@@ -739,15 +748,15 @@ html,body{overflow-x:clip}
   <section class="feats wrap">
     <div class="feat rv">
       <div><p class="eyebrow">01</p><h3>Decí qué preferís, en orden</h3><p>Marcá tus posiciones por prioridad. Los demás ven de un vistazo qué es lo que más te gusta jugar.</p></div>
-      <div class="viz" id="vizPrio"></div>
+      <div class="viz" id="vizPrio" aria-hidden="true" inert></div>
     </div>
     <div class="feat rv">
       <div><p class="eyebrow">02</p><h3>Filtrá hasta dar con tu dúo</h3><p>Últimas 24 hs, rango, posición, horario, micro u onda. Combiná los que quieras.</p></div>
-      <div class="viz" id="vizFilt"></div>
+      <div class="viz" id="vizFilt" aria-hidden="true" inert></div>
     </div>
     <div class="feat rv">
       <div><p class="eyebrow">03</p><h3>Chats que no se acumulan</h3><p>Cada chat nace de una oferta y se borra 24 hs después de que termina. Tu bandeja siempre limpia.</p></div>
-      <div class="viz" id="vizChat"></div>
+      <div class="viz" id="vizChat" aria-hidden="true" inert></div>
     </div>
   </section>
 
@@ -810,7 +819,7 @@ const EN={
 "Chats que no se acumulan":"Chats that don't pile up","Cada chat nace de una oferta y se borra 24 hs después de que termina. Tu bandeja siempre limpia.":"Every chat starts from an offer and is deleted 24 hours after it ends. Your inbox stays clean.",
 "¿Armamos la partida?":"Ready to queue up?","Crear tu perfil lleva diez segundos.":"Creating your profile takes ten seconds.","Los demás ven primero tu":"Others see your top pick first:","jugadores coinciden":"players match",
 "Te paso mi Discord: premade_seba":"Here's my Discord: premade_seba","Listo, te agrego. ¡Nos vemos en la partida!":"Done, adding you. See you in game!","Esta oferta terminó. El chat se borra en 24 h.":"This offer ended. The chat will be deleted in 24 h.",
-"Nueva oferta":"New offer","No pudimos cargar las ofertas":"We couldn't load the offers","Puede ser tu conexión o un problema nuestro. Probá de nuevo en unos segundos.":"It may be your connection or a problem on our side. Try again in a few seconds.","Reintentar":"Try again","No se pudieron actualizar las ofertas":"Couldn't refresh the offers","Cerrar aviso":"Close notice","No se pudo enviar el reporte. Probá de nuevo.":"Couldn't send the report. Try again.","No se pudo descartar el reporte":"Couldn't dismiss the report","No se pudo abrir el chat. Probá de nuevo.":"Couldn't open the chat. Try again.","Enviando...":"Sending...","Nueva oferta en":"New offer in","Server donde se publica":"Server to post in","Elegí tu rango":"Choose your rank","División":"Division","Repetir última oferta":"Repeat last offer","Tocá las opciones en orden de preferencia: la primera es la que más te interesa.":"Tap options in order of preference: the first one is what you want most.","Detalles opcionales":"Optional details","Rango que buscás, campeones, micro y onda":"Rank you want, champions, mic and vibe","Rango que buscás":"Rank you want","Ideal si tu dúo juega con":"Ideally your duo plays","Mejor que no juegue con":"Better if they don’t play","Elegí al menos un modo.":"Choose at least one mode.","Elegí tu posición.":"Choose your position.","Elegí qué posición buscás.":"Choose the position you want.","Elegí al menos un horario.":"Choose at least one time.","Revisá los campos marcados.":"Check the highlighted fields.","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
+"Nueva oferta":"New offer","Ver detalle":"Show details","No pudimos cargar las ofertas":"We couldn't load the offers","Puede ser tu conexión o un problema nuestro. Probá de nuevo en unos segundos.":"It may be your connection or a problem on our side. Try again in a few seconds.","Reintentar":"Try again","No se pudieron actualizar las ofertas":"Couldn't refresh the offers","Cerrar aviso":"Close notice","No se pudo enviar el reporte. Probá de nuevo.":"Couldn't send the report. Try again.","No se pudo descartar el reporte":"Couldn't dismiss the report","No se pudo abrir el chat. Probá de nuevo.":"Couldn't open the chat. Try again.","Enviando...":"Sending...","Nueva oferta en":"New offer in","Server donde se publica":"Server to post in","Elegí tu rango":"Choose your rank","División":"Division","Repetir última oferta":"Repeat last offer","Tocá las opciones en orden de preferencia: la primera es la que más te interesa.":"Tap options in order of preference: the first one is what you want most.","Detalles opcionales":"Optional details","Rango que buscás, campeones, micro y onda":"Rank you want, champions, mic and vibe","Rango que buscás":"Rank you want","Ideal si tu dúo juega con":"Ideally your duo plays","Mejor que no juegue con":"Better if they don’t play","Elegí al menos un modo.":"Choose at least one mode.","Elegí tu posición.":"Choose your position.","Elegí qué posición buscás.":"Choose the position you want.","Elegí al menos un horario.":"Choose at least one time.","Revisá los campos marcados.":"Check the highlighted fields.","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
 "Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. League of Legends es una marca de Riot Games, Inc. ·":"Hook n' Queue isn't affiliated with or endorsed by Riot Games. League of Legends is a trademark of Riot Games, Inc. ·",
 "Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. ·":"Hook n' Queue isn't affiliated with or endorsed by Riot Games. ·","Privacidad":"Privacy","Donar":"Donate",
 "Buscá con quién jugar":"Find someone to play with","Elegí tu server, mirá las ofertas y coordiná la partida.":"Pick your server, browse offers and set up your game.",
@@ -835,7 +844,7 @@ const EN={
 "Completá tu perfil":"Complete your profile","Editar perfil":"Edit profile","Cambiá tus datos cuando quieras.":"Update your info anytime.",
 "Ya entraste con Google. Ahora contanos cómo te encuentran en el juego. Nicks o mensajes ofensivos no están permitidos.":"You're signed in with Google. Now tell us how to find you in game. Offensive names or messages aren't allowed.",
 "Nombre de invocador":"Summoner name","Server donde jugás":"Your server","Tus mains (hasta 3, en orden)":"Your mains (up to 3, in order)","Escribí un campeón...":"Type a champion...","Buscá un campeón...":"Search a champion...",
-"Avisarme por mail cuando me escriban":"Email me when someone messages me","Te llega un mail cuando alguien abre chat en tu oferta o te escribe (máximo uno por hora por chat). Lo podés apagar cuando quieras.":"You'll get an email when someone opens a chat on your offer or messages you (at most one per hour per chat). You can turn it off anytime.",
+"Avisarme por mail cuando me escriban":"Email me when someone messages me","Te llega un mail cuando alguien te escribe por tu oferta (máximo uno por hora por chat). Lo podés apagar cuando quieras.":"You'll get an email when someone messages you about your offer (at most one per hour per chat). You can turn it off anytime.",
 "Tu avatar":"Your avatar","Color":"Color","Subir foto":"Upload photo","Cambiar foto":"Change photo","Usar inicial":"Use initial","Salir":"Sign out","Crear perfil":"Create profile","Guardar cambios":"Save changes","Cancelar":"Cancel","Guardando...":"Saving...",
 "Ej: Flash en la D":"e.g. Flash on D","Tag":"Tag","Elegí un archivo de imagen.":"Choose an image file.",
 "El nombre de invocador tiene que tener al menos 3 caracteres.":"Summoner name must be at least 3 characters.","El tag va sin espacios, de 3 a 5 letras o números.":"The tag has no spaces, 3 to 5 letters or numbers.",
@@ -977,8 +986,11 @@ const AVC=["#3F6FD8","#E0524A","#A35BE0","#E08A2E","#2FA866","#D6366E"];
 function avColor(n){let x=0;for(const c of n)x=(x*31+c.charCodeAt(0))>>>0;return AVC[x%AVC.length]}
 const MINIHOOK='<path d="M5 2V14Q5 22 10.5 21Q14.5 20 13.5 13" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><polygon points="10,14 17,14 13.5,5" fill="currentColor"/>';
 function miniHook(){const t=document.createElement("template");t.innerHTML=`<svg viewBox="0 0 18 26" aria-hidden="true">${MINIHOOK}</svg>`;return t.content.firstChild}
-function avatarEl(o,cls="pav"){
-  const el=h("span",{class:cls,style:`background:${o.color||avColor(o.nick)}`,title:o.online?"En línea":null},
+function inkOn(bg){const m=/^#([0-9a-f]{6})$/i.exec(bg||"");if(!m)return"#fff";
+  const L=[0,2,4].map(i=>parseInt(m[1].slice(i,i+2),16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);
+  const l=.2126*L[0]+.7152*L[1]+.0722*L[2];return 1.05/(l+.05)>=(l+.05)/.055?"#fff":"#06120D"}
+function avatarEl(o,cls="pav"){const bg=o.color||avColor(o.nick);
+  const el=h("span",{class:cls,style:`background:${bg};color:${inkOn(bg)}`,title:o.online?"En línea":null},
     o.photo?h("img",{src:o.photo,alt:""}):o.nick[0].toUpperCase());
   if(o.online)el.append(h("span",{class:"onl","aria-label":"en línea"},miniHook()));
   return el}
@@ -1135,6 +1147,22 @@ function playerInfo(id){
   const base=offs[0]||c;if(!base)return null;
   return{user_id:id,nick:base.nick,tag:base.tag,color:base.color,photo:base.photo,mains:base.mains||[],home:base.home||base.server,offers:offs,online:id===uid||onlineSet.has(id),mine:id===uid};
 }
+(()=>{const m=document.getElementById("modal");let back=null;
+  const card=()=>m.querySelector(".overlay > .card");
+  new MutationObserver(()=>{const c=card();
+    if(c){if(!c.hasAttribute("role")){c.setAttribute("role","dialog");c.setAttribute("aria-modal","true");
+        const t=c.querySelector("h2");if(t){t.id=t.id||"dlg-title";c.setAttribute("aria-labelledby",t.id)}}
+      if(!back)back=document.activeElement;
+      if(!c.contains(document.activeElement)){const f=c.querySelector("input:not([disabled]),select:not([disabled]),textarea,button:not([disabled])");
+        if(f)f.focus({preventScroll:true});else{c.tabIndex=-1;c.focus({preventScroll:true})}}}
+    else if(back){const b=back;back=null;if(b.isConnected)b.focus({preventScroll:true})}}).observe(m,{childList:true});
+  document.addEventListener("keydown",e=>{const c=card();if(!c)return;
+    if(e.key==="Escape"){if(c.hasAttribute("data-noesc")||(e.target.closest&&e.target.closest(".cbox")))return;e.preventDefault();e.stopImmediatePropagation();m.replaceChildren();return}
+    if(e.key!=="Tab")return;const f=[...c.querySelectorAll(FOCUSABLE)].filter(x=>!x.disabled&&x.offsetParent!==null);if(!f.length)return;
+    const a=f[0],z=f[f.length-1];
+    if(!c.contains(document.activeElement)){e.preventDefault();a.focus()}
+    else if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}
+    else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}},true)})();
 function closePlayerCard(){document.getElementById("pcardpop")?.remove();document.getElementById("pcardback")?.remove()}
 function openPlayerCard(id,anchor){
   closePlayerCard();const p=playerInfo(id);if(!p)return;
@@ -1229,7 +1257,12 @@ function closeUMenu(){document.querySelector(".umenu")?.remove();document.queryS
 document.addEventListener("click",e=>{if(!e.target.closest(".umenu-wrap"))closeUMenu()});
 function renderServers(){const nav=document.getElementById("servers");nav.replaceChildren();
   SERVERS.forEach(s=>nav.append(h("button",{class:"srv","aria-pressed":String(s.id===current),title:s.name,onclick:()=>{current=s.id;render()}},s.id,profile&&profile.server===s.id?h("span",{class:"home","aria-label":"tu server"}):null)))}
+const FOCUSABLE='button,a[href],input,select,textarea,[tabindex]:not([tabindex="-1"])';
+function restoreRowFocus(k){if(!k)return;const r=document.querySelector(`#list .offer[data-id="${k.id}"]`);if(!r)return;
+  const t=[...r.querySelectorAll(FOCUSABLE)][k.i];if(t)t.focus({preventScroll:true})}
 function renderList(){setTimeout(renderSides,0);
+  const ae=document.activeElement,arow=ae&&ae.closest?ae.closest("#list .offer"):null;
+  const fk=arow?{id:arow.dataset.id,i:[...arow.querySelectorAll(FOCUSABLE)].indexOf(ae)}:null;
   const s=SERVERS.find(x=>x.id===current);
   const inServer=allOffers().filter(o=>o.server===current);
   const offers=inServer.filter(o=>!blockedIds.has(o.user_id)).filter(passes).sort((a,b)=>b.at-a.at);
@@ -1248,8 +1281,8 @@ function renderList(){setTimeout(renderSides,0);
     const isOpen=openRows.has(o.id);
     let chatBtn=o.mine?h("button",{class:"btn sec",onclick:e=>{e.stopPropagation();closeOffer(o.id)}},"Ya encontré"):h("button",{class:"btn sec",onclick:e=>{e.stopPropagation();openChat(o)}},"Abrir chat");
     if(isAdmin&&!o.mine)chatBtn=h("span",{class:"adminwrap"},chatBtn,h("button",{class:"shield",title:"Moderar",onclick:e=>{e.stopPropagation();modMenu(o,e.currentTarget)}},"🛡️"));
-    const row=h("article",{class:"offer"+(isOpen?" open":""),"data-id":o.id,tabindex:"0","aria-expanded":String(isOpen),title:isOpen?"":"Tocá para ver la oferta completa"},
-      h("div",{class:"player",title:"Ver perfil",onclick:e=>{e.stopPropagation();openPlayerCard(o.user_id,e.currentTarget)}},avatarEl(o),h("div",{class:"pname"},h("b",{},o.nick),h("small",{},"#"+o.tag,o.online?h("span",{class:"ontxt"}," · en línea"):null,o.mine?h("span",{class:"mine-tag"},"Tu oferta"):null))),
+    const row=h("article",{class:"offer"+(isOpen?" open":""),"data-id":o.id,title:isOpen?"":"Tocá para ver la oferta completa"},
+      h("button",{type:"button",class:"player",title:"Ver perfil",onclick:e=>{e.stopPropagation();openPlayerCard(o.user_id,e.currentTarget)}},avatarEl(o),h("span",{class:"pname"},h("b",{},o.nick),h("small",{},"#"+o.tag,o.online?h("span",{class:"ontxt"}," · en línea"):null,o.mine?h("span",{class:"mine-tag"},"Tu oferta"):null))),
       h("div",{class:"posgroup"},
         h("div",{class:"pos"},h("span",{class:"lbl-m"},"Juega"),[].concat(o.rol).slice(0,[].concat(o.rol).length>2?1:2).map((r,i)=>roleIc(r,false,i)),[].concat(o.rol).length>2?h("span",{class:"pmore",title:[].concat(o.rol).join(", ")},"+"+([].concat(o.rol).length-1)):null),
         h("div",{class:"pos"},h("span",{class:"lbl-m"},"Busca"),o.busca.slice(0,o.busca.length>2?1:2).map((r,i)=>roleIc(r,true,i)),o.busca.length>2?h("span",{class:"pmore want",title:o.busca.join(", ")},"+"+(o.busca.length-1)):null)),
@@ -1257,12 +1290,13 @@ function renderList(){setTimeout(renderSides,0);
       h("div",{class:"mode"},[].concat(o.modo)[0],[].concat(o.modo).length>1?h("span",{class:"more"}," +"+([].concat(o.modo).length-1)):null),
       h("div",{class:"title"},h("p",{},o.titulo),h("div",{class:"tags"},tag("t-mode",null,[].concat(o.modo).join(" / ")),timeTag([].concat(o.horario),true),micTag(o.mic),vibeTag([].concat(o.onda)[0]))),
       h("div",{class:"age"},ago(o.at),o.mine?h("small",{class:"exp"},`Vence en ${Math.max(1,Math.ceil((EXPIRE-(Date.now()-o.at))/DAY))} días`):null),
-      h("div",{class:"chat"},chatBtn,h("span",{class:"chev","aria-hidden":"true"},"▾")),
+      h("div",{class:"chat"},chatBtn,h("button",{type:"button",class:"chev","aria-expanded":String(isOpen),"aria-label":isOpen?"Ocultar detalle":"Ver detalle",onclick:e=>{e.stopPropagation();toggle()}},h("span",{"aria-hidden":"true"},"▾"))),
       isOpen?offerDetail(o):null);
     const toggle=()=>{openRows.has(o.id)?openRows.delete(o.id):openRows.add(o.id);renderList()};
     row.addEventListener("click",e=>{if(e.target.closest("button"))return;toggle()});
     row.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target===row){e.preventDefault();toggle()}});
     list.append(row)});
+  restoreRowFocus(fk);
 }
 function render(){renderMe();renderServers();renderList();renderSides()}
 
@@ -1306,10 +1340,10 @@ function openProfile(editing,mode="signup"){const m=document.getElementById("mod
       if(editing){await loadOffers();await loadChats();render()}else enterApp();
     }catch(ex){err.textContent=ex.message||"No se pudo guardar. Probá de nuevo.";btn.disabled=false;btn.textContent=editing?"Guardar cambios":"Crear perfil"}
   }
-  m.replaceChildren(h("div",{class:"overlay"},h("form",{class:"card",onsubmit:save},
+  m.replaceChildren(h("div",{class:"overlay"},h("form",{class:"card",onsubmit:save,"data-noesc":!editing},
     h("h2",{},editing?"Editar perfil":"Completá tu perfil"),h("p",{},editing?"Cambiá tus datos cuando quieras.":"Ya entraste con Google. Ahora contanos cómo te encuentran en el juego. Nicks o mensajes ofensivos no están permitidos."),
     h("div",{class:"field"},h("label",{for:"nick"},"Nombre de invocador"),h("div",{class:"row"},nick,h("div",{class:"tagbox"},h("span",{},"#"),tag))),
-    h("div",{class:"field"},h("label",{for:"srv"},"Server donde jugás"),srv),h("div",{class:"field"},h("label",{},"Tus mains (hasta 3, en orden)"),mainsP.el),h("div",{class:"field"},h("label",{class:"remember"},notifCb,"Avisarme por mail cuando me escriban"),h("p",{class:"hint2"},"Te llega un mail cuando alguien abre chat en tu oferta o te escribe (máximo uno por hora por chat). Lo podés apagar cuando quieras.")),h("div",{class:"field"},h("label",{},"Tu avatar"),h("div",{class:"avrow"},prev,h("div",{class:"avopts"},sw,ic))),err,
+    h("div",{class:"field"},h("label",{for:"srv"},"Server donde jugás"),srv),h("div",{class:"field"},h("label",{},"Tus mains (hasta 3, en orden)"),mainsP.el),h("div",{class:"field"},h("label",{class:"remember"},notifCb,"Avisarme por mail cuando me escriban"),h("p",{class:"hint2"},"Te llega un mail cuando alguien te escribe por tu oferta (máximo uno por hora por chat). Lo podés apagar cuando quieras.")),h("div",{class:"field"},h("label",{},"Tu avatar"),h("div",{class:"avrow"},prev,h("div",{class:"avopts"},sw,ic))),err,
     h("div",{class:"actions"},h("button",{type:"button",class:"btn sec",onclick:()=>{m.replaceChildren();if(!editing)sb.auth.signOut()}},editing?"Cancelar":"Salir"),h("button",{class:"btn",type:"submit"},editing?"Guardar cambios":"Crear perfil")))));
   syncPrev();nick.focus()}
 
@@ -1415,7 +1449,8 @@ function buildFilters(){
   [["all","Todas"],["24h","Últimas 24 hs"],["week","Esta semana"],["old","Más de una semana"]].forEach(([k,t])=>
     seg.append(h("button",{type:"button","aria-pressed":String(F.fecha===k),onclick:()=>{F.fecha=k;buildFilters();renderList()}},t)));
   const pnl=document.getElementById("fpanel");pnl.replaceChildren();
-  const P=(label,key,opts,icons)=>h("div",{},h("label",{},label),picker(opts,{multi:true,nonum:true,icons,value:F[key],onchange:v=>{F[key]=v;renderList()}}).el);
+  const P=(label,key,opts,icons)=>{const pk=picker(opts,{multi:true,nonum:true,icons,value:F[key],onchange:v=>{F[key]=v;renderList()}}).el;
+    pk.setAttribute("role","group");pk.setAttribute("aria-labelledby","fl-"+key);return h("div",{},h("label",{id:"fl-"+key},label),pk)};
   const tsel=(key,ph)=>{const el=h("select",{"aria-label":ph},h("option",{value:""},ph),TIER_ORDER.map(t=>h("option",{value:t,selected:F[key]===t},t)));el.addEventListener("change",()=>{F[key]=el.value;renderList()});return el};
   pnl.append(P("Modo","modo",MODES),P("Juega de","juega",ROLES,true),P("Busca","busca",ROLES,true),
     h("div",{},h("label",{},"Rango del jugador"),h("div",{class:"two"},tsel("rmin","Desde"),tsel("rmax","Hasta"))),
@@ -1534,7 +1569,7 @@ function showChat(key){
     d.append(menuEl)}
   const d=h("aside",{class:"drawer",id:"drawer","aria-label":"Chat con "+who},
     h("div",{class:"dhead"},h("button",{class:"icb",title:"Volver a mis chats",onclick:openChats},"‹"),
-      (()=>{const a=avatarEl({...g0,online:onlineSet.has(key)});a.style.cursor="pointer";a.title="Ver perfil";a.onclick=e=>{e.stopPropagation();openPlayerCard(key,a)};return a})(),
+      h("button",{type:"button",class:"avbtn",title:"Ver perfil","aria-label":"Ver perfil",onclick:e=>{e.stopPropagation();openPlayerCard(key,e.currentTarget)}},avatarEl({...g0,online:onlineSet.has(key)})),
       h("div",{class:"t"},h("b",{},who),sub),
       h("button",{class:"icb",title:"Opciones",onclick:menu},"⋯"),h("button",{class:"icb",title:"Cerrar",onclick:closeDrawer},"✕")),
     msgs,h("form",{class:"compose",onsubmit:send},input,sendBtn));
