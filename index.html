@@ -148,7 +148,10 @@ input:focus,select:focus{border-color:var(--accent)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .hint{font-size:.75rem;color:var(--muted);margin-top:4px;text-align:right}
 .mine-tag{display:inline-block;background:var(--accent-soft);color:var(--accent);border-radius:4px;padding:0 6px;font-size:.7rem;font-weight:600;margin-left:6px;vertical-align:middle}
-.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-weight:600;z-index:30}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-weight:600;z-index:30;display:flex;align-items:center;gap:10px;max-width:calc(100vw - 32px);width:max-content}
+.toast.bad{background:var(--danger);color:#1A0606;border-radius:14px;padding:10px 8px 10px 16px}
+.toast .tx{border:0;background:none;color:inherit;width:32px;height:32px;border-radius:8px;flex:none;font-size:.9rem;opacity:.75}
+.toast .tx:hover{opacity:1;background:rgba(0,0,0,.12)}
 
 .fbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
 .seg{display:flex;background:var(--bg);border-radius:8px;padding:3px;gap:2px;overflow-x:auto}
@@ -184,6 +187,7 @@ input:focus,select:focus{border-color:var(--accent)}
 .typing{color:var(--muted);font-size:.8rem;padding:0 14px 6px;min-height:1.4em}
 .compose{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--line)}
 .compose input{border-radius:999px}
+.compose .btn[disabled]{opacity:.6}
 .clist{flex:1;overflow-y:auto}
 .citem{display:flex;gap:10px;align-items:center;width:100%;text-align:left;border:0;background:transparent;padding:12px 14px;border-bottom:1px solid var(--line)}
 .citem:hover{background:var(--surface2)}
@@ -806,7 +810,7 @@ const EN={
 "Chats que no se acumulan":"Chats that don't pile up","Cada chat nace de una oferta y se borra 24 hs después de que termina. Tu bandeja siempre limpia.":"Every chat starts from an offer and is deleted 24 hours after it ends. Your inbox stays clean.",
 "¿Armamos la partida?":"Ready to queue up?","Crear tu perfil lleva diez segundos.":"Creating your profile takes ten seconds.","Los demás ven primero tu":"Others see your top pick first:","jugadores coinciden":"players match",
 "Te paso mi Discord: premade_seba":"Here's my Discord: premade_seba","Listo, te agrego. ¡Nos vemos en la partida!":"Done, adding you. See you in game!","Esta oferta terminó. El chat se borra en 24 h.":"This offer ended. The chat will be deleted in 24 h.",
-"Nueva oferta":"New offer","Nueva oferta en":"New offer in","Server donde se publica":"Server to post in","Elegí tu rango":"Choose your rank","División":"Division","Repetir última oferta":"Repeat last offer","Tocá las opciones en orden de preferencia: la primera es la que más te interesa.":"Tap options in order of preference: the first one is what you want most.","Detalles opcionales":"Optional details","Rango que buscás, campeones, micro y onda":"Rank you want, champions, mic and vibe","Rango que buscás":"Rank you want","Ideal si tu dúo juega con":"Ideally your duo plays","Mejor que no juegue con":"Better if they don’t play","Elegí al menos un modo.":"Choose at least one mode.","Elegí tu posición.":"Choose your position.","Elegí qué posición buscás.":"Choose the position you want.","Elegí al menos un horario.":"Choose at least one time.","Revisá los campos marcados.":"Check the highlighted fields.","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
+"Nueva oferta":"New offer","No pudimos cargar las ofertas":"We couldn't load the offers","Puede ser tu conexión o un problema nuestro. Probá de nuevo en unos segundos.":"It may be your connection or a problem on our side. Try again in a few seconds.","Reintentar":"Try again","No se pudieron actualizar las ofertas":"Couldn't refresh the offers","Cerrar aviso":"Close notice","No se pudo enviar el reporte. Probá de nuevo.":"Couldn't send the report. Try again.","No se pudo descartar el reporte":"Couldn't dismiss the report","No se pudo abrir el chat. Probá de nuevo.":"Couldn't open the chat. Try again.","Enviando...":"Sending...","Nueva oferta en":"New offer in","Server donde se publica":"Server to post in","Elegí tu rango":"Choose your rank","División":"Division","Repetir última oferta":"Repeat last offer","Tocá las opciones en orden de preferencia: la primera es la que más te interesa.":"Tap options in order of preference: the first one is what you want most.","Detalles opcionales":"Optional details","Rango que buscás, campeones, micro y onda":"Rank you want, champions, mic and vibe","Rango que buscás":"Rank you want","Ideal si tu dúo juega con":"Ideally your duo plays","Mejor que no juegue con":"Better if they don’t play","Elegí al menos un modo.":"Choose at least one mode.","Elegí tu posición.":"Choose your position.","Elegí qué posición buscás.":"Choose the position you want.","Elegí al menos un horario.":"Choose at least one time.","Revisá los campos marcados.":"Check the highlighted fields.","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
 "Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. League of Legends es una marca de Riot Games, Inc. ·":"Hook n' Queue isn't affiliated with or endorsed by Riot Games. League of Legends is a trademark of Riot Games, Inc. ·",
 "Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. ·":"Hook n' Queue isn't affiliated with or endorsed by Riot Games. ·","Privacidad":"Privacy","Donar":"Donate",
 "Buscá con quién jugar":"Find someone to play with","Elegí tu server, mirá las ofertas y coordiná la partida.":"Pick your server, browse offers and set up your game.",
@@ -877,7 +881,7 @@ const RULES=[
  [/^Esta oferta terminó\. El chat se borra en (\d+) h, aprovechá para pasar tu nick o Discord\.$/,(m,a)=>`This offer ended. This chat will be deleted in ${a} h, so swap names or Discord now.`],
  [/^Te falta elegir (.+)\.$/,(m,a)=>`You still need to choose ${a.split(", ").map(tr).join(", ")}.`],
  [/^¿Desbanear a (.+)\?\n\nVa a poder volver a entrar y crear su perfil de nuevo\.$/,(m,a)=>`Unban ${a}?\n\nThey'll be able to sign in and create their profile again.`],
- [/^Nuevo mensaje de (.+)$/,(m,a)=>`New message from ${a}`],[/^(.+) bloqueado$/,(m,a)=>`${a} blocked`],[/^(.+) baneado$/,(m,a)=>`${a} banned`],
+ [/^Nuevo mensaje de (.+)$/,(m,a)=>`New message from ${a}`],[/^Cuando mandes tu primer mensaje, le avisamos a (.+)\.$/,(m,a)=>`When you send your first message, we'll let ${a} know.`],[/^(.+) bloqueado$/,(m,a)=>`${a} blocked`],[/^(.+) baneado$/,(m,a)=>`${a} banned`],
  [/^No se pudo publicar: (.*)$/,(m,a)=>`Couldn't post: ${a}`],[/^No se pudo banear: (.*)$/,(m,a)=>`Couldn't ban: ${a}`],[/^Alias: (.+)$/,(m,a)=>`Alias: ${a}`],
  [/^¿Banear a (.+)\?\n\nSe borra su perfil, sus ofertas y sus chats, y no va a poder volver a usar la app con esa cuenta\.$/,(m,a)=>`Ban ${a}?\n\nTheir profile, offers and chats will be deleted, and they won't be able to use the app with that account again.`],
  [/^¿Borrar el chat con (.+) de tu lista\?\n\nA la otra persona no le pasa nada\. Si te vuelve a escribir, el chat reaparece con los mensajes anteriores\.$/,(m,a)=>`Delete your chat with ${a} from your list?\n\nNothing happens to the other person. If they message you again, the chat comes back with the previous messages.`],
@@ -938,12 +942,12 @@ const H=3600e3;
 const SB_URL="https://onidctftsskhgqdtjiib.supabase.co",SB_KEY="sb_publishable_vDyM0bTueq3oLd3zSNIi-Q_D6GOxAgq";
 const sb=window.supabase.createClient(SB_URL,SB_KEY);
 const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-let uid=null,profile=null,current="LAS",loadingOffers=true;
+let uid=null,profile=null,current="LAS",loadingOffers=true,offersError=false,offersLoaded=false;
 let OFFERS=[],onlineSet=new Set(),blockedIds=new Set();
 const DAY=864e5,EXPIRE=15*DAY;
 const allOffers=()=>OFFERS.filter(o=>Date.now()-o.at<EXPIRE).map(o=>(o.online=o.mine||onlineSet.has(o.user_id),o));
 const FDEF={online:false,fecha:"all",modo:[],juega:[],busca:[],rmin:"",rmax:"",horario:[],mic:[],onda:[]};
-let chats={},readAt=store.get("hnq.read")||{};
+let chats={},draft=null,readAt=store.get("hnq.read")||{};
 let F=JSON.parse(JSON.stringify(FDEF));
 const arr=v=>[].concat(v).map(x=>x===true?"Con micro":x===false?"Sin micro":x);
 const any=(a,b)=>!b.length||arr(a).some(x=>b.includes(x));
@@ -1103,7 +1107,7 @@ async function loadReports(body){
       h("div",{},h("b",{},r.reported.nick+"#"+r.reported.tag),h("small",{},`Reportado por ${r.reporter?.nick||"?"} · ${ago(Date.parse(r.created_at))}`),
         offers.length?h("small",{class:"rofs"},"Ofertas: "+offers.map(o=>`"${o.titulo}"`).join(", ")):null),
       h("div",{class:"ractions"},
-        h("button",{class:"btn sec sm",onclick:async()=>{await sb.from("reports").delete().eq("id",r.id);el.remove();toast("Reporte descartado")}},"Descartar"),
+        h("button",{class:"btn sec sm",onclick:async()=>{const {error}=await sb.from("reports").delete().eq("id",r.id);if(error){toast("No se pudo descartar el reporte");return}el.remove();toast("Reporte descartado")}},"Descartar"),
         h("button",{class:"btn sm danger-btn",onclick:async()=>{if(await banUser(r.reported.id,r.reported.nick,"Reportado: "+(r.reason||"")))el.remove()}},"Banear")));
     return el}));
 }
@@ -1152,7 +1156,7 @@ function openPlayerCard(id,anchor){
       p.mine?h("button",{class:"btn",onclick:()=>{closePlayerCard();openProfile(true)}},"Editar perfil")
         :h("button",{class:"btn",onclick:()=>{closePlayerCard();if(groupOf(id))showChat(id);else if(p.offers[0])openChat(p.offers[0])}},"💬 Abrir chat")),
     p.mine?null:h("div",{class:"pfoot"},
-      h("button",{onclick:async()=>{closePlayerCard();await sb.from("reports").insert({reporter_id:uid,reported_id:id,reason:"perfil"});toast("Reporte enviado. Lo vamos a revisar.")}},"Reportar"),
+      h("button",{onclick:()=>{closePlayerCard();report(id,"perfil")}},"Reportar"),
       h("span",{},"·"),
       h("button",{onclick:async()=>{closePlayerCard();const {error}=await sb.from("blocks").insert({blocker_id:uid,blocked_id:id});if(error&&error.code!=="23505"){toast("No se pudo bloquear");return}
         blockedIds.add(id);for(const c of Object.values(chats))if(c.user_id===id)delete chats[c.id];closeDrawer();render();toast(riot+" bloqueado")}},"Bloquear")));
@@ -1230,13 +1234,14 @@ function renderList(){setTimeout(renderSides,0);
   const inServer=allOffers().filter(o=>o.server===current);
   const offers=inServer.filter(o=>!blockedIds.has(o.user_id)).filter(passes).sort((a,b)=>b.at-a.at);
   document.getElementById("srvTitle").textContent=`${s.id} · ${s.name}`;
-  document.getElementById("srvCount").textContent=!inServer.length?"Sin ofertas por ahora":offers.length===inServer.length?`${offers.length} ${offers.length===1?"oferta activa":"ofertas activas"}`:`Mostrando ${offers.length} de ${inServer.length} ofertas`;
+  document.getElementById("srvCount").textContent=offersError?"":!inServer.length?"Sin ofertas por ahora":offers.length===inServer.length?`${offers.length} ${offers.length===1?"oferta activa":"ofertas activas"}`:`Mostrando ${offers.length} de ${inServer.length} ofertas`;
   document.getElementById("stToday").textContent=inServer.filter(o=>Date.now()-o.at<24*H).length;
   document.getElementById("stTotal").textContent=inServer.length;document.getElementById("stOnline").textContent=inServer.filter(o=>o.online).length;document.getElementById("onBtn").setAttribute("aria-pressed",String(F.online));
   const fb=document.getElementById("fBtnN");if(fb){const n=activeCount();fb.textContent=n?n:"";fb.hidden=!n}
   document.getElementById("cols").hidden=!offers.length;
   const list=document.getElementById("list");list.replaceChildren();
   if(loadingOffers){list.append(h("div",{class:"loading"},"Cargando ofertas..."));return}
+  if(offersError){list.append(h("div",{class:"empty"},hangHook(),h("h3",{},"No pudimos cargar las ofertas"),h("p",{},"Puede ser tu conexión o un problema nuestro. Probá de nuevo en unos segundos."),h("button",{class:"btn",onclick:retryOffers},"Reintentar")));return}
   if(inServer.length&&!offers.length){list.append(h("div",{class:"empty"},hangHook(),h("h3",{},"El anzuelo volvió vacío"),h("p",{},"Ninguna oferta coincide con tus filtros. Probá sacando alguno para ver más jugadores."),h("button",{class:"btn sec",onclick:clearFilters},"Limpiar filtros")));return}
   if(!offers.length){list.append(h("div",{class:"empty"},hangHook(),h("h3",{},`Tirá el primer anzuelo en ${s.id}`),h("p",{},"Todavía nadie publicó en este server. El primero que tira el anzuelo, pesca."),h("button",{class:"btn",onclick:()=>openOffer()},"Publicar oferta")));return}
   offers.forEach(o=>{const tier=o.rango==="Sin rango"?"Sin rango":o.rango.split(" ")[0];
@@ -1308,7 +1313,12 @@ function openProfile(editing,mode="signup"){const m=document.getElementById("mod
     h("div",{class:"actions"},h("button",{type:"button",class:"btn sec",onclick:()=>{m.replaceChildren();if(!editing)sb.auth.signOut()}},editing?"Cancelar":"Salir"),h("button",{class:"btn",type:"submit"},editing?"Guardar cambios":"Crear perfil")))));
   syncPrev();nick.focus()}
 
-function toast(msg){const t=h("div",{class:"toast",role:"status"},msg);document.body.append(t);setTimeout(()=>t.remove(),2400)}
+function toast(msg,err=/^No se pud/.test(msg)){document.querySelector(".toast")?.remove();
+  const t=h("div",{class:"toast"+(err?" bad":""),role:err?"alert":"status"},h("span",{},msg));
+  if(err)t.append(h("button",{type:"button",class:"tx","aria-label":"Cerrar aviso",onclick:()=>t.remove()},"✕"));
+  document.body.append(t);setTimeout(()=>t.remove(),err?7000:2400)}
+async function report(id,reason){const {error}=await sb.from("reports").insert({reporter_id:uid,reported_id:id,reason});
+  if(error){console.error(error);toast(limitMsg(error)||"No se pudo enviar el reporte. Probá de nuevo.");return}toast("Reporte enviado. Lo vamos a revisar.")}
 function hookIn(id){
   const row=document.querySelector(`.offer[data-id="${id}"]`);if(!row||RM)return;
   row.scrollIntoView({block:"center",behavior:"smooth"});
@@ -1420,11 +1430,11 @@ document.getElementById("onBtn").addEventListener("click",()=>{F.online=!F.onlin
 
 const leftH=c=>Math.max(1,Math.ceil((DAY-(Date.now()-c.endedAt))/36e5));
 const isUnread=c=>c.msgs.some(m=>!m.me&&m.at>(readAt[c.id]||0));
-function markRead(c){readAt[c.id]=Date.now();store.set("hnq.read",readAt)}
+function markRead(c){if(c.draft)return;readAt[c.id]=Date.now();store.set("hnq.read",readAt)}
 // ---------- chats agrupados por persona (una conversación aunque haya varias ofertas)
 function groupsOf(all=false){
   const g={};
-  for(const c of Object.values(chats))(g[c.user_id]||(g[c.user_id]={user_id:c.user_id,nick:c.nick,tag:c.tag,color:c.color,photo:c.photo,chats:[]})).chats.push(c);
+  for(const c of [...Object.values(chats),...(draft?[draft]:[])])(g[c.user_id]||(g[c.user_id]={user_id:c.user_id,nick:c.nick,tag:c.tag,color:c.color,photo:c.photo,chats:[]})).chats.push(c);
   return Object.values(g).map(x=>{x.chats.sort((a,b)=>a.createdAt-b.createdAt);
     x.msgs=x.chats.flatMap(c=>c.msgs.map(m=>({...m,chat:c}))).sort((a,b)=>a.at-b.at);
     x.last=x.msgs.at(-1);x.allEnded=x.chats.every(c=>c.endedAt);x.unread=x.chats.some(isUnread);
@@ -1436,12 +1446,12 @@ function groupsOf(all=false){
 const groupOf=u=>groupsOf(true).find(g=>g.user_id===u);
 async function setHidden(u,hide){const {error}=await sb.rpc("hnq_hide_chats",{other:u,hide});if(error){console.error(error);return false}
   for(const c of Object.values(chats))if(c.user_id===u)c.hiddenAt=hide?Date.now():null;return true}
-function sendTarget(g){const lc=g.last?.chat;if(lc&&!lc.endedAt)return lc;const act=g.chats.filter(c=>!c.endedAt);return [...(act.length?act:g.chats)].sort((a,b)=>b.createdAt-a.createdAt)[0]}
+function sendTarget(g){if(draft&&draft.user_id===g.user_id)return draft;const lc=g.last?.chat;if(lc&&!lc.endedAt)return lc;const act=g.chats.filter(c=>!c.endedAt);return [...(act.length?act:g.chats)].sort((a,b)=>b.createdAt-a.createdAt)[0]}
 const groupSub=g=>g.allEnded?`Ofertas terminadas · se borra en ${Math.min(...g.chats.map(leftH))} h`:g.last?(g.last.me?"Vos: ":"")+g.last.text:(g.chats.length>1?g.chats.length+" ofertas":g.chats[0].titulo);
 function unreadEl(){const n=groupsOf().filter(g=>g.unread).length;return n?h("span",{class:"unread"},n):null}
 const hhmm=ts=>new Date(ts).toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"});
 let openId=null,repaint=null;
-function closeDrawer(){document.getElementById("drawer")?.remove();openId=null;repaint=null}
+function closeDrawer(keepDraft){document.getElementById("drawer")?.remove();openId=null;repaint=null;if(!keepDraft)draft=null}
 const PCOLS="id,nick,tag,color,photo_url,mains,server";
 async function loadChats(){
   if(!uid)return;
@@ -1467,16 +1477,24 @@ function onMessage(m){
 }
 async function openChat(o){
   if(!profile)return;
-  let c=Object.values(chats).find(x=>x.offer_id===o.id);
-  if(Object.values(chats).some(x=>x.user_id===o.user_id&&x.hiddenAt))await setHidden(o.user_id,false);
-  if(c){showChat(c.user_id);return}
-  const {data,error}=await sb.from("chats").insert({offer_id:o.id,offer_title:o.titulo,owner_id:o.user_id,guest_id:uid}).select().single();
-  if(error&&error.code!=="23505"){toast(limitMsg(error)||"No se pudo abrir el chat");console.error(error);return}
-  await loadChats();showChat(o.user_id);
+  const c=Object.values(chats).find(x=>x.offer_id===o.id);
+  if(c){if(c.hiddenAt)await setHidden(o.user_id,false);showChat(c.user_id);return}
+  // el chat se crea recién con el primer mensaje: hasta entonces es un borrador local
+  closeDrawer();
+  draft={draft:true,id:"draft:"+o.id,offer_id:o.id,titulo:o.titulo,server:o.server,user_id:o.user_id,nick:o.nick,tag:o.tag,color:o.color,photo:o.photo,mains:o.mains,home:o.home,
+    createdAt:Date.now(),endedAt:null,hiddenAt:null,msgs:[]};
+  showChat(o.user_id);
+}
+async function createChat(d){
+  let {data,error}=await sb.from("chats").insert({offer_id:d.offer_id,offer_title:d.titulo,owner_id:d.user_id,guest_id:uid}).select("id").single();
+  if(error&&error.code==="23505")({data,error}=await sb.from("chats").select("id").eq("offer_id",d.offer_id).eq("guest_id",uid).single());
+  if(error){console.error(error);return {error}}
+  if(Object.values(chats).some(x=>x.user_id===d.user_id&&x.hiddenAt))await setHidden(d.user_id,false);
+  return {id:data.id};
 }
 function showChat(key){
   if(chats[key])key=chats[key].user_id;   // acepta id de chat o de usuario
-  closeDrawer();const g0=groupOf(key);if(!g0)return;openId=key;g0.chats.forEach(markRead);renderMe();
+  closeDrawer(true);const g0=groupOf(key);if(!g0)return;openId=key;g0.chats.forEach(markRead);renderMe();
   const msgs=h("div",{class:"msgs"});
   const input=h("input",{placeholder:"Escribí un mensaje...",maxlength:"500","aria-label":"Mensaje"});
   let menuEl=null;
@@ -1484,7 +1502,7 @@ function showChat(key){
   const sub=h("small",{});
   function paint(){const g=groupOf(key);if(!g)return;g.chats.forEach(markRead);
     sub.textContent=g.chats.length>1?`${g.chats.length} ofertas en común`:g.chats[0].titulo;
-    const out=[h("div",{class:"sys"},"Coordinen nick, horario y, si quieren, Discord.")];
+    const out=[h("div",{class:"sys"},draft&&draft.user_id===key&&!g.msgs.length?`Cuando mandes tu primer mensaje, le avisamos a ${g.nick}.`:"Coordinen nick, horario y, si quieren, Discord.")];
     const shown=new Set();let prev=null;
     const divider=c=>h("div",{class:"odiv"+(c.endedAt?" off":"")},h("span",{},(c.endedAt?"Terminada · ":"Oferta · ")+c.titulo));
     for(const m of g.msgs){if(m.chat!==prev){if(g.chats.length>1||!prev)out.push(divider(m.chat));shown.add(m.chat.id);prev=m.chat}
@@ -1493,16 +1511,24 @@ function showChat(key){
     if(g.allEnded)out.push(h("div",{class:"ended"},`Las ofertas terminaron. El chat se borra en ${Math.min(...g.chats.map(leftH))} h, aprovechá para pasar tu nick o Discord.`));
     msgs.replaceChildren(...out);msgs.scrollTop=msgs.scrollHeight}
   repaint=paint;
-  async function send(e){e.preventDefault();const t=input.value.trim();if(!t)return;const g=groupOf(key);if(!g)return;input.value="";
-    const {data,error}=await sb.from("messages").insert({chat_id:sendTarget(g).id,sender_id:uid,body:maskText(t)}).select().single();
-    if(error){toast(limitMsg(error)||"No se pudo enviar el mensaje");input.value=t;return}
-    onMessage(data)}
+  let sending=false;
+  async function send(e){e.preventDefault();const t=input.value.trim();if(!t||sending)return;const g=groupOf(key);if(!g)return;
+    sending=true;sendBtn.disabled=true;sendBtn.textContent="Enviando...";
+    const done=()=>{sending=false;sendBtn.disabled=false;sendBtn.textContent="Enviar"};
+    let target=sendTarget(g),fresh=false;
+    if(target.draft){const r=await createChat(target);if(r.error){done();toast(limitMsg(r.error)||"No se pudo abrir el chat. Probá de nuevo.");return}target={id:r.id};fresh=true}
+    const {data,error}=await sb.from("messages").insert({chat_id:target.id,sender_id:uid,body:maskText(t)}).select().single();
+    done();
+    if(error){toast(limitMsg(error)||"No se pudo enviar el mensaje");if(fresh){draft=null;await loadChats()}return}
+    input.value="";
+    if(fresh){draft=null;await loadChats();if(chats[target.id])markRead(chats[target.id]);repaint&&repaint()}else onMessage(data);input.focus()}
+  const sendBtn=h("button",{class:"btn"},"Enviar");
   function menu(){if(menuEl){menuEl.remove();menuEl=null;return}
     menuEl=h("div",{class:"menu"},
       h("button",{onclick:async()=>{menuEl.remove();menuEl=null;
         if(!confirm(t(`¿Borrar el chat con ${g0.nick} de tu lista?\n\nA la otra persona no le pasa nada. Si te vuelve a escribir, el chat reaparece con los mensajes anteriores.`)))return;
         if(await setHidden(key,true)){closeDrawer();render();toast("Chat borrado")}else toast("No se pudo borrar el chat")}},"Borrar chat"),
-      h("button",{onclick:async()=>{menuEl.remove();menuEl=null;await sb.from("reports").insert({reporter_id:uid,reported_id:key,reason:"chat"});toast("Reporte enviado. Lo vamos a revisar.")}},"Reportar"),
+      h("button",{onclick:()=>{menuEl.remove();menuEl=null;report(key,"chat")}},"Reportar"),
       h("button",{class:"danger",onclick:async()=>{const {error}=await sb.from("blocks").insert({blocker_id:uid,blocked_id:key});if(error&&error.code!=="23505"){toast("No se pudo bloquear");return}
         blockedIds.add(key);for(const c of Object.values(chats))if(c.user_id===key)delete chats[c.id];closeDrawer();render();toast(who+" bloqueado")}},"Bloquear"));
     d.append(menuEl)}
@@ -1511,7 +1537,7 @@ function showChat(key){
       (()=>{const a=avatarEl({...g0,online:onlineSet.has(key)});a.style.cursor="pointer";a.title="Ver perfil";a.onclick=e=>{e.stopPropagation();openPlayerCard(key,a)};return a})(),
       h("div",{class:"t"},h("b",{},who),sub),
       h("button",{class:"icb",title:"Opciones",onclick:menu},"⋯"),h("button",{class:"icb",title:"Cerrar",onclick:closeDrawer},"✕")),
-    msgs,h("form",{class:"compose",onsubmit:send},input,h("button",{class:"btn"},"Enviar")));
+    msgs,h("form",{class:"compose",onsubmit:send},input,sendBtn));
   document.body.append(d);paint();input.focus();
 }
 function openChats(){
@@ -1533,9 +1559,11 @@ function mapOffer(r){const p=r.profiles||{};return{id:r.id,user_id:r.user_id,min
 async function loadOffers(){
   const {data,error}=await sb.from("offers").select("*, profiles(nick,tag,color,photo_url,mains,server)").is("closed_at",null)
     .gt("created_at",new Date(Date.now()-EXPIRE).toISOString()).order("created_at",{ascending:false}).limit(500);
-  loadingOffers=false;if(error){console.error(error);toast("No se pudieron cargar las ofertas");renderList();return}
-  OFFERS=data.map(mapOffer);renderList();
+  loadingOffers=false;
+  if(error){console.error(error);if(offersLoaded)toast("No se pudieron actualizar las ofertas");else offersError=true;renderList();return}
+  offersError=false;offersLoaded=true;OFFERS=data.map(mapOffer);renderList();
 }
+function retryOffers(){offersError=false;loadingOffers=true;renderList();loadOffers()}
 async function loadBlocks(){const {data}=await sb.from("blocks").select("blocked_id");blockedIds=new Set((data||[]).map(b=>b.blocked_id))}
 let rt=null,pres=null,offT=null;
 function startRealtime(){
