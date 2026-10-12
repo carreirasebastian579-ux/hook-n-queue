@@ -637,8 +637,8 @@ html,body{overflow-x:clip}
 
 @media (max-width:900px){
   .cols{display:none}
-  .offer{grid-template-columns:1fr auto;grid-template-areas:"player age" "title title" "pos pos" "rank mode" "chat chat";gap:10px;padding:16px 18px}
-  .player{grid-area:player}.age{grid-area:age}.title{grid-area:title}.rank{grid-area:rank}.mode{grid-area:mode;justify-self:end}.chat{grid-area:chat}
+  .offer{grid-template-columns:1fr auto;grid-template-areas:"player age" "title title" "pos pos" "rank mode" "chat chat" "det det";gap:10px;padding:16px 18px}
+  .player{grid-area:player}.age{grid-area:age}.title{grid-area:title}.offer>.rank{grid-area:rank}.offer>.mode{grid-area:mode;justify-self:end}.chat{grid-area:chat}
   .posgroup{grid-area:pos;display:flex;gap:16px}
   .title p{white-space:normal}
   .lbl-m{display:inline;color:var(--muted);font-size:.75rem;margin-right:6px;align-self:center}
