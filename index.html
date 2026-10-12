@@ -1640,26 +1640,38 @@ const lhero=document.getElementById("lhero"),lsticky=document.querySelector(".ls
 const chain=document.getElementById("chain"),head=document.getElementById("hookhead"),impact=document.getElementById("impact"),streaks=document.getElementById("streaks");
 const ramp=(p,a,b)=>Math.max(0,Math.min(1,(p-a)/(b-a)));
 const easeOut=t=>1-Math.pow(1-t,3),easeIn=t=>t*t*t;
-let hooked=false,anchor={x:0,y:0};
+let hooked=false,anchor={x:0,y:0},fromTop=false;
+const TOPMQ=matchMedia("(max-width:820px)");
 function measureAnchor(){const prev=lcopy.style.transform;lcopy.style.transform="none";
   const sr=lsticky.getBoundingClientRect(),hr=lh1.getBoundingClientRect(),range=document.createRange();range.selectNodeContents(lh1);
-  const rects=[...range.getClientRects()].filter(r=>r.width>4);const fit=rects.filter(r=>r.right+90<sr.right);const last=fit.at(-1)||rects[0]||hr;
-  anchor={x:Math.min(last.right+34,sr.width-50)-sr.left,y:last.top+last.height*.18-sr.top};lcopy.style.transform=prev}
+  const rects=[...range.getClientRects()].filter(r=>r.width>4);fromTop=TOPMQ.matches;
+  if(fromTop){const first=rects[0]||hr;anchor={x:Math.min(first.right-10,sr.width-40)-sr.left,y:first.top-sr.top}}
+  else{const fit=rects.filter(r=>r.right+90<sr.right);const last=fit.at(-1)||rects[0]||hr;
+    anchor={x:Math.min(last.right+34,sr.width-50)-sr.left,y:last.top+last.height*.18-sr.top}}
+  lcopy.style.transform=prev}
 function placePortal(){
   const r=lhero.getBoundingClientRect(),vh=innerHeight;const p=RM?0:Math.max(0,Math.min(1,-r.top/Math.max(1,r.height-vh)));
   const launch=easeOut(ramp(p,.04,.22)),drag=easeIn(ramp(p,.26,.9));
   const dy=drag*vh*1.25;
-  // hook flies up from below, then drags everything down
-  const hy=launch<1?(vh+140)+(anchor.y-(vh+140))*launch:anchor.y+dy;
-  const hx=anchor.x;
-  head.style.opacity=String(ramp(p,.03,.06));
-  head.style.transform=`translate(${hx-30}px,${hy-8}px) rotate(${launch<1?(1-launch)*14:-drag*6}deg) scaleX(-1)`;
-  chain.style.opacity=head.style.opacity;
-  chain.style.transform=`translate(${hx-13}px,${hy+124}px)`;chain.style.height=Math.max(0,vh+60-(hy+124))+"px";
-  if(p>=.22&&!hooked){hooked=true;impact.style.left=hx+"px";impact.style.top=anchor.y+"px";impact.classList.remove("go");void impact.offsetWidth;impact.classList.add("go");
+  head.style.opacity=String(ramp(p,.03,.06));chain.style.opacity=head.style.opacity;
+  let hx=anchor.x,bite=anchor.y;
+  if(fromTop){
+    // celular: el anzuelo cuelga desde arriba (girado 180°), engancha la primera línea y al scrollear la levanta
+    const sc=.8,eye=anchor.y+16-118*sc;   // ojo del anzuelo: la curva engancha la última letra de la primera línea
+    const ey=launch<1?-140+(eye+140)*launch:eye-dy;
+    head.style.transform=`translate(${hx-30}px,${ey-124}px) rotate(${180+(launch<1?(1-launch)*12:drag*6)}deg) scale(${sc})`;
+    chain.style.transform=`translate(${hx-13}px,0px)`;chain.style.height=Math.max(0,ey)+"px";
+    hx-=24;bite=anchor.y+16;
+  }else{
+    // compu: el anzuelo sube desde abajo y arrastra todo hacia abajo
+    const hy=launch<1?(vh+140)+(anchor.y-(vh+140))*launch:anchor.y+dy;
+    head.style.transform=`translate(${hx-30}px,${hy-8}px) rotate(${launch<1?(1-launch)*14:-drag*6}deg) scaleX(-1)`;
+    chain.style.transform=`translate(${hx-13}px,${hy+124}px)`;chain.style.height=Math.max(0,vh+60-(hy+124))+"px";
+  }
+  if(p>=.22&&!hooked){hooked=true;impact.style.left=hx+"px";impact.style.top=bite+"px";impact.classList.remove("go");void impact.offsetWidth;impact.classList.add("go");
     lsticky.classList.remove("hit");void lsticky.offsetWidth;lsticky.classList.add("hit");lh1.style.textShadow="0 0 24px rgba(69,230,166,.9)";setTimeout(()=>lh1.style.textShadow="",500)}
   if(p<.2)hooked=false;
-  lcopy.style.transform=`translateY(${dy}px) rotate(${drag*4}deg)`;lcopy.style.opacity=String(1-ramp(p,.7,.88));
+  lcopy.style.transform=fromTop?`translateY(${-dy}px) rotate(${-drag*4}deg)`:`translateY(${dy}px) rotate(${drag*4}deg)`;lcopy.style.opacity=String(1-ramp(p,.7,.88));
   streaks.style.opacity=String(ramp(p,.28,.4)*(1-ramp(p,.84,.94)));streaks.style.backgroundPositionY=`${-p*3000}px`;streaks.style.transform=`translateY(${-(p*1600)%260}px)`;
   cue.style.opacity=String(1-ramp(p,0,.08));
   veil.style.opacity=String(ramp(p,.86,1));
