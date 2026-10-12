@@ -18,6 +18,7 @@ colors:
   superficie-muelle: "#141817"
   superficie-muelle-2: "#1B201F"
   linea-muelle: "#242A29"
+  linea-campo: "#5E6866"
   tinta-muelle: "#E4EAE8"
   gris-muelle: "#86918E"
   tinta-verde-muelle: "#06120D"
@@ -181,7 +182,8 @@ The CSS custom properties (`--bg`, `--surface`, `--surface2`, `--line`, `--ink`,
 - **Tinta Espuma** (`--ink`, landing): primary text. **Musgo Apagado** (`--muted`): secondary text. **Musgo Claro**: the hero subtitle, a slightly brighter muted for long landing copy.
 - **Grafito Muelle** (`--bg`, app): page and header background, input fill, inset areas (filter panel, offer detail).
 - **Superficie Muelle** / **Superficie Muelle 2** (`--surface` / `--surface2`, app): panels and cards / secondary buttons, hovers, pressed segment, received chat bubbles.
-- **Línea Muelle** (`--line`, app): all borders and row dividers.
+- **Línea Muelle** (`--line`, app): borders of panels, cards and row dividers.
+- **Línea Campo** (`--field-line`): borders of inputs, selects and the Riot tag box, so form fields reach 3:1 against the background in both registers.
 - **Tinta Muelle** (`--ink`, app) and **Gris Muelle** (`--muted`, app): primary and secondary text.
 - **Tinta Verde Noche** / **Tinta Verde Muelle** (`--accent-ink`): text on green fills in each register.
 
@@ -277,7 +279,7 @@ Tactile and confident: a solid fill, a clear label, no outline-only primaries.
 - **Shadow strategy:** none at rest (see Elevation).
 
 ### Inputs / Fields
-- **Style:** `--bg` fill, 1px `--line` border, 8px corners, 11×12px padding, full width.
+- **Style:** `--bg` fill, 1px `--field-line` border, 8px corners, 11×12px padding, full width.
 - **Focus:** border turns accent; no glow.
 - **Label:** above the field, 0.82rem, 500, muted.
 - **Error:** Coral Alerta text, 0.82rem, under the field, with reserved height so the layout does not jump.

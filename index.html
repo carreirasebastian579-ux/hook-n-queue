@@ -38,7 +38,7 @@
 <style>
 :root{
   --bg:#060F0D; --surface:#0C1A17; --surface2:#13251F; --line:#1C332C; --ink:#E2F4EE; --muted:#7C9A90;
-  --accent:#45E6A6; --accent-ink:#03140D; --accent-soft:rgba(69,230,166,.13); --ic:#E2F4EE; --ic2:#25403A; --ok:#2DBE8C; --danger:#F26B6B; --field-line:#5E6866;
+  --accent:#45E6A6; --accent-ink:#03140D; --accent-soft:rgba(69,230,166,.13); --ic:#E2F4EE; --ic2:#25403A; --ok:#2DBE8C; --danger:#F26B6B; --field-line:#5E6866; --hook-hi:#E0FFF1;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
@@ -131,7 +131,7 @@ input:focus,select:focus{border-color:var(--accent)}
 .tagbox:focus-within{border-color:var(--accent)}
 .tagbox span{color:var(--muted)}
 .tagbox input{border:0;padding-left:4px}
-.err{color:#F26B6B;font-size:.82rem;min-height:1.2em;margin:4px 0 0}
+.err{color:var(--danger);font-size:.82rem;min-height:1.2em;margin:4px 0 0}
 .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
 
 .overlay{overflow-y:auto;align-items:start}
@@ -197,7 +197,7 @@ input:focus,select:focus{border-color:var(--accent)}
 .menu{position:absolute;right:14px;top:56px;background:var(--surface2);border:1px solid var(--line);border-radius:10px;overflow:hidden;z-index:2}
 .menu button{display:block;width:100%;text-align:left;border:0;background:transparent;padding:10px 16px}
 .menu button:hover{background:var(--line)}
-.menu .danger{color:#F26B6B}
+.menu .danger{color:var(--danger)}
 
 /* ---------- landing ---------- */
 .lnav{position:fixed;top:0;left:0;right:0;z-index:10;padding-top:env(safe-area-inset-top,0px);transition:background .2s}
@@ -211,25 +211,14 @@ input:focus,select:focus{border-color:var(--accent)}
 .lcta{display:flex;gap:10px;flex-wrap:wrap}
 .btn.big{padding:13px 22px;font-size:1rem;border-radius:10px}
 .btn:not(.sec){box-shadow:0 0 0 1px rgba(69,230,166,.4),0 8px 30px rgba(69,230,166,.25)}
-.portal{position:absolute;left:50%;top:50%;width:min(92vmin,780px);aspect-ratio:1;z-index:1;will-change:transform;transform:translate(-50%,-50%) translateX(var(--px,22vw)) scale(var(--ps,1)) rotate(var(--pr,0deg))}
-.portal svg{width:100%;height:100%;display:block;overflow:visible}
-.spin{transform-box:fill-box;transform-origin:center;animation:spin 80s linear infinite}
-.spin.s2{animation-duration:55s;animation-direction:reverse}
-.spin.s3{animation-duration:32s}
-.spin.s4{animation-duration:20s;animation-direction:reverse}
-.pulse{transform-box:fill-box;transform-origin:center;animation:pulse 4s ease-in-out infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes pulse{50%{transform:scale(1.08);opacity:.85}}
 .particles{position:absolute;inset:0;z-index:2;pointer-events:none}
 .particles i{position:absolute;bottom:-10px;border-radius:50%;background:#A6F7D2;box-shadow:0 0 8px 2px rgba(69,230,166,.7);animation:rise linear infinite;opacity:0}
 @keyframes rise{10%{opacity:.9}80%{opacity:.6}to{transform:translateY(-105svh) translateX(var(--dx,0));opacity:0}}
-.flash{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0;background:radial-gradient(circle at 50% 50%,#F2FEFF 0%,#8FF0FA 18%,#1FB8D6 42%,#0B4E6A 72%,#0A2433 100%)}
 .veil{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0;background:#060F0D}
 .cue{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);color:var(--muted);font-size:.8rem;display:flex;flex-direction:column;align-items:center;gap:8px;z-index:3}
 .cue span{width:22px;height:34px;border:2px solid var(--line);border-radius:12px;position:relative}
 .cue span::after{content:"";position:absolute;left:50%;top:6px;width:4px;height:7px;border-radius:2px;background:var(--accent);transform:translateX(-50%);animation:cueb 1.6s ease-in-out infinite}
 @keyframes cueb{50%{transform:translate(-50%,9px);opacity:.3}}
-.portal.small{width:min(120vmin,900px);opacity:.35;--px:0px}
 .how{padding:110px 16px 90px}
 .how h2,.lservers h2,.final h2{font-size:clamp(1.9rem,4vw,2.8rem);font-weight:800;letter-spacing:-.03em;line-height:1.1}
 .steps{position:relative;margin-top:44px;display:grid;gap:56px;padding-left:64px;max-width:640px}
@@ -266,7 +255,7 @@ input:focus,select:focus{border-color:var(--accent)}
 
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
 .rv.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.hooklayer,.streaks{display:none}.rv{opacity:1;transform:none;transition:none}.track{animation:none;flex-wrap:wrap;width:auto;justify-content:center}.spin,.pulse,.cue span::after{animation:none}.particles{display:none}.lhero{height:100svh}}
+@media (prefers-reduced-motion:reduce){.hooklayer,.streaks{display:none}.rv{opacity:1;transform:none;transition:none}.track{animation:none;flex-wrap:wrap;width:auto;justify-content:center}.cue span::after{animation:none}.particles{display:none}.lhero{height:100svh}}
 @media (max-width:820px){
   .lsticky{align-items:flex-end;padding-bottom:90px}
   .feat{grid-template-columns:1fr;gap:22px}
@@ -278,8 +267,6 @@ input:focus,select:focus{border-color:var(--accent)}
 .top{position:relative}
 .top{margin-top:20px;margin-bottom:18px;padding:26px 28px;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--line)}
 .top > *{position:relative;z-index:1}
-.top .deco{position:absolute;right:-140px;top:50%;width:420px;aspect-ratio:1;transform:translateY(-50%);opacity:.45;z-index:0;pointer-events:none}
-.top .deco svg{width:100%;height:100%}
 .top .stat{background:rgba(6,15,13,.65)}
 
 .hooklayer{position:absolute;inset:0;pointer-events:none}
@@ -381,6 +368,9 @@ html.in-app .chip.role,html.in-app .mine-tag{color:#7FD3B2}
 .logo b{color:var(--accent);font-weight:800}
 .logo .apos{width:.62em;height:1.05em;vertical-align:.22em;margin:0 .32em 0 .04em;color:var(--accent);filter:drop-shadow(0 0 4px rgba(69,230,166,.6))}
 html.in-app .logo .apos{filter:none}
+.hookhead,.dhook,.hhook,.drop .dh{color:var(--accent)}
+html.in-app{--hook-hi:#BFE3D4}
+html.in-app .hchain,html.in-app .drop .dc{filter:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='44' viewBox='0 0 26 44'%3E%3Cpath d='M13 2 21 8v12l-8 6-8-6V8Z' fill='none' stroke='%233DBF8E' stroke-width='2.4'/%3E%3Cpath d='M13 10v8' stroke='%237FD3B2' stroke-width='1.6'/%3E%3Cpath d='M13 28l4 8-4 8-4-8Z' fill='%233DBF8E' opacity='.85'/%3E%3C/svg%3E")}
 
 .pav,.av{position:relative;overflow:visible}
 .pav svg.ic,.av svg.ic{width:62%;height:62%;color:inherit}
@@ -416,7 +406,7 @@ html.in-app .logo .apos{filter:none}
 @keyframes dropHook{0%{transform:translateY(-420px)}35%,68%{transform:translateY(0);opacity:1}100%{transform:translateY(-460px);opacity:0}}
 @media (prefers-reduced-motion:reduce){.hang,.onl::after{animation:none}}
 .cols[hidden]{display:none}
-.exp{white-space:normal;line-height:1.2;margin-top:2px}
+.exp{white-space:normal;line-height:1.3;margin-top:2px}
 .pav img,.av img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
 .upl{display:flex;gap:6px;flex-wrap:wrap}
 .btn.sm{padding:6px 12px;font-size:.8rem}
@@ -475,7 +465,7 @@ html,body{overflow-x:clip}
 .umenu .uhead small{color:var(--muted);display:inline!important}
 .umenu button{border:0!important;background:transparent!important;text-align:left;padding:9px 10px!important;border-radius:8px!important;font-size:.9rem!important;color:var(--ink)!important}
 .umenu button:hover{background:var(--surface2)!important}
-.umenu .danger{color:#F26B6B!important}
+.umenu .danger{color:var(--danger)!important}
 @media (max-width:640px){
   .bar{gap:8px}
   .logo{font-size:.95rem}
@@ -582,7 +572,7 @@ html,body{overflow-x:clip}
 .pmore.want{color:var(--accent)}
 .adminwrap{display:inline-flex;gap:6px;align-items:center;position:relative}
 .shield{border:1px solid var(--line);background:transparent;border-radius:8px;padding:6px 8px;line-height:1;cursor:pointer}
-.shield:hover{border-color:#F26B6B}
+.shield:hover{border-color:var(--danger)}
 .modpop{position:absolute;right:0;top:calc(100% + 6px);z-index:8;min-width:170px}
 .report{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line)}
 .report small{display:block;color:var(--muted);font-size:.75rem}
@@ -590,7 +580,7 @@ html,body{overflow-x:clip}
 .report>div:first-child{min-width:0;flex:1}
 .modlist{display:block!important;align-content:start}
 .ractions{display:flex;gap:6px;flex:none}
-.danger-btn{background:#F26B6B!important;color:#1A0606!important}
+.danger-btn{background:var(--danger)!important;color:#1A0606!important}
 
 .pos{flex-wrap:nowrap!important;align-items:center}
 @media (min-width:901px){
@@ -631,7 +621,7 @@ html,body{overflow-x:clip}
 .pbtns .btn:last-child{grid-column:1/-1}
 .pfoot{display:flex;justify-content:center;gap:8px;color:var(--muted);font-size:.78rem}
 .pfoot button{border:0;background:none;color:var(--muted);cursor:pointer;padding:0;font-size:.78rem}
-.pfoot button:hover{color:#F26B6B}
+.pfoot button:hover{color:var(--danger)}
 
 .modtabs{display:flex;gap:4px;padding:8px 14px;border-bottom:1px solid var(--line)}
 .modtabs button{border:0;background:transparent;color:var(--muted);padding:7px 14px;border-radius:8px;font-weight:600;cursor:pointer}
@@ -643,7 +633,7 @@ html,body{overflow-x:clip}
 .ppbtn{display:block;margin:10px 0 0;background:#FFC439!important;color:#111!important;box-shadow:none!important}
 .payhint{display:block;color:var(--muted);font-size:.75rem;margin:4px 0 0}
 .donate .mpbtn{margin-bottom:0}
-.note{font-size:.75rem;color:var(--muted);text-align:center;padding:0 0 28px}
+.note{font-size:.75rem;color:var(--muted);text-align:center;padding:0 16px 28px}
 
 @media (max-width:900px){
   .cols{display:none}
@@ -828,7 +818,7 @@ const EN={
 "Jugador":"Player","Juega":"Plays","Busca":"Looking for","Rango":"Rank","Modo":"Mode","Oferta":"Offer","Publicada":"Posted","Abrir chat":"Open chat","Ya encontré":"Found one",
 "Juega de":"Plays","Rango del jugador":"Player rank","Desde":"From","Hasta":"To","Horario":"Schedule","Micrófono":"Mic","Onda":"Vibe",
 "Tocá para ver la oferta completa":"Tap to see the full offer","Modos":"Modes","Su rango":"Their rank","Rango que busca":"Rank wanted","Horarios":"Schedule","Sus mains":"Their mains",
-"💚 Ideal si jugás con":"💚 Ideal if you play","❌ Mejor no":"❌ Rather not","Sin preferencia":"No preference","Cualquiera":"Any",
+"Ideal si jugás con":"Ideal if you play","Mejor no":"Rather not","Sin preferencia":"No preference","Cualquiera":"Any",
 "Top":"Top","Jungla":"Jungle","Mid":"Mid","ADC":"ADC","Support":"Support","Fill":"Fill",
 "Solo/Dúo":"Solo/Duo","Flex":"Flex","Clash":"Clash","Normal":"Normal","ARAM":"ARAM",
 "Mañana":"Morning","Tarde":"Afternoon","Noche":"Night","Madrugada":"Late night",
@@ -851,8 +841,8 @@ const EN={
 "Ese nombre no está permitido. Elegí otro, respetando a los demás.":"That name isn't allowed. Please choose another, and be respectful.","Ese nombre de invocador y #tag ya están registrados.":"That summoner name and #tag are already taken.",
 "No se pudo guardar. Probá de nuevo.":"Couldn't save. Please try again.","Hubo un problema al cargar tu perfil":"There was a problem loading your profile",
 "Donde podés marcar varias opciones, tocalas en orden de preferencia: la primera que elijas es la que más te interesa.":"Where you can pick several options, tap them in order of preference: the first one you pick is your favorite.",
-"Tu posición":"Your role","Posición que buscás":"Role you're looking for","💚 Ideal si tu dúo juega con (opcional)":"💚 Ideal if your duo plays (optional)","Champs que te gusta que use quien se sume. Hasta 5.":"Champions you'd like your teammate to play. Up to 5.",
-"❌ Mejor que no juegue con (opcional)":"❌ Rather they don't play (optional)","Tu rango":"Your rank","Rango que buscás (desde / hasta)":"Rank you're looking for (from / to)","Horarios en que jugás":"When you play",
+"Tu posición":"Your role","Posición que buscás":"Role you're looking for","Champs que te gusta que use quien se sume. Hasta 5.":"Champions you'd like your teammate to play. Up to 5.",
+"Tu rango":"Your rank","Rango que buscás (desde / hasta)":"Rank you're looking for (from / to)","Horarios en que jugás":"When you play",
 "Micrófono (opcional)":"Mic (optional)","Onda (opcional)":"Vibe (optional)","Título de tu oferta":"Offer title","Ej: Busco sup tranqui para subir a Plati":"e.g. Chill support wanted to climb to Plat","Publicando...":"Posting...",
 "El título tiene palabras que no están permitidas. Probá con otro.":"The title contains words that aren't allowed. Try another one.",
 "el modo":"the mode","tu posición":"your role","qué posición buscás":"the role you're looking for","el horario":"your schedule","un título de al menos 5 caracteres":"a title with at least 5 characters",
@@ -1025,8 +1015,8 @@ function offerDetail(o){
       it("Horarios",h("div",{class:"tags"},[].concat(o.horario).map(x=>timeTag([x])))),
       it("Micrófono",h("div",{class:"tags"},micTag(o.mic)||h("span",{class:"dk nop"},"Sin preferencia"))),
       o.mains&&o.mains.length?it("Sus mains",h("div",{class:"clist"},o.mains.map((c,i)=>champChip(c,"",i+1)))):null,
-      o.like&&o.like.length?it("💚 Ideal si jugás con",h("div",{class:"clist"},o.like.map(c=>champChip(c,"like")))):null,
-      o.avoid&&o.avoid.length?it("❌ Mejor no",h("div",{class:"clist"},o.avoid.map(c=>champChip(c,"avoid")))):null,
+      o.like&&o.like.length?it("Ideal si jugás con",h("div",{class:"clist"},o.like.map(c=>champChip(c,"like")))):null,
+      o.avoid&&o.avoid.length?it("Mejor no",h("div",{class:"clist"},o.avoid.map(c=>champChip(c,"avoid")))):null,
       it("Onda",h("div",{class:"tags"},[].concat(o.onda||[]).length?[].concat(o.onda).map(vibeTag):h("span",{class:"dk nop"},"Sin preferencia")))),
     h("div",{class:"dfoot"},h("span",{class:"dk"},"Publicada "+ago(o.at)+" · Server "+o.server),
       o.mine?null:h("button",{class:"btn",onclick:()=>openChat(o)},"Abrir chat con "+o.nick)));
@@ -1636,31 +1626,13 @@ function showLanding(){document.documentElement.classList.remove("in-app");docum
 document.querySelectorAll("[data-login]").forEach(b=>b.addEventListener("click",signInGoogle));
 document.querySelectorAll("[data-signup]").forEach(b=>b.addEventListener("click",signInGoogle));
 
-// portal (original rune design)
 const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
-function portalSVG(p){
-  const C="#45E6A6";let t="";
-  for(let i=0;i<72;i++){const a=i*5*Math.PI/180,r1=i%6?296:288,r2=306;t+=`<line x1="${(Math.cos(a)*r1).toFixed(1)}" y1="${(Math.sin(a)*r1).toFixed(1)}" x2="${(Math.cos(a)*r2).toFixed(1)}" y2="${(Math.sin(a)*r2).toFixed(1)}"/>`}
-  let g="";for(let i=0;i<12;i++){const a=i*30,sh=i%3===0?'<path d="M0-12 9 0 0 12-9 0Z"/>':i%3===1?'<path d="M0-11 10 8H-10Z" fill="none" stroke-width="2"/>':'<circle r="5"/><circle r="11" fill="none" stroke-width="1.5"/>';g+=`<g transform="rotate(${a}) translate(0 -252)">${sh}</g>`}
-  let hx="";for(let i=0;i<6;i++){const a=(i*60-90)*Math.PI/180;hx+=`${(Math.cos(a)*150).toFixed(1)},${(Math.sin(a)*150).toFixed(1)} `}
-  return `<svg viewBox="-500 -500 1000 1000"><defs>
-  <radialGradient id="${p}c"><stop offset="0" stop-color="#EFFFFF"/><stop offset=".12" stop-color="#8FF4FC"/><stop offset=".35" stop-color="#1FB8D6" stop-opacity=".55"/><stop offset=".65" stop-color="#0A4A66" stop-opacity=".22"/><stop offset="1" stop-color="#060F0D" stop-opacity="0"/></radialGradient>
-  <filter id="${p}g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-  <circle r="500" fill="url(#${p}c)"/>
-  <g filter="url(#${p}g)" stroke="${C}" fill="${C}">
-   <g class="spin"><circle r="330" fill="none" stroke-width="1" opacity=".35"/><g stroke-width="2" opacity=".7">${t}</g><circle r="300" fill="none" stroke-width="2.5"/></g>
-   <g class="spin s2" opacity=".85"><circle r="270" fill="none" stroke-width="1" stroke-dasharray="3 9"/>${g}<circle r="232" fill="none" stroke-width="1.5"/></g>
-   <g class="spin s3"><circle r="190" fill="none" stroke-width="3" stroke-dasharray="46 16" opacity=".8"/><polygon points="${hx}" fill="none" stroke-width="2"/></g>
-   <g class="spin s4" opacity=".9"><path d="M0-120 104 60H-104Z M0 120-104-60H104Z" fill="none" stroke-width="2"/><circle r="84" fill="none" stroke-width="1.5" stroke-dasharray="2 6"/></g>
-   <g class="pulse"><circle r="46" fill="#E0FFF1" stroke="none" opacity=".95"/><circle r="62" fill="none" stroke-width="2" opacity=".6"/></g>
-  </g></svg>`;
-}
 const HOOK_SVG=`<svg viewBox="0 0 96 136"><g stroke-linecap="round" stroke-linejoin="round">
-<path d="M30 116 L30 44 Q30 6 60 6 Q88 8 86 44" fill="none" stroke="#45E6A6" stroke-width="15"/>
-<path d="M30 100 L30 50" stroke="#E0FFF1" stroke-width="3" stroke-dasharray="6 8" fill="none"/>
-<polygon points="77,40 95,40 86,72" fill="#45E6A6"/>
-<polygon points="80,52 64,38 80,62" fill="#45E6A6"/>
-<circle cx="30" cy="124" r="9" fill="none" stroke="#45E6A6" stroke-width="4.5"/></g></svg>`;
+<path d="M30 116 L30 44 Q30 6 60 6 Q88 8 86 44" fill="none" stroke="currentColor" stroke-width="15"/>
+<path d="M30 100 L30 50" style="stroke:var(--hook-hi)" stroke-width="3" stroke-dasharray="6 8" fill="none"/>
+<polygon points="77,40 95,40 86,72" fill="currentColor"/>
+<polygon points="80,52 64,38 80,62" fill="currentColor"/>
+<circle cx="30" cy="124" r="9" fill="none" stroke="currentColor" stroke-width="4.5"/></g></svg>`;
 document.getElementById("hookhead").innerHTML=HOOK_SVG;document.getElementById("dhook").innerHTML=HOOK_SVG;
 if(!RM){const pt=document.getElementById("particles");for(let i=0;i<42;i++){const sz=1.5+Math.random()*2.5;
   pt.append(h("i",{style:`left:${Math.random()*100}%;width:${sz}px;height:${sz}px;--dx:${(Math.random()*80-40).toFixed(0)}px;animation-duration:${(7+Math.random()*9).toFixed(1)}s;animation-delay:-${(Math.random()*14).toFixed(1)}s`}))}}
