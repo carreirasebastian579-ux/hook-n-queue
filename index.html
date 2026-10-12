@@ -38,7 +38,7 @@
 <style>
 :root{
   --bg:#060F0D; --surface:#0C1A17; --surface2:#13251F; --line:#1C332C; --ink:#E2F4EE; --muted:#7C9A90;
-  --accent:#45E6A6; --accent-ink:#03140D; --accent-soft:rgba(69,230,166,.13); --ic:#E2F4EE; --ic2:#25403A; --ok:#2DBE8C;
+  --accent:#45E6A6; --accent-ink:#03140D; --accent-soft:rgba(69,230,166,.13); --ic:#E2F4EE; --ic2:#25403A; --ok:#2DBE8C; --danger:#F26B6B;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
@@ -649,6 +649,44 @@ html,body{overflow-x:clip}
   .me small{display:none}
 }
 @media (min-width:901px){.posgroup{display:contents}}
+
+/* ---------- formulario de oferta ---------- */
+.offerform{--cp:28px;padding:var(--cp)}
+.ohead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.hsel{width:auto;font-weight:800;padding:2px 10px;border-radius:8px;cursor:pointer}
+.offerform > p:not(.prio){margin-bottom:18px}
+.repeat{margin:0 0 18px}
+.repbtn{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 14px;color:var(--ink);transition:border-color .2s}
+.repbtn:hover{border-color:var(--accent)}
+.repbtn svg.ic{color:var(--accent)}
+.repbtn .rt{min-width:0;display:grid}
+.repbtn b{font-weight:600}
+.repbtn small{color:var(--muted);font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.offerform .pick{min-height:40px}
+.ferr{color:var(--danger);font-size:.8rem;margin:6px 0 0}
+.ferr:empty{display:none}
+.field.bad > label{color:var(--danger)}
+.field.bad select,.field.bad input,.field.bad .pick{border-color:var(--danger)}
+.more{border-top:1px solid var(--line);margin:6px 0 0}
+.more summary{display:flex;align-items:center;gap:12px;padding:16px 0;cursor:pointer;list-style:none;min-height:48px}
+.more summary::-webkit-details-marker{display:none}
+.more summary::after{content:"";flex:none;width:8px;height:8px;margin:0 4px 0 auto;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+.more[open] summary::after{transform:rotate(-135deg) translateY(-2px)}
+.more summary:hover .mt{color:var(--accent)}
+.more .mt{font-weight:600;white-space:nowrap}
+.more .ms{color:var(--muted);font-size:.8rem;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.morebody{padding:2px 0 4px}
+.ofoot{position:sticky;bottom:calc(-1 * var(--cp));z-index:2;margin:10px calc(-1 * var(--cp)) calc(-1 * var(--cp));padding:12px var(--cp) 16px;background:var(--surface);border-top:1px solid var(--line);border-radius:0 0 16px 16px}
+.ofoot .err:empty{display:none}
+.ofoot .err{margin:0 0 10px}
+.ofoot .actions{margin-top:0}
+@media (max-width:640px){
+  .offerform{--cp:20px}
+  .overlay:has(.offerform){padding:12px}
+  .more .ms{display:none}
+  .ofoot .actions .btn{flex:1;min-height:46px}
+}
+@media (prefers-reduced-motion:reduce){.more summary::after,.repbtn{transition:none}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
 </head>
@@ -768,7 +806,7 @@ const EN={
 "Chats que no se acumulan":"Chats that don't pile up","Cada chat nace de una oferta y se borra 24 hs después de que termina. Tu bandeja siempre limpia.":"Every chat starts from an offer and is deleted 24 hours after it ends. Your inbox stays clean.",
 "¿Armamos la partida?":"Ready to queue up?","Crear tu perfil lleva diez segundos.":"Creating your profile takes ten seconds.","Los demás ven primero tu":"Others see your top pick first:","jugadores coinciden":"players match",
 "Te paso mi Discord: premade_seba":"Here's my Discord: premade_seba","Listo, te agrego. ¡Nos vemos en la partida!":"Done, adding you. See you in game!","Esta oferta terminó. El chat se borra en 24 h.":"This offer ended. The chat will be deleted in 24 h.",
-"Nueva oferta":"New offer","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
+"Nueva oferta":"New offer","Nueva oferta en":"New offer in","Server donde se publica":"Server to post in","Elegí tu rango":"Choose your rank","División":"Division","Repetir última oferta":"Repeat last offer","Tocá las opciones en orden de preferencia: la primera es la que más te interesa.":"Tap options in order of preference: the first one is what you want most.","Detalles opcionales":"Optional details","Rango que buscás, campeones, micro y onda":"Rank you want, champions, mic and vibe","Rango que buscás":"Rank you want","Ideal si tu dúo juega con":"Ideally your duo plays","Mejor que no juegue con":"Better if they don’t play","Elegí al menos un modo.":"Choose at least one mode.","Elegí tu posición.":"Choose your position.","Elegí qué posición buscás.":"Choose the position you want.","Elegí al menos un horario.":"Choose at least one time.","Revisá los campos marcados.":"Check the highlighted fields.","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
 "Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. League of Legends es una marca de Riot Games, Inc. ·":"Hook n' Queue isn't affiliated with or endorsed by Riot Games. League of Legends is a trademark of Riot Games, Inc. ·",
 "Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. ·":"Hook n' Queue isn't affiliated with or endorsed by Riot Games. ·","Privacidad":"Privacy","Donar":"Donate",
 "Buscá con quién jugar":"Find someone to play with","Elegí tu server, mirá las ofertas y coordiná la partida.":"Pick your server, browse offers and set up your game.",
@@ -1286,49 +1324,79 @@ function picker(opts,{multi=false,icons=false,value=multi?[]:null,onchange=null,
   sync();return{el:wrap,get:()=>val};
 }
 function tierSelect(id,withNone,def){return h("select",{id},(withNone?["Sin rango",...TIER_ORDER]:TIER_ORDER).map(t=>h("option",{value:t,selected:t===def},t)))}
-function openOffer(){
+const REPEAT_IC='<svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 9A6.5 6.5 0 0 1 15 5.2L16.5 6.5M16.5 2.5v4h-4M16.5 11A6.5 6.5 0 0 1 5 14.8L3.5 13.5M3.5 17.5v-4h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+function splitRank(r){if(!r)return["",""];if(r==="Sin rango")return["Sin rango",""];const[a,b]=r.split(" ");return[TIER_ORDER.includes(a)?a:"",b||""]}
+function openOffer(prefill=null,last){
   if(!profile){openProfile(false);return}
   if(allOffers().filter(o=>o.mine).length>=5){toast(limitMsg("HNQ_LIMIT_OFFERS"));return}
-  const m=document.getElementById("modal");
-  const modo=picker(MODES,{multi:true}),rol=picker(ROLES,{multi:true,icons:true}),busca=picker(ROLES,{multi:true,icons:true});
-  const tier=tierSelect("tier",true,"Oro");
-  const div=h("select",{id:"div"},["I","II","III","IV"].map(d=>h("option",{value:d},d)));
-  const syncDiv=()=>{div.disabled=!DIV_TIERS.includes(tier.value);div.style.opacity=div.disabled?.4:1};tier.addEventListener("change",syncDiv);
-  const rMin=tierSelect("rmin",false,"Plata"),rMax=tierSelect("rmax",false,"Platino");
-  const likeP=champPicker({max:5,tone:"like"}),avoidP=champPicker({max:5,tone:"avoid"});
-  const hora=picker(HOURS,{multi:true}),mic=picker(["Con micro","Sin micro"],{multi:true}),onda=picker(["Tryhard","Relajado"],{multi:true});
-  const titulo=h("input",{id:"titulo",maxlength:"80",placeholder:"Ej: Busco sup tranqui para subir a Plati",autocomplete:"off"});
-  const count=h("div",{class:"hint"},"0/80");titulo.addEventListener("input",()=>count.textContent=titulo.value.length+"/80");
+  const m=document.getElementById("modal"),P=prefill||{},fld={};
+  const ok=k=>{const f=fld[k];if(f&&f.classList.contains("bad")){f.classList.remove("bad");f.querySelector(".ferr").textContent=""}};
+  const modo=picker(MODES,{multi:true,value:P.modos||[],onchange:()=>ok("modo")}),rol=picker(ROLES,{multi:true,icons:true,value:P.roles||[],onchange:()=>ok("rol")}),busca=picker(ROLES,{multi:true,icons:true,value:P.busca||[],onchange:()=>ok("busca")});
+  const hora=picker(HOURS,{multi:true,value:P.horarios||[],onchange:()=>ok("hora")}),mic=picker(["Con micro","Sin micro"],{multi:true,value:P.mic||[]}),onda=picker(["Tryhard","Relajado"],{multi:true,value:P.onda||[]});
+  const [pt,pd]=splitRank(P.rango);
+  const tier=h("select",{id:"tier"},h("option",{value:"",disabled:true,selected:!pt},"Elegí tu rango"),["Sin rango",...TIER_ORDER].map(x=>h("option",{value:x,selected:x===pt},x)));
+  const div=h("select",{id:"div","aria-label":"División"},["I","II","III","IV"].map(d=>h("option",{value:d,selected:d===pd},d)));
+  const syncDiv=()=>{div.disabled=!DIV_TIERS.includes(tier.value);div.style.opacity=div.disabled?.4:1};
+  tier.addEventListener("change",()=>{syncDiv();ok("tier")});
+  const setRank=r=>{const[a,b]=splitRank(r);if(!a)return;tier.value=a;if(b)div.value=b;syncDiv()};
+  const rsel=(id,v)=>h("select",{id},h("option",{value:""},"Cualquiera"),TIER_ORDER.map(x=>h("option",{value:x,selected:x===v},x)));
+  const anyRange=P.rango_min===TIER_ORDER[0]&&P.rango_max===TIER_ORDER[TIER_ORDER.length-1];
+  const rMin=rsel("rmin",anyRange?"":P.rango_min),rMax=rsel("rmax",anyRange?"":P.rango_max);
+  const likeP=champPicker({max:5,tone:"like",value:P.like_champs||[]}),avoidP=champPicker({max:5,tone:"avoid",value:P.avoid_champs||[]});
+  const srv=h("select",{id:"osrv",class:"hsel","aria-label":"Server donde se publica"},SERVERS.map(s=>h("option",{value:s.id,selected:s.id===(P.server||profile.server||current)},s.id)));
+  const titulo=h("input",{id:"titulo",maxlength:"80",placeholder:"Ej: Busco sup tranqui para subir a Plati",autocomplete:"off",value:P.titulo||null});
+  const count=h("div",{class:"hint"},(P.titulo||"").length+"/80");titulo.addEventListener("input",()=>{count.textContent=titulo.value.length+"/80";ok("titulo")});
   const err=h("p",{class:"err",role:"alert"});
-  const F=(label,el,forId)=>h("div",{class:"field"},h("label",forId?{for:forId}:{},label),el);
-  async function publish(e){e.preventDefault();
-    const miss=[];
-    if(!modo.get().length)miss.push("el modo");if(!rol.get().length)miss.push("tu posición");if(!busca.get().length)miss.push("qué posición buscás");
-    if(!hora.get().length)miss.push("el horario");;
-    const t=titulo.value.trim();if(t.length<5)miss.push("un título de al menos 5 caracteres");
-    if(isOffensive(t)){err.textContent="El título tiene palabras que no están permitidas. Probá con otro.";return}
-    if(miss.length){err.textContent="Te falta elegir "+miss.join(", ")+".";return}
-    let a=TIER_ORDER.indexOf(rMin.value),b=TIER_ORDER.indexOf(rMax.value);if(a>b)[a,b]=[b,a];
-    const rango=tier.value==="Sin rango"?"Sin rango":DIV_TIERS.includes(tier.value)?tier.value+" "+div.value:tier.value;
+  const Fq=(k,label,el,forId)=>{const lid="l-"+k,eid="e-"+k;
+    if(!forId){el.setAttribute("role","group");el.setAttribute("aria-labelledby",lid)}
+    (forId?el.querySelector("#"+forId):el).setAttribute("aria-describedby",eid);
+    return fld[k]=h("div",{class:"field"},h("label",forId?{id:lid,for:forId}:{id:lid},label),el,h("p",{class:"ferr",id:eid}))};
+  const rep=h("div",{class:"repeat",hidden:true});
+  function offerLast(d){
+    if(!tier.value)setRank(d.rango);
+    rep.replaceChildren(h("button",{type:"button",class:"repbtn",onclick:()=>openOffer(d,d)},
+      (()=>{const t=document.createElement("template");t.innerHTML=REPEAT_IC;return t.content.firstChild})(),
+      h("span",{class:"rt"},h("b",{},"Repetir última oferta"),h("small",{"data-notr":true},d.titulo))));
+    rep.hidden=false}
+  async function publish(e){e.preventDefault();err.textContent="";
+    const t=titulo.value.trim(),need=[
+      ["modo",!modo.get().length,"Elegí al menos un modo."],["rol",!rol.get().length,"Elegí tu posición."],["busca",!busca.get().length,"Elegí qué posición buscás."],
+      ["hora",!hora.get().length,"Elegí al menos un horario."],["tier",!tier.value,"Elegí tu rango."],
+      ["titulo",t.length<5?"Escribí un título de al menos 5 caracteres.":isOffensive(t)?"El título tiene palabras que no están permitidas. Probá con otro.":"",null]].filter(x=>x[1]);
+    need.forEach(([k,c,msg])=>{const f=fld[k];f.classList.add("bad");f.querySelector(".ferr").textContent=msg||c});
+    if(need.length){err.textContent=need.length===1?"Revisá el campo marcado.":"Revisá los campos marcados.";
+      const f=fld[need[0][0]];f.scrollIntoView({block:"center",behavior:RM?"auto":"smooth"});const fe=f.querySelector("select,input,button");if(fe)fe.focus({preventScroll:true});return}
+    let rmin=null,rmax=null;if(rMin.value||rMax.value){let a=rMin.value?TIER_ORDER.indexOf(rMin.value):0,b=rMax.value?TIER_ORDER.indexOf(rMax.value):TIER_ORDER.length-1;if(a>b)[a,b]=[b,a];rmin=TIER_ORDER[a];rmax=TIER_ORDER[b]}
+    const rango=tier.value==="Sin rango"?"Sin rango":DIV_TIERS.includes(tier.value)?tier.value+" "+div.value:tier.value,server=srv.value;
     const btn=e.submitter||e.target.querySelector('[type=submit]');btn.disabled=true;btn.textContent="Publicando...";
-    const {data,error}=await sb.from("offers").insert({user_id:uid,server:current,titulo:t,modos:modo.get(),roles:rol.get(),busca:busca.get(),
-      rango,rango_min:TIER_ORDER[a],rango_max:TIER_ORDER[b],like_champs:likeP.get(),avoid_champs:avoidP.get(),horarios:hora.get(),mic:mic.get(),onda:onda.get()}).select("*, profiles(nick,tag,color,photo_url,mains,server)").single();
+    const {data,error}=await sb.from("offers").insert({user_id:uid,server,titulo:t,modos:modo.get(),roles:rol.get(),busca:busca.get(),
+      rango,rango_min:rmin,rango_max:rmax,like_champs:likeP.get(),avoid_champs:avoidP.get(),horarios:hora.get(),mic:mic.get(),onda:onda.get()}).select("*, profiles(nick,tag,color,photo_url,mains,server)").single();
     if(error){err.textContent=limitMsg(error)||(String(error.message).includes("HNQ_OFFENSIVE")?"El título tiene palabras que no están permitidas. Probá con otro.":"No se pudo publicar: "+error.message);btn.disabled=false;btn.textContent="Publicar oferta";return}
-    const o=mapOffer(data);OFFERS=[o,...OFFERS.filter(x=>x.id!==o.id)];m.replaceChildren();if(F.fecha==="old"||activeCount())clearFilters();render();hookIn(o.id);toast("¡Oferta publicada en "+current+"!");
+    const o=mapOffer(data);OFFERS=[o,...OFFERS.filter(x=>x.id!==o.id)];m.replaceChildren();current=server;if(F.fecha==="old"||activeCount())clearFilters();render();hookIn(o.id);toast("¡Oferta publicada en "+server+"!");
   }
-  m.replaceChildren(h("div",{class:"overlay"},h("form",{class:"card wide",onsubmit:publish},
-    h("h2",{},"Nueva oferta en "+current),h("p",{},"Se publica como "+profile.nick+" #"+profile.tag+"."),
-    h("p",{class:"prio"},"Donde podés marcar varias opciones, tocalas en orden de preferencia: la primera que elijas es la que más te interesa."),F("Modos",modo.el),F("Tu posición",rol.el),F("Posición que buscás",busca.el),
-    h("div",{class:"field"},h("label",{},"💚 Ideal si tu dúo juega con (opcional)"),h("p",{class:"hint2"},"Champs que te gusta que use quien se sume. Hasta 5."),likeP.el),
-    h("div",{class:"field"},h("label",{},"❌ Mejor que no juegue con (opcional)"),avoidP.el),
-    h("div",{class:"field"},h("label",{for:"tier"},"Tu rango"),h("div",{class:"two"},tier,div)),
-    h("div",{class:"field"},h("label",{for:"rmin"},"Rango que buscás (desde / hasta)"),h("div",{class:"two"},rMin,rMax)),
-    F("Horarios en que jugás",hora.el),F("Micrófono (opcional)",mic.el),F("Onda (opcional)",onda.el),
-    h("div",{class:"field"},h("label",{for:"titulo"},"Título de tu oferta"),titulo,count),
-    err,
-    h("div",{class:"actions"},h("button",{type:"button",class:"btn sec",onclick:()=>m.replaceChildren()},"Cancelar"),h("button",{class:"btn",type:"submit"},"Publicar oferta"))
-  )));
+  const hasMore=!!(rMin.value||rMax.value||likeP.get().length||avoidP.get().length||mic.get().length||onda.get().length);
+  const form=h("form",{class:"card wide offerform",onsubmit:publish,novalidate:true},
+    h("h2",{class:"ohead"},h("span",{},"Nueva oferta en"),srv),h("p",{},"Se publica como "+profile.nick+" #"+profile.tag+"."),
+    rep,
+    h("p",{class:"prio"},"Tocá las opciones en orden de preferencia: la primera es la que más te interesa."),
+    Fq("modo","Modos",modo.el),Fq("rol","Tu posición",rol.el),Fq("busca","Posición que buscás",busca.el),Fq("hora","Horarios en que jugás",hora.el),
+    Fq("tier","Tu rango",h("div",{class:"two"},tier,div),"tier"),
+    Fq("titulo","Título de tu oferta",h("div",{},titulo,count),"titulo"),
+    h("details",{class:"more",open:hasMore},
+      h("summary",{},h("span",{class:"mt"},"Detalles opcionales"),h("span",{class:"ms"},"Rango que buscás, campeones, micro y onda")),
+      h("div",{class:"morebody"},
+        h("div",{class:"field"},h("label",{for:"rmin"},"Rango que buscás"),h("div",{class:"two"},rMin,rMax)),
+        h("div",{class:"field"},h("label",{},"Ideal si tu dúo juega con"),h("p",{class:"hint2"},"Champs que te gusta que use quien se sume. Hasta 5."),likeP.el),
+        h("div",{class:"field"},h("label",{},"Mejor que no juegue con"),avoidP.el),
+        h("div",{class:"field"},h("label",{},"Micrófono"),mic.el),
+        h("div",{class:"field"},h("label",{},"Onda"),onda.el))),
+    h("div",{class:"ofoot"},err,
+      h("div",{class:"actions"},h("button",{type:"button",class:"btn sec",onclick:()=>m.replaceChildren()},"Cancelar"),h("button",{class:"btn",type:"submit"},"Publicar oferta"))));
+  m.replaceChildren(h("div",{class:"overlay"},form));
   syncDiv();
+  if(last&&!prefill)offerLast(last);
+  else if(last===undefined&&uid)sb.from("offers").select("server,titulo,modos,roles,busca,rango,rango_min,rango_max,like_champs,avoid_champs,horarios,mic,onda")
+    .eq("user_id",uid).order("created_at",{ascending:false}).limit(1).maybeSingle().then(({data})=>{if(data&&form.isConnected)offerLast(data)},()=>{});
 }
 document.getElementById("pubBtn").addEventListener("click",()=>openOffer());
 
