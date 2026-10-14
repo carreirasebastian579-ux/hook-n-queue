@@ -211,6 +211,32 @@ input:focus,select:focus{border-color:var(--accent)}
 .lhero-in{position:relative;z-index:3;width:100%}
 .lcopy{max-width:560px;will-change:transform,opacity}
 .lcopy h1{font-size:clamp(2.6rem,6.4vw,4.6rem);line-height:1.02;font-weight:800;letter-spacing:-.035em;max-width:11ch;text-shadow:0 2px 30px rgba(6,15,13,.8)}
+.lcopy h1 em{font-style:normal}
+@media (min-width:821px){
+  .lcopy{max-width:660px}
+  .lcopy h1{font-size:clamp(3.4rem,6.6vw,6rem);line-height:.96;letter-spacing:-.04em;max-width:9.5ch}
+  .lcopy h1 em{color:var(--accent)}
+}
+.lcatch{position:absolute;top:0;bottom:0;right:max(24px,calc((100vw - 1200px)/2 + 60px));width:340px;z-index:2;pointer-events:none;will-change:transform,opacity}
+.lc-line{position:absolute;left:50%;top:0;height:30%;width:26px;margin-left:-13px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='44' viewBox='0 0 26 44'%3E%3Cpath d='M13 2 21 8v12l-8 6-8-6V8Z' fill='none' stroke='%2345E6A6' stroke-width='2.4'/%3E%3Cpath d='M13 10v8' stroke='%23A6F7D2' stroke-width='1.6'/%3E%3Cpath d='M13 28l4 8-4 8-4-8Z' fill='%2345E6A6' opacity='.85'/%3E%3C/svg%3E");background-repeat:repeat-y;background-size:26px 44px;background-position:0 bottom;filter:drop-shadow(0 0 5px rgba(69,230,166,.55))}
+.lc-swing{position:absolute;left:50%;top:30%;transform-origin:0 0;animation:lcsw 4.2s ease-in-out infinite}
+@keyframes lcsw{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+.lc-hook{position:absolute;left:-22px;top:-6px;width:44px;height:62px;color:var(--accent);filter:drop-shadow(0 0 8px rgba(69,230,166,.8))}
+.lc-hook svg{width:100%;height:100%;transform:rotate(180deg)}
+.lc-card{position:absolute;left:-165px;top:48px;width:330px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 30px 60px rgba(0,0,0,.5);transform:rotate(-2deg)}
+.lc-card::before{content:"";position:absolute;left:158px;top:-7px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.lc-ex{position:absolute;right:12px;top:-24px;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lc-h{display:flex;align-items:center;gap:10px}
+.lc-h .pav{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:700;flex:none}
+.lc-n b{display:block;font-weight:600}.lc-n small{color:var(--muted)}
+.lc-age{margin-left:auto;color:var(--muted);font-size:.78rem}
+.lc-t{margin:12px 0 10px;font-weight:600;font-size:1.02rem}
+.lc-card .picks{align-items:center}
+.lc-card .pick{padding:5px 10px;font-size:.82rem}
+.lc-card .rank{margin-left:4px}
+.lc-card .tags{margin-top:10px;flex-wrap:wrap}
+@media (max-width:1100px){.lcatch{display:none}}
+@media (prefers-reduced-motion:reduce){.lc-swing{animation:none}}
 .lcopy p{color:#A9CFC2;font-size:1.12rem;max-width:40ch;margin:18px 0 28px;line-height:1.55}
 .lcta{display:flex;gap:10px;flex-wrap:wrap}
 .btn.big{padding:13px 22px;font-size:1rem;border-radius:10px}
@@ -348,7 +374,10 @@ input:focus,select:focus{border-color:var(--accent)}
 .feat .viz .count{text-align:center;font-size:.85rem;color:var(--muted)}
 .feat .viz .count b{color:var(--accent);font-size:1.1rem}
 
-.final{padding-top:300px}
+.final{padding-top:380px}
+.dbtn{position:absolute;left:50%;top:228px;z-index:2;transform:translateX(-50%);white-space:nowrap;font-size:1.1rem;padding:16px 30px;border-radius:14px}
+.final h2{font-size:clamp(2.6rem,7vw,5.4rem);line-height:.98;letter-spacing:-.04em;max-width:9ch;margin:0 auto}
+.final .wrap p{margin-bottom:0}
 .dangle{position:absolute;left:50%;top:0;transform-origin:50% 0;animation:swing 3.4s ease-in-out infinite;z-index:1}
 .dchain{width:26px;height:150px;margin-left:-13px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='44' viewBox='0 0 26 44'%3E%3Cpath d='M13 2 21 8v12l-8 6-8-6V8Z' fill='none' stroke='%2345E6A6' stroke-width='2.4'/%3E%3Cpath d='M13 10v8' stroke='%23A6F7D2' stroke-width='1.6'/%3E%3Cpath d='M13 28l4 8-4 8-4-8Z' fill='%2345E6A6' opacity='.85'/%3E%3C/svg%3E");background-repeat:repeat-y;background-size:26px 44px;background-position:0 bottom;filter:drop-shadow(0 0 6px rgba(69,230,166,.8))}
 .dhook{width:72px;height:102px;margin-left:-50px;margin-top:-8px;filter:drop-shadow(0 0 10px rgba(69,230,166,.8))}
@@ -707,9 +736,10 @@ html,body{overflow-x:clip}
     <div class="lsticky">
       <div class="streaks" id="streaks" aria-hidden="true"></div>
       <div class="particles" id="particles" aria-hidden="true"></div>
+      <div class="lcatch" id="lcatch" aria-hidden="true"><div class="lc-line"></div><div class="lc-swing"><div class="lc-hook" id="lchook"></div><div class="lc-card" id="lccard"></div></div></div>
       <div class="wrap lhero-in">
         <div class="lcopy" id="lcopy">
-          <h1 id="lh1">Tu próximo dúo está acá.</h1>
+          <h1 id="lh1">Tu próximo dúo está <em>acá.</em></h1>
           <p>Publicá lo que buscás, filtrá por posición, rango y horario, y coordiná por chat con gente de tu server.</p>
           <div class="lcta"><button class="btn big" data-signup>Entrar con Google</button><a class="btn sec big" href="#como">Cómo funciona</a></div>
         </div>
@@ -757,7 +787,8 @@ html,body{overflow-x:clip}
   <section class="final">
     <div class="fglow" aria-hidden="true"></div>
     <div class="dangle" aria-hidden="true"><div class="dchain"></div><div class="dhook" id="dhook"></div></div>
-    <div class="wrap rv"><h2>¿Armamos la partida?</h2><p>Crear tu perfil lleva diez segundos.</p><button class="btn big" data-signup>Entrar con Google</button></div>
+    <button class="btn big dbtn" data-signup>Entrar con Google</button>
+    <div class="wrap rv"><h2>¿Armamos la partida?</h2><p>Crear tu perfil lleva diez segundos.</p></div>
   </section>
   <p class="note">Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. League of Legends es una marca de Riot Games, Inc. · <a href="privacidad.html">Privacidad</a></p>
 </div>
@@ -813,7 +844,7 @@ const EN={
 "Chats que no se acumulan":"Chats that don't pile up","Cada chat nace de una oferta y se borra 24 hs después de que termina. Tu bandeja siempre limpia.":"Every chat starts from an offer and is deleted 24 hours after it ends. Your inbox stays clean.",
 "¿Armamos la partida?":"Ready to queue up?","Crear tu perfil lleva diez segundos.":"Creating your profile takes ten seconds.","Los demás ven primero tu":"Others see your top pick first:","jugadores coinciden":"players match",
 "Te paso mi Discord: premade_seba":"Here's my Discord: premade_seba","Listo, te agrego. ¡Nos vemos en la partida!":"Done, adding you. See you in game!","Esta oferta terminó. El chat se borra en 24 h.":"This offer ended. The chat will be deleted in 24 h.",
-"Nueva oferta":"New offer","Deshacer":"Undo","Oferta reabierta":"Offer reopened","No se pudo reabrir la oferta":"Couldn't reopen the offer","No se pudo desbloquear":"Couldn't unblock","Ya pasó mucho tiempo para deshacer. Si querés, publicá la oferta de nuevo.":"It's too late to undo. You can post the offer again if you want.","Ver detalle":"Show details","No pudimos cargar las ofertas":"We couldn't load the offers","Puede ser tu conexión o un problema nuestro. Probá de nuevo en unos segundos.":"It may be your connection or a problem on our side. Try again in a few seconds.","Reintentar":"Try again","No se pudieron actualizar las ofertas":"Couldn't refresh the offers","Cerrar aviso":"Close notice","No se pudo enviar el reporte. Probá de nuevo.":"Couldn't send the report. Try again.","No se pudo descartar el reporte":"Couldn't dismiss the report","No se pudo abrir el chat. Probá de nuevo.":"Couldn't open the chat. Try again.","Enviando...":"Sending...","Nueva oferta en":"New offer in","Server donde se publica":"Server to post in","Elegí tu rango":"Choose your rank","División":"Division","Repetir última oferta":"Repeat last offer","Tocá las opciones en orden de preferencia: la primera es la que más te interesa.":"Tap options in order of preference: the first one is what you want most.","Detalles opcionales":"Optional details","Rango que buscás, campeones, micro y onda":"Rank you want, champions, mic and vibe","Rango que buscás":"Rank you want","Ideal si tu dúo juega con":"Ideally your duo plays","Mejor que no juegue con":"Better if they don’t play","Elegí al menos un modo.":"Choose at least one mode.","Elegí tu posición.":"Choose your position.","Elegí qué posición buscás.":"Choose the position you want.","Elegí al menos un horario.":"Choose at least one time.","Revisá los campos marcados.":"Check the highlighted fields.","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
+"Nueva oferta":"New offer","Tu próximo dúo está":"Your next duo is","acá.":"here.","Ejemplo":"Example","Busco jungla para flex esta noche":"Looking for a jungler for flex tonight","hace 3 min":"3 min ago","#LAS1 · en línea":"#LAS1 · online","Deshacer":"Undo","Oferta reabierta":"Offer reopened","No se pudo reabrir la oferta":"Couldn't reopen the offer","No se pudo desbloquear":"Couldn't unblock","Ya pasó mucho tiempo para deshacer. Si querés, publicá la oferta de nuevo.":"It's too late to undo. You can post the offer again if you want.","Ver detalle":"Show details","No pudimos cargar las ofertas":"We couldn't load the offers","Puede ser tu conexión o un problema nuestro. Probá de nuevo en unos segundos.":"It may be your connection or a problem on our side. Try again in a few seconds.","Reintentar":"Try again","No se pudieron actualizar las ofertas":"Couldn't refresh the offers","Cerrar aviso":"Close notice","No se pudo enviar el reporte. Probá de nuevo.":"Couldn't send the report. Try again.","No se pudo descartar el reporte":"Couldn't dismiss the report","No se pudo abrir el chat. Probá de nuevo.":"Couldn't open the chat. Try again.","Enviando...":"Sending...","Nueva oferta en":"New offer in","Server donde se publica":"Server to post in","Elegí tu rango":"Choose your rank","División":"Division","Repetir última oferta":"Repeat last offer","Tocá las opciones en orden de preferencia: la primera es la que más te interesa.":"Tap options in order of preference: the first one is what you want most.","Detalles opcionales":"Optional details","Rango que buscás, campeones, micro y onda":"Rank you want, champions, mic and vibe","Rango que buscás":"Rank you want","Ideal si tu dúo juega con":"Ideally your duo plays","Mejor que no juegue con":"Better if they don’t play","Elegí al menos un modo.":"Choose at least one mode.","Elegí tu posición.":"Choose your position.","Elegí qué posición buscás.":"Choose the position you want.","Elegí al menos un horario.":"Choose at least one time.","Revisá los campos marcados.":"Check the highlighted fields.","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
 "Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. League of Legends es una marca de Riot Games, Inc. ·":"Hook n' Queue isn't affiliated with or endorsed by Riot Games. League of Legends is a trademark of Riot Games, Inc. ·",
 "Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. ·":"Hook n' Queue isn't affiliated with or endorsed by Riot Games. ·","Privacidad":"Privacy","Donar":"Donate",
 "Buscá con quién jugar":"Find someone to play with","Elegí tu server, mirá las ofertas y coordiná la partida.":"Pick your server, browse offers and set up your game.",
@@ -1651,11 +1682,11 @@ const HOOK_SVG=`<svg viewBox="0 0 96 136"><g stroke-linecap="round" stroke-linej
 <polygon points="77,40 95,40 86,72" fill="currentColor"/>
 <polygon points="80,52 64,38 80,62" fill="currentColor"/>
 <circle cx="30" cy="124" r="9" fill="none" stroke="currentColor" stroke-width="4.5"/></g></svg>`;
-document.getElementById("hookhead").innerHTML=HOOK_SVG;document.getElementById("dhook").innerHTML=HOOK_SVG;
+document.getElementById("hookhead").innerHTML=HOOK_SVG;document.getElementById("dhook").innerHTML=HOOK_SVG;document.getElementById("lchook").innerHTML=HOOK_SVG;
 if(!RM){const pt=document.getElementById("particles");for(let i=0;i<42;i++){const sz=1.5+Math.random()*2.5;
   pt.append(h("i",{style:`left:${Math.random()*100}%;width:${sz}px;height:${sz}px;--dx:${(Math.random()*80-40).toFixed(0)}px;animation-duration:${(7+Math.random()*9).toFixed(1)}s;animation-delay:-${(Math.random()*14).toFixed(1)}s`}))}}
 const lhero=document.getElementById("lhero"),lsticky=document.querySelector(".lsticky"),lcopy=document.getElementById("lcopy"),lh1=document.getElementById("lh1"),veil=document.getElementById("veil"),cue=document.getElementById("cue");
-const chain=document.getElementById("chain"),head=document.getElementById("hookhead"),impact=document.getElementById("impact"),streaks=document.getElementById("streaks");
+const lcatch=document.getElementById("lcatch"),chain=document.getElementById("chain"),head=document.getElementById("hookhead"),impact=document.getElementById("impact"),streaks=document.getElementById("streaks");
 const ramp=(p,a,b)=>Math.max(0,Math.min(1,(p-a)/(b-a)));
 const easeOut=t=>1-Math.pow(1-t,3),easeIn=t=>t*t*t;
 let hooked=false,anchor={x:0,y:0},fromTop=false;
@@ -1692,8 +1723,16 @@ function placePortal(){
   lcopy.style.transform=fromTop?`translateY(${-dy}px) rotate(${-drag*4}deg)`:`translateY(${dy}px) rotate(${drag*4}deg)`;lcopy.style.opacity=String(1-ramp(p,.7,.88));
   streaks.style.opacity=String(ramp(p,.28,.4)*(1-ramp(p,.84,.94)));streaks.style.backgroundPositionY=`${-p*3000}px`;streaks.style.transform=`translateY(${-(p*1600)%260}px)`;
   cue.style.opacity=String(1-ramp(p,0,.08));
+  {const k=easeIn(ramp(p,0,.1));lcatch.style.transform=`translateY(${-k*110}%)`;lcatch.style.opacity=String(1-ramp(p,.04,.1))}   // la oferta de ejemplo se recoge antes de que entre el anzuelo
   veil.style.opacity=String(ramp(p,.86,1));
 }
+
+// oferta de ejemplo que cuelga del anzuelo en el hero (compu)
+document.getElementById("lccard").append(h("span",{class:"lc-ex"},"Ejemplo"),
+  h("div",{class:"lc-h"},avatarEl({nick:"Mati",color:"#E08A2E",online:true}),h("span",{class:"lc-n"},h("b",{},"Mati"),h("small",{},"#LAS1 · en línea")),h("span",{class:"lc-age"},"hace 3 min")),
+  h("p",{class:"lc-t"},"Busco jungla para flex esta noche"),
+  h("div",{class:"picks"},["Jungla","Top"].map((r,i)=>h("span",{class:"pick","aria-pressed":"true"},h("span",{class:"n"},i+1),roleIcon(r),r)),h("span",{class:"rank"},badge("Platino"),"Platino IV")),
+  h("div",{class:"tags"},timeTag(["Noche"],true),micTag(["Con micro"]),vibeTag("Relajado")));
 
 // servers marquee
 const track=document.getElementById("track");

@@ -209,8 +209,9 @@ The CSS custom properties (`--bg`, `--surface`, `--surface2`, `--line`, `--ink`,
 **Character:** One family doing everything. The brand voice comes from weight 800 with tight negative tracking on headings, against plain 400/500 text at a compact 14px base.
 
 ### Hierarchy
-- **Display** (800, `clamp(2.6rem, 6.4vw, 4.6rem)`, 1.02, -0.035em, max 11ch): the landing hero headline only, the one the hook bites into.
-- **Headline** (800, `clamp(1.9rem, 4vw, 2.8rem)`, 1.1, -0.03em): landing section titles ("Cómo funciona", "¿Armamos la partida?"). Feature titles step down to `clamp(1.5rem, 3vw, 2rem)`.
+- **Display** (800, `clamp(2.6rem, 6.4vw, 4.6rem)`, 1.02, -0.035em, max 11ch on phones; `clamp(3.4rem, 6.6vw, 6rem)`, 0.96, -0.04em, max 9.5ch above 820px): the landing hero headline only, the one the hook bites into. Its last word ("acá.") is set in the accent on desktop.
+- **Closing** (800, `clamp(2.6rem, 7vw, 5.4rem)`, 0.98, -0.04em, max 9ch): "¿Armamos la partida?" in the final CTA section.
+- **Headline** (800, `clamp(1.9rem, 4vw, 2.8rem)`, 1.1, -0.03em): landing section titles ("Cómo funciona", "Un tablón para cada server"). Feature titles step down to `clamp(1.5rem, 3vw, 2rem)`.
 - **Title** (800, 1.6rem, -0.02em): the app's board title; modal titles use 1.4rem. Panel headings drop to 700 at 1rem. On phones the board title shrinks to 1.3rem.
 - **Body** (400, 14px, 1.45): all app text. Landing paragraphs run larger (1.02–1.12rem, line-height 1.55, max 40–46ch).
 - **Label** (600, 0.7rem, 0.09em, uppercase): side-card headings and detail keys (0.72rem, 0.06em). Form labels are sentence case, 500, 0.82rem, muted.
@@ -228,7 +229,7 @@ A centered `.wrap` container (max 1200px, 16px side gutters), widened to 1640px 
 
 The offer board is an 8-column grid on desktop (player, positions, rank, mode, schedule, title, age, actions; 12px gaps, 18px row padding, 68px minimum row height). At ≤900px the column header disappears and each offer becomes a stacked card using named grid areas (player/age, title, positions, rank/mode, full-width chat button). At ≤640px the header compresses (labels hide, icons stay), stats become a three-up grid, and the chat drawer goes full screen.
 
-The landing is a long scroll story: a 260svh pinned hero, a "how it works" section with a sticky phone mock beside a progress rail (phone hidden ≤900px), an infinite server marquee, alternating two-column feature rows (single column ≤820px), and a final CTA under a swinging hook.
+The landing is a long scroll story: a 260svh pinned hero, a "how it works" section with a sticky phone mock beside a progress rail (phone hidden ≤900px), an infinite server marquee, alternating two-column feature rows (single column ≤820px), and a final CTA where the primary button sits still right under a swinging hook (the button never moves, so it stays easy to tap). Above 1100px the hero also shows an example offer hanging from a hook on the right, labeled "Ejemplo", which reels up out of view as soon as the scroll animation starts.
 
 Spacing runs on small steps (4, 6, 8, 12, 16, 18, 24, 28px) inside the app; the landing uses large section padding (90–150px vertical). No horizontal page scroll at any width (`overflow-x: clip` on `html, body`); horizontally scrolling rows (server tabs, segmented filters) hide their scrollbars.
 
