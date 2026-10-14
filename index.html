@@ -221,11 +221,10 @@ input:focus,select:focus{border-color:var(--accent)}
 .lc-line{position:absolute;left:50%;top:0;height:30%;width:26px;margin-left:-13px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='44' viewBox='0 0 26 44'%3E%3Cpath d='M13 2 21 8v12l-8 6-8-6V8Z' fill='none' stroke='%2345E6A6' stroke-width='2.4'/%3E%3Cpath d='M13 10v8' stroke='%23A6F7D2' stroke-width='1.6'/%3E%3Cpath d='M13 28l4 8-4 8-4-8Z' fill='%2345E6A6' opacity='.85'/%3E%3C/svg%3E");background-repeat:repeat-y;background-size:26px 44px;background-position:0 bottom;filter:drop-shadow(0 0 5px rgba(69,230,166,.55))}
 .lc-swing{position:absolute;left:50%;top:30%;transform-origin:0 0;animation:lcsw 4.2s ease-in-out infinite}
 @keyframes lcsw{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
-.lc-hook{position:absolute;left:-22px;top:-6px;width:44px;height:62px;color:var(--accent);filter:drop-shadow(0 0 8px rgba(69,230,166,.8))}
+.lc-hook{position:absolute;left:-30px;top:-6px;width:44px;height:62px;color:var(--accent);filter:drop-shadow(0 0 8px rgba(69,230,166,.8))}
 .lc-hook svg{width:100%;height:100%;transform:rotate(180deg)}
 .lc-card{position:absolute;left:-165px;top:48px;width:330px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 30px 60px rgba(0,0,0,.5);transform:rotate(-2deg)}
 .lc-card::before{content:"";position:absolute;left:158px;top:-7px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
-.lc-ex{position:absolute;right:12px;top:-24px;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .lc-h{display:flex;align-items:center;gap:10px}
 .lc-h .pav{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:700;flex:none}
 .lc-n b{display:block;font-weight:600}.lc-n small{color:var(--muted)}
@@ -374,8 +373,8 @@ input:focus,select:focus{border-color:var(--accent)}
 .feat .viz .count{text-align:center;font-size:.85rem;color:var(--muted)}
 .feat .viz .count b{color:var(--accent);font-size:1.1rem}
 
-.final{padding-top:380px}
-.dbtn{position:absolute;left:50%;top:228px;z-index:2;transform:translateX(-50%);white-space:nowrap;font-size:1.1rem;padding:16px 30px;border-radius:14px}
+.final{padding-top:420px}
+.dbtn{position:absolute;left:50%;top:268px;z-index:2;transform:translateX(-50%);white-space:nowrap;font-size:1.1rem;padding:16px 30px;border-radius:14px}
 .final h2{font-size:clamp(2.6rem,7vw,5.4rem);line-height:.98;letter-spacing:-.04em;max-width:9ch;margin:0 auto}
 .final .wrap p{margin-bottom:0}
 .dangle{position:absolute;left:50%;top:0;transform-origin:50% 0;animation:swing 3.4s ease-in-out infinite;z-index:1}
@@ -1728,7 +1727,7 @@ function placePortal(){
 }
 
 // oferta de ejemplo que cuelga del anzuelo en el hero (compu)
-document.getElementById("lccard").append(h("span",{class:"lc-ex"},"Ejemplo"),
+document.getElementById("lccard").append(
   h("div",{class:"lc-h"},avatarEl({nick:"Mati",color:"#E08A2E",online:true}),h("span",{class:"lc-n"},h("b",{},"Mati"),h("small",{},"#LAS1 · en línea")),h("span",{class:"lc-age"},"hace 3 min")),
   h("p",{class:"lc-t"},"Busco jungla para flex esta noche"),
   h("div",{class:"picks"},["Jungla","Top"].map((r,i)=>h("span",{class:"pick","aria-pressed":"true"},h("span",{class:"n"},i+1),roleIcon(r),r)),h("span",{class:"rank"},badge("Platino"),"Platino IV")),
