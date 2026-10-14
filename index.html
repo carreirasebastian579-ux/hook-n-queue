@@ -39,6 +39,7 @@
 :root{
   --bg:#060F0D; --surface:#0C1A17; --surface2:#13251F; --line:#1C332C; --ink:#E2F4EE; --muted:#7C9A90;
   --accent:#45E6A6; --accent-ink:#03140D; --accent-soft:rgba(69,230,166,.13); --ic:#E2F4EE; --ic2:#25403A; --ok:#2DBE8C; --danger:#F26B6B; --field-line:#5E6866; --hook-hi:#E0FFF1;
+  --r-top:#F2A580; --r-jungla:#80D4B4; --r-mid:#9CC4F4; --r-adc:#F4A3A3; --r-support:#C9B6F2; --r-fill:#C5CFCC;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
@@ -428,9 +429,9 @@ html.in-app .hchain,html.in-app .drop .dc{filter:none;background-image:url("data
 
 .pav,.av{position:relative;overflow:visible}
 .pav svg.ic,.av svg.ic{width:62%;height:62%;color:inherit}
-.onl{position:absolute;right:-5px;bottom:-5px;width:17px;height:17px;border-radius:50%;background:var(--surface);border:1.5px solid var(--accent);display:grid;place-items:center;color:var(--accent)}
-.onl svg{width:8px;height:12px}
-.onl::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--accent);opacity:0;animation:onl 2.6s ease-out infinite}
+.onl{position:absolute;right:-5px;bottom:-5px;width:17px;height:20px;border-radius:6px;background:var(--surface);border:0;display:grid;place-items:center;color:var(--accent)}
+.onl svg{width:10px;height:14px;color:#7FD3B2}
+.onl::after{content:none}
 @keyframes onl{0%{transform:scale(.8);opacity:.6}100%{transform:scale(1.5);opacity:0}}
 .ontxt{color:var(--accent)}
 .mh{display:inline-flex;color:var(--accent)}.mh svg{width:10px;height:14px}.mh.sm svg{width:8px;height:11px}
@@ -448,7 +449,7 @@ html.in-app .hchain,html.in-app .drop .dc{filter:none;background-image:url("data
 .avopts .pick svg.ic{width:16px;height:16px}
 .hang{height:128px;display:flex;flex-direction:column;align-items:center;margin:-20px auto 6px;transform-origin:50% 0;animation:swing 3.4s ease-in-out infinite}
 .hchain{width:26px;height:70px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='44' viewBox='0 0 26 44'%3E%3Cpath d='M13 2 21 8v12l-8 6-8-6V8Z' fill='none' stroke='%2345E6A6' stroke-width='2.4'/%3E%3Cpath d='M13 10v8' stroke='%23A6F7D2' stroke-width='1.6'/%3E%3Cpath d='M13 28l4 8-4 8-4-8Z' fill='%2345E6A6' opacity='.85'/%3E%3C/svg%3E");background-repeat:repeat-y;background-size:26px 44px;background-position:0 bottom;filter:drop-shadow(0 0 5px rgba(69,230,166,.55))}
-.hhook{width:44px;height:62px;margin:-3px 0 0 -26px}
+.hhook{width:44px;height:62px;margin:-3px 0 0 -16.5px}
 .hhook svg,.drop .dh svg{width:100%;height:100%;transform:rotate(180deg)}
 .offer{position:relative}
 .offer.landing{animation:rowIn 1.5s cubic-bezier(.2,.8,.2,1) both,rowGlow 2.6s ease-out}
@@ -456,7 +457,7 @@ html.in-app .hchain,html.in-app .drop .dc{filter:none;background-image:url("data
 @keyframes rowGlow{0%,60%{background:rgba(61,191,142,.16)}100%{background:transparent}}
 .drop{position:absolute;left:32px;bottom:calc(50% + 6px);display:flex;flex-direction:column;align-items:center;pointer-events:none;z-index:3;animation:dropHook 1.5s ease-in-out forwards}
 .drop .dc{width:26px;height:340px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='44' viewBox='0 0 26 44'%3E%3Cpath d='M13 2 21 8v12l-8 6-8-6V8Z' fill='none' stroke='%2345E6A6' stroke-width='2.4'/%3E%3Cpath d='M13 10v8' stroke='%23A6F7D2' stroke-width='1.6'/%3E%3Cpath d='M13 28l4 8-4 8-4-8Z' fill='%2345E6A6' opacity='.85'/%3E%3C/svg%3E");background-repeat:repeat-y;background-size:26px 44px;background-position:0 bottom;filter:drop-shadow(0 0 5px rgba(69,230,166,.55))}
-.drop .dh{width:34px;height:48px;margin:-3px 0 0 -20px}
+.drop .dh{width:34px;height:48px;margin:-3px 0 0 -12.8px}
 @keyframes dropHook{0%{transform:translateY(-420px)}35%,68%{transform:translateY(0);opacity:1}100%{transform:translateY(-460px);opacity:0}}
 @media (prefers-reduced-motion:reduce){.hang,.onl::after{animation:none}}
 .cols[hidden]{display:none}
@@ -744,6 +745,26 @@ html,body{overflow-x:clip}
   .icb,.chev{width:44px;height:44px}
 }
 @media (prefers-reduced-motion:reduce){.detail,.ppop{animation:none}.fake .caret,.dots i{animation:none}.scr{transition:none}}
+/* ---------- tablón "en el muelle" ---------- */
+html.in-app body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.22;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .6 0 0 0 0 .55 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+html.in-app #app{position:relative;z-index:1}
+.dock{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 24px;align-items:end;padding:22px 0 18px;margin-bottom:14px;border-bottom:1px solid var(--line)}
+.dcode{font-size:clamp(3rem,6vw,4.6rem);font-weight:800;letter-spacing:-.05em;line-height:.9}
+.dname{color:var(--muted);font-size:1rem;margin-top:8px}
+.dlive{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:14px;color:var(--muted);font-size:.9rem}
+.dlive>span{display:inline-flex;align-items:center;gap:6px}
+.dlive b{color:var(--ink);font-weight:700}
+.dlive .lampic{width:12px;height:16px;color:#7FD3B2}
+.dock .btn{padding:14px 22px;font-size:1rem}
+.ml{display:inline-flex}.ml .lampic{width:11px;height:15px}
+.onbtn[aria-pressed="true"] .lampic{color:var(--accent)}
+.lend{margin:0;padding:18px;text-align:center;color:var(--muted);font-size:.85rem}
+@media (max-width:640px){.dock{grid-template-columns:1fr}.dock .btn{width:100%}}
+/* ---------- color por posición ---------- */
+.ic.r-top{color:var(--r-top)}.ic.r-jungla{color:var(--r-jungla)}.ic.r-mid{color:var(--r-mid)}.ic.r-adc{color:var(--r-adc)}.ic.r-support{color:var(--r-support)}.ic.r-fill{color:var(--r-fill)}
+.posic.pr-top{--rc:var(--r-top)}.posic.pr-jungla{--rc:var(--r-jungla)}.posic.pr-mid{--rc:var(--r-mid)}.posic.pr-adc{--rc:var(--r-adc)}.posic.pr-support{--rc:var(--r-support)}.posic.pr-fill{--rc:var(--r-fill)}
+.posic[class*=" pr-"]{background:color-mix(in srgb,var(--rc) 9%,var(--bg))}
+.posic.want[class*=" pr-"],html.in-app .posic.want[class*=" pr-"]{background:color-mix(in srgb,var(--rc) 18%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--rc) 45%,transparent);color:var(--rc)}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
 </head>
@@ -825,21 +846,13 @@ html,body{overflow-x:clip}
 <main class="wrap appgrid">
 <aside class="lside" id="lside" aria-label="Servers y perfil"></aside>
 <div class="center">
-  <section class="top">
-    <div><h1>Buscá con quién jugar</h1><p>Elegí tu server, mirá las ofertas y coordiná la partida.</p></div>
-    <div class="stats">
-      <div class="stat"><small><i></i>Ofertas hoy</small><b id="stToday">0</b></div>
-      <div class="stat"><small><span class="mh sm"></span>En línea ahora</small><b id="stOnline">0</b></div>
-      <div class="stat"><small>Activas en el server</small><b id="stTotal">0</b></div>
-    </div>
+  <section class="dock">
+    <div><div class="dcode" id="dCode"></div><div class="dname" id="dName"></div><div class="dlive" id="dLive"></div></div>
+    <button class="btn" id="pubBtn">Publicar oferta</button>
   </section>
   <nav class="servers" id="servers" aria-label="Servers"></nav>
   <section class="panel">
-    <div class="panel-head">
-      <div><h2 id="srvTitle"></h2><p id="srvCount"></p></div>
-      <button class="btn" id="pubBtn">Publicar oferta</button>
-    </div>
-    <div class="fbar"><div class="seg" id="seg" role="group" aria-label="Fecha"></div><div class="fright"><button class="onbtn" id="onBtn" aria-pressed="false"><span class="mh"></span>Solo en línea</button><button class="btn sec fbtn" id="fBtn" aria-expanded="false">Filtros <span class="fn" id="fBtnN" hidden></span></button></div></div>
+    <div class="fbar"><div class="seg" id="seg" role="group" aria-label="Fecha"></div><div class="fright"><button class="onbtn" id="onBtn" aria-pressed="false"><span class="ml"></span>Farol prendido</button><button class="btn sec fbtn" id="fBtn" aria-expanded="false">Filtros <span class="fn" id="fBtnN" hidden></span></button></div></div>
     <div class="fpanel" id="fpanel" hidden></div>
     <div class="cols" id="cols"><span>Jugador</span><span>Juega</span><span>Busca</span><span>Rango</span><span>Modo</span><span>Oferta</span><span>Publicada</span><span></span></div>
     <div id="list"></div>
@@ -867,7 +880,7 @@ const EN={
 "Chats que no se acumulan":"Chats that don't pile up","Cada chat nace de una oferta y se borra 24 hs después de que termina. Tu bandeja siempre limpia.":"Every chat starts from an offer and is deleted 24 hours after it ends. Your inbox stays clean.",
 "¿Armamos la partida?":"Ready to queue up?","Crear tu perfil lleva diez segundos.":"Creating your profile takes ten seconds.","Los demás ven primero tu":"Others see your top pick first:","jugadores coinciden":"players match",
 "Te paso mi Discord: premade_seba":"Here's my Discord: premade_seba","Listo, te agrego. ¡Nos vemos en la partida!":"Done, adding you. See you in game!","Esta oferta terminó. El chat se borra en 24 h.":"This offer ended. The chat will be deleted in 24 h.",
-"Nueva oferta":"New offer","Tu próximo dúo está":"Your next duo is","acá.":"here.","Ejemplo":"Example","Busco jungla para flex esta noche":"Looking for a jungler for flex tonight","hace 3 min":"3 min ago","#LAS1 · en línea":"#LAS1 · online","Deshacer":"Undo","Oferta reabierta":"Offer reopened","No se pudo reabrir la oferta":"Couldn't reopen the offer","No se pudo desbloquear":"Couldn't unblock","Ya pasó mucho tiempo para deshacer. Si querés, publicá la oferta de nuevo.":"It's too late to undo. You can post the offer again if you want.","Ver detalle":"Show details","No pudimos cargar las ofertas":"We couldn't load the offers","Puede ser tu conexión o un problema nuestro. Probá de nuevo en unos segundos.":"It may be your connection or a problem on our side. Try again in a few seconds.","Reintentar":"Try again","No se pudieron actualizar las ofertas":"Couldn't refresh the offers","Cerrar aviso":"Close notice","No se pudo enviar el reporte. Probá de nuevo.":"Couldn't send the report. Try again.","No se pudo descartar el reporte":"Couldn't dismiss the report","No se pudo abrir el chat. Probá de nuevo.":"Couldn't open the chat. Try again.","Enviando...":"Sending...","Nueva oferta en":"New offer in","Server donde se publica":"Server to post in","Elegí tu rango":"Choose your rank","División":"Division","Repetir última oferta":"Repeat last offer","Tocá las opciones en orden de preferencia: la primera es la que más te interesa.":"Tap options in order of preference: the first one is what you want most.","Detalles opcionales":"Optional details","Rango que buscás, campeones, micro y onda":"Rank you want, champions, mic and vibe","Rango que buscás":"Rank you want","Ideal si tu dúo juega con":"Ideally your duo plays","Mejor que no juegue con":"Better if they don’t play","Elegí al menos un modo.":"Choose at least one mode.","Elegí tu posición.":"Choose your position.","Elegí qué posición buscás.":"Choose the position you want.","Elegí al menos un horario.":"Choose at least one time.","Revisá los campos marcados.":"Check the highlighted fields.","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
+"Nueva oferta":"New offer","el tablón de tu server":"your server's board","con el farol prendido":"with their lantern lit","nuevas hoy":"new today","· farol prendido":"· lantern lit","Tu próximo dúo está":"Your next duo is","acá.":"here.","Ejemplo":"Example","Busco jungla para flex esta noche":"Looking for a jungler for flex tonight","hace 3 min":"3 min ago","#LAS1 · en línea":"#LAS1 · online","Deshacer":"Undo","Oferta reabierta":"Offer reopened","No se pudo reabrir la oferta":"Couldn't reopen the offer","No se pudo desbloquear":"Couldn't unblock","Ya pasó mucho tiempo para deshacer. Si querés, publicá la oferta de nuevo.":"It's too late to undo. You can post the offer again if you want.","Ver detalle":"Show details","No pudimos cargar las ofertas":"We couldn't load the offers","Puede ser tu conexión o un problema nuestro. Probá de nuevo en unos segundos.":"It may be your connection or a problem on our side. Try again in a few seconds.","Reintentar":"Try again","No se pudieron actualizar las ofertas":"Couldn't refresh the offers","Cerrar aviso":"Close notice","No se pudo enviar el reporte. Probá de nuevo.":"Couldn't send the report. Try again.","No se pudo descartar el reporte":"Couldn't dismiss the report","No se pudo abrir el chat. Probá de nuevo.":"Couldn't open the chat. Try again.","Enviando...":"Sending...","Nueva oferta en":"New offer in","Server donde se publica":"Server to post in","Elegí tu rango":"Choose your rank","División":"Division","Repetir última oferta":"Repeat last offer","Tocá las opciones en orden de preferencia: la primera es la que más te interesa.":"Tap options in order of preference: the first one is what you want most.","Detalles opcionales":"Optional details","Rango que buscás, campeones, micro y onda":"Rank you want, champions, mic and vibe","Rango que buscás":"Rank you want","Ideal si tu dúo juega con":"Ideally your duo plays","Mejor que no juegue con":"Better if they don’t play","Elegí al menos un modo.":"Choose at least one mode.","Elegí tu posición.":"Choose your position.","Elegí qué posición buscás.":"Choose the position you want.","Elegí al menos un horario.":"Choose at least one time.","Revisá los campos marcados.":"Check the highlighted fields.","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
 "Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. League of Legends es una marca de Riot Games, Inc. ·":"Hook n' Queue isn't affiliated with or endorsed by Riot Games. League of Legends is a trademark of Riot Games, Inc. ·",
 "Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. ·":"Hook n' Queue isn't affiliated with or endorsed by Riot Games. ·","Privacidad":"Privacy","Donar":"Donate",
 "Buscá con quién jugar":"Find someone to play with","Elegí tu server, mirá las ofertas y coordiná la partida.":"Pick your server, browse offers and set up your game.",
@@ -938,7 +951,7 @@ const RULES=[
  [/^Esta oferta terminó\. El chat se borra en (\d+) h, aprovechá para pasar tu nick o Discord\.$/,(m,a)=>`This offer ended. This chat will be deleted in ${a} h, so swap names or Discord now.`],
  [/^Te falta elegir (.+)\.$/,(m,a)=>`You still need to choose ${a.split(", ").map(tr).join(", ")}.`],
  [/^¿Desbanear a (.+)\?\n\nVa a poder volver a entrar y crear su perfil de nuevo\.$/,(m,a)=>`Unban ${a}?\n\nThey'll be able to sign in and create their profile again.`],
- [/^Nuevo mensaje de (.+)$/,(m,a)=>`New message from ${a}`],[/^Cuando mandes tu primer mensaje, le avisamos a (.+)\.$/,(m,a)=>`When you send your first message, we'll let ${a} know.`],[/^(.+) bloqueado$/,(m,a)=>`${a} blocked`],[/^(.+) desbloqueado$/,(m,a)=>`${a} unblocked`],[/^(.+) baneado$/,(m,a)=>`${a} banned`],
+ [/^Nuevo mensaje de (.+)$/,(m,a)=>`New message from ${a}`],[/^Con el farol prendido en (\w+)$/,(m,a)=>`Lantern lit in ${a}`],[/^Eso es todo lo que hay en (\w+) por ahora\.$/,(m,a)=>`That's everything in ${a} for now.`],[/^Cuando mandes tu primer mensaje, le avisamos a (.+)\.$/,(m,a)=>`When you send your first message, we'll let ${a} know.`],[/^(.+) bloqueado$/,(m,a)=>`${a} blocked`],[/^(.+) desbloqueado$/,(m,a)=>`${a} unblocked`],[/^(.+) baneado$/,(m,a)=>`${a} banned`],
  [/^No se pudo publicar: (.*)$/,(m,a)=>`Couldn't post: ${a}`],[/^No se pudo banear: (.*)$/,(m,a)=>`Couldn't ban: ${a}`],[/^Alias: (.+)$/,(m,a)=>`Alias: ${a}`],
  [/^¿Banear a (.+)\?\n\nSe borra su perfil, sus ofertas y sus chats, y no va a poder volver a usar la app con esa cuenta\.$/,(m,a)=>`Ban ${a}?\n\nTheir profile, offers and chats will be deleted, and they won't be able to use the app with that account again.`],
  [/^¿Borrar el chat con (.+) de tu lista\?\n\nA la otra persona no le pasa nada\. Si te vuelve a escribir, el chat reaparece con los mensajes anteriores\.$/,(m,a)=>`Delete your chat with ${a} from your list?\n\nNothing happens to the other person. If they message you again, the chat comes back with the previous messages.`],
@@ -1033,19 +1046,21 @@ function ago(ts){const m=Math.round((Date.now()-ts)/60000);if(m<60)return`hace $
 const AVC=["#3F6FD8","#E0524A","#A35BE0","#E08A2E","#2FA866","#D6366E"];
 function avColor(n){let x=0;for(const c of n)x=(x*31+c.charCodeAt(0))>>>0;return AVC[x%AVC.length]}
 const MINIHOOK='<path d="M5 2V14Q5 22 10.5 21Q14.5 20 13.5 13" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><polygon points="10,14 17,14 13.5,5" fill="currentColor"/>';
+const MINILAMP='<path d="M4 3.2V2a2 2 0 0 1 4 0v1.2" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M3 3.5h6l.6 1.3H2.4Z" fill="currentColor"/><rect x="2.6" y="4.8" width="6.8" height="7.6" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M6 7c-1 1.4-1 2.8 0 3.6 1-.8 1-2.2 0-3.6Z" fill="currentColor"/><path d="M2.2 12.4h7.6l-.8 1.6H3Z" fill="currentColor"/>';
+function miniLamp(){const t=document.createElement("template");t.innerHTML=`<svg class="lampic" viewBox="0 0 12 16" aria-hidden="true">${MINILAMP}</svg>`;return t.content.firstChild}
 function miniHook(){const t=document.createElement("template");t.innerHTML=`<svg viewBox="0 0 18 26" aria-hidden="true">${MINIHOOK}</svg>`;return t.content.firstChild}
 function inkOn(bg){const m=/^#([0-9a-f]{6})$/i.exec(bg||"");if(!m)return"#fff";
   const L=[0,2,4].map(i=>parseInt(m[1].slice(i,i+2),16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);
   const l=.2126*L[0]+.7152*L[1]+.0722*L[2];return 1.05/(l+.05)>=(l+.05)/.055?"#fff":"#06120D"}
 function avatarEl(o,cls="pav"){const bg=o.color||avColor(o.nick);
-  const el=h("span",{class:cls,style:`background:${bg};color:${inkOn(bg)}`,title:o.online?"En línea":null},
+  const el=h("span",{class:cls,style:`background:${bg};color:${inkOn(bg)}`,title:o.online?"Farol prendido":null},
     o.photo?h("img",{src:o.photo,alt:""}):o.nick[0].toUpperCase());
-  if(o.online)el.append(h("span",{class:"onl","aria-label":"en línea"},miniHook()));
+  if(o.online)el.append(h("span",{class:"onl","aria-label":"en línea"},miniLamp()));
   return el}
 function hangHook(){const w=h("div",{class:"hang","aria-hidden":"true"},h("div",{class:"hchain"}));const hk=h("div",{class:"hhook"});hk.innerHTML=HOOK_SVG;w.append(hk);return w}
 const ICON_FILE={Top:"top",Jungla:"jungla",Mid:"mid",ADC:"adc",Support:"support",Fill:"fill"},CUSTOM_IC={};
-function roleIcon(r){return CUSTOM_IC[r]?h("img",{src:CUSTOM_IC[r],class:"ic",alt:""}):svg(ROLE_SVG[r])}
-const roleIc=(r,want,i=0)=>h("span",{class:"posic"+(want?" want":"")+(i>0?" alt":""),title:`${r} (${i+1}° preferencia)`},roleIcon(r));
+function roleIcon(r){const el=CUSTOM_IC[r]?h("img",{src:CUSTOM_IC[r],class:"ic",alt:""}):svg(ROLE_SVG[r]);if(ICON_FILE[r])el.classList.add("r-"+ICON_FILE[r]);return el}
+const roleIc=(r,want,i=0)=>h("span",{class:"posic"+(want?" want":"")+(i>0?" alt":"")+(ICON_FILE[r]?" pr-"+ICON_FILE[r]:""),title:`${r} (${i+1}° preferencia)`},roleIcon(r));
 
 
 const openRows=new Set();
@@ -1223,7 +1238,7 @@ function openPlayerCard(id,anchor){
   const card=h("div",{class:"ppop",id:"pcardpop",role:"dialog","aria-label":"Perfil de "+riot,onclick:e=>e.stopPropagation()},
     h("button",{class:"icb pclose",title:"Cerrar",onclick:closePlayerCard},"✕"),
     h("div",{class:"phead"},avatarEl({...p},"pav pbig"),h("div",{},h("b",{class:"pnick"},p.nick),h("div",{class:"ptag"},"#"+p.tag),
-      h("div",{class:"pstatus"+(p.online?" on":"")},p.online?"En línea":"Desconectado",h("span",{}," · "+(p.home||"")) ))),
+      h("div",{class:"pstatus"+(p.online?" on":"")},p.online?"Farol prendido":"Desconectado",h("span",{}," · "+(p.home||"")) ))),
     h("div",{class:"psec"},h("div",{class:"dk"},"Mains"),p.mains.length?h("div",{class:"clist"},p.mains.map((c,i)=>champChip(c,"",i+1))):h("p",{class:"pempty"},"Todavía no cargó sus mains.")),
     h("div",{class:"psec"},h("div",{class:"dk"},p.offers.length===1?"1 oferta activa":`${p.offers.length} ofertas activas`),
       p.offers.length?h("div",{class:"poffs"},p.offers.slice(0,3).map(o=>h("button",{class:"poff",onclick:()=>goOffer(o)},h("span",{},o.titulo),h("small",{},o.server+" · "+ago(o.at))))):h("p",{class:"pempty"},"No tiene ofertas activas ahora.")),
@@ -1275,7 +1290,7 @@ function renderSides(){
   const seen=new Set(),on=[];
   all.filter(o=>o.server===current&&o.online&&!o.mine).sort((a,b)=>b.at-a.at).forEach(o=>{if(!seen.has(o.user_id)){seen.add(o.user_id);on.push(o)}});
   const extra=Math.max(0,onlineSet.size-1-on.length);
-  const onCard=h("div",{class:"scard"},h("h4",{},"En línea en "+current,h("span",{},String(on.length))),
+  const onCard=h("div",{class:"scard"},h("h4",{},"Con el farol prendido en "+current,h("span",{},String(on.length))),
     on.length?h("div",{class:"plist"},on.slice(0,8).map(o=>h("button",{class:"pitem",title:"Ver su oferta",onclick:()=>{openRows.add(o.id);renderList();document.querySelector(`.offer[data-id="${o.id}"]`)?.scrollIntoView({block:"center",behavior:"smooth"})}},
       avatarEl(o),h("div",{class:"pt"},h("b",{},o.nick),h("small",{},[].concat(o.rol)[0]+" busca "+o.busca.join(", "))))))
       :h("p",{class:"sempty"},"Nadie con ofertas conectado ahora en "+current+". Publicá la tuya y tirá el anzuelo."),
@@ -1314,10 +1329,13 @@ function renderList(){setTimeout(renderSides,0);
   const s=SERVERS.find(x=>x.id===current);
   const inServer=allOffers().filter(o=>o.server===current&&!blockedIds.has(o.user_id));
   const offers=inServer.filter(passes).sort((a,b)=>b.at-a.at);
-  document.getElementById("srvTitle").textContent=`${s.id} · ${s.name}`;
-  document.getElementById("srvCount").textContent=offersError?"":!inServer.length?"Sin ofertas por ahora":offers.length===inServer.length?`${offers.length} ${offers.length===1?"oferta activa":"ofertas activas"}`:`Mostrando ${offers.length} de ${inServer.length} ofertas`;
-  document.getElementById("stToday").textContent=inServer.filter(o=>Date.now()-o.at<24*H).length;
-  document.getElementById("stTotal").textContent=inServer.length;document.getElementById("stOnline").textContent=inServer.filter(o=>o.online).length;document.getElementById("onBtn").setAttribute("aria-pressed",String(F.online));
+  const nOn=inServer.filter(o=>o.online).length,nToday=inServer.filter(o=>Date.now()-o.at<24*H).length;
+  document.getElementById("dCode").textContent=s.id;document.getElementById("dName").replaceChildren(s.name," · ","el tablón de tu server");
+  document.getElementById("dLive").replaceChildren(
+    h("span",{id:"srvCount"},offersError?"":!inServer.length?"Sin ofertas por ahora":offers.length===inServer.length?`${offers.length} ${offers.length===1?"oferta activa":"ofertas activas"}`:`Mostrando ${offers.length} de ${inServer.length} ofertas`),
+    h("span",{},miniLamp(),h("b",{},String(nOn)),h("span",{},"con el farol prendido")),
+    h("span",{},h("b",{},String(nToday)),h("span",{},nToday===1?"nueva hoy":"nuevas hoy")));
+  document.getElementById("onBtn").setAttribute("aria-pressed",String(F.online));
   const fb=document.getElementById("fBtnN");if(fb){const n=activeCount();fb.textContent=n?n:"";fb.hidden=!n}
   document.getElementById("cols").hidden=!offers.length;
   const list=document.getElementById("list");list.replaceChildren();
@@ -1329,8 +1347,8 @@ function renderList(){setTimeout(renderSides,0);
     const isOpen=openRows.has(o.id);
     let chatBtn=o.mine?h("button",{class:"btn sec",onclick:e=>{e.stopPropagation();closeOffer(o.id)}},"Ya encontré"):h("button",{class:"btn sec",onclick:e=>{e.stopPropagation();openChat(o)}},"Abrir chat");
     if(isAdmin&&!o.mine)chatBtn=h("span",{class:"adminwrap"},chatBtn,h("button",{class:"shield",title:"Moderar",onclick:e=>{e.stopPropagation();modMenu(o,e.currentTarget)}},"🛡️"));
-    const row=h("article",{class:"offer"+(isOpen?" open":""),"data-id":o.id,title:isOpen?"":"Tocá para ver la oferta completa"},
-      h("button",{type:"button",class:"player",title:"Ver perfil",onclick:e=>{e.stopPropagation();openPlayerCard(o.user_id,e.currentTarget)}},avatarEl(o),h("span",{class:"pname"},h("b",{},o.nick),h("small",{},"#"+o.tag,o.online?h("span",{class:"ontxt"}," · en línea"):null,o.mine?h("span",{class:"mine-tag"},"Tu oferta"):null))),
+    const row=h("article",{class:"offer"+(isOpen?" open":"")+(o.mine?" mine":""),"data-id":o.id,title:isOpen?"":"Tocá para ver la oferta completa"},
+      h("button",{type:"button",class:"player",title:"Ver perfil",onclick:e=>{e.stopPropagation();openPlayerCard(o.user_id,e.currentTarget)}},avatarEl(o),h("span",{class:"pname"},h("b",{},o.nick),h("small",{},"#"+o.tag,o.online?h("span",{class:"ontxt"}," · farol prendido"):null,o.mine?h("span",{class:"mine-tag"},"Tu oferta"):null))),
       h("div",{class:"posgroup"},
         h("div",{class:"pos"},h("span",{class:"lbl-m"},"Juega"),[].concat(o.rol).slice(0,[].concat(o.rol).length>2?1:2).map((r,i)=>roleIc(r,false,i)),[].concat(o.rol).length>2?h("span",{class:"pmore",title:[].concat(o.rol).join(", ")},"+"+([].concat(o.rol).length-1)):null),
         h("div",{class:"pos"},h("span",{class:"lbl-m"},"Busca"),o.busca.slice(0,o.busca.length>2?1:2).map((r,i)=>roleIc(r,true,i)),o.busca.length>2?h("span",{class:"pmore want",title:o.busca.join(", ")},"+"+(o.busca.length-1)):null)),
@@ -1344,6 +1362,7 @@ function renderList(){setTimeout(renderSides,0);
     row.addEventListener("click",e=>{if(e.target.closest("button"))return;toggle()});
     row.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target===row){e.preventDefault();toggle()}});
     list.append(row)});
+  list.append(h("p",{class:"lend"},`Eso es todo lo que hay en ${s.id} por ahora.`));
   restoreRowFocus(fk);
 }
 function render(){renderMe();renderServers();renderList();renderSides()}
@@ -1523,7 +1542,7 @@ function buildFilters(){
 function clearFilters(){F=JSON.parse(JSON.stringify(FDEF));document.getElementById("onBtn").setAttribute("aria-pressed","false");buildFilters();renderList()}
 document.getElementById("fBtn").addEventListener("click",e=>{const p=document.getElementById("fpanel");p.hidden=!p.hidden;e.currentTarget.setAttribute("aria-expanded",String(!p.hidden))});
 buildFilters();
-document.querySelectorAll(".mh").forEach(e=>e.append(miniHook()));
+document.querySelectorAll(".mh").forEach(e=>e.append(miniHook()));document.querySelectorAll(".ml").forEach(e=>e.append(miniLamp()));
 document.getElementById("onBtn").addEventListener("click",()=>{F.online=!F.online;renderList()});
 
 const leftH=c=>Math.max(1,Math.ceil((DAY-(Date.now()-c.endedAt))/36e5));

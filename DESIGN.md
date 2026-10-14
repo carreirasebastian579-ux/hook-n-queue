@@ -24,6 +24,12 @@ colors:
   tinta-verde-muelle: "#06120D"
   coral-alerta: "#F26B6B"
   celeste-mic: "#9CC4F4"
+  rol-top: "#F2A580"
+  rol-jungla: "#80D4B4"
+  rol-mid: "#9CC4F4"
+  rol-adc: "#F4A3A3"
+  rol-support: "#C9B6F2"
+  rol-fill: "#C5CFCC"
   naranja-intento: "#F2A580"
 typography:
   display:
@@ -295,8 +301,14 @@ Tactile and confident: a solid fill, a clear label, no outline-only primaries.
 ### Chat drawer
 A 400px right-hand drawer (full screen on phones). Messages are 14px bubbles at max 78% width; yours are accent-filled on the right, theirs `--surface2` on the left. System notes are centered and muted; an ended-offer notice is a full-width accent-soft banner. Conversations from different offers are separated by a hairline divider with a pill label. The compose field is a pill.
 
-### Online hook indicator (signature)
-A 17px circle at the avatar's bottom-right corner with an accent ring and a tiny hook glyph inside; a second ring pulses outward like sonar every 2.6s. It is the clearest daily expression of the brand inside the app.
+### Online lantern indicator ("farol prendido")
+Someone online "has their lantern lit". A small fishing lantern (Menta Preferida, no glow, no pulse) sits in a 17×20px rounded tab at the bottom-right of the avatar. Copy follows the metaphor: "farol prendido" next to the nick, the filter "Farol prendido", the right rail "Con el farol prendido en LAS". Screen readers still hear "en línea".
+
+### The dock (board header)
+The board opens with the server as a dock sign: the server code very large (800, `clamp(3rem, 6vw, 4.6rem)`, -0.05em), its name plus "el tablón de tu server" in muted, and a live line ("N ofertas activas · N con el farol prendido · N nuevas hoy", or "Mostrando X de Y" when filtering). "Publicar oferta" sits beside it, full width on phones. Offers stay as compact rows below. The board ends with "Eso es todo lo que hay en LAS por ahora." The app background carries the same faint water/fog noise texture as the landing (no light, no glow).
+
+### Position colors
+Each role has its own color, applied to its icon everywhere (rows, filters, offer form, detail): see the rol-* colors in the frontmatter. In rows, "Juega" tiles show the colored icon on a faint tint of its color; "Busca" tiles add a stronger tint and a 1px inset outline in the same color. Priority 2+ stays smaller and faded.
 
 ### Lantern (signature, landing)
 A night-fishing lantern drawn from scratch (iron cage and cap in Musgo Apagado, never glowing; glass and flicking flame in Verde Espectral, Bruma Menta and a near-white core). It hangs from an iron chain, sways ±2.2° over 6s, and positions the light: a screen-blended spectral pool plus a penumbra vignette centered on it (measured in JS), spectral smoke drifting from it, and ~10 embers rising from it. Text and buttons always sit above the penumbra so they stay fully legible. It is a fisherman's lantern: never a hooded figure, scythe, souls or anything evoking a League of Legends champion.
