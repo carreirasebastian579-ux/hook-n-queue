@@ -149,7 +149,7 @@ components:
 
 **Creative North Star: "El Anzuelo Espectral"**
 
-The whole system is one cast of a fishing line. The landing is the cast itself: a spectral green hook flies out of near-black water, bites into the headline and drags the page as you scroll, trailing a glowing chain, particles and a pulsing portal. That is the only place where the system glows. Once you are inside the app (`html.in-app`), you are standing on the dock waiting for a bite: the same green settles into a calmer, desaturated tone, the background turns to a neutral graphite, and light gives way to clear layering.
+The whole system is one cast of a fishing line. The landing is the cast itself: a spectral green hook flies out of near-black water, bites into the headline and drags the page as you scroll, trailing a glowing chain. That is the only place where the system glows. Once you are inside the app (`html.in-app`), you are standing on the dock waiting for a bite: the same green settles into a calmer, desaturated tone, the background turns to a neutral graphite, and light gives way to clear layering. A night-fishing lantern hangs over the hero and is the only light source: the page sits in a soft penumbra that falls off away from the lantern, with spectral smoke and a few embers rising from it.
 
 Inside, the app should feel warm and gamer, not clinical: the hook keeps appearing as a living signature (the online-indicator hook with its sonar ring, the hook that drops a newly published offer into the board, the hanging hook in empty states), priority numbers pop in, and rows land with a little bounce. That warmth comes from motion and the hook motif, never from glow, neon or gradients. Controls are tactile and confident: comfortable tap targets, soft 8px corners, clear pressed states, and nothing that needs precision aiming on a phone.
 
@@ -173,7 +173,7 @@ The CSS custom properties (`--bg`, `--surface`, `--surface2`, `--line`, `--ink`,
 - **Verde Espectral** (`--accent` on the landing): the hook, the chain, the primary CTA, the scroll-cue dot, the step rail fill and the highlighted server names on the landing. The only color allowed to glow (`box-shadow` / `drop-shadow` halos with `rgba(69,230,166,.25–.9)`).
 - **Verde Muelle** (`--accent` in the app): primary buttons, the user's own chat bubbles, selected picks, unread counters, the online ring, the first-priority number. Never glows.
 - **Menta Preferida**: the readable text tone for "wanted" positions, role chips and the "Tuya" tag inside the app, where Verde Muelle on a tinted background would be too dark.
-- **Bruma Menta**: the light core of landing effects (particles, chain highlights, impact ring). Landing only.
+- **Bruma Menta**: the light core of landing effects (the lantern flame, embers, chain highlights, impact ring). Landing only.
 
 ### Neutral
 - **Abismo** (`--bg`, landing): the water. Page background, `theme-color`, the base of the hero's radial gradient (`#0B2A20` at the center).
@@ -229,7 +229,7 @@ A centered `.wrap` container (max 1200px, 16px side gutters), widened to 1640px 
 
 The offer board is an 8-column grid on desktop (player, positions, rank, mode, schedule, title, age, actions; 12px gaps, 18px row padding, 68px minimum row height). At ≤900px the column header disappears and each offer becomes a stacked card using named grid areas (player/age, title, positions, rank/mode, full-width chat button). At ≤640px the header compresses (labels hide, icons stay), stats become a three-up grid, and the chat drawer goes full screen.
 
-The landing is a long scroll story: a 260svh pinned hero, a "how it works" section with a sticky phone mock beside a progress rail (phone hidden ≤900px), an infinite server marquee, alternating two-column feature rows (single column ≤820px), and a final CTA where the primary button sits still right under a swinging hook (the button never moves, so it stays easy to tap). Above 1100px the hero also shows an example offer hanging from a hook on the right, labeled "Ejemplo", which reels up out of view as soon as the scroll animation starts.
+The landing is a long scroll story: a 260svh pinned hero, a "how it works" section with a sticky phone mock beside a progress rail (phone hidden ≤900px), an infinite server marquee, alternating two-column feature rows (single column ≤820px), and a final CTA where the primary button sits still right under a swinging hook (the button never moves, so it stays easy to tap). Above 1100px the hero shows the lantern on the right with an example offer hanging from its base by a short iron chain; the offer fades out as soon as the scroll starts, the lantern keeps lighting, and the usual hook then bites the headline. On phones the lantern hangs top-center without the offer. Between 821px and 1100px the lantern is hidden.
 
 Spacing runs on small steps (4, 6, 8, 12, 16, 18, 24, 28px) inside the app; the landing uses large section padding (90–150px vertical). No horizontal page scroll at any width (`overflow-x: clip` on `html, body`); horizontally scrolling rows (server tabs, segmented filters) hide their scrollbars.
 
@@ -298,6 +298,9 @@ A 400px right-hand drawer (full screen on phones). Messages are 14px bubbles at 
 ### Online hook indicator (signature)
 A 17px circle at the avatar's bottom-right corner with an accent ring and a tiny hook glyph inside; a second ring pulses outward like sonar every 2.6s. It is the clearest daily expression of the brand inside the app.
 
+### Lantern (signature, landing)
+A night-fishing lantern drawn from scratch (iron cage and cap in Musgo Apagado, never glowing; glass and flicking flame in Verde Espectral, Bruma Menta and a near-white core). It hangs from an iron chain, sways ±2.2° over 6s, and positions the light: a screen-blended spectral pool plus a penumbra vignette centered on it (measured in JS), spectral smoke drifting from it, and ~10 embers rising from it. Text and buttons always sit above the penumbra so they stay fully legible. It is a fisherman's lantern: never a hooded figure, scythe, souls or anything evoking a League of Legends champion.
+
 ### Hook drop (signature)
 When a new offer appears, a hook on its chain drops from above, the row falls in with a small overshoot (`rowIn`, 1.5s) and briefly tints green, then the hook is pulled back up. Empty states show the hook hanging and gently swinging (`swing`, 3.4s, ±7°).
 
@@ -305,7 +308,7 @@ When a new offer appears, a hook on its chain drops from above, the row falls in
 
 ### Do:
 - **Do** style every component with the CSS variables so it works under both `:root` (landing) and `html.in-app` (app).
-- **Do** keep glow, particles and gradients on the landing; inside the app, express warmth through the hook motif and motion (pop, drop, swing, sonar ring).
+- **Do** keep glow and light effects on the landing, and make them come from a source (the lantern, the hook): penumbra away from the lantern, embers only near it, never particles scattered across the screen; inside the app, express warmth through the hook motif and motion (pop, drop, swing, sonar ring).
 - **Do** mark selections with `aria-pressed` and show priority order with numbered accent badges; order is information.
 - **Do** keep tap targets comfortable (at least 32–34px icon buttons, full-width chat button on phones) and inputs at 16px on phones.
 - **Do** wrap every animation in a `prefers-reduced-motion: reduce` fallback that shows the final state.
