@@ -585,7 +585,8 @@ html,body{overflow-x:clip}
 .tag.t-mode{display:none;background:var(--surface2);color:var(--ink)}
 /* ---------- campeones ---------- */
 .cchip{display:inline-flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:2px 10px 2px 3px;font-size:.8rem;white-space:nowrap}
-.cmono{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:.68rem;font-weight:800;color:#fff;flex:none}
+.cmono{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:.68rem;font-weight:800;color:#fff;flex:none;overflow:hidden}
+.cmono img{width:100%;height:100%;object-fit:cover;transform:scale(1.12);display:block}
 .cchip .cn{font-style:normal;font-size:.66rem;font-weight:700;color:var(--muted);margin:0 -2px 0 4px}
 .cchip.like{background:rgba(61,191,142,.12);border-color:rgba(61,191,142,.35);color:#9BE0C4}
 .cchip.avoid{background:rgba(242,107,107,.1);border-color:rgba(242,107,107,.35);color:#F4A3A3}
@@ -834,7 +835,7 @@ html.in-app #app{position:relative;z-index:1}
     <button class="btn big dbtn" data-signup>Entrar con Google</button>
     <div class="wrap rv"><h2>¿Armamos la partida?</h2><p>Crear tu perfil lleva diez segundos.</p></div>
   </section>
-  <p class="note">Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. League of Legends es una marca de Riot Games, Inc. · <a href="privacidad.html">Privacidad</a></p>
+  <p class="note">Hook n' Queue fue creado bajo la política "Legal Jibber Jabber" de Riot Games usando recursos propiedad de Riot Games. Riot Games no respalda ni patrocina este proyecto. League of Legends es una marca de Riot Games, Inc. · <a href="privacidad.html">Privacidad</a></p>
 </div>
 
 <div id="app" hidden>
@@ -857,7 +858,7 @@ html.in-app #app{position:relative;z-index:1}
     <div class="cols" id="cols"><span>Jugador</span><span>Juega</span><span>Busca</span><span>Rango</span><span>Modo</span><span>Oferta</span><span>Publicada</span><span></span></div>
     <div id="list"></div>
   </section>
-  <p class="note">Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. · <a href="privacidad.html">Privacidad</a> · <a href="#" onclick="openDonate();return false">Donar</a></p>
+  <p class="note">Hook n' Queue fue creado bajo la política "Legal Jibber Jabber" de Riot Games usando recursos propiedad de Riot Games. Riot Games no respalda ni patrocina este proyecto. · <a href="privacidad.html">Privacidad</a> · <a href="#" onclick="openDonate();return false">Donar</a></p>
 </div>
 <aside class="rside" id="rside" aria-label="En línea y chats"></aside>
 </main>
@@ -881,8 +882,8 @@ const EN={
 "¿Armamos la partida?":"Ready to queue up?","Crear tu perfil lleva diez segundos.":"Creating your profile takes ten seconds.","Los demás ven primero tu":"Others see your top pick first:","jugadores coinciden":"players match",
 "Te paso mi Discord: premade_seba":"Here's my Discord: premade_seba","Listo, te agrego. ¡Nos vemos en la partida!":"Done, adding you. See you in game!","Esta oferta terminó. El chat se borra en 24 h.":"This offer ended. The chat will be deleted in 24 h.",
 "Nueva oferta":"New offer","el tablón de tu server":"your server's board","con el farol prendido":"with their lantern lit","nuevas hoy":"new today","· farol prendido":"· lantern lit","Tu próximo dúo está":"Your next duo is","acá.":"here.","Ejemplo":"Example","Busco jungla para flex esta noche":"Looking for a jungler for flex tonight","hace 3 min":"3 min ago","#LAS1 · en línea":"#LAS1 · online","Deshacer":"Undo","Oferta reabierta":"Offer reopened","No se pudo reabrir la oferta":"Couldn't reopen the offer","No se pudo desbloquear":"Couldn't unblock","Ya pasó mucho tiempo para deshacer. Si querés, publicá la oferta de nuevo.":"It's too late to undo. You can post the offer again if you want.","Ver detalle":"Show details","No pudimos cargar las ofertas":"We couldn't load the offers","Puede ser tu conexión o un problema nuestro. Probá de nuevo en unos segundos.":"It may be your connection or a problem on our side. Try again in a few seconds.","Reintentar":"Try again","No se pudieron actualizar las ofertas":"Couldn't refresh the offers","Cerrar aviso":"Close notice","No se pudo enviar el reporte. Probá de nuevo.":"Couldn't send the report. Try again.","No se pudo descartar el reporte":"Couldn't dismiss the report","No se pudo abrir el chat. Probá de nuevo.":"Couldn't open the chat. Try again.","Enviando...":"Sending...","Nueva oferta en":"New offer in","Server donde se publica":"Server to post in","Elegí tu rango":"Choose your rank","División":"Division","Repetir última oferta":"Repeat last offer","Tocá las opciones en orden de preferencia: la primera es la que más te interesa.":"Tap options in order of preference: the first one is what you want most.","Detalles opcionales":"Optional details","Rango que buscás, campeones, micro y onda":"Rank you want, champions, mic and vibe","Rango que buscás":"Rank you want","Ideal si tu dúo juega con":"Ideally your duo plays","Mejor que no juegue con":"Better if they don’t play","Elegí al menos un modo.":"Choose at least one mode.","Elegí tu posición.":"Choose your position.","Elegí qué posición buscás.":"Choose the position you want.","Elegí al menos un horario.":"Choose at least one time.","Revisá los campos marcados.":"Check the highlighted fields.","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
-"Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. League of Legends es una marca de Riot Games, Inc. ·":"Hook n' Queue isn't affiliated with or endorsed by Riot Games. League of Legends is a trademark of Riot Games, Inc. ·",
-"Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. ·":"Hook n' Queue isn't affiliated with or endorsed by Riot Games. ·","Privacidad":"Privacy","Donar":"Donate",
+"Hook n' Queue fue creado bajo la política \"Legal Jibber Jabber\" de Riot Games usando recursos propiedad de Riot Games. Riot Games no respalda ni patrocina este proyecto. League of Legends es una marca de Riot Games, Inc. ·":"Hook n' Queue was created under Riot Games' \"Legal Jibber Jabber\" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project. League of Legends is a trademark of Riot Games, Inc. ·",
+"Hook n' Queue fue creado bajo la política \"Legal Jibber Jabber\" de Riot Games usando recursos propiedad de Riot Games. Riot Games no respalda ni patrocina este proyecto. ·":"Hook n' Queue was created under Riot Games' \"Legal Jibber Jabber\" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project. ·","Privacidad":"Privacy","Donar":"Donate",
 "Buscá con quién jugar":"Find someone to play with","Elegí tu server, mirá las ofertas y coordiná la partida.":"Pick your server, browse offers and set up your game.",
 "Ofertas hoy":"Offers today","En línea ahora":"Online now","Activas en el server":"Active on server","Publicar oferta":"Post offer","Mis chats":"My chats",
 "Todas":"All","Últimas 24 hs":"Last 24 hours","Esta semana":"This week","Más de una semana":"Older than a week","Solo en línea":"Online only","Filtros":"Filters","Limpiar filtros":"Clear filters",
@@ -1097,13 +1098,18 @@ function offerDetail(o){
 
 // ---------- campeones (nombres desde datos públicos de Riot, con lista de respaldo)
 let CHAMPS="Aatrox,Ahri,Akali,Akshan,Alistar,Ambessa,Amumu,Anivia,Annie,Aphelios,Ashe,Aurelion Sol,Aurora,Azir,Bardo,Bel'Veth,Blitzcrank,Brand,Braum,Briar,Caitlyn,Camille,Cassiopeia,Cho'Gath,Corki,Darius,Diana,Dr. Mundo,Draven,Ekko,Elise,Evelynn,Ezreal,Fiddlesticks,Fiora,Fizz,Galio,Gangplank,Garen,Gnar,Gragas,Graves,Gwen,Hecarim,Heimerdinger,Hwei,Illaoi,Irelia,Ivern,Janna,Jarvan IV,Jax,Jayce,Jhin,Jinx,K'Sante,Kai'Sa,Kalista,Karma,Karthus,Kassadin,Katarina,Kayle,Kayn,Kennen,Kha'Zix,Kindred,Kled,Kog'Maw,LeBlanc,Lee Sin,Leona,Lillia,Lissandra,Lucian,Lulu,Lux,Malphite,Malzahar,Maokai,Master Yi,Mel,Milio,Miss Fortune,Mordekaiser,Morgana,Naafiri,Nami,Nasus,Nautilus,Neeko,Nidalee,Nilah,Nocturne,Nunu y Willump,Olaf,Orianna,Ornn,Pantheon,Poppy,Pyke,Qiyana,Quinn,Rakan,Rammus,Rek'Sai,Rell,Renata Glasc,Renekton,Rengar,Riven,Rumble,Ryze,Samira,Sejuani,Senna,Seraphine,Sett,Shaco,Shen,Shyvana,Singed,Sion,Sivir,Skarner,Smolder,Sona,Soraka,Swain,Sylas,Syndra,Tahm Kench,Taliyah,Talon,Taric,Teemo,Thresh,Tristana,Trundle,Tryndamere,Twisted Fate,Twitch,Udyr,Urgot,Varus,Vayne,Veigar,Vel'Koz,Vex,Vi,Viego,Viktor,Vladimir,Volibear,Warwick,Wukong,Xayah,Xerath,Xin Zhao,Yasuo,Yone,Yorick,Yuumi,Zac,Zed,Zeri,Ziggs,Zilean,Zoe,Zyra".split(",");
+const CHAMP_IMG={};
 (async()=>{try{const v=(await (await fetch("https://ddragon.leagueoflegends.com/api/versions.json")).json())[0];
   const d=await (await fetch(`https://ddragon.leagueoflegends.com/cdn/${v}/data/es_AR/champion.json`)).json();
-  const names=Object.values(d.data).map(c=>c.name).sort((a,b)=>a.localeCompare(b,"es"));if(names.length>100)CHAMPS=names}catch(e){}})();
+  Object.values(d.data).forEach(c=>{CHAMP_IMG[c.name]=`https://ddragon.leagueoflegends.com/cdn/${v}/img/champion/${c.image.full}`});
+  const names=Object.values(d.data).map(c=>c.name).sort((a,b)=>a.localeCompare(b,"es"));if(names.length>100)CHAMPS=names;
+  if(uid)render()}catch(e){}})();
 const norm=t=>t.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/gi,"").toLowerCase();
 const CC=["#3F6FD8","#E0524A","#A35BE0","#E08A2E","#2FA866","#D6366E","#2BA3B8","#8A7F3A"];
 function champChip(name,cls="",num){let x=0;for(const c of name)x=(x*31+c.charCodeAt(0))>>>0;
-  return h("span",{class:"cchip "+cls},num?h("i",{class:"cn"},num):null,h("span",{class:"cmono",style:`background:${CC[x%CC.length]}`},name[0]),name)}
+  const mono=h("span",{class:"cmono",style:`background:${CC[x%CC.length]}`},name[0]);
+  if(CHAMP_IMG[name]){mono.textContent="";mono.append(h("img",{src:CHAMP_IMG[name],alt:"",loading:"lazy",onerror:e=>{e.target.remove();mono.textContent=name[0]}}))}
+  return h("span",{class:"cchip "+cls},num?h("i",{class:"cn"},num):null,mono,name)}
 function champPicker({max=3,value=[],numbered=false,placeholder="Buscá un campeón...",tone=""}={}){
   let val=[...value];const chips=h("div",{class:"cpicks"}),input=h("input",{class:"cinput",placeholder,autocomplete:"off"}),sug=h("div",{class:"csug",role:"listbox"});
   const wrap=h("div",{class:"cpicker "+tone},chips,h("div",{class:"cbox"},input,sug));

@@ -25,7 +25,7 @@ El sistema completo está en `DESIGN.md` (estilo "El Anzuelo Espectral"); `PRODU
 - **Adentro de la app** (`html.in-app`): gris grafito (`#0D0F0F`) y **Verde Muelle** (`#3DBF8E`). Cálida y gamer, pero **sin brillos**: la personalidad sale del anzuelo en movimiento (indicador "en línea", anzuelo que deja caer ofertas, anzuelo que se balancea), nunca de glows ni degradés.
 - Siempre usar las variables CSS (`--accent`, `--surface`, `--ink`…), no colores fijos, así cada componente funciona en la landing y en la app.
 - Plano por capas: sin sombras en tarjetas, paneles ni botones; solo en lo que flota (menús, chat, ventanas).
-- Íconos de posiciones y logos son **propios**. No usar arte, íconos ni imágenes oficiales de Riot Games (salvo que Sebastian los ponga en `iconos/` siguiendo la política de Riot).
+- Logos propios; nunca usar logos ni marcas de Riot. Arte oficial de Riot solo en estos casos, que Sebastian decidió consultando a Riot (política "Legal Jibber Jabber"): imágenes de campeones desde Data Dragon e íconos de posición que él ponga en `iconos/`. No descargar íconos de Riot de fuentes no oficiales. El pie de página tiene que llevar el aviso que pide esa política.
 - Sin imágenes ni diseños que imiten personajes de League of Legends.
 
 ## Idiomas
