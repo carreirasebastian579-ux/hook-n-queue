@@ -152,6 +152,10 @@ input:focus,select:focus{border-color:var(--accent)}
 .toast.bad{background:var(--danger);color:#1A0606;border-radius:14px;padding:10px 8px 10px 16px}
 .toast .tx{border:0;background:none;color:inherit;width:32px;height:32px;border-radius:8px;flex:none;font-size:.9rem;opacity:.75}
 .toast .tx:hover{opacity:1;background:rgba(0,0,0,.12)}
+.toast.act{padding:6px 6px 6px 18px}
+.toast .ta{border:0;background:rgba(0,0,0,.1);color:inherit;font-weight:700;border-radius:999px;padding:0 14px;min-height:34px;flex:none}
+.toast .ta:hover{background:rgba(0,0,0,.18)}
+@media (pointer:coarse){.toast .ta{min-height:44px}}
 
 .fbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
 .seg{display:flex;background:var(--bg);border-radius:8px;padding:3px;gap:2px;overflow-x:auto}
@@ -809,7 +813,7 @@ const EN={
 "Chats que no se acumulan":"Chats that don't pile up","Cada chat nace de una oferta y se borra 24 hs después de que termina. Tu bandeja siempre limpia.":"Every chat starts from an offer and is deleted 24 hours after it ends. Your inbox stays clean.",
 "¿Armamos la partida?":"Ready to queue up?","Crear tu perfil lleva diez segundos.":"Creating your profile takes ten seconds.","Los demás ven primero tu":"Others see your top pick first:","jugadores coinciden":"players match",
 "Te paso mi Discord: premade_seba":"Here's my Discord: premade_seba","Listo, te agrego. ¡Nos vemos en la partida!":"Done, adding you. See you in game!","Esta oferta terminó. El chat se borra en 24 h.":"This offer ended. The chat will be deleted in 24 h.",
-"Nueva oferta":"New offer","Ver detalle":"Show details","No pudimos cargar las ofertas":"We couldn't load the offers","Puede ser tu conexión o un problema nuestro. Probá de nuevo en unos segundos.":"It may be your connection or a problem on our side. Try again in a few seconds.","Reintentar":"Try again","No se pudieron actualizar las ofertas":"Couldn't refresh the offers","Cerrar aviso":"Close notice","No se pudo enviar el reporte. Probá de nuevo.":"Couldn't send the report. Try again.","No se pudo descartar el reporte":"Couldn't dismiss the report","No se pudo abrir el chat. Probá de nuevo.":"Couldn't open the chat. Try again.","Enviando...":"Sending...","Nueva oferta en":"New offer in","Server donde se publica":"Server to post in","Elegí tu rango":"Choose your rank","División":"Division","Repetir última oferta":"Repeat last offer","Tocá las opciones en orden de preferencia: la primera es la que más te interesa.":"Tap options in order of preference: the first one is what you want most.","Detalles opcionales":"Optional details","Rango que buscás, campeones, micro y onda":"Rank you want, champions, mic and vibe","Rango que buscás":"Rank you want","Ideal si tu dúo juega con":"Ideally your duo plays","Mejor que no juegue con":"Better if they don’t play","Elegí al menos un modo.":"Choose at least one mode.","Elegí tu posición.":"Choose your position.","Elegí qué posición buscás.":"Choose the position you want.","Elegí al menos un horario.":"Choose at least one time.","Revisá los campos marcados.":"Check the highlighted fields.","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
+"Nueva oferta":"New offer","Deshacer":"Undo","Oferta reabierta":"Offer reopened","No se pudo reabrir la oferta":"Couldn't reopen the offer","No se pudo desbloquear":"Couldn't unblock","Ya pasó mucho tiempo para deshacer. Si querés, publicá la oferta de nuevo.":"It's too late to undo. You can post the offer again if you want.","Ver detalle":"Show details","No pudimos cargar las ofertas":"We couldn't load the offers","Puede ser tu conexión o un problema nuestro. Probá de nuevo en unos segundos.":"It may be your connection or a problem on our side. Try again in a few seconds.","Reintentar":"Try again","No se pudieron actualizar las ofertas":"Couldn't refresh the offers","Cerrar aviso":"Close notice","No se pudo enviar el reporte. Probá de nuevo.":"Couldn't send the report. Try again.","No se pudo descartar el reporte":"Couldn't dismiss the report","No se pudo abrir el chat. Probá de nuevo.":"Couldn't open the chat. Try again.","Enviando...":"Sending...","Nueva oferta en":"New offer in","Server donde se publica":"Server to post in","Elegí tu rango":"Choose your rank","División":"Division","Repetir última oferta":"Repeat last offer","Tocá las opciones en orden de preferencia: la primera es la que más te interesa.":"Tap options in order of preference: the first one is what you want most.","Detalles opcionales":"Optional details","Rango que buscás, campeones, micro y onda":"Rank you want, champions, mic and vibe","Rango que buscás":"Rank you want","Ideal si tu dúo juega con":"Ideally your duo plays","Mejor que no juegue con":"Better if they don’t play","Elegí al menos un modo.":"Choose at least one mode.","Elegí tu posición.":"Choose your position.","Elegí qué posición buscás.":"Choose the position you want.","Elegí al menos un horario.":"Choose at least one time.","Revisá los campos marcados.":"Check the highlighted fields.","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
 "Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. League of Legends es una marca de Riot Games, Inc. ·":"Hook n' Queue isn't affiliated with or endorsed by Riot Games. League of Legends is a trademark of Riot Games, Inc. ·",
 "Hook n' Queue no está afiliado a Riot Games ni cuenta con su respaldo. ·":"Hook n' Queue isn't affiliated with or endorsed by Riot Games. ·","Privacidad":"Privacy","Donar":"Donate",
 "Buscá con quién jugar":"Find someone to play with","Elegí tu server, mirá las ofertas y coordiná la partida.":"Pick your server, browse offers and set up your game.",
@@ -880,7 +884,7 @@ const RULES=[
  [/^Esta oferta terminó\. El chat se borra en (\d+) h, aprovechá para pasar tu nick o Discord\.$/,(m,a)=>`This offer ended. This chat will be deleted in ${a} h, so swap names or Discord now.`],
  [/^Te falta elegir (.+)\.$/,(m,a)=>`You still need to choose ${a.split(", ").map(tr).join(", ")}.`],
  [/^¿Desbanear a (.+)\?\n\nVa a poder volver a entrar y crear su perfil de nuevo\.$/,(m,a)=>`Unban ${a}?\n\nThey'll be able to sign in and create their profile again.`],
- [/^Nuevo mensaje de (.+)$/,(m,a)=>`New message from ${a}`],[/^Cuando mandes tu primer mensaje, le avisamos a (.+)\.$/,(m,a)=>`When you send your first message, we'll let ${a} know.`],[/^(.+) bloqueado$/,(m,a)=>`${a} blocked`],[/^(.+) baneado$/,(m,a)=>`${a} banned`],
+ [/^Nuevo mensaje de (.+)$/,(m,a)=>`New message from ${a}`],[/^Cuando mandes tu primer mensaje, le avisamos a (.+)\.$/,(m,a)=>`When you send your first message, we'll let ${a} know.`],[/^(.+) bloqueado$/,(m,a)=>`${a} blocked`],[/^(.+) desbloqueado$/,(m,a)=>`${a} unblocked`],[/^(.+) baneado$/,(m,a)=>`${a} banned`],
  [/^No se pudo publicar: (.*)$/,(m,a)=>`Couldn't post: ${a}`],[/^No se pudo banear: (.*)$/,(m,a)=>`Couldn't ban: ${a}`],[/^Alias: (.+)$/,(m,a)=>`Alias: ${a}`],
  [/^¿Banear a (.+)\?\n\nSe borra su perfil, sus ofertas y sus chats, y no va a poder volver a usar la app con esa cuenta\.$/,(m,a)=>`Ban ${a}?\n\nTheir profile, offers and chats will be deleted, and they won't be able to use the app with that account again.`],
  [/^¿Borrar el chat con (.+) de tu lista\?\n\nA la otra persona no le pasa nada\. Si te vuelve a escribir, el chat reaparece con los mensajes anteriores\.$/,(m,a)=>`Delete your chat with ${a} from your list?\n\nNothing happens to the other person. If they message you again, the chat comes back with the previous messages.`],
@@ -1062,6 +1066,7 @@ function limitMsg(e){const m=String(e&&e.message||e||"");
   if(m.includes("HNQ_LIMIT_MSG"))return "Estás mandando mensajes muy rápido. Esperá un momento.";
   if(m.includes("HNQ_LIMIT_CHATS"))return "Abriste muchos chats seguidos. Esperá un rato para abrir otro.";
   if(m.includes("HNQ_LIMIT_REPORTS"))return "Hiciste muchos reportes seguidos. Esperá un rato.";
+  if(m.includes("HNQ_REOPEN_LATE"))return "Ya pasó mucho tiempo para deshacer. Si querés, publicá la oferta de nuevo.";
   return null}
 // ---------- moderación (solo administradores)
 function showBanned(){
@@ -1176,8 +1181,7 @@ function openPlayerCard(id,anchor){
     p.mine?null:h("div",{class:"pfoot"},
       h("button",{onclick:()=>{closePlayerCard();report(id,"perfil")}},"Reportar"),
       h("span",{},"·"),
-      h("button",{onclick:async()=>{closePlayerCard();const {error}=await sb.from("blocks").insert({blocker_id:uid,blocked_id:id});if(error&&error.code!=="23505"){toast("No se pudo bloquear");return}
-        blockedIds.add(id);for(const c of Object.values(chats))if(c.user_id===id)delete chats[c.id];closeDrawer();render();toast(riot+" bloqueado")}},"Bloquear")));
+      h("button",{onclick:()=>{closePlayerCard();blockUser(id,riot)}},"Bloquear")));
   const back=h("div",{class:"pback",id:"pcardback",onclick:closePlayerCard});
   document.body.append(back,card);
   if(innerWidth>640&&anchor){const r=anchor.getBoundingClientRect(),W=card.offsetWidth,H=card.offsetHeight;
@@ -1254,8 +1258,8 @@ function renderList(){setTimeout(renderSides,0);
   const ae=document.activeElement,arow=ae&&ae.closest?ae.closest("#list .offer"):null;
   const fk=arow?{id:arow.dataset.id,i:[...arow.querySelectorAll(FOCUSABLE)].indexOf(ae)}:null;
   const s=SERVERS.find(x=>x.id===current);
-  const inServer=allOffers().filter(o=>o.server===current);
-  const offers=inServer.filter(o=>!blockedIds.has(o.user_id)).filter(passes).sort((a,b)=>b.at-a.at);
+  const inServer=allOffers().filter(o=>o.server===current&&!blockedIds.has(o.user_id));
+  const offers=inServer.filter(passes).sort((a,b)=>b.at-a.at);
   document.getElementById("srvTitle").textContent=`${s.id} · ${s.name}`;
   document.getElementById("srvCount").textContent=offersError?"":!inServer.length?"Sin ofertas por ahora":offers.length===inServer.length?`${offers.length} ${offers.length===1?"oferta activa":"ofertas activas"}`:`Mostrando ${offers.length} de ${inServer.length} ofertas`;
   document.getElementById("stToday").textContent=inServer.filter(o=>Date.now()-o.at<24*H).length;
@@ -1337,10 +1341,20 @@ function openProfile(editing,mode="signup"){const m=document.getElementById("mod
     h("div",{class:"actions"},h("button",{type:"button",class:"btn sec",onclick:()=>{m.replaceChildren();if(!editing)sb.auth.signOut()}},editing?"Cancelar":"Salir"),h("button",{class:"btn",type:"submit"},editing?"Guardar cambios":"Crear perfil")))));
   syncPrev();nick.focus()}
 
-function toast(msg,err=/^No se pud/.test(msg)){document.querySelector(".toast")?.remove();
-  const t=h("div",{class:"toast"+(err?" bad":""),role:err?"alert":"status"},h("span",{},msg));
+function toast(msg,err=/^No se pud/.test(msg),action=null){document.querySelector(".toast")?.remove();
+  const t=h("div",{class:"toast"+(err?" bad":"")+(action?" act":""),role:err?"alert":"status"},h("span",{},msg));
+  if(action)t.append(h("button",{type:"button",class:"ta",onclick:()=>{t.remove();action.fn()}},action.label));
   if(err)t.append(h("button",{type:"button",class:"tx","aria-label":"Cerrar aviso",onclick:()=>t.remove()},"✕"));
-  document.body.append(t);setTimeout(()=>t.remove(),err?7000:2400)}
+  document.body.append(t);
+  const ms=err?7000:action?6000:2400;let tm=setTimeout(()=>t.remove(),ms);
+  if(action||err){const stop=()=>clearTimeout(tm),go=()=>{clearTimeout(tm);tm=setTimeout(()=>t.remove(),2500)};
+    t.addEventListener("mouseenter",stop);t.addEventListener("mouseleave",go);t.addEventListener("focusin",stop);t.addEventListener("focusout",go)}}
+async function blockUser(id,who){const {error}=await sb.from("blocks").insert({blocker_id:uid,blocked_id:id});if(error&&error.code!=="23505"){toast("No se pudo bloquear");return}
+  blockedIds.add(id);for(const c of Object.values(chats))if(c.user_id===id)delete chats[c.id];closeDrawer();render();
+  toast(who+" bloqueado",false,{label:"Deshacer",fn:()=>unblockUser(id,who)})}
+async function unblockUser(id,who){const {error}=await sb.from("blocks").delete().eq("blocker_id",uid).eq("blocked_id",id);
+  if(error){console.error(error);toast("No se pudo desbloquear");return}
+  blockedIds.delete(id);render();await loadChats();renderSides();toast(who+" desbloqueado")}
 async function report(id,reason){const {error}=await sb.from("reports").insert({reporter_id:uid,reported_id:id,reason});
   if(error){console.error(error);toast(limitMsg(error)||"No se pudo enviar el reporte. Probá de nuevo.");return}toast("Reporte enviado. Lo vamos a revisar.")}
 function hookIn(id){
@@ -1348,7 +1362,12 @@ function hookIn(id){
   row.scrollIntoView({block:"center",behavior:"smooth"});
   const d=h("div",{class:"drop","aria-hidden":"true"},h("div",{class:"dc"}));const hk=h("div",{class:"dh"});hk.innerHTML=HOOK_SVG;d.append(hk);
   row.append(d);row.classList.add("landing");setTimeout(()=>{d.remove();row.classList.remove("landing")},2600)}
-async function closeOffer(id){const {error}=await sb.from("offers").update({closed_at:new Date().toISOString()}).eq("id",id);if(error){toast("No se pudo cerrar la oferta");return}OFFERS=OFFERS.filter(o=>o.id!==id);render();toast("Oferta cerrada, GG")}
+async function closeOffer(id){const o=OFFERS.find(x=>x.id===id);
+  const {error}=await sb.from("offers").update({closed_at:new Date().toISOString()}).eq("id",id);if(error){toast("No se pudo cerrar la oferta");return}
+  OFFERS=OFFERS.filter(x=>x.id!==id);render();toast("Oferta cerrada, GG",false,o?{label:"Deshacer",fn:()=>reopenOffer(o)}:null)}
+async function reopenOffer(o){const {error}=await sb.from("offers").update({closed_at:null}).eq("id",o.id);
+  if(error){console.error(error);toast(limitMsg(error)||"No se pudo reabrir la oferta");return}
+  OFFERS=[o,...OFFERS.filter(x=>x.id!==o.id)];if(current!==o.server)current=o.server;render();loadChats();toast("Oferta reabierta")}
 function picker(opts,{multi=false,icons=false,value=multi?[]:null,onchange=null,nonum=false}={}){
   let val=multi?[...value]:value;const wrap=h("div",{class:"picks"});
   const btns=opts.map(o=>{const n=h("span",{class:"n"});const b=h("button",{type:"button",class:"pick","aria-pressed":"false",onclick:()=>{
@@ -1554,8 +1573,7 @@ function showChat(key){
         if(!confirm(t(`¿Borrar el chat con ${g0.nick} de tu lista?\n\nA la otra persona no le pasa nada. Si te vuelve a escribir, el chat reaparece con los mensajes anteriores.`)))return;
         if(await setHidden(key,true)){closeDrawer();render();toast("Chat borrado")}else toast("No se pudo borrar el chat")}},"Borrar chat"),
       h("button",{onclick:()=>{menuEl.remove();menuEl=null;report(key,"chat")}},"Reportar"),
-      h("button",{class:"danger",onclick:async()=>{const {error}=await sb.from("blocks").insert({blocker_id:uid,blocked_id:key});if(error&&error.code!=="23505"){toast("No se pudo bloquear");return}
-        blockedIds.add(key);for(const c of Object.values(chats))if(c.user_id===key)delete chats[c.id];closeDrawer();render();toast(who+" bloqueado")}},"Bloquear"));
+      h("button",{class:"danger",onclick:()=>{menuEl.remove();menuEl=null;blockUser(key,who)}},"Bloquear"));
     d.append(menuEl)}
   const d=h("aside",{class:"drawer",id:"drawer","aria-label":"Chat con "+who},
     h("div",{class:"dhead"},h("button",{class:"icb",title:"Volver a mis chats",onclick:openChats},"‹"),
