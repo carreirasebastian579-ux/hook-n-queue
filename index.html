@@ -1945,7 +1945,9 @@ function onScroll(){if(ticking)return;ticking=true;requestAnimationFrame(()=>{ti
 addEventListener("scroll",onScroll,{passive:true});addEventListener("load",placeLight);document.fonts&&document.fonts.ready.then(placeLight);addEventListener("resize",()=>{measureAnchor();onScroll()});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.15});
 document.querySelectorAll(".rv").forEach(el=>io.observe(el));
-Object.entries(ICON_FILE).forEach(([r,f])=>{const im=new Image();im.onload=()=>{CUSTOM_IC[r]=im.src;if(uid)renderList()};im.src=`iconos/${f}.png`});
+Object.entries(ICON_FILE).forEach(([r,f])=>{const im=new Image();im.onload=()=>{CUSTOM_IC[r]=im.src;
+  document.querySelectorAll("svg.ic.r-"+f).forEach(el=>el.replaceWith(roleIcon(r)));   // landing y demos ya dibujadas: cambio al ícono oficial
+  if(uid)renderList()};im.src=`iconos/${f}.png`});
 if(!profile)showLanding();
 </script>
 </body>
