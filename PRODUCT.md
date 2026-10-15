@@ -31,7 +31,7 @@ Used mostly right before or between games, on desktop (often beside the game cli
 ## Brand Commitments
 - Name **Hook n' Queue**; wordmark "HOOK N' QUEUE" with the apostrophe drawn as a fishing hook. The hook motif is part of the identity (landing hero, online indicator).
 - Voice: Argentine Spanish voseo, short and direct, gamer-casual ("¿Armamos la partida?").
-- Not affiliated with Riot Games; the disclaimer stays. No official Riot art, icons or images (unless the owner adds them to `iconos/` per Riot's policy), and nothing imitating League of Legends characters. Position icons and logos are original.
+- Not affiliated with Riot Games; the disclaimer stays. Official Riot art only where the owner decided it under Riot's "Legal Jibber Jabber" policy: champion images from Data Dragon and the official position icons in `iconos/`. No Riot logos or trademarks, nothing from unofficial sources, and nothing imitating League of Legends characters. Logos are original.
 - Public contact: hooknqueue@gmail.com.
 
 ## Evidence on Hand

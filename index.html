@@ -193,7 +193,7 @@ input:focus,select:focus{border-color:var(--accent)}
 .compose{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--line)}
 .compose input{border-radius:999px}
 .compose .btn[disabled]{opacity:.6}
-.clist{flex:1;overflow-y:auto}
+.drawer .clist{flex:1;overflow-y:auto}
 .citem{display:flex;gap:10px;align-items:center;width:100%;text-align:left;border:0;background:transparent;padding:12px 14px;border-bottom:1px solid var(--line)}
 .citem:hover{background:var(--surface2)}
 .citem .t{flex:1;min-width:0}
@@ -288,7 +288,7 @@ input:focus,select:focus{border-color:var(--accent)}
 .sv{display:flex;align-items:baseline;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 26px;white-space:nowrap}
 .sv b{font-size:2.2rem;font-weight:800;letter-spacing:-.03em}
 .sv span{color:var(--muted)}
-.sv:nth-child(3n+1) b{color:var(--accent)}
+.sv.main b{color:var(--accent)}
 @keyframes mq{to{transform:translateX(-50%)}}
 
 .feats{display:grid;gap:90px;padding:40px 16px 110px}
@@ -698,9 +698,9 @@ html,body{overflow-x:clip}
 .modtabs button{border:0;background:transparent;color:var(--muted);padding:7px 14px;border-radius:8px;font-weight:600;cursor:pointer}
 .modtabs button[aria-pressed="true"]{background:var(--surface2);color:var(--ink)}
 .bmail{color:var(--ink)!important;opacity:.8}
-.clist{display:flex!important;flex-direction:column;justify-content:flex-start;align-items:stretch}
-.clist>.citem{flex:none}
-.clist>.empty{margin:auto 0}
+.drawer .clist{display:flex;flex-direction:column;flex-wrap:nowrap;gap:0;justify-content:flex-start;align-items:stretch}
+.drawer .clist>.citem{flex:none}
+.drawer .clist>.empty{margin:auto 0}
 .ppbtn{display:block;margin:10px 0 0;background:#FFC439!important;color:#111!important;box-shadow:none!important}
 .payhint{display:block;color:var(--muted);font-size:.75rem;margin:4px 0 0}
 .donate .mpbtn{margin-bottom:0}
@@ -980,7 +980,7 @@ const EN={
 "Chats que no se acumulan":"Chats that don't pile up","Cada chat nace de una oferta y se borra 24 hs después de que termina. Tu bandeja siempre limpia.":"Every chat starts from an offer and is deleted 24 hours after it ends. Your inbox stays clean.",
 "¿Armamos la partida?":"Ready to queue up?","Crear tu perfil lleva diez segundos.":"Creating your profile takes ten seconds.","Los demás ven primero tu":"Others see your top pick first:","jugadores coinciden":"players match",
 "Te paso mi Discord: premade_seba":"Here's my Discord: premade_seba","Listo, te agrego. ¡Nos vemos en la partida!":"Done, adding you. See you in game!","Esta oferta terminó. El chat se borra en 24 h.":"This offer ended. The chat will be deleted in 24 h.",
-"Nueva oferta":"New offer","Bloqueados":"Blocked","No bloqueaste a nadie.":"You haven't blocked anyone.","Desbloquear":"Unblock","Fondo del tablón":"Board background","El campeón que ves detrás del nombre del server. Si no elegís ninguno, va Thresh.":"The champion shown behind the server name. If you don't pick one, it's Thresh.","Thresh (por defecto)":"Thresh (default)","Ofertas activas":"Active offers","Nuevas hoy":"New today","Server":"Server","el tablón de tu server":"your server's board","con el farol prendido":"with their lantern lit","nuevas hoy":"new today","· farol prendido":"· lantern lit","Tu próximo dúo está":"Your next duo is","acá.":"here.","Ejemplo":"Example","Busco jungla para flex esta noche":"Looking for a jungler for flex tonight","hace 3 min":"3 min ago","#LAS1 · en línea":"#LAS1 · online","Deshacer":"Undo","Oferta reabierta":"Offer reopened","No se pudo reabrir la oferta":"Couldn't reopen the offer","No se pudo desbloquear":"Couldn't unblock","Ya pasó mucho tiempo para deshacer. Si querés, publicá la oferta de nuevo.":"It's too late to undo. You can post the offer again if you want.","Ver detalle":"Show details","No pudimos cargar las ofertas":"We couldn't load the offers","Puede ser tu conexión o un problema nuestro. Probá de nuevo en unos segundos.":"It may be your connection or a problem on our side. Try again in a few seconds.","Reintentar":"Try again","No se pudieron actualizar las ofertas":"Couldn't refresh the offers","Cerrar aviso":"Close notice","No se pudo enviar el reporte. Probá de nuevo.":"Couldn't send the report. Try again.","No se pudo descartar el reporte":"Couldn't dismiss the report","No se pudo abrir el chat. Probá de nuevo.":"Couldn't open the chat. Try again.","Enviando...":"Sending...","Nueva oferta en":"New offer in","Server donde se publica":"Server to post in","Elegí tu rango":"Choose your rank","División":"Division","Repetir última oferta":"Repeat last offer","Tocá las opciones en orden de preferencia: la primera es la que más te interesa.":"Tap options in order of preference: the first one is what you want most.","Detalles opcionales":"Optional details","Rango que buscás, campeones, micro y onda":"Rank you want, champions, mic and vibe","Rango que buscás":"Rank you want","Ideal si tu dúo juega con":"Ideally your duo plays","Mejor que no juegue con":"Better if they don’t play","Elegí al menos un modo.":"Choose at least one mode.","Elegí tu posición.":"Choose your position.","Elegí qué posición buscás.":"Choose the position you want.","Elegí al menos un horario.":"Choose at least one time.","Revisá los campos marcados.":"Check the highlighted fields.","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
+"Nueva oferta":"New offer","#LAS1 · farol prendido":"#LAS1 · lantern lit","Bloqueados":"Blocked","No bloqueaste a nadie.":"You haven't blocked anyone.","Desbloquear":"Unblock","Fondo del tablón":"Board background","El campeón que ves detrás del nombre del server. Si no elegís ninguno, va Thresh.":"The champion shown behind the server name. If you don't pick one, it's Thresh.","Thresh (por defecto)":"Thresh (default)","Ofertas activas":"Active offers","Nuevas hoy":"New today","Server":"Server","el tablón de tu server":"your server's board","con el farol prendido":"with their lantern lit","nuevas hoy":"new today","· farol prendido":"· lantern lit","Tu próximo dúo está":"Your next duo is","acá.":"here.","Ejemplo":"Example","Busco jungla para flex esta noche":"Looking for a jungler for flex tonight","hace 3 min":"3 min ago","#LAS1 · en línea":"#LAS1 · online","Deshacer":"Undo","Oferta reabierta":"Offer reopened","No se pudo reabrir la oferta":"Couldn't reopen the offer","No se pudo desbloquear":"Couldn't unblock","Ya pasó mucho tiempo para deshacer. Si querés, publicá la oferta de nuevo.":"It's too late to undo. You can post the offer again if you want.","Ver detalle":"Show details","No pudimos cargar las ofertas":"We couldn't load the offers","Puede ser tu conexión o un problema nuestro. Probá de nuevo en unos segundos.":"It may be your connection or a problem on our side. Try again in a few seconds.","Reintentar":"Try again","No se pudieron actualizar las ofertas":"Couldn't refresh the offers","Cerrar aviso":"Close notice","No se pudo enviar el reporte. Probá de nuevo.":"Couldn't send the report. Try again.","No se pudo descartar el reporte":"Couldn't dismiss the report","No se pudo abrir el chat. Probá de nuevo.":"Couldn't open the chat. Try again.","Enviando...":"Sending...","Nueva oferta en":"New offer in","Server donde se publica":"Server to post in","Elegí tu rango":"Choose your rank","División":"Division","Repetir última oferta":"Repeat last offer","Tocá las opciones en orden de preferencia: la primera es la que más te interesa.":"Tap options in order of preference: the first one is what you want most.","Detalles opcionales":"Optional details","Rango que buscás, campeones, micro y onda":"Rank you want, champions, mic and vibe","Rango que buscás":"Rank you want","Ideal si tu dúo juega con":"Ideally your duo plays","Mejor que no juegue con":"Better if they don’t play","Elegí al menos un modo.":"Choose at least one mode.","Elegí tu posición.":"Choose your position.","Elegí qué posición buscás.":"Choose the position you want.","Elegí al menos un horario.":"Choose at least one time.","Revisá los campos marcados.":"Check the highlighted fields.","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
 "Hook n' Queue fue creado bajo la política \"Legal Jibber Jabber\" de Riot Games usando recursos propiedad de Riot Games. Riot Games no respalda ni patrocina este proyecto. League of Legends es una marca de Riot Games, Inc. ·":"Hook n' Queue was created under Riot Games' \"Legal Jibber Jabber\" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project. League of Legends is a trademark of Riot Games, Inc. ·",
 "Hook n' Queue fue creado bajo la política \"Legal Jibber Jabber\" de Riot Games usando recursos propiedad de Riot Games. Riot Games no respalda ni patrocina este proyecto. ·":"Hook n' Queue was created under Riot Games' \"Legal Jibber Jabber\" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project. ·","Privacidad":"Privacy","Donar":"Donate",
 "Buscá con quién jugar":"Find someone to play with","Elegí tu server, mirá las ofertas y coordiná la partida.":"Pick your server, browse offers and set up your game.",
@@ -1902,15 +1902,15 @@ function placePortal(){
 
 // oferta de ejemplo que cuelga del anzuelo en el hero (compu)
 document.getElementById("lccard").append(
-  h("div",{class:"lc-h"},avatarEl({nick:"Mati",color:"#E08A2E",online:true}),h("span",{class:"lc-n"},h("b",{},"Mati"),h("small",{},"#LAS1 · en línea")),h("span",{class:"lc-age"},"hace 3 min")),
+  h("div",{class:"lc-h"},avatarEl({nick:"Mati",color:"#E08A2E",online:true}),h("span",{class:"lc-n"},h("b",{},"Mati"),h("small",{},"#LAS1 · farol prendido")),h("span",{class:"lc-age"},"hace 3 min")),
   h("p",{class:"lc-t"},"Busco jungla para flex esta noche"),
   h("div",{class:"picks"},["Jungla","Top"].map((r,i)=>h("span",{class:"pick","aria-pressed":"true"},h("span",{class:"n"},i+1),roleIcon(r),r)),h("span",{class:"rank"},badge("Platino"),"Platino IV")),
   h("div",{class:"tags"},timeTag(["Noche"],true),micTag(["Con micro"]),vibeTag("Relajado")));
 
 // servers marquee
 const track=document.getElementById("track");
-[...SERVERS,...SERVERS].forEach(s=>{const n=0;
-  track.append(h("div",{class:"sv"},h("b",{},s.id),h("span",{},s.name),null))});
+[...SERVERS,...SERVERS].forEach(s=>{
+  track.append(h("div",{class:"sv"+(s.id==="LAS"||s.id==="LAN"?" main":"")},h("b",{},s.id),h("span",{},s.name),null))});
 
 // feature visuals
 const D=(d)=>`--d:${d}s`;

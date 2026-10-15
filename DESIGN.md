@@ -159,7 +159,7 @@ The whole system is one cast of a fishing line. The landing is the cast itself: 
 
 Inside, the app should feel warm and gamer, not clinical: the hook keeps appearing as a living signature (the online-indicator hook with its sonar ring, the hook that drops a newly published offer into the board, the hanging hook in empty states), priority numbers pop in, and rows land with a little bounce. That warmth comes from motion and the hook motif, never from glow, neon or gradients. Controls are tactile and confident: comfortable tap targets, soft 8px corners, clear pressed states, and nothing that needs precision aiming on a phone.
 
-Density is moderate: the offer board is a real data table on desktop (8 columns, up to three columns of layout at ≥1500px) that folds into stacked cards on phones. Everything is set in a single typeface, Inter, with the brand voice carried by weight 800 and tight tracking.
+Density is moderate: the offer board is a real data table on desktop (8 columns, up to three columns of layout at ≥1500px) that folds into stacked cards on phones. Three families, each with one job: Inter for body text and data, Barlow Condensed 800 for the biggest titles (landing headlines, the server name in the dock), and Saira Condensed 600/700 for labels, buttons, tabs and ranks.
 
 **Key Characteristics:**
 - Two registers of the same green: Verde Espectral (landing, can glow) and Verde Muelle (app, never glows).
@@ -226,7 +226,7 @@ The CSS custom properties (`--bg`, `--surface`, `--surface2`, `--line`, `--ink`,
 - **Wordmark**: "HOOK N' QUEUE", 800, 0.04em tracking, with the apostrophe drawn as a hook SVG in the accent color.
 
 ### Named Rules
-**The Heavy Voice Rule.** Headings are 800 with negative tracking; never use a light or thin weight for a heading, and never add a second typeface.
+**The Heavy Voice Rule.** Headings are heavy (700–800); never use a light or thin weight for a heading. Stick to the three families (Inter, Barlow Condensed, Saira Condensed) and never add a fourth.
 
 **The 16px Input Rule.** On phones every input and select is at least 16px so iOS does not zoom on focus.
 
@@ -256,7 +256,7 @@ Flat by layers. Depth comes from stepping through `--bg` → `--surface` → `--
 
 ## Shapes
 
-Soft, friendly rectangles. Controls (buttons, inputs, picks, server tabs, icon buttons) use 8px corners; small inner pieces drop to 4–6px (tags, segmented-control buttons). Containers grow rounder with size: stats and big buttons 10px, panels and offer details 12px, side cards and chat bubbles 14px, modals and the hero board 16px, landing demo boxes 18px. Counters, tags, toasts, the chat compose field and champion chips are full pills. Avatars and online indicators are circles.
+Soft, friendly rectangles on the landing; inside the app corners are nearly square (see App shape language, `--rad` 6px). On the landing, controls (buttons, inputs, picks, server tabs, icon buttons) use 8px corners; small inner pieces drop to 4–6px (tags, segmented-control buttons). Containers grow rounder with size: stats and big buttons 10px, panels and offer details 12px, side cards and chat bubbles 14px, modals and the hero board 16px, landing demo boxes 18px. Counters, tags, toasts, the chat compose field and champion chips are full pills. Avatars and online indicators are circles.
 
 Chat bubbles are 14px with one tucked corner (4px) on the speaker's side. Position icons sit in 32px rounded-square tiles. The hook and its hexagonal chain links are the only non-rectangular shapes, and they belong to the brand, not to general UI.
 
@@ -333,7 +333,7 @@ When a new offer appears, a hook on its chain drops from above, the row falls in
 ### Don't:
 - **Don't** put glows, neon shadows or green gradients inside the app (`html.in-app`); the landing is the only place things shine.
 - **Don't** add shadows to resting cards, panels, rows or buttons in the app; only floating layers get them.
-- **Don't** add a second typeface or use light weights for headings.
-- **Don't** use official Riot Games art, icons or imagery, or anything imitating League of Legends characters; position icons and logos are original.
+- **Don't** add a fourth typeface or use light weights for headings.
+- **Don't** use Riot logos or trademarks, Riot art from unofficial sources, or anything imitating League of Legends characters. Allowed official art (owner's decision under Riot's "Legal Jibber Jabber" policy): champion images from Data Dragon and the official position icons in `iconos/`. Logos are original, and the footer keeps Riot's notice.
 - **Don't** hard-code Verde Espectral (`#45E6A6`) inside the app or Verde Muelle on the landing.
 - **Don't** use the hook or chain as static clip-art; it appears as a living element (biting, dropping, swinging, pulsing).
