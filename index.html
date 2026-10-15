@@ -38,7 +38,7 @@
 <style>
 :root{
   --bg:#060F0D; --surface:#0C1A17; --surface2:#13251F; --line:#1C332C; --ink:#E2F4EE; --muted:#7C9A90;
-  --accent:#45E6A6; --accent-ink:#03140D; --accent-soft:rgba(69,230,166,.13); --ic:#E2F4EE; --ic2:#25403A; --ok:#2DBE8C; --danger:#F26B6B; --field-line:#5E6866; --hook-hi:#E0FFF1;
+  --accent:#45E6A6; --accent-ink:#03140D; --accent-soft:rgba(69,230,166,.13); --ic:#E2F4EE; --ic2:#25403A; --ok:#2DBE8C; --danger:#F26B6B; --field-line:#5E6866; --hook-hi:#E0FFF1; --silver-hi:#F2F5F4; --silver-lo:#AEB8B5;
   --r-top:#F2A580; --r-jungla:#80D4B4; --r-mid:#9CC4F4; --r-adc:#F4A3A3; --r-support:#C9B6F2; --r-fill:#C5CFCC;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
@@ -354,7 +354,7 @@ input:focus,select:focus{border-color:var(--accent)}
 .fake.btnf{background:var(--accent);color:var(--accent-ink);font-weight:700;justify-content:center;border:0}
 .scr .picks{gap:5px}
 .scr .pick{padding:5px 9px;font-size:.78rem;background:var(--surface2)}
-.scr .pick svg.ic{width:15px;height:15px}
+.scr .pick svg.ic,.scr .pick i.ic{width:15px;height:15px}
 .scr.on .pick.seq{animation:pickOn .01s forwards;animation-delay:var(--d)}
 @keyframes pickOn{to{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}}
 .scr .pick.seq .n{transform:scale(0)}
@@ -505,7 +505,10 @@ html.in-app .hchain,html.in-app .drop .dc{filter:none;background-image:url("data
 .dk.nop{text-transform:none;letter-spacing:0;font-size:.85rem}
 .note a{color:inherit}
 a.btn{text-decoration:none;display:inline-block}
-.pick img.ic{width:18px;height:18px}.posic img.ic{width:22px;height:22px}.rn img.ic{width:16px;height:16px}img.ic{object-fit:contain}
+.pick img.ic,.pick i.ic{width:18px;height:18px}.posic img.ic,.posic i.ic{width:22px;height:22px}.rn img.ic,.rn i.ic{width:16px;height:16px}img.ic{object-fit:contain}
+/* íconos oficiales de posición: silueta en plata pulida */
+i.rimg{width:20px;height:20px}
+i.ic.rimg{display:block;flex:none;background:linear-gradient(180deg,var(--silver-hi),var(--silver-lo));-webkit-mask:var(--src) center/contain no-repeat;mask:var(--src) center/contain no-repeat}
 .loading{padding:48px 20px;text-align:center;color:var(--muted)}
 
 /* ---------- header usuario + celular ---------- */
@@ -1060,7 +1063,7 @@ function avatarEl(o,cls="pav"){const bg=o.color||avColor(o.nick);
   return el}
 function hangHook(){const w=h("div",{class:"hang","aria-hidden":"true"},h("div",{class:"hchain"}));const hk=h("div",{class:"hhook"});hk.innerHTML=HOOK_SVG;w.append(hk);return w}
 const ICON_FILE={Top:"top",Jungla:"jungla",Mid:"mid",ADC:"adc",Support:"support",Fill:"fill"},CUSTOM_IC={};
-function roleIcon(r){const el=CUSTOM_IC[r]?h("img",{src:CUSTOM_IC[r],class:"ic",alt:""}):svg(ROLE_SVG[r]);if(ICON_FILE[r])el.classList.add("r-"+ICON_FILE[r]);return el}
+function roleIcon(r){const el=CUSTOM_IC[r]?h("i",{class:"ic rimg","aria-hidden":"true",style:`--src:url("${CUSTOM_IC[r]}")`}):svg(ROLE_SVG[r]);if(ICON_FILE[r])el.classList.add("r-"+ICON_FILE[r]);return el}
 const roleIc=(r,want,i=0)=>h("span",{class:"posic"+(want?" want":"")+(i>0?" alt":"")+(ICON_FILE[r]?" pr-"+ICON_FILE[r]:""),title:`${r} (${i+1}° preferencia)`},roleIcon(r));
 
 
