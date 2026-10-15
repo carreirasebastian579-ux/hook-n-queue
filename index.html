@@ -812,6 +812,22 @@ html.in-app .seg button[aria-pressed="true"]{background:none;border-bottom-color
 .pban.none{height:56px;background:var(--surface2)}
 .pcard .pav{margin-top:-34px;position:relative;box-shadow:0 0 0 4px var(--surface)}
 .pcard>b{font-family:var(--disp);font-weight:700;font-size:1.45rem;letter-spacing:.02em;text-transform:uppercase;line-height:1.1}
+/* ---------- landing: letras elegidas (Barlow para títulos grandes, Saira para carteles) ---------- */
+.lcopy h1{font-family:var(--title);font-weight:800;text-transform:uppercase;letter-spacing:.005em;line-height:.92;font-size:clamp(3.2rem,8vw,4.6rem)}
+@media (min-width:821px){.lcopy h1{font-size:clamp(4.2rem,7.6vw,6.8rem);letter-spacing:.005em;line-height:.9;max-width:12ch}}
+.how h2,.lservers h2,.final h2{font-family:var(--title);font-weight:800;text-transform:uppercase;letter-spacing:.01em;line-height:.92;font-size:clamp(2.6rem,6vw,4.4rem)}
+.final h2{font-size:clamp(3.2rem,8.5vw,6.6rem);max-width:12ch}
+.eyebrow{font-family:var(--disp);font-size:.82rem;letter-spacing:.16em}
+.step .num{font-family:var(--title);font-weight:800;font-size:1.3rem}
+.step h3,.feat h3{font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:.02em;line-height:1.05}
+.step h3{font-size:1.6rem}
+.feat h3{font-size:clamp(1.7rem,3.2vw,2.3rem)}
+.sv b{font-family:var(--title);font-weight:800;font-size:2.6rem;letter-spacing:.01em}
+#landing .btn{font-family:var(--disp);font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+#landing .btn.big{font-size:1.08rem}
+.finalbg{position:absolute;inset:0;z-index:0;pointer-events:none;background:url(https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Thresh_0.jpg) 62% 20%/cover;filter:blur(3px) saturate(.75) brightness(.6);opacity:.55;
+  -webkit-mask-image:radial-gradient(55% 65% at 50% 45%,#000 20%,transparent 75%);mask-image:radial-gradient(55% 65% at 50% 45%,#000 20%,transparent 75%)}
+.fcred{position:absolute;z-index:1;right:16px;bottom:14px;font-family:var(--disp);font-weight:700;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(226,244,238,.35)}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
 </head>
@@ -876,6 +892,7 @@ html.in-app .seg button[aria-pressed="true"]{background:none;border-bottom-color
   </section>
 
   <section class="final">
+    <div class="finalbg" aria-hidden="true"></div><span class="fcred" aria-hidden="true" data-notr>Thresh</span>
     <div class="fglow" aria-hidden="true"></div>
     <div class="dangle" aria-hidden="true"><div class="dchain"></div><div class="dhook" id="dhook"></div></div>
     <button class="btn big dbtn" data-signup>Entrar con Google</button>
