@@ -840,6 +840,20 @@ html.in-app .seg button[aria-pressed="true"]{background:none;border-bottom-color
   html.in-app #list>.empty,html.in-app #list>.loading{background:var(--surface);border-radius:var(--rad)}
   html.in-app .lend{padding:8px 0 4px}
 }
+/* ---------- compu: cada fila es una franja separada (mismas columnas) ---------- */
+@media (min-width:901px){
+  html.in-app .panel{background:transparent;overflow:visible}
+  html.in-app .panel .fbar{background:var(--surface);border-radius:var(--rad);border-bottom:0;margin-bottom:8px}
+  html.in-app .fpanel{border-radius:var(--rad);margin-bottom:8px;border-bottom:0}
+  html.in-app .cols{background:transparent;border-bottom:0;height:30px}
+  html.in-app #list{display:grid;gap:6px}
+  html.in-app #list .offer,html.in-app #list .offer:last-child{background:var(--surface);border:1px solid var(--line);border-radius:var(--rad)}
+  html.in-app #list .offer:hover{border-color:#36403E;background:var(--surface)}
+  html.in-app #list .offer.open{background:var(--surface)}
+  html.in-app #list .offer.mine::before{border-radius:var(--rad) 0 0 var(--rad)}
+  html.in-app #list>.empty,html.in-app #list>.loading{background:var(--surface);border-radius:var(--rad)}
+  html.in-app .lend{padding:10px 0 4px}
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
 </head>
