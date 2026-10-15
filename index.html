@@ -34,7 +34,7 @@
 <meta name="twitter:image" content="https://hooknqueue.com/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Barlow+Condensed:wght@800&family=Saira+Condensed:wght@600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#060F0D; --surface:#0C1A17; --surface2:#13251F; --line:#1C332C; --ink:#E2F4EE; --muted:#7C9A90;
@@ -764,23 +764,54 @@ html,body{overflow-x:clip}
 /* ---------- tablón "en el muelle" ---------- */
 html.in-app body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.22;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .6 0 0 0 0 .55 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 html.in-app #app{position:relative;z-index:1}
-.dock{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 24px;align-items:end;padding:22px 0 18px;margin-bottom:14px;border-bottom:1px solid var(--line)}
-.dcode{font-size:clamp(3rem,6vw,4.6rem);font-weight:800;letter-spacing:-.05em;line-height:.9}
-.dname{color:var(--muted);font-size:1rem;margin-top:8px}
-.dlive{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:14px;color:var(--muted);font-size:.9rem}
-.dlive>span{display:inline-flex;align-items:center;gap:6px}
-.dlive b{color:var(--ink);font-weight:700}
-.dlive .lampic{width:12px;height:16px;color:#7FD3B2}
+.dock{position:relative;border-radius:var(--rad);overflow:hidden;min-height:210px;padding:22px 24px;margin-bottom:14px;background:#0B0E0D}
+.dbg{position:absolute;inset:-20px;background:url(https://ddragon.leagueoflegends.com/cdn/img/champion/centered/Thresh_0.jpg) center 25%/cover;filter:blur(5px) saturate(.8) brightness(.7)}
+.dock::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,15,15,.96) 0%,rgba(13,15,15,.78) 45%,rgba(13,15,15,.35) 100%),linear-gradient(0deg,rgba(13,15,15,.85),transparent 60%)}
+.din{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:16px 28px;align-items:flex-end;justify-content:space-between;min-height:166px}
+.dcred{position:absolute;right:12px;top:10px;z-index:1;font-family:var(--disp);font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(228,234,232,.45)}
+.dcode{font-family:var(--title);font-weight:800;letter-spacing:.01em;text-transform:uppercase;font-size:clamp(4rem,7vw,6.2rem);line-height:.92}
+.dname{color:var(--ink);opacity:.78;font-size:1rem;margin-top:6px}
+.dlive{display:flex;flex-wrap:wrap;gap:12px 26px;margin-top:16px}
+.dlive>div{display:grid;gap:2px}
+.dlive b{font-family:var(--disp);font-weight:700;font-size:1.6rem;line-height:1;color:var(--ink)}
+.dlive .k .lampic{width:10px;height:14px;color:#7FD3B2;vertical-align:-2px;margin-right:5px}
 .dock .btn{padding:14px 22px;font-size:1rem}
 .ml{display:inline-flex}.ml .lampic{width:11px;height:15px}
 .onbtn[aria-pressed="true"] .lampic{color:var(--accent)}
 .lend{margin:0;padding:18px;text-align:center;color:var(--muted);font-size:.85rem}
-@media (max-width:640px){.dock{grid-template-columns:1fr}.dock .btn{width:100%}}
+@media (max-width:640px){.dock{padding:18px;min-height:230px}.din{min-height:0}.dock .btn{width:100%}}
 /* ---------- color por posición ---------- */
 .ic.r-top{color:var(--r-top)}.ic.r-jungla{color:var(--r-jungla)}.ic.r-mid{color:var(--r-mid)}.ic.r-adc{color:var(--r-adc)}.ic.r-support{color:var(--r-support)}.ic.r-fill{color:var(--r-fill)}
 .posic.pr-top{--rc:var(--r-top)}.posic.pr-jungla{--rc:var(--r-jungla)}.posic.pr-mid{--rc:var(--r-mid)}.posic.pr-adc{--rc:var(--r-adc)}.posic.pr-support{--rc:var(--r-support)}.posic.pr-fill{--rc:var(--r-fill)}
 .posic[class*=" pr-"]{background:color-mix(in srgb,var(--rc) 9%,var(--bg))}
 .posic.want[class*=" pr-"],html.in-app .posic.want[class*=" pr-"]{background:color-mix(in srgb,var(--rc) 18%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--rc) 45%,transparent);color:var(--rc)}
+/* ---------- tablón v2: letras de cartel, bordes rectos, franjas ---------- */
+:root{--disp:"Saira Condensed",Inter,system-ui,sans-serif;--title:"Barlow Condensed",Inter,system-ui,sans-serif;--rad:6px}
+.k{font-family:var(--disp);font-weight:700;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+html.in-app .btn{font-family:var(--disp);font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:var(--rad)}
+html.in-app .panel,html.in-app .detail,html.in-app .scard,html.in-app .fpanel{border-radius:var(--rad)}
+html.in-app .scard{border:0}
+html.in-app .card{border-radius:10px}
+html.in-app .tag{border-radius:4px}
+html.in-app .cols span{font-family:var(--disp);font-weight:700;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
+html.in-app .rank{font-family:var(--disp);font-weight:700;font-size:.98rem;letter-spacing:.03em;text-transform:uppercase}
+html.in-app .scard h4{font-family:var(--disp);font-weight:700;font-size:.74rem;letter-spacing:.14em}
+html.in-app .sitem{border-radius:0;border-left:3px solid transparent;padding:9px 12px}
+html.in-app .sitem[aria-current="true"]{border-left-color:var(--accent);background:var(--accent-soft)}
+html.in-app .sitem b{font-family:var(--disp);font-weight:700;font-size:1.15rem;letter-spacing:.02em}
+html.in-app .sitem em{border-radius:4px}
+html.in-app .srv,html.in-app .srv[aria-pressed="true"]{border:0;border-bottom:2px solid transparent;border-radius:0;background:none;font-family:var(--disp);font-weight:700;font-size:1.1rem;letter-spacing:.02em;padding:8px 12px}
+html.in-app .srv[aria-pressed="true"]{border-bottom-color:var(--accent);color:var(--ink)}
+html.in-app .seg{background:none;padding:0;border-radius:0;gap:4px}
+html.in-app .seg button{border-radius:0;border-bottom:2px solid transparent;font-family:var(--disp);font-weight:700;font-size:.92rem;letter-spacing:.06em;text-transform:uppercase;padding:7px 10px}
+html.in-app .seg button[aria-pressed="true"]{background:none;border-bottom-color:var(--accent);color:var(--ink)}
+.offer.mine::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+.pcard{position:relative;padding:0 14px 16px}
+.pban{width:calc(100% + 28px);height:92px;margin:0 -14px;background:center 20%/cover;position:relative}
+.pban::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,24,23,.15),var(--surface) 96%)}
+.pban.none{height:56px;background:var(--surface2)}
+.pcard .pav{margin-top:-34px;position:relative;box-shadow:0 0 0 4px var(--surface)}
+.pcard>b{font-family:var(--disp);font-weight:700;font-size:1.45rem;letter-spacing:.02em;text-transform:uppercase;line-height:1.1}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
 </head>
@@ -863,8 +894,11 @@ html.in-app #app{position:relative;z-index:1}
 <aside class="lside" id="lside" aria-label="Servers y perfil"></aside>
 <div class="center">
   <section class="dock">
-    <div><div class="dcode" id="dCode"></div><div class="dname" id="dName"></div><div class="dlive" id="dLive"></div></div>
-    <button class="btn" id="pubBtn">Publicar oferta</button>
+    <div class="dbg" aria-hidden="true"></div><span class="dcred" aria-hidden="true">Thresh</span>
+    <div class="din">
+      <div><span class="k">Server</span><div class="dcode" id="dCode"></div><div class="dname" id="dName"></div><div class="dlive" id="dLive"></div></div>
+      <button class="btn" id="pubBtn">Publicar oferta</button>
+    </div>
   </section>
   <nav class="servers" id="servers" aria-label="Servers"></nav>
   <section class="panel">
@@ -896,7 +930,7 @@ const EN={
 "Chats que no se acumulan":"Chats that don't pile up","Cada chat nace de una oferta y se borra 24 hs después de que termina. Tu bandeja siempre limpia.":"Every chat starts from an offer and is deleted 24 hours after it ends. Your inbox stays clean.",
 "¿Armamos la partida?":"Ready to queue up?","Crear tu perfil lleva diez segundos.":"Creating your profile takes ten seconds.","Los demás ven primero tu":"Others see your top pick first:","jugadores coinciden":"players match",
 "Te paso mi Discord: premade_seba":"Here's my Discord: premade_seba","Listo, te agrego. ¡Nos vemos en la partida!":"Done, adding you. See you in game!","Esta oferta terminó. El chat se borra en 24 h.":"This offer ended. The chat will be deleted in 24 h.",
-"Nueva oferta":"New offer","el tablón de tu server":"your server's board","con el farol prendido":"with their lantern lit","nuevas hoy":"new today","· farol prendido":"· lantern lit","Tu próximo dúo está":"Your next duo is","acá.":"here.","Ejemplo":"Example","Busco jungla para flex esta noche":"Looking for a jungler for flex tonight","hace 3 min":"3 min ago","#LAS1 · en línea":"#LAS1 · online","Deshacer":"Undo","Oferta reabierta":"Offer reopened","No se pudo reabrir la oferta":"Couldn't reopen the offer","No se pudo desbloquear":"Couldn't unblock","Ya pasó mucho tiempo para deshacer. Si querés, publicá la oferta de nuevo.":"It's too late to undo. You can post the offer again if you want.","Ver detalle":"Show details","No pudimos cargar las ofertas":"We couldn't load the offers","Puede ser tu conexión o un problema nuestro. Probá de nuevo en unos segundos.":"It may be your connection or a problem on our side. Try again in a few seconds.","Reintentar":"Try again","No se pudieron actualizar las ofertas":"Couldn't refresh the offers","Cerrar aviso":"Close notice","No se pudo enviar el reporte. Probá de nuevo.":"Couldn't send the report. Try again.","No se pudo descartar el reporte":"Couldn't dismiss the report","No se pudo abrir el chat. Probá de nuevo.":"Couldn't open the chat. Try again.","Enviando...":"Sending...","Nueva oferta en":"New offer in","Server donde se publica":"Server to post in","Elegí tu rango":"Choose your rank","División":"Division","Repetir última oferta":"Repeat last offer","Tocá las opciones en orden de preferencia: la primera es la que más te interesa.":"Tap options in order of preference: the first one is what you want most.","Detalles opcionales":"Optional details","Rango que buscás, campeones, micro y onda":"Rank you want, champions, mic and vibe","Rango que buscás":"Rank you want","Ideal si tu dúo juega con":"Ideally your duo plays","Mejor que no juegue con":"Better if they don’t play","Elegí al menos un modo.":"Choose at least one mode.","Elegí tu posición.":"Choose your position.","Elegí qué posición buscás.":"Choose the position you want.","Elegí al menos un horario.":"Choose at least one time.","Revisá los campos marcados.":"Check the highlighted fields.","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
+"Nueva oferta":"New offer","Ofertas activas":"Active offers","Nuevas hoy":"New today","Server":"Server","el tablón de tu server":"your server's board","con el farol prendido":"with their lantern lit","nuevas hoy":"new today","· farol prendido":"· lantern lit","Tu próximo dúo está":"Your next duo is","acá.":"here.","Ejemplo":"Example","Busco jungla para flex esta noche":"Looking for a jungler for flex tonight","hace 3 min":"3 min ago","#LAS1 · en línea":"#LAS1 · online","Deshacer":"Undo","Oferta reabierta":"Offer reopened","No se pudo reabrir la oferta":"Couldn't reopen the offer","No se pudo desbloquear":"Couldn't unblock","Ya pasó mucho tiempo para deshacer. Si querés, publicá la oferta de nuevo.":"It's too late to undo. You can post the offer again if you want.","Ver detalle":"Show details","No pudimos cargar las ofertas":"We couldn't load the offers","Puede ser tu conexión o un problema nuestro. Probá de nuevo en unos segundos.":"It may be your connection or a problem on our side. Try again in a few seconds.","Reintentar":"Try again","No se pudieron actualizar las ofertas":"Couldn't refresh the offers","Cerrar aviso":"Close notice","No se pudo enviar el reporte. Probá de nuevo.":"Couldn't send the report. Try again.","No se pudo descartar el reporte":"Couldn't dismiss the report","No se pudo abrir el chat. Probá de nuevo.":"Couldn't open the chat. Try again.","Enviando...":"Sending...","Nueva oferta en":"New offer in","Server donde se publica":"Server to post in","Elegí tu rango":"Choose your rank","División":"Division","Repetir última oferta":"Repeat last offer","Tocá las opciones en orden de preferencia: la primera es la que más te interesa.":"Tap options in order of preference: the first one is what you want most.","Detalles opcionales":"Optional details","Rango que buscás, campeones, micro y onda":"Rank you want, champions, mic and vibe","Rango que buscás":"Rank you want","Ideal si tu dúo juega con":"Ideally your duo plays","Mejor que no juegue con":"Better if they don’t play","Elegí al menos un modo.":"Choose at least one mode.","Elegí tu posición.":"Choose your position.","Elegí qué posición buscás.":"Choose the position you want.","Elegí al menos un horario.":"Choose at least one time.","Revisá los campos marcados.":"Check the highlighted fields.","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
 "Hook n' Queue fue creado bajo la política \"Legal Jibber Jabber\" de Riot Games usando recursos propiedad de Riot Games. Riot Games no respalda ni patrocina este proyecto. League of Legends es una marca de Riot Games, Inc. ·":"Hook n' Queue was created under Riot Games' \"Legal Jibber Jabber\" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project. League of Legends is a trademark of Riot Games, Inc. ·",
 "Hook n' Queue fue creado bajo la política \"Legal Jibber Jabber\" de Riot Games usando recursos propiedad de Riot Games. Riot Games no respalda ni patrocina este proyecto. ·":"Hook n' Queue was created under Riot Games' \"Legal Jibber Jabber\" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project. ·","Privacidad":"Privacy","Donar":"Donate",
 "Buscá con quién jugar":"Find someone to play with","Elegí tu server, mirá las ofertas y coordiná la partida.":"Pick your server, browse offers and set up your game.",
@@ -967,7 +1001,7 @@ const RULES=[
  [/^Esta oferta terminó\. El chat se borra en (\d+) h, aprovechá para pasar tu nick o Discord\.$/,(m,a)=>`This offer ended. This chat will be deleted in ${a} h, so swap names or Discord now.`],
  [/^Te falta elegir (.+)\.$/,(m,a)=>`You still need to choose ${a.split(", ").map(tr).join(", ")}.`],
  [/^¿Desbanear a (.+)\?\n\nVa a poder volver a entrar y crear su perfil de nuevo\.$/,(m,a)=>`Unban ${a}?\n\nThey'll be able to sign in and create their profile again.`],
- [/^Nuevo mensaje de (.+)$/,(m,a)=>`New message from ${a}`],[/^Con el farol prendido en (\w+)$/,(m,a)=>`Lantern lit in ${a}`],[/^Eso es todo lo que hay en (\w+) por ahora\.$/,(m,a)=>`That's everything in ${a} for now.`],[/^Cuando mandes tu primer mensaje, le avisamos a (.+)\.$/,(m,a)=>`When you send your first message, we'll let ${a} know.`],[/^(.+) bloqueado$/,(m,a)=>`${a} blocked`],[/^(.+) desbloqueado$/,(m,a)=>`${a} unblocked`],[/^(.+) baneado$/,(m,a)=>`${a} banned`],
+ [/^Nuevo mensaje de (.+)$/,(m,a)=>`New message from ${a}`],[/^(\d+) de (\d+)$/,(m,a,b)=>`${a} of ${b}`],[/^Con el farol prendido en (\w+)$/,(m,a)=>`Lantern lit in ${a}`],[/^Eso es todo lo que hay en (\w+) por ahora\.$/,(m,a)=>`That's everything in ${a} for now.`],[/^Cuando mandes tu primer mensaje, le avisamos a (.+)\.$/,(m,a)=>`When you send your first message, we'll let ${a} know.`],[/^(.+) bloqueado$/,(m,a)=>`${a} blocked`],[/^(.+) desbloqueado$/,(m,a)=>`${a} unblocked`],[/^(.+) baneado$/,(m,a)=>`${a} banned`],
  [/^No se pudo publicar: (.*)$/,(m,a)=>`Couldn't post: ${a}`],[/^No se pudo banear: (.*)$/,(m,a)=>`Couldn't ban: ${a}`],[/^Alias: (.+)$/,(m,a)=>`Alias: ${a}`],
  [/^¿Banear a (.+)\?\n\nSe borra su perfil, sus ofertas y sus chats, y no va a poder volver a usar la app con esa cuenta\.$/,(m,a)=>`Ban ${a}?\n\nTheir profile, offers and chats will be deleted, and they won't be able to use the app with that account again.`],
  [/^¿Borrar el chat con (.+) de tu lista\?\n\nA la otra persona no le pasa nada\. Si te vuelve a escribir, el chat reaparece con los mensajes anteriores\.$/,(m,a)=>`Delete your chat with ${a} from your list?\n\nNothing happens to the other person. If they message you again, the chat comes back with the previous messages.`],
@@ -1120,10 +1154,10 @@ function offerDetail(o){
 
 // ---------- campeones (nombres desde datos públicos de Riot, con lista de respaldo)
 let CHAMPS="Aatrox,Ahri,Akali,Akshan,Alistar,Ambessa,Amumu,Anivia,Annie,Aphelios,Ashe,Aurelion Sol,Aurora,Azir,Bardo,Bel'Veth,Blitzcrank,Brand,Braum,Briar,Caitlyn,Camille,Cassiopeia,Cho'Gath,Corki,Darius,Diana,Dr. Mundo,Draven,Ekko,Elise,Evelynn,Ezreal,Fiddlesticks,Fiora,Fizz,Galio,Gangplank,Garen,Gnar,Gragas,Graves,Gwen,Hecarim,Heimerdinger,Hwei,Illaoi,Irelia,Ivern,Janna,Jarvan IV,Jax,Jayce,Jhin,Jinx,K'Sante,Kai'Sa,Kalista,Karma,Karthus,Kassadin,Katarina,Kayle,Kayn,Kennen,Kha'Zix,Kindred,Kled,Kog'Maw,LeBlanc,Lee Sin,Leona,Lillia,Lissandra,Lucian,Lulu,Lux,Malphite,Malzahar,Maokai,Master Yi,Mel,Milio,Miss Fortune,Mordekaiser,Morgana,Naafiri,Nami,Nasus,Nautilus,Neeko,Nidalee,Nilah,Nocturne,Nunu y Willump,Olaf,Orianna,Ornn,Pantheon,Poppy,Pyke,Qiyana,Quinn,Rakan,Rammus,Rek'Sai,Rell,Renata Glasc,Renekton,Rengar,Riven,Rumble,Ryze,Samira,Sejuani,Senna,Seraphine,Sett,Shaco,Shen,Shyvana,Singed,Sion,Sivir,Skarner,Smolder,Sona,Soraka,Swain,Sylas,Syndra,Tahm Kench,Taliyah,Talon,Taric,Teemo,Thresh,Tristana,Trundle,Tryndamere,Twisted Fate,Twitch,Udyr,Urgot,Varus,Vayne,Veigar,Vel'Koz,Vex,Vi,Viego,Viktor,Vladimir,Volibear,Warwick,Wukong,Xayah,Xerath,Xin Zhao,Yasuo,Yone,Yorick,Yuumi,Zac,Zed,Zeri,Ziggs,Zilean,Zoe,Zyra".split(",");
-const CHAMP_IMG={};
+const CHAMP_IMG={},CHAMP_ID={};
 (async()=>{try{const v=(await (await fetch("https://ddragon.leagueoflegends.com/api/versions.json")).json())[0];
   const d=await (await fetch(`https://ddragon.leagueoflegends.com/cdn/${v}/data/es_AR/champion.json`)).json();
-  Object.values(d.data).forEach(c=>{CHAMP_IMG[c.name]=`https://ddragon.leagueoflegends.com/cdn/${v}/img/champion/${c.image.full}`});
+  Object.values(d.data).forEach(c=>{CHAMP_ID[c.name]=c.id;CHAMP_IMG[c.name]=`https://ddragon.leagueoflegends.com/cdn/${v}/img/champion/${c.image.full}`});
   const names=Object.values(d.data).map(c=>c.name).sort((a,b)=>a.localeCompare(b,"es"));if(names.length>100)CHAMPS=names;
   if(uid)render()}catch(e){}})();
 const norm=t=>t.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/gi,"").toLowerCase();
@@ -1310,7 +1344,7 @@ function renderSides(){
     return h("button",{class:"sitem","aria-current":String(sv.id===current),onclick:()=>{current=sv.id;render()}},h("b",{},sv.id),h("span",{class:"nm"},sv.name),h("em",{},String(n)))}));
   const mine=all.filter(o=>o.mine).length,myChats=groupsOf().length;
   L.replaceChildren(
-    h("div",{class:"scard pcard"},avatarEl({...profile,online:true}),h("b",{},profile.nick),h("small",{},"#"+profile.tag+" · "+profile.server),profile.mains&&profile.mains.length?h("div",{class:"clist"},profile.mains.map((c,i)=>champChip(c,"",i+1))):null,
+    h("div",{class:"scard pcard"},(()=>{const m=(profile.mains||[])[0],id=m&&CHAMP_ID[m];return h("div",{class:"pban"+(id?"":" none"),"aria-hidden":"true",style:id?`background-image:url(https://ddragon.leagueoflegends.com/cdn/img/champion/centered/${id}_0.jpg)`:null})})(),avatarEl({...profile,online:true}),h("b",{},profile.nick),h("small",{},"#"+profile.tag+" · "+profile.server),profile.mains&&profile.mains.length?h("div",{class:"clist"},profile.mains.map((c,i)=>champChip(c,"",i+1))):null,
       h("div",{class:"pstats"},h("div",{},h("b",{},String(mine)),h("span",{},"ofertas")),h("div",{},h("b",{},String(myChats)),h("span",{},"chats"))),
       h("button",{class:"btn",onclick:()=>openOffer()},"Publicar oferta"),h("button",{class:"lnk",onclick:()=>openProfile(true)},"Editar perfil"),h("button",{class:"lnk don",onclick:openDonate},svg(UI_SVG.heart),"Apoyar el proyecto")),
     h("div",{class:"scard"},h("h4",{},"Servers"),sl));
@@ -1359,10 +1393,11 @@ function renderList(){setTimeout(renderSides,0);
   const offers=inServer.filter(passes).sort((a,b)=>b.at-a.at);
   const nOn=inServer.filter(o=>o.online).length,nToday=inServer.filter(o=>Date.now()-o.at<24*H).length;
   document.getElementById("dCode").textContent=s.id;document.getElementById("dName").replaceChildren(s.name," · ","el tablón de tu server");
-  document.getElementById("dLive").replaceChildren(
-    h("span",{id:"srvCount"},offersError?"":!inServer.length?"Sin ofertas por ahora":offers.length===inServer.length?`${offers.length} ${offers.length===1?"oferta activa":"ofertas activas"}`:`Mostrando ${offers.length} de ${inServer.length} ofertas`),
-    h("span",{},miniLamp(),h("b",{},String(nOn)),h("span",{},"con el farol prendido")),
-    h("span",{},h("b",{},String(nToday)),h("span",{},nToday===1?"nueva hoy":"nuevas hoy")));
+  const filt=offers.length!==inServer.length;
+  document.getElementById("dLive").replaceChildren(...(offersError?[]:[
+    h("div",{},h("span",{class:"k",id:"srvCount"},filt?"Mostrando":"Ofertas activas"),h("b",{},filt?`${offers.length} de ${inServer.length}`:String(inServer.length))),
+    h("div",{},h("span",{class:"k"},miniLamp(),"Farol prendido"),h("b",{},String(nOn))),
+    h("div",{},h("span",{class:"k"},"Nuevas hoy"),h("b",{},String(nToday)))]));
   document.getElementById("onBtn").setAttribute("aria-pressed",String(F.online));
   const fb=document.getElementById("fBtnN");if(fb){const n=activeCount();fb.textContent=n?n:"";fb.hidden=!n}
   document.getElementById("cols").hidden=!offers.length;

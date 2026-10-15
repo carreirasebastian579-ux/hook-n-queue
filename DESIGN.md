@@ -211,6 +211,7 @@ The CSS custom properties (`--bg`, `--surface`, `--surface2`, `--line`, `--ink`,
 
 **Display Font:** Inter (with system-ui, -apple-system, Segoe UI, sans-serif)
 **Body Font:** Inter (same stack)
+**Display Fonts (app and labels):** Barlow Condensed 800 only for the server title in the dock ("LAS"); Saira Condensed 600/700 for everything else that is a label or sign: small uppercase labels above data (.k: 0.74rem, 0.14em tracking), buttons inside the app (uppercase, 0.06em), ranks, table headers, the server list and tabs.
 
 **Character:** One family doing everything. The brand voice comes from weight 800 with tight negative tracking on headings, against plain 400/500 text at a compact 14px base.
 
@@ -305,7 +306,10 @@ A 400px right-hand drawer (full screen on phones). Messages are 14px bubbles at 
 Someone online "has their lantern lit". A small fishing lantern (Menta Preferida, no glow, no pulse) sits in a 17×20px rounded tab at the bottom-right of the avatar. Copy follows the metaphor: "farol prendido" next to the nick, the filter "Farol prendido", the right rail "Con el farol prendido en LAS". Screen readers still hear "en línea".
 
 ### The dock (board header)
-The board opens with the server as a dock sign: the server code very large (800, `clamp(3rem, 6vw, 4.6rem)`, -0.05em), its name plus "el tablón de tu server" in muted, and a live line ("N ofertas activas · N con el farol prendido · N nuevas hoy", or "Mostrando X de Y" when filtering). "Publicar oferta" sits beside it, full width on phones. Offers stay as compact rows below. The board ends with "Eso es todo lo que hay en LAS por ahora." The app background carries the same faint water/fog noise texture as the landing (no light, no glow).
+The board opens with the server as a dock sign, inspired by LoL Esports' editorial schedule: a fixed, blurred and darkened Thresh splash (Data Dragon "centered" image, blur 5px, brightness .7) behind a left-to-right dark gradient; the label SERVER, the code in Barlow Condensed 800 (`clamp(4rem, 7vw, 6.2rem)`), the server name plus "el tablón de tu server", and three labeled values: OFERTAS ACTIVAS (MOSTRANDO "X de Y" when filtering), FAROL PRENDIDO, NUEVAS HOY. "Publicar oferta" sits beside it, full width on phones. The champion name is credited small at the top right.
+
+### App shape language
+Corners are nearly square inside the app (--rad 6px for panels, side cards, details; 4px for tags; modals 10px). The active server in the side list is marked with a 3px accent stripe on the left; tabs (servers under 1500px and the date filter) use a 2px accent underline instead of filled pills. The user's own offer row gets a 3px accent stripe on its left edge. The profile card shows the splash of the user's main #1 as a short faded banner above the avatar (plain surface when there are no mains).
 
 ### Position colors
 Each role has its own color, applied to its icon everywhere (rows, filters, offer form, detail): see the rol-* colors in the frontmatter. Official Riot position icons (PNGs in `iconos/`, from Riot's ranked-positions.zip) are shown as a silhouette in polished silver (a vertical gradient from #F2F5F4 to #AEB8B5 through a CSS mask), never with their original bronze-ish tint; Fill keeps the house icon. In rows, "Juega" tiles show the colored icon on a faint tint of its color; "Busca" tiles add a stronger tint and a 1px inset outline in the same color. Priority 2+ stays smaller and faded.
