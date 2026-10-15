@@ -828,6 +828,18 @@ html.in-app .seg button[aria-pressed="true"]{background:none;border-bottom-color
 .finalbg{position:absolute;inset:0;z-index:0;pointer-events:none;background:url(https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Thresh_0.jpg) 62% 20%/cover;filter:blur(3px) saturate(.75) brightness(.6);opacity:.55;
   -webkit-mask-image:radial-gradient(55% 65% at 50% 45%,#000 20%,transparent 75%);mask-image:radial-gradient(55% 65% at 50% 45%,#000 20%,transparent 75%)}
 .fcred{position:absolute;z-index:1;right:16px;bottom:14px;font-family:var(--disp);font-weight:700;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(226,244,238,.35)}
+/* ---------- celular/tablet: cada oferta es una tarjeta separada ---------- */
+@media (max-width:900px){
+  html.in-app .panel{background:transparent;overflow:visible}
+  html.in-app .panel .fbar{background:var(--surface);border-radius:var(--rad);border-bottom:0;margin-bottom:10px}
+  html.in-app .fpanel{border-radius:var(--rad);margin-bottom:10px;border-bottom:0}
+  html.in-app #list{display:grid;gap:12px}
+  html.in-app #list .offer,html.in-app #list .offer:last-child{background:var(--surface);border:1px solid var(--line);border-radius:var(--rad);padding:16px}
+  html.in-app #list .offer.open{background:var(--surface)}
+  html.in-app #list .offer.mine::before{border-radius:var(--rad) 0 0 var(--rad)}
+  html.in-app #list>.empty,html.in-app #list>.loading{background:var(--surface);border-radius:var(--rad)}
+  html.in-app .lend{padding:8px 0 4px}
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
 </head>
