@@ -641,7 +641,11 @@ html,body{overflow-x:clip}
 .ractions{display:flex;gap:6px;flex:none}
 .danger-btn{background:var(--danger)!important;color:#1A0606!important}
 
-.pos{flex-wrap:nowrap!important;align-items:center}
+.pos{flex-wrap:nowrap!important;align-items:flex-start!important}
+.pos>.lbl-m{margin-top:8px}.pos>.pmore{align-self:flex-start;margin-top:7px}
+.posw{display:inline-flex;flex-direction:column;align-items:center;gap:3px;flex:none;width:32px}
+.posn{font-size:.62rem;line-height:1;color:var(--muted);white-space:nowrap;font-weight:500}
+.posn.want{color:var(--ink)}
 @media (min-width:901px){
   body.is-admin .cols,body.is-admin .offer{grid-template-columns:170px 70px 76px 140px 90px minmax(0,1fr) 78px 178px}
 }
@@ -1064,7 +1068,8 @@ function avatarEl(o,cls="pav"){const bg=o.color||avColor(o.nick);
 function hangHook(){const w=h("div",{class:"hang","aria-hidden":"true"},h("div",{class:"hchain"}));const hk=h("div",{class:"hhook"});hk.innerHTML=HOOK_SVG;w.append(hk);return w}
 const ICON_FILE={Top:"top",Jungla:"jungla",Mid:"mid",ADC:"adc",Support:"support",Fill:"fill"},CUSTOM_IC={};
 function roleIcon(r){const el=CUSTOM_IC[r]?h("i",{class:"ic rimg","aria-hidden":"true",style:`--src:url("${CUSTOM_IC[r]}")`}):svg(ROLE_SVG[r]);if(ICON_FILE[r])el.classList.add("r-"+ICON_FILE[r]);return el}
-const roleIc=(r,want,i=0)=>h("span",{class:"posic"+(want?" want":"")+(i>0?" alt":"")+(ICON_FILE[r]?" pr-"+ICON_FILE[r]:""),title:`${r} (${i+1}° preferencia)`},roleIcon(r));
+const roleIc=(r,want,i=0)=>{const t=h("span",{class:"posic"+(want?" want":"")+(i>0?" alt":"")+(ICON_FILE[r]?" pr-"+ICON_FILE[r]:""),title:`${r} (${i+1}° preferencia)`},roleIcon(r));
+  return i>0?t:h("span",{class:"posw"},t,h("small",{class:"posn"+(want?" want":"")},r))};   // la primera preferencia lleva el nombre debajo
 
 
 const openRows=new Set();
