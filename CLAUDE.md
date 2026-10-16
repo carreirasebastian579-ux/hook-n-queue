@@ -29,7 +29,7 @@ El sistema completo está en `DESIGN.md` (estilo "El Anzuelo Espectral"); `PRODU
 - **"En línea" = "farol prendido"**: farolito en el avatar, filtro "Farol prendido". Las posiciones tienen color propio; los íconos oficiales de posición se muestran como silueta plateada (Fill usa el ícono propio). Los botones usan íconos propios de línea, nunca emojis.
 - Siempre usar las variables CSS (`--accent`, `--surface`, `--ink`…), no colores fijos, así cada componente funciona en la landing y en la app.
 - Plano por capas: sin sombras en tarjetas, paneles ni botones; solo en lo que flota (menús, chat, ventanas).
-- Logos propios; nunca usar logos ni marcas de Riot. Arte oficial de Riot solo en estos casos, que Sebastian decidió consultando a Riot (política "Legal Jibber Jabber"): imágenes de campeones desde Data Dragon e íconos de posición que él ponga en `iconos/`. No descargar íconos de Riot de fuentes no oficiales. El pie de página tiene que llevar el aviso que pide esa política.
+- Logos propios; nunca usar logos ni marcas de Riot. Arte oficial de Riot solo en estos casos, que Sebastian decidió consultando a Riot (política "Legal Jibber Jabber"): imágenes de campeones desde Data Dragon, íconos de posición que él ponga en `iconos/`, y `img/parche.webp` (arte del dragón que él eligió para la tarjeta "Parche actual", a su riesgo, 2026-10-16). No descargar íconos de Riot de fuentes no oficiales. El pie de página tiene que llevar el aviso que pide esa política.
 - Sin imágenes ni diseños que imiten personajes de League of Legends.
 
 ## Idiomas
