@@ -2029,7 +2029,11 @@ document.querySelectorAll("[data-signup]").forEach(b=>b.addEventListener("click"
 document.querySelectorAll("[data-guest]").forEach(b=>b.addEventListener("click",enterGuest));
 document.querySelectorAll(".logo").forEach(l=>{l.setAttribute("role","link");l.tabIndex=0;l.title=t("Recargar");
   const go=()=>{try{history.scrollRestoration="manual"}catch(e){}window.scrollTo(0,0);location.reload()};
-  l.addEventListener("click",go);l.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}})});
+  // ruedita o Ctrl/Cmd + clic: abre la página en otra pestaña (como en YouTube)
+  const newTab=()=>window.open(location.origin+location.pathname,"_blank","noopener");
+  l.addEventListener("mousedown",e=>{if(e.button===1)e.preventDefault()});
+  l.addEventListener("auxclick",e=>{if(e.button===1){e.preventDefault();newTab()}});
+  l.addEventListener("click",e=>{if(e.ctrlKey||e.metaKey){newTab();return}go()});l.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}})});
 
 const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const HOOK_SVG=`<svg viewBox="0 0 96 136"><g stroke-linecap="round" stroke-linejoin="round">
