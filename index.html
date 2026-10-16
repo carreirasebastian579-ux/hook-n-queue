@@ -714,7 +714,7 @@ html,body{overflow-x:clip}
   .title p{white-space:normal}
   .lbl-m{display:inline;color:var(--muted);font-size:.75rem;margin-right:6px;align-self:center}
   .chat .btn{width:100%}
-  .me small{display:none}
+  header .me small{display:none}
 }
 @media (min-width:901px){.posgroup{display:contents}}
 
@@ -905,6 +905,42 @@ html.in-app .card .field>label:not(.remember),html.in-app .card .bdet .mt{font-f
 .dbg.lit{filter:saturate(1.05) brightness(1.1);background-position:center 45%}
 .dbg:not(.on)+.dcred{visibility:hidden}
 @media (prefers-reduced-motion:reduce){.dbg{transition:none}}
+/* ---------- chat ---------- */
+@media (min-width:1500px){.drawer{width:440px}}
+.dhead .t b{font-weight:600}
+.cst{display:flex!important;align-items:center;gap:5px;font-size:.78rem}
+.cst.on{color:var(--accent)!important}
+.cst .lampic{width:9px;height:12px}
+.cofr{display:block;padding:9px 14px;border-bottom:1px solid var(--line);background:var(--bg);min-width:0}
+.cofr .k{flex:none;margin:0}
+.cofr .cot{display:block;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.88rem;margin-top:3px}
+.cl1{display:flex;align-items:center;gap:10px}
+.cogo{width:100%;min-width:0;display:block;border:0;background:none;color:var(--ink);padding:0;text-align:left;cursor:pointer}
+.cogo:hover .cot{text-decoration:underline}
+.copos{flex:none;display:flex;align-items:center;gap:4px;color:var(--muted)}
+.copos .ic{width:18px;height:18px}
+.copos i{font-style:normal;font-size:.75rem}
+.copos small{margin-left:4px;font-family:var(--disp);font-weight:600;font-size:.74rem;letter-spacing:.04em;text-transform:uppercase}
+.cmore,.coff{flex:none;font-size:.72rem;color:var(--muted)}
+.msgs{gap:2px}
+.msg{border-radius:4px 12px 12px 4px;padding:7px 11px;line-height:1.4}
+.msg.st{border-top-left-radius:12px;margin-top:8px}
+.msg.en{border-bottom-left-radius:12px}
+.msg.me{border-radius:12px 4px 4px 12px;border-bottom-right-radius:4px}
+.msg.me.st{border-top-right-radius:12px}
+.msg.me.en{border-bottom-right-radius:12px}
+.msg.st.en:not(.me){border-bottom-left-radius:4px}
+.msg.me.st.en{border-bottom-right-radius:4px}
+.msg small{font-size:.66rem;margin-top:3px}
+.cday{align-self:center;margin:12px 0 2px;font-family:var(--disp);font-weight:600;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.drawer .odiv span{border-radius:4px}
+.quick{display:flex;gap:6px;padding:8px 14px 0;overflow-x:auto;scrollbar-width:none}
+.quick::-webkit-scrollbar{display:none}
+.quick[hidden]{display:none}
+.quick button{flex:none;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:var(--rad);padding:6px 10px;font-size:.8rem;cursor:pointer;white-space:nowrap}
+.quick button:hover{border-color:var(--accent);color:var(--accent)}
+.drawer .compose{border-top:0;padding-top:8px}
+.drawer .compose input{border-radius:var(--rad)}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
 </head>
@@ -1026,7 +1062,7 @@ const EN={
 "Chats que no se acumulan":"Chats that don't pile up","Cada chat nace de una oferta y se borra 24 hs después de que termina. Tu bandeja siempre limpia.":"Every chat starts from an offer and is deleted 24 hours after it ends. Your inbox stays clean.",
 "¿Armamos la partida?":"Ready to queue up?","Crear tu perfil lleva diez segundos.":"Creating your profile takes ten seconds.","Los demás ven primero tu":"Others see your top pick first:","jugadores coinciden":"players match",
 "Te paso mi Discord: premade_seba":"Here's my Discord: premade_seba","Listo, te agrego. ¡Nos vemos en la partida!":"Done, adding you. See you in game!","Esta oferta terminó. El chat se borra en 24 h.":"This offer ended. The chat will be deleted in 24 h.",
-"Nueva oferta":"New offer","Novedades":"News","Parche actual":"Current patch","Leé las notas oficiales":"Read the official notes","Campeón nuevo":"New champion","Todas las notas de parche":"All patch notes","Título (opcional)":"Title (optional)","Si lo dejás vacío, se usa este.":"If you leave it empty, this one is used.","busca":"looking for","Recargar":"Reload","Entrar":"Sign in","Ver el tablón":"See the board","Estás mirando sin cuenta.":"You're browsing without an account.","Entrá para escribirle a alguien o publicar tu oferta.":"Sign in to message someone or post your offer.","Entrá para escribirle":"Sign in to message them","Con tu cuenta de Google abrís el chat y le mandás tu primer mensaje. Es gratis.":"With your Google account you open the chat and send your first message. It's free.","Entrá para publicar tu oferta":"Sign in to post your offer","Con tu cuenta de Google armás tu perfil y publicás tu oferta en un minuto. Es gratis.":"With your Google account you set up your profile and post your offer in a minute. It's free.","Para eso necesitás una cuenta. Es gratis y tarda un minuto.":"You need an account for that. It's free and takes a minute.","Seguir mirando":"Keep browsing","Mirás sin cuenta":"Browsing without an account","Para escribirle a alguien o publicar tu oferta, entrá con Google. Es gratis y tarda un minuto.":"To message someone or post your offer, sign in with Google. It's free and takes a minute.","Cuando entres y le escribas a alguien, el chat aparece acá.":"Once you sign in and message someone, the chat shows up here.","#LAS1 · farol prendido":"#LAS1 · lantern lit","Bloqueados":"Blocked","No bloqueaste a nadie.":"You haven't blocked anyone.","Desbloquear":"Unblock","Fondo del tablón":"Board background","El campeón que ves detrás del nombre del server. Si no elegís ninguno, va uno distinto en cada visita.":"The champion shown behind the server name. If you don't pick one, you get a different one each visit.","Al azar (por defecto)":"Random (default)","Ofertas activas":"Active offers","Nuevas hoy":"New today","Server":"Server","el tablón de tu server":"your server's board","con el farol prendido":"with their lantern lit","nuevas hoy":"new today","· farol prendido":"· lantern lit","Tu próximo dúo está":"Your next duo is","acá.":"here.","Ejemplo":"Example","Busco jungla para flex esta noche":"Looking for a jungler for flex tonight","hace 3 min":"3 min ago","#LAS1 · en línea":"#LAS1 · online","Deshacer":"Undo","Oferta reabierta":"Offer reopened","No se pudo reabrir la oferta":"Couldn't reopen the offer","No se pudo desbloquear":"Couldn't unblock","Ya pasó mucho tiempo para deshacer. Si querés, publicá la oferta de nuevo.":"It's too late to undo. You can post the offer again if you want.","Ver detalle":"Show details","No pudimos cargar las ofertas":"We couldn't load the offers","Puede ser tu conexión o un problema nuestro. Probá de nuevo en unos segundos.":"It may be your connection or a problem on our side. Try again in a few seconds.","Reintentar":"Try again","No se pudieron actualizar las ofertas":"Couldn't refresh the offers","Cerrar aviso":"Close notice","No se pudo enviar el reporte. Probá de nuevo.":"Couldn't send the report. Try again.","No se pudo descartar el reporte":"Couldn't dismiss the report","No se pudo abrir el chat. Probá de nuevo.":"Couldn't open the chat. Try again.","Enviando...":"Sending...","Nueva oferta en":"New offer in","Server donde se publica":"Server to post in","Elegí tu rango":"Choose your rank","División":"Division","Repetir última oferta":"Repeat last offer","Tocá las opciones en orden de preferencia: la primera es la que más te interesa.":"Tap options in order of preference: the first one is what you want most.","Detalles opcionales":"Optional details","Rango que buscás, campeones, micro y onda":"Rank you want, champions, mic and vibe","Rango que buscás":"Rank you want","Ideal si tu dúo juega con":"Ideally your duo plays","Mejor que no juegue con":"Better if they don’t play","Elegí al menos un modo.":"Choose at least one mode.","Elegí tu posición.":"Choose your position.","Elegí qué posición buscás.":"Choose the position you want.","Elegí al menos un horario.":"Choose at least one time.","Revisá los campos marcados.":"Check the highlighted fields.","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
+"Nueva oferta":"New offer","Hoy":"Today","Ayer":"Yesterday","Su oferta":"Their offer","Ver oferta":"See offer","Terminada":"Ended","Te paso mi Riot ID":"Send my Riot ID","Mi Riot ID es":"My Riot ID is","¿Jugamos ahora?":"Want to play now?","¿Tenés Discord?":"Do you have Discord?","Novedades":"News","Parche actual":"Current patch","Leé las notas oficiales":"Read the official notes","Campeón nuevo":"New champion","Todas las notas de parche":"All patch notes","Título (opcional)":"Title (optional)","Si lo dejás vacío, se usa este.":"If you leave it empty, this one is used.","busca":"looking for","Recargar":"Reload","Entrar":"Sign in","Ver el tablón":"See the board","Estás mirando sin cuenta.":"You're browsing without an account.","Entrá para escribirle a alguien o publicar tu oferta.":"Sign in to message someone or post your offer.","Entrá para escribirle":"Sign in to message them","Con tu cuenta de Google abrís el chat y le mandás tu primer mensaje. Es gratis.":"With your Google account you open the chat and send your first message. It's free.","Entrá para publicar tu oferta":"Sign in to post your offer","Con tu cuenta de Google armás tu perfil y publicás tu oferta en un minuto. Es gratis.":"With your Google account you set up your profile and post your offer in a minute. It's free.","Para eso necesitás una cuenta. Es gratis y tarda un minuto.":"You need an account for that. It's free and takes a minute.","Seguir mirando":"Keep browsing","Mirás sin cuenta":"Browsing without an account","Para escribirle a alguien o publicar tu oferta, entrá con Google. Es gratis y tarda un minuto.":"To message someone or post your offer, sign in with Google. It's free and takes a minute.","Cuando entres y le escribas a alguien, el chat aparece acá.":"Once you sign in and message someone, the chat shows up here.","#LAS1 · farol prendido":"#LAS1 · lantern lit","Bloqueados":"Blocked","No bloqueaste a nadie.":"You haven't blocked anyone.","Desbloquear":"Unblock","Fondo del tablón":"Board background","El campeón que ves detrás del nombre del server. Si no elegís ninguno, va uno distinto en cada visita.":"The champion shown behind the server name. If you don't pick one, you get a different one each visit.","Al azar (por defecto)":"Random (default)","Ofertas activas":"Active offers","Nuevas hoy":"New today","Server":"Server","el tablón de tu server":"your server's board","con el farol prendido":"with their lantern lit","nuevas hoy":"new today","· farol prendido":"· lantern lit","Tu próximo dúo está":"Your next duo is","acá.":"here.","Ejemplo":"Example","Busco jungla para flex esta noche":"Looking for a jungler for flex tonight","hace 3 min":"3 min ago","#LAS1 · en línea":"#LAS1 · online","Deshacer":"Undo","Oferta reabierta":"Offer reopened","No se pudo reabrir la oferta":"Couldn't reopen the offer","No se pudo desbloquear":"Couldn't unblock","Ya pasó mucho tiempo para deshacer. Si querés, publicá la oferta de nuevo.":"It's too late to undo. You can post the offer again if you want.","Ver detalle":"Show details","No pudimos cargar las ofertas":"We couldn't load the offers","Puede ser tu conexión o un problema nuestro. Probá de nuevo en unos segundos.":"It may be your connection or a problem on our side. Try again in a few seconds.","Reintentar":"Try again","No se pudieron actualizar las ofertas":"Couldn't refresh the offers","Cerrar aviso":"Close notice","No se pudo enviar el reporte. Probá de nuevo.":"Couldn't send the report. Try again.","No se pudo descartar el reporte":"Couldn't dismiss the report","No se pudo abrir el chat. Probá de nuevo.":"Couldn't open the chat. Try again.","Enviando...":"Sending...","Nueva oferta en":"New offer in","Server donde se publica":"Server to post in","Elegí tu rango":"Choose your rank","División":"Division","Repetir última oferta":"Repeat last offer","Tocá las opciones en orden de preferencia: la primera es la que más te interesa.":"Tap options in order of preference: the first one is what you want most.","Detalles opcionales":"Optional details","Rango que buscás, campeones, micro y onda":"Rank you want, champions, mic and vibe","Rango que buscás":"Rank you want","Ideal si tu dúo juega con":"Ideally your duo plays","Mejor que no juegue con":"Better if they don’t play","Elegí al menos un modo.":"Choose at least one mode.","Elegí tu posición.":"Choose your position.","Elegí qué posición buscás.":"Choose the position you want.","Elegí al menos un horario.":"Choose at least one time.","Revisá los campos marcados.":"Check the highlighted fields.","Chat con Seba":"Chat with Seba","Vi tu oferta, soy jungla 👋":"Saw your offer, I'm a jungler 👋","¡Buenísimo! ¿Jugamos a las 22?":"Awesome! Play at 10 pm?","Dale, te agrego: JungleKing#LAS":"Sure, adding you: JungleKing#LAS","Mid que roamea busca jungla para dúo":"Roaming mid looking for a jungle duo",
 "Hook n' Queue fue creado bajo la política \"Legal Jibber Jabber\" de Riot Games usando recursos propiedad de Riot Games. Riot Games no respalda ni patrocina este proyecto. League of Legends es una marca de Riot Games, Inc. ·":"Hook n' Queue was created under Riot Games' \"Legal Jibber Jabber\" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project. League of Legends is a trademark of Riot Games, Inc. ·",
 "Hook n' Queue fue creado bajo la política \"Legal Jibber Jabber\" de Riot Games usando recursos propiedad de Riot Games. Riot Games no respalda ni patrocina este proyecto. ·":"Hook n' Queue was created under Riot Games' \"Legal Jibber Jabber\" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project. ·","Privacidad":"Privacy","Donar":"Donate",
 "Buscá con quién jugar":"Find someone to play with","Elegí tu server, mirá las ofertas y coordiná la partida.":"Pick your server, browse offers and set up your game.",
@@ -1788,7 +1824,9 @@ async function setHidden(u,hide){const {error}=await sb.rpc("hnq_hide_chats",{ot
 function sendTarget(g){if(draft&&draft.user_id===g.user_id)return draft;const lc=g.last?.chat;if(lc&&!lc.endedAt)return lc;const act=g.chats.filter(c=>!c.endedAt);return [...(act.length?act:g.chats)].sort((a,b)=>b.createdAt-a.createdAt)[0]}
 const groupSub=g=>g.allEnded?`Ofertas terminadas · se borra en ${Math.min(...g.chats.map(leftH))} h`:g.last?(g.last.me?"Vos: ":"")+g.last.text:(g.chats.length>1?g.chats.length+" ofertas":g.chats[0].titulo);
 function unreadEl(){const n=groupsOf().filter(g=>g.unread).length;return n?h("span",{class:"unread"},n):null}
-const hhmm=ts=>new Date(ts).toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"});
+const hhmm=ts=>new Date(ts).toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit",hour12:false});
+const dayLabel=ts=>{const d=new Date(ts),n=new Date(),y=new Date(n-864e5),same=(a,b)=>a.toDateString()===b.toDateString();
+  return same(d,n)?t("Hoy"):same(d,y)?t("Ayer"):d.toLocaleDateString(LANG==="en"?"en-US":"es-AR",{day:"numeric",month:"short"})};
 let openId=null,repaint=null;
 function closeDrawer(keepDraft){document.getElementById("drawer")?.remove();openId=null;repaint=null;if(!keepDraft)draft=null}
 const PCOLS="id,nick,tag,color,photo_url,mains,server";
@@ -1839,15 +1877,28 @@ function showChat(key){
   const input=h("input",{placeholder:"Escribí un mensaje...",maxlength:"500","aria-label":"Mensaje"});
   let menuEl=null;
   const who=g0.nick+"#"+g0.tag;
-  const sub=h("small",{});
+  const sub=h("small",{class:"cst"});
+  const ofr=h("div",{class:"cofr"});
+  function paintOffer(g){const c=sendTarget(g)||g.chats[0],o=c&&OFFERS.find(x=>x.id===c.offer_id);
+    const lab=h("span",{class:"k"},o&&o.mine?"Tu oferta":"Su oferta");
+    const more=g.chats.length>1?h("span",{class:"cmore"},`+${g.chats.length-1}`):"";
+    if(!o){ofr.replaceChildren(h("div",{class:"cogo"},h("span",{class:"cl1"},lab,h("span",{class:"coff"},"Terminada"),more),h("span",{class:"cot","data-notr":""},c?c.titulo:"")));return}
+    ofr.replaceChildren(h("button",{type:"button",class:"cogo",title:"Ver oferta",onclick:()=>{closeDrawer();if(current!==o.server){current=o.server;render()}openRows.add(o.id);renderList();
+        setTimeout(()=>document.querySelector(`.offer[data-id="${o.id}"]`)?.scrollIntoView({block:"center",behavior:"smooth"}),50)}},
+      h("span",{class:"cl1"},lab,h("span",{class:"copos"},roleIcon([].concat(o.rol)[0]),h("i",{"aria-hidden":"true"},"→"),roleIcon([].concat(o.busca)[0]),h("small",{},o.rango)),more),
+      h("span",{class:"cot","data-notr":""},o.titulo)))}
   function paint(){const g=groupOf(key);if(!g)return;g.chats.forEach(markRead);
-    sub.textContent=g.chats.length>1?`${g.chats.length} ofertas en común`:g.chats[0].titulo;
+    const on=onlineSet.has(key);sub.className="cst"+(on?" on":"");sub.replaceChildren(on?"Farol prendido":"Desconectado");paintOffer(g);
     const out=[h("div",{class:"sys"},draft&&draft.user_id===key&&!g.msgs.length?`Cuando mandes tu primer mensaje, le avisamos a ${g.nick}.`:"Coordinen nick, horario y, si quieren, Discord.")];
     const shown=new Set();let prev=null;
     const divider=c=>h("div",{class:"odiv"+(c.endedAt?" off":"")},h("span",{},(c.endedAt?"Terminada · ":"Oferta · ")+c.titulo));
-    for(const m of g.msgs){if(m.chat!==prev){if(g.chats.length>1||!prev)out.push(divider(m.chat));shown.add(m.chat.id);prev=m.chat}
-      out.push(h("div",{class:"msg"+(m.me?" me":"")},m.text,h("small",{},hhmm(m.at))))}
-    g.chats.filter(c=>!shown.has(c.id)).forEach(c=>out.push(divider(c)));
+    let lastDay="";const ms=g.msgs;
+    ms.forEach((m,i)=>{if(m.chat!==prev){if(g.chats.length>1)out.push(divider(m.chat));shown.add(m.chat.id);prev=m.chat}
+      const dl=dayLabel(m.at);if(dl!==lastDay){out.push(h("div",{class:"cday"},dl));lastDay=dl}
+      // mensajes seguidos de la misma persona van juntos y la hora va solo en el último
+      const nx=ms[i+1],pv=ms[i-1],end=!nx||nx.me!==m.me||nx.at-m.at>5*60e3||dayLabel(nx.at)!==dl,start=!pv||pv.me!==m.me||m.at-pv.at>5*60e3||dayLabel(pv.at)!==dl;
+      out.push(h("div",{class:"msg"+(m.me?" me":"")+(start?" st":"")+(end?" en":"")},m.text,end?h("small",{},hhmm(m.at)):null))});
+    if(g.chats.length>1)g.chats.filter(c=>!shown.has(c.id)).forEach(c=>out.push(divider(c)));
     if(g.allEnded)out.push(h("div",{class:"ended"},`Las ofertas terminaron. El chat se borra en ${Math.min(...g.chats.map(leftH))} h, aprovechá para pasar tu nick o Discord.`));
     msgs.replaceChildren(...out);msgs.scrollTop=msgs.scrollHeight}
   repaint=paint;
@@ -1860,9 +1911,16 @@ function showChat(key){
     const {data,error}=await sb.from("messages").insert({chat_id:target.id,sender_id:uid,body:maskText(t)}).select().single();
     done();
     if(error){toast(limitMsg(error)||"No se pudo enviar el mensaje");if(fresh){draft=null;await loadChats()}return}
-    input.value="";
+    input.value="";syncQuick();
     if(fresh){draft=null;await loadChats();if(chats[target.id])markRead(chats[target.id]);repaint&&repaint()}else onMessage(data);input.focus()}
   const sendBtn=h("button",{class:"btn"},"Enviar");
+  // respuestas rápidas: completan el campo, no mandan nada solas
+  const fill=txt=>{input.value=txt;input.focus();input.setSelectionRange(txt.length,txt.length);syncQuick()};
+  const quick=h("div",{class:"quick"},
+    h("button",{type:"button",onclick:()=>fill(t("Mi Riot ID es")+" "+profile.nick+"#"+profile.tag)},"Te paso mi Riot ID"),
+    h("button",{type:"button",onclick:()=>fill(t("¿Jugamos ahora?"))},"¿Jugamos ahora?"),
+    h("button",{type:"button",onclick:()=>fill(t("¿Tenés Discord?"))},"¿Tenés Discord?"));
+  const syncQuick=()=>{quick.hidden=!!input.value.trim()};input.addEventListener("input",syncQuick);
   function menu(){if(menuEl){menuEl.remove();menuEl=null;return}
     menuEl=h("div",{class:"menu"},
       h("button",{onclick:async()=>{menuEl.remove();menuEl=null;
@@ -1874,9 +1932,9 @@ function showChat(key){
   const d=h("aside",{class:"drawer",id:"drawer","aria-label":"Chat con "+who},
     h("div",{class:"dhead"},h("button",{class:"icb",title:"Volver a mis chats",onclick:openChats},"‹"),
       h("button",{type:"button",class:"avbtn",title:"Ver perfil","aria-label":"Ver perfil",onclick:e=>{e.stopPropagation();openPlayerCard(key,e.currentTarget)}},avatarEl({...g0,online:onlineSet.has(key)})),
-      h("div",{class:"t"},h("b",{},who),sub),
+      h("div",{class:"t"},h("b",{"data-notr":""},who),sub),
       h("button",{class:"icb",title:"Opciones",onclick:menu},"⋯"),h("button",{class:"icb",title:"Cerrar",onclick:closeDrawer},"✕")),
-    msgs,h("form",{class:"compose",onsubmit:send},input,sendBtn));
+    ofr,msgs,quick,h("form",{class:"compose",onsubmit:send},input,sendBtn));
   document.body.append(d);paint();input.focus();
 }
 function openChats(){
