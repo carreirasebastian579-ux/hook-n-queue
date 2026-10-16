@@ -941,6 +941,21 @@ html.in-app .card .field>label:not(.remember),html.in-app .card .bdet .mt{font-f
 .quick button:hover{border-color:var(--accent);color:var(--accent)}
 .drawer .compose{border-top:0;padding-top:8px}
 .drawer .compose input{border-radius:var(--rad)}
+/* ---------- landing: cinta de carteles y demos con splash ---------- */
+.sv{border-radius:var(--rad);padding:16px 22px 14px;position:relative}
+.sv span{font-family:var(--disp);font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+.sv.main::before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:3px;background:var(--accent);border-radius:var(--rad) var(--rad) 0 0}
+.sv:hover{box-shadow:none}
+.sv em{border-radius:4px;font-family:var(--disp);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.72rem}
+.feat .viz{border-radius:var(--rad);padding:44px 26px 26px;background:var(--bg)}
+.feat .viz::before{inset:0;background:var(--vbg) center 22%/cover;opacity:.55;filter:saturate(.9);
+  -webkit-mask-image:linear-gradient(100deg,transparent 5%,#000 70%);mask-image:linear-gradient(100deg,transparent 5%,#000 70%)}
+.feat .viz::after{content:"HOOK N' QUEUE · LAS";position:absolute;left:0;right:0;top:0;padding:8px 14px;border-bottom:1px solid var(--line);background:rgba(6,15,13,.7);
+  font-family:var(--disp);font-weight:700;font-size:.66rem;letter-spacing:.16em;color:var(--muted)}
+.feat .viz>*{position:relative;z-index:1}
+#vizPrio{--vbg:url(https://ddragon.leagueoflegends.com/cdn/img/champion/centered/Pyke_0.jpg)}
+#vizFilt{--vbg:url(https://ddragon.leagueoflegends.com/cdn/img/champion/centered/Nautilus_0.jpg)}
+#vizChat{--vbg:url(https://ddragon.leagueoflegends.com/cdn/img/champion/centered/Kalista_0.jpg)}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
 </head>
@@ -1115,7 +1130,7 @@ const ROLE_RE="Top|Jungla|Mid|ADC|Support|Fill";
 const tr=s=>EN[s]??s;
 const RULES=[
  [/^hace (\d+) min$/,(m,a)=>`${a} min ago`],[/^hace (\d+) h$/,(m,a)=>`${a} h ago`],[/^hace 1 día$/,()=>"1 day ago"],[/^hace (\d+) días$/,(m,a)=>`${a} days ago`],
- [/^(\d+) ofertas? activas?$/,(m,a)=>a==="1"?"1 active offer":`${a} active offers`],[/^Mostrando (\d+) de (\d+) ofertas$/,(m,a,b)=>`Showing ${a} of ${b} offers`],
+ [/^(\d+) ofertas$/,(m,a)=>`${a} offers`],[/^(\d+) ofertas? activas?$/,(m,a)=>a==="1"?"1 active offer":`${a} active offers`],[/^Mostrando (\d+) de (\d+) ofertas$/,(m,a,b)=>`Showing ${a} of ${b} offers`],
  [/^\+(\d+) conectados sin oferta$/,(m,a)=>`+${a} online without offers`],[/^(\d+) ofertas en común$/,(m,a)=>`${a} offers in common`],[/^(\d+) ofertas$/,(m,a)=>`${a} offers`],
  [/^En línea en (\w+)$/,(m,a)=>`Online in ${a}`],[/^Nadie con ofertas conectado ahora en (\w+)\. Publicá la tuya y tirá el anzuelo\.$/,(m,a)=>`Nobody with an offer is online in ${a} right now. Post yours and cast the hook.`],
  [/^Tirá el primer anzuelo en (\w+)$/,(m,a)=>`Cast the first hook in ${a}`],[/^Nueva oferta en (\w+)$/,(m,a)=>`New offer in ${a}`],[/^¡Oferta publicada en (\w+)!$/,(m,a)=>`Offer posted in ${a}!`],
@@ -2080,7 +2095,9 @@ document.getElementById("lccard").append(
 // servers marquee
 const track=document.getElementById("track");
 [...SERVERS,...SERVERS].forEach(s=>{
-  track.append(h("div",{class:"sv"+(s.id==="LAS"||s.id==="LAN"?" main":"")},h("b",{},s.id),h("span",{},s.name),null))});
+  track.append(h("div",{class:"sv"+(s.id==="LAS"||s.id==="LAN"?" main":""),"data-sv":s.id},h("b",{},s.id),h("span",{},s.name)))});
+sb.rpc("hnq_public_board").then(({data})=>{if(!data)return;const n={};data.forEach(o=>n[o.server]=(n[o.server]||0)+1);
+  track.querySelectorAll(".sv").forEach(el=>{const k=n[el.dataset.sv]||0;if(k)el.append(h("em",{},k===1?"1 oferta":k+" ofertas"))})},()=>{});
 
 // feature visuals
 const D=(d)=>`--d:${d}s`;
