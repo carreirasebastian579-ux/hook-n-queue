@@ -15,6 +15,7 @@ El dueño (Sebastian) no es programador: explicale todo en español rioplatense,
 - **Nunca subas secretos al repo**: claves de Resend, `service_role` de Supabase, ni el `HNQ_SECRET`. Si un archivo SQL los contiene, no lo commitees.
 - **Cambios de base de datos**: no tenés acceso a Supabase. Escribí el SQL en `sql/AAAA-MM-DD-descripcion.sql`, idempotente (`if not exists`, `drop ... if exists`), y explicale a Sebastian que lo pegue en Supabase → SQL Editor → Run **antes** de pushear el HTML que lo usa.
 - La seguridad real está en la base (RLS, triggers, límites). No confíes solo en validaciones del navegador.
+- La tabla `offers` tiene un control `hnq_offer_values` que solo acepta ciertos valores (modos, horarios, etc.). Si sumás una opción nueva, primero el SQL que la agregue (ver `sql/2026-10-16-horario-ahora.sql`), después el HTML. La vista previa local simula la base, así que estos errores no se ven ahí.
 - **Antes de pushear**, mostrale a Sebastian qué cambió y pedile confirmación. Cada push a `main` sale publicado al instante.
 - **Cambios visuales**: primero mostrale una maqueta (o la página andando solo en local) y esperá su OK. Trabajá de a un tema por vez.
 - Probá en ancho de compu (≥1500px, con columnas laterales) y de celular (390px). En celular no tiene que haber scroll horizontal.
@@ -37,7 +38,7 @@ El sistema completo está en `DESIGN.md` (estilo "El Anzuelo Espectral"); `PRODU
 - Los textos que muestra la gente (títulos, mensajes, nicks) no se traducen.
 
 ## Funcionalidades existentes (no romperlas)
-Perfiles con foto, mains y fondo del tablón elegido · ofertas con prioridades y filtros · "Repetir última oferta" · "Deshacer" en "Ya encontré" y "Bloquear" (la base permite reabrir hasta 2 minutos) · chats que nacen con el primer mensaje, agrupados por persona (con "Borrar chat") · avisos por mail (el primero trae el mensaje) · indicador "farol prendido" · mini tarjeta de perfil (Copiar Riot ID, OP.GG) · accesibilidad (teclado, Escape en ventanas, foco estable) · moderación (solo admins: reportes, baneos, desbaneo) · filtro de palabras ofensivas · límites anti-spam (5 ofertas activas, 15 por día, 20 mensajes/min) · donaciones (Mercado Pago y PayPal) · Google Analytics (`G-QFPJPHXCDJ`).
+Perfiles con foto, mains y fondo del tablón elegido · ofertas con prioridades y filtros · "Repetir última oferta" · publicar rápido (horario "Ahora", que se oculta a las 3 hs si hay otros horarios; Solo/Dúo por defecto; título opcional que se arma solo) · tablón sin cuenta ("Ver el tablón" en la landing; usa la función `hnq_public_board`, que entrega solo datos recortados; chatear, publicar, reportar o bloquear piden entrar con Google) · el logo recarga la página y vuelve arriba · "Deshacer" en "Ya encontré" y "Bloquear" (la base permite reabrir hasta 2 minutos) · chats que nacen con el primer mensaje, agrupados por persona (con "Borrar chat") · avisos por mail (el primero trae el mensaje) · indicador "farol prendido" · mini tarjeta de perfil (Copiar Riot ID, OP.GG) · accesibilidad (teclado, Escape en ventanas, foco estable) · moderación (solo admins: reportes, baneos, desbaneo) · filtro de palabras ofensivas · límites anti-spam (5 ofertas activas, 15 por día, 20 mensajes/min) · donaciones (Mercado Pago y PayPal) · Google Analytics (`G-QFPJPHXCDJ`).
 
 ## Contacto público
 hooknqueue@gmail.com
