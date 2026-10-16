@@ -895,6 +895,10 @@ html.in-app .card .field>label:not(.remember),html.in-app .card .bdet .mt{font-f
 .news .nchamp b{font-weight:600}
 .news .nall{display:inline-block;margin-top:10px;font-size:.8rem;color:var(--accent);text-decoration:none}
 .news .nall:hover{text-decoration:underline}
+.newsm{margin-top:16px}
+.newsm:empty{display:none}
+@media (min-width:1500px){.newsm{display:none}}
+@media (max-width:1499px){.newsm .nitem{min-height:170px}}
 @media (prefers-reduced-motion:reduce){.news .nimg{transition:none}.news .nitem:hover .nimg{transform:none}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
@@ -993,6 +997,7 @@ html.in-app .card .field>label:not(.remember),html.in-app .card .bdet .mt{font-f
     <div class="cols" id="cols"><span>Jugador</span><span>Juega</span><span>Busca</span><span>Rango</span><span>Modo</span><span>Oferta</span><span>Publicada</span><span></span></div>
     <div id="list"></div>
   </section>
+  <div class="newsm" id="newsm"></div>
   <p class="note">Hook n' Queue fue creado bajo la política "Legal Jibber Jabber" de Riot Games usando recursos propiedad de Riot Games. Riot Games no respalda ni patrocina este proyecto. · <a href="privacidad.html">Privacidad</a> · <a href="#" onclick="openDonate();return false">Donar</a></p>
 </div>
 <aside class="rside" id="rside" aria-label="En línea y chats"></aside>
@@ -1253,7 +1258,7 @@ async function loadPatch(vs,cur){const m=/^(\d+)\.(\d+)/.exec(vs[0]);if(!m)retur
   const d=await (await fetch(`https://ddragon.leagueoflegends.com/cdn/${v}/data/es_AR/champion.json`)).json();
   Object.values(d.data).forEach(c=>{CHAMP_ID[c.name]=c.id;CHAMP_IMG[c.name]=`https://ddragon.leagueoflegends.com/cdn/${v}/img/champion/${c.image.full}`});
   const names=Object.values(d.data).map(c=>c.name).sort((a,b)=>a.localeCompare(b,"es"));if(names.length>100)CHAMPS=names;
-  if(uid||guest)render();if(matchMedia("(min-width:1500px)").matches)loadPatch(vs,d.data)}catch(e){}})();
+  if(uid||guest)render();loadPatch(vs,d.data)}catch(e){}})();
 const norm=t=>t.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/gi,"").toLowerCase();
 const CC=["#3F6FD8","#E0524A","#A35BE0","#E08A2E","#2FA866","#D6366E","#2BA3B8","#8A7F3A"];
 function champChip(name,cls="",num){let x=0;for(const c of name)x=(x*31+c.charCodeAt(0))>>>0;
@@ -1460,6 +1465,8 @@ function renderSides(){
       avatarEl({...g,online:onlineSet.has(g.user_id)}),h("div",{class:"pt"},h("b",{},g.nick),h("small",{},groupSub(g))),g.unread?h("span",{class:"dot","aria-label":"sin leer"}):null)))
       :h("p",{class:"sempty"},"Cuando le escribas a alguien, el chat aparece acá."));
   Rr.replaceChildren(onCard,chCard,...(PATCH?[newsCard()]:[]));
+  // celu y tablet (sin columna derecha): la misma tarjeta al final de la lista
+  const nm=document.getElementById("newsm");if(nm)nm.replaceChildren(...(PATCH?[newsCard()]:[]));
 }
 function newsCard(){const loc=LANG==="en"?"en-us":"es-mx",base=`https://www.leagueoflegends.com/${loc}/news`,nc=PATCH.newChamp;
   // imagen: el campeón nuevo si hay; si no, el dragón (img/parche.webp, elegido por Sebastian)
