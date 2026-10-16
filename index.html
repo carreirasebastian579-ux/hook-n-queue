@@ -1019,7 +1019,7 @@ const EN={
 "Todavía nadie publicó en este server. El primero que tira el anzuelo, pesca.":"Nobody has posted on this server yet. First to cast the hook gets the catch.",
 "Completá tu perfil":"Complete your profile","Editar perfil":"Edit profile","Cambiá tus datos cuando quieras.":"Update your info anytime.",
 "Ya entraste con Google. Ahora contanos cómo te encuentran en el juego. Nicks o mensajes ofensivos no están permitidos.":"You're signed in with Google. Now tell us how to find you in game. Offensive names or messages aren't allowed.",
-"Nombre de invocador":"Summoner name","Server donde jugás":"Your server","Tus mains (hasta 3, en orden)":"Your mains (up to 3, in order)","Escribí un campeón...":"Type a champion...","Buscá un campeón...":"Search a champion...",
+"Server donde jugás":"Your server","Tus mains (hasta 3, en orden)":"Your mains (up to 3, in order)","Escribí un campeón...":"Type a champion...","Buscá un campeón...":"Search a champion...",
 "Avisarme por mail cuando me escriban":"Email me when someone messages me","Te llega un mail cuando alguien te escribe por tu oferta (máximo uno por hora por chat). Lo podés apagar cuando quieras.":"You'll get an email when someone messages you about your offer (at most one per hour per chat). You can turn it off anytime.",
 "Tu avatar":"Your avatar","Color":"Color","Subir foto":"Upload photo","Cambiar foto":"Change photo","Usar inicial":"Use initial","Salir":"Sign out","Crear perfil":"Create profile","Guardar cambios":"Save changes","Cancelar":"Cancel","Guardando...":"Saving...",
 "Ej: Flash en la D":"e.g. Flash on D","Tag":"Tag","Elegí un archivo de imagen.":"Choose an image file.",
@@ -1557,7 +1557,7 @@ function openProfile(editing,mode="signup"){const m=document.getElementById("mod
   }
   m.replaceChildren(h("div",{class:"overlay"},h("form",{class:"card",onsubmit:save,"data-noesc":!editing},
     h("h2",{},editing?"Editar perfil":"Completá tu perfil"),h("p",{},editing?"Cambiá tus datos cuando quieras.":"Ya entraste con Google. Ahora contanos cómo te encuentran en el juego. Nicks o mensajes ofensivos no están permitidos."),
-    h("div",{class:"field"},h("label",{for:"nick"},"Nombre de invocador"),h("div",{class:"row"},nick,h("div",{class:"tagbox"},h("span",{},"#"),tag))),
+    h("div",{class:"field"},h("label",{for:"nick"},"Riot ID"),h("div",{class:"row"},nick,h("div",{class:"tagbox"},h("span",{},"#"),tag))),
     h("div",{class:"field"},h("label",{for:"srv"},"Server donde jugás"),srv),h("div",{class:"field"},h("label",{},"Tus mains (hasta 3, en orden)"),mainsP.el),
     editing?h("div",{class:"field"},h("label",{},"Fondo del tablón"),h("p",{class:"hint2"},"El campeón que ves detrás del nombre del server. Si no elegís ninguno, va Thresh."),bgP.el):null,
     editing?h("details",{class:"more bdet"},h("summary",{},h("span",{class:"mt"},"Bloqueados"),h("span",{class:"bcount"},String(blockedIds.size))),h("div",{class:"morebody"},blk)):null,h("div",{class:"field"},h("label",{class:"remember"},notifCb,"Avisarme por mail cuando me escriban"),h("p",{class:"hint2"},"Te llega un mail cuando alguien te escribe por tu oferta (máximo uno por hora por chat). Lo podés apagar cuando quieras.")),h("div",{class:"field"},h("label",{},"Tu avatar"),h("div",{class:"avrow"},prev,h("div",{class:"avopts"},sw,ic))),err,
@@ -1976,7 +1976,7 @@ document.getElementById("vizChat").append(h("div",{class:"msgs",style:"padding:0
 const screen=document.getElementById("screen");
 const nickTyped=h("span",{});
 const scrs=[
-  h("div",{class:"scr on"},h("h4",{},"Creá tu perfil"),h("div",{class:"lbl"},"Nombre de invocador"),h("div",{class:"fake"},nickTyped,h("span",{class:"caret"})),
+  h("div",{class:"scr on"},h("h4",{},"Creá tu perfil"),h("div",{class:"lbl"},"Riot ID"),h("div",{class:"fake"},nickTyped,h("span",{class:"caret"})),
     h("div",{class:"lbl"},"Tag"),h("div",{class:"fake"},"#LAS"),h("div",{class:"lbl"},"Server"),h("div",{class:"fake sel"},"LAS · Latinoamérica Sur",h("span",{},"▾")),h("div",{class:"fake btnf"},"Crear perfil")),
   h("div",{class:"scr"},h("h4",{},"Nueva oferta"),h("div",{class:"lbl"},"Tu posición"),
     h("div",{class:"picks"},["Mid","Top"].map((r,i)=>h("span",{class:"pick seq",style:D(.3+i*.4)},h("span",{class:"n",style:D(.3+i*.4)},i+1),roleIcon(r),r)),h("span",{class:"pick"},roleIcon("ADC"),"ADC")),
