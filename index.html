@@ -12,8 +12,8 @@
 </script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Hook n' Queue · Encontrá dúo para League of Legends</title>
-<meta name="description" content="Tu próximo dúo está acá. Publicá lo que buscás y encontrá con quién jugar League of Legends por server, posición, rango y horario, con chat incluido. Gratis.">
+<title>Buscá dúo de LoL en LAS, LAN y más · Hook n' Queue</title>
+<meta name="description" content="Encontrá dúo o compañeros para Flex, Clash y ARAM en LAS, LAN y todos los servers de LoL. Filtrá por posición, rango y horario y coordiná por chat. Gratis.">
 <link rel="canonical" href="https://www.hooknqueue.com/">
 <meta name="theme-color" content="#060F0D">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Hook n' Queue">
 <meta property="og:url" content="https://www.hooknqueue.com/">
 <meta property="og:title" content="Hook n' Queue · Tu próximo dúo está acá">
-<meta property="og:description" content="Encontrá con quién jugar League of Legends: ofertas por server, posición, rango y horario, con chat incluido.">
+<meta property="og:description" content="Buscá dúo o compañeros para Flex en LAS, LAN y todos los servers de League of Legends, por posición, rango y horario, con chat incluido.">
 <meta property="og:image" content="https://www.hooknqueue.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="es_AR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Hook n' Queue · Tu próximo dúo está acá">
-<meta name="twitter:description" content="Encontrá con quién jugar League of Legends por server, posición, rango y horario.">
+<meta name="twitter:description" content="Buscá dúo o compañeros para Flex en LAS, LAN y todos los servers de League of Legends.">
 <meta name="twitter:image" content="https://www.hooknqueue.com/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -963,6 +963,7 @@ html.in-app .card .field>label:not(.remember),html.in-app .card .bdet .mt{font-f
 .fhang .dbtn{top:268px}
 .fguest{position:absolute;left:50%;top:346px;transform:translateX(-50%);white-space:nowrap;border:0;background:none;color:var(--muted);font-size:.95rem;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .fguest:hover{color:var(--accent)}
+.svlist{color:var(--muted);font-size:1.02rem;line-height:1.55;max-width:58ch;margin:14px 0 0}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
 </head>
@@ -982,7 +983,7 @@ html.in-app .card .field>label:not(.remember),html.in-app .card .bdet .mt{font-f
       <div class="wrap lhero-in">
         <div class="lcopy" id="lcopy">
           <h1 id="lh1">Tu próximo dúo está <em>acá.</em></h1>
-          <p>Publicá lo que buscás, filtrá por posición, rango y horario, y coordiná por chat con gente de tu server.</p>
+          <p>Buscá dúo o compañeros para Flex en tu server: publicá lo que buscás, filtrá por posición, rango y horario, y coordiná por chat.</p>
           <div class="lcta"><button class="btn big" data-signup>Entrar con Google</button><button class="btn sec big" data-guest>Ver el tablón</button></div>
         </div>
       </div>
@@ -999,7 +1000,7 @@ html.in-app .card .field>label:not(.remember),html.in-app .card .bdet .mt{font-f
       <div class="steps" id="steps">
         <div class="rail"><div class="fill" id="railFill"></div></div>
         <div class="step rv"><span class="num">1</span><div><h3>Creá tu perfil</h3><p>Entrá con Google y poné tu Riot ID, tu #tag y el server donde jugás. Nada más.</p></div></div>
-        <div class="step rv"><span class="num">2</span><div><h3>Publicá tu oferta</h3><p>Elegí modos, posiciones, rango y horarios en orden de preferencia, y ponele un título que invite.</p></div></div>
+        <div class="step rv"><span class="num">2</span><div><h3>Publicá tu oferta</h3><p>Elegí modos (Solo/Dúo, Flex, Clash, Normal o ARAM), posiciones, rango y horarios en orden de preferencia y, si querés, ponele un título que invite.</p></div></div>
         <div class="step rv"><span class="num">3</span><div><h3>Coordiná por chat</h3><p>Te escriben, se pasan el nick o el Discord y a jugar. Cuando la oferta termina, el chat se borra solo.</p></div></div>
       </div>
       <div class="phonewrap" aria-hidden="true" inert><div class="phone"><div class="notch"></div><div class="screen" id="screen"></div></div></div>
@@ -1007,7 +1008,7 @@ html.in-app .card .field>label:not(.remember),html.in-app .card .bdet .mt{font-f
   </section>
 
   <section class="lservers">
-    <div class="wrap"><p class="eyebrow rv">8 servers</p><h2 class="rv">Un tablón para cada server</h2></div>
+    <div class="wrap"><p class="eyebrow rv">8 servers</p><h2 class="rv">Un tablón para cada server</h2><p class="svlist rv">LAS, LAN, Brasil, Norteamérica, EUW, EUNE, Corea y Oceanía. Cada server tiene su propio tablón para Solo/Dúo, Flex, Clash, Normal y ARAM.</p></div>
     <div class="marquee" aria-hidden="true"><div class="track" id="track"></div></div>
   </section>
 
@@ -1077,11 +1078,11 @@ let LANG=(()=>{try{const v=localStorage.getItem("hnq.lang");if(v)return JSON.par
 document.documentElement.lang=LANG;
 const EN={
 "Iniciar sesión":"Sign in","Entrar con Google":"Sign in with Google","Cómo funciona":"How it works","Tu próximo dúo está acá.":"Your next duo is here.",
-"Publicá lo que buscás, filtrá por posición, rango y horario, y coordiná por chat con gente de tu server.":"Post what you're looking for, filter by role, rank and schedule, and team up by chat with players from your server.",
+"Buscá dúo o compañeros para Flex en tu server: publicá lo que buscás, filtrá por posición, rango y horario, y coordiná por chat.":"Find a duo or Flex teammates on your server: post what you're looking for, filter by role, rank and schedule, and team up by chat.",
 "Bajá para entrar":"Scroll to enter","Paso a paso":"Step by step","Creá tu perfil":"Create your profile","Entrá con Google y poné tu Riot ID, tu #tag y el server donde jugás. Nada más.":"Sign in with Google and add your Riot ID, #tag and the server you play on. That's it.",
-"Publicá tu oferta":"Post your offer","Elegí modos, posiciones, rango y horarios en orden de preferencia, y ponele un título que invite.":"Pick modes, roles, rank and schedule in order of preference, and give it a catchy title.",
+"Publicá tu oferta":"Post your offer","Elegí modos (Solo/Dúo, Flex, Clash, Normal o ARAM), posiciones, rango y horarios en orden de preferencia y, si querés, ponele un título que invite.":"Pick modes (Solo/Duo, Flex, Clash, Normal or ARAM), roles, rank and schedule in order of preference and, if you like, give it a catchy title.",
 "Coordiná por chat":"Team up by chat","Te escriben, se pasan el nick o el Discord y a jugar. Cuando la oferta termina, el chat se borra solo.":"They message you, you swap names or Discord and play. When the offer ends, the chat deletes itself.",
-"8 servers":"8 servers","Un tablón para cada server":"A board for every server","Decí qué preferís, en orden":"Say what you prefer, in order",
+"8 servers":"8 servers","Un tablón para cada server":"A board for every server","LAS, LAN, Brasil, Norteamérica, EUW, EUNE, Corea y Oceanía. Cada server tiene su propio tablón para Solo/Dúo, Flex, Clash, Normal y ARAM.":"LAS, LAN, Brazil, North America, EUW, EUNE, Korea and Oceania. Every server has its own board for Solo/Duo, Flex, Clash, Normal and ARAM.","Decí qué preferís, en orden":"Say what you prefer, in order",
 "Marcá tus posiciones por prioridad. Los demás ven de un vistazo qué es lo que más te gusta jugar.":"Rank your roles by priority. Others see at a glance what you love to play.",
 "Filtrá hasta dar con tu dúo":"Filter until you find your duo","Últimas 24 hs, rango, posición, horario, micro u onda. Combiná los que quieras.":"Last 24 hours, rank, role, schedule, mic or vibe. Mix and match.",
 "Chats que no se acumulan":"Chats that don't pile up","Cada chat nace de una oferta y se borra 24 hs después de que termina. Tu bandeja siempre limpia.":"Every chat starts from an offer and is deleted 24 hours after it ends. Your inbox stays clean.",
